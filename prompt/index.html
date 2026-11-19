@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>프롬프트 실시간 공유 Board | 더콘텐츠스쿨</title>
+<meta name="description" content="강의 중 새 프롬프트가 올라오면 바로 확인하고 버튼 한 번으로 복사하는 더콘텐츠스쿨 프롬프트 실시간 공유 보드.">
+<meta name="theme-color" content="#0D2B22">
+<meta property="og:title" content="프롬프트 실시간 공유 Board">
+<meta property="og:description" content="새 프롬프트가 올라왔어요 · 지금 바로 복사하세요">
+<meta property="og:type" content="website">
+<style>
+@font-face{font-family:'Paperozi';font-weight:300;font-style:normal;font-display:swap;src:url('fonts/Paperozi-300.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:400;font-style:normal;font-display:swap;src:url('fonts/Paperozi-400.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:500;font-style:normal;font-display:swap;src:url('fonts/Paperozi-500.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:700;font-style:normal;font-display:swap;src:url('fonts/Paperozi-700.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:800;font-style:normal;font-display:swap;src:url('fonts/Paperozi-800.woff2') format('woff2')}
+
+:root{
+  --dg:#0D2B22; --dg2:#1F3D2B; --dg3:#16342A;
+  --gold:#FFC24B; --gold-d:#D79F2E; --gold-l:#FFF3D9;
+  --cream:#FAF8F2; --white:#fff;
+  --line:#E6E1D4; --line2:#EDE7D8;
+  --ink:#15251E; --ink2:#41504A; --muted:#7A857E; --muted2:#98A29B;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font-family:'Paperozi','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5}
+button{font-family:inherit}
+
+/* ── 상단 바 ───────────────────────────── */
+.topbar{position:sticky;top:0;z-index:40;background:linear-gradient(115deg,#0D2B22 0%,#1F3D2B 62%,#16342A 100%);
+  color:var(--cream);border-bottom:3px solid var(--gold)}
+.topbar-in{max-width:980px;margin:0 auto;padding:15px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px 18px;flex-wrap:wrap}
+.brand-row{display:flex;align-items:center;gap:9px;min-width:0}
+.live-dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex:0 0 auto;animation:pulse 1.9s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,194,75,.65)}70%{box-shadow:0 0 0 9px rgba(255,194,75,0)}100%{box-shadow:0 0 0 0 rgba(255,194,75,0)}}
+h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.tb-sub{margin:7px 0 0 19px;font-size:12.5px;font-weight:400;color:#B7CDBE}
+.tb-right{display:flex;align-items:center;gap:9px;font-size:12px;color:#CFE0D4;padding-top:3px;white-space:nowrap}
+.conn{display:inline-flex;align-items:center;gap:6px}
+.conn i{width:7px;height:7px;border-radius:50%;background:#7FBF95;display:inline-block}
+.conn.is-off i{background:#E0736A}
+.conn.is-wait i{background:#D9B465}
+.clock{font-variant-numeric:tabular-nums;font-weight:700;color:var(--gold);font-size:12.5px;letter-spacing:.02em}
+.clock-sep{color:#6F8A7B}
+
+/* ── 본문 ─────────────────────────────── */
+.wrap{max-width:980px;margin:0 auto;padding:18px 24px 56px}
+.guide{margin:2px 0 14px;font-size:13px;color:var(--muted);font-weight:500}
+
+.arrive{display:flex;align-items:center;gap:12px;background:var(--gold-l);border:1px solid var(--gold);border-radius:12px;
+  padding:11px 14px;margin:0 0 12px;font-size:13px;font-weight:700;color:#6B4E10}
+.arrive button{margin-left:auto;background:var(--dg2);color:var(--cream);border:0;border-radius:9px;padding:8px 14px;
+  font-size:12.5px;font-weight:700;cursor:pointer}
+.arrive[hidden]{display:none}
+.arrive button:hover{background:var(--dg)}
+
+/* 메인 카드 */
+.main-card{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:clip;
+  box-shadow:0 12px 30px rgba(13,43,34,.08);scroll-margin-top:96px}
+.mc-head{display:flex;align-items:center;gap:10px;background:linear-gradient(100deg,var(--dg) 0%,var(--dg2) 100%);
+  color:var(--cream);padding:12px 16px;flex-wrap:wrap}
+.mc-title{font-size:13.5px;font-weight:700;letter-spacing:-.01em}
+.mc-meta{font-size:11.5px;color:#A9C4B2;font-weight:400;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc-time{margin-left:auto;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.mc-back{border:1px solid rgba(255,194,75,.6);background:rgba(255,194,75,.12);color:var(--gold);border-radius:8px;
+  padding:6px 10px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}
+.mc-back[hidden]{display:none}
+.mc-back:hover{background:rgba(255,194,75,.24)}
+.mc-body{padding:24px 26px 28px}
+.prompt-text{margin:0;font-family:inherit;font-size:17.5px;line-height:1.85;color:#16261F;
+  white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;letter-spacing:-.003em}
+.mc-body.is-flash{animation:flash 1.05s ease-out}
+@keyframes flash{0%{background:#FFF7E4}100%{background:#fff}}
+.mc-foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--cream);border-top:1px solid var(--line2);padding:12px 16px;
+  position:sticky;bottom:0;z-index:6;box-shadow:0 -8px 16px rgba(13,43,34,.06)}
+.mc-hint{flex:1 1 200px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.copy-btn{margin-left:auto;background:var(--gold);color:var(--dg);border:0;border-radius:12px;
+  padding:15px 30px;font-size:16.5px;font-weight:800;letter-spacing:-.01em;cursor:pointer;
+  box-shadow:0 4px 0 var(--gold-d);transition:transform .08s,box-shadow .08s,background .15s}
+.copy-btn:hover{background:#FFCF6B}
+.copy-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--gold-d)}
+.copy-btn.is-done{background:#3E8A5F;color:#fff;box-shadow:0 4px 0 #2C6B46}
+.foot-note{margin:8px 2px 30px;font-size:11.5px;color:var(--muted2);line-height:1.6;text-align:right}
+
+/* 이전 프롬프트 */
+.hist-head{display:flex;align-items:center;gap:10px;margin:0 0 10px;flex-wrap:wrap}
+.hist-head h2{margin:0;font-size:14px;font-weight:700;color:#2A3A32}
+.hist-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+.hist-count{font-size:11.5px;color:var(--muted2);font-variant-numeric:tabular-nums;white-space:nowrap;flex:0 0 auto}
+#search{font-family:inherit;font-size:12.5px;color:#24342C;background:var(--white);border:1px solid #E0DACB;
+  border-radius:9px;padding:7px 11px;width:180px;outline:none}
+#search:focus{border-color:var(--dg2);box-shadow:0 0 0 3px rgba(31,61,43,.08)}
+.hist-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;background:var(--white);
+  border:1px solid var(--line);border-radius:12px;padding:12px 14px;transition:border-color .15s,box-shadow .15s,background .15s}
+.row.is-cur{border-color:var(--dg2);background:#FCFDFB;box-shadow:inset 0 0 0 1px var(--dg2),0 0 0 3px rgba(31,61,43,.06)}
+.row-no{display:flex;align-items:center;justify-content:center;gap:2px;height:26px;border-radius:8px;
+  background:var(--gold-l);color:var(--dg2);font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.row-no .pin{font-size:9px;line-height:1}
+.row-main{min-width:0}
+.row-title{margin:0 0 5px;font-size:12px;font-weight:700;color:var(--dg2);line-height:1.4}
+.row-title .tag{color:#B0862A;font-weight:700;font-size:11px;margin-left:5px}
+.row-text{margin:0;font-size:13.5px;line-height:1.72;color:var(--ink2);
+  white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+.row-pick{font-size:12px;font-weight:700;color:var(--dg2);background:var(--white);border:1px solid var(--dg2);
+  border-radius:9px;padding:8px 13px;cursor:pointer;white-space:nowrap;transition:background .12s,color .12s}
+.row-pick:hover{background:#EFF3EC}
+.row.is-cur .row-pick{background:var(--dg2);color:var(--cream)}
+.empty{margin:14px 2px;font-size:12.5px;color:var(--muted2)}
+.empty[hidden]{display:none}
+
+/* 강사 모드 토글 */
+.teacher-toggle-wrap{display:flex;justify-content:center;margin:32px 0 8px}
+.teacher-toggle{background:none;border:0;color:#8C968F;font-size:12.5px;cursor:pointer;
+  text-decoration:underline;text-underline-offset:4px;padding:8px 12px}
+.teacher-toggle:hover{color:var(--dg2)}
+
+/* 강사 패널 */
+.teacher{margin-top:12px;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:0 10px 24px rgba(13,43,34,.06);scroll-margin-top:96px}
+.tp-head{display:flex;align-items:center;gap:10px;background:var(--dg2);color:var(--cream);padding:12px 16px;font-size:13.5px;font-weight:700}
+.tp-head .tp-badge{margin-left:auto;font-size:11px;font-weight:700;color:var(--dg);background:var(--gold);border-radius:999px;padding:3px 9px}
+.tp-body{padding:16px}
+.tp-sec{border:1px solid var(--line2);border-radius:12px;padding:14px;margin-bottom:12px;background:#FEFDFA}
+.tp-sec:last-child{margin-bottom:0}
+.tp-sec h3{margin:0 0 4px;font-size:13px;font-weight:800;color:var(--dg2)}
+.tp-sec .tp-desc{margin:0 0 11px;font-size:11.5px;color:var(--muted);line-height:1.55}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:9px}
+.field label{font-size:11.5px;font-weight:700;color:#4C5C54}
+.field input[type=text],.field input[type=password],.field input[type=number],.field textarea,.field select{
+  font-family:inherit;font-size:13px;color:#1D2C25;background:#fff;border:1px solid #DED8C9;border-radius:9px;padding:9px 11px;outline:none;width:100%}
+.field textarea{min-height:130px;line-height:1.7;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--dg2);box-shadow:0 0 0 3px rgba(31,61,43,.08)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.btn{font-size:12.5px;font-weight:700;border-radius:9px;padding:10px 15px;cursor:pointer;border:1px solid transparent;transition:background .12s,border-color .12s}
+.btn-dark{background:var(--dg2);color:var(--cream)}
+.btn-dark:hover{background:var(--dg)}
+.btn-gold{background:var(--gold);color:var(--dg);box-shadow:0 3px 0 var(--gold-d)}
+.btn-gold:hover{background:#FFCF6B}
+.btn-ghost{background:#fff;border-color:#CFC9B9;color:#3C4A43}
+.btn-ghost:hover{border-color:var(--dg2);color:var(--dg2)}
+.btn-mini{font-size:11.5px;padding:6px 10px;border-radius:8px}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.status{margin:9px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted);word-break:break-word}
+.status.ok{color:#2C6B46;font-weight:700}
+.status.err{color:#B23A2E;font-weight:700}
+.status.warn{color:#8A6412;font-weight:700}
+.manage-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:430px;overflow:auto}
+.mrow{border:1px solid var(--line2);border-radius:10px;padding:10px 11px;background:#fff}
+.mrow-top{display:flex;align-items:center;gap:8px}
+.mrow-no{font-size:11.5px;font-weight:800;color:var(--dg2);background:var(--gold-l);border-radius:6px;padding:2px 7px}
+.mrow-title{font-size:12px;font-weight:700;color:#2A3A32;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mrow-btns{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.mrow-snip{margin:6px 0 0;font-size:11.5px;color:var(--muted2);line-height:1.5;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mrow-edit{margin-top:9px;display:flex;flex-direction:column;gap:7px}
+.mrow-confirm{margin-top:9px;display:flex;align-items:center;gap:8px;font-size:11.5px;color:#B23A2E;font-weight:700;flex-wrap:wrap}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:6px 10px;font-size:11.5px;color:#4C5C54;margin-top:8px}
+.kv dt{font-weight:700;color:#6C7A72}
+.kv dd{margin:0;word-break:break-all;color:#3A4A42}
+.note{font-size:11px;color:var(--muted2);line-height:1.6;margin:9px 0 0;padding:9px 11px;background:#FBF7EC;border:1px dashed #E3D6B4;border-radius:9px}
+.note b{color:#8A6412}
+
+/* PIN 모달 */
+.modal{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(9,26,20,.55);backdrop-filter:blur(2px)}
+.modal[hidden]{display:none}
+.modal-card{width:100%;max-width:340px;background:var(--white);border-radius:16px;padding:20px;
+  box-shadow:0 22px 50px rgba(0,0,0,.3);border-top:4px solid var(--gold)}
+.modal-card h3{margin:0 0 6px;font-size:15px;color:var(--dg2);font-weight:800}
+.modal-card p{margin:0 0 12px;font-size:12px;color:var(--muted);line-height:1.55}
+.modal-card input{width:100%;font-family:inherit;font-size:18px;letter-spacing:.24em;text-align:center;
+  padding:11px;border:1px solid #DED8C9;border-radius:10px;outline:none;color:var(--dg)}
+.modal-card input:focus{border-color:var(--dg2);box-shadow:0 0 0 3px rgba(31,61,43,.1)}
+.pin-msg{min-height:16px;margin:8px 0 0!important;font-size:11.5px;color:#B23A2E;font-weight:700}
+.pin-msg.hint{color:var(--muted2);font-weight:400}
+.modal-actions{display:flex;gap:8px;margin-top:12px}
+.modal-actions .btn{flex:1;padding:11px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.modal-card.is-shake{animation:shake .28s ease-in-out}
+
+/* 토스트 */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:90;background:var(--dg);
+  color:var(--cream);font-size:13px;font-weight:700;padding:13px 20px;border-radius:12px;
+  box-shadow:0 12px 26px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;max-width:calc(100vw - 32px);text-align:center}
+.toast.is-on{opacity:1;transform:translate(-50%,0)}
+.toast.ok{background:#236140}
+.toast.warn{background:#8A6412}
+
+@media (max-width:600px){
+  .topbar-in{padding:11px 15px}
+  h1{font-size:17px}
+  .tb-sub{margin-top:6px;font-size:11.5px}
+  .tb-right{font-size:11px;gap:7px}
+  .clock{font-size:11.5px}
+  .wrap{padding:13px 15px 44px}
+  .guide{font-size:12px;margin-bottom:11px}
+  .mc-body{padding:17px 16px 20px}
+  .prompt-text{font-size:16px;line-height:1.8}
+  .mc-hint{display:none}
+  .mc-foot{padding:11px 13px 15px}
+  .copy-btn{flex:1 1 100%;margin-left:0;padding:15px;font-size:16px}
+  .foot-note{text-align:center;margin-bottom:24px}
+  .hist-head h2{font-size:13px}
+  .hist-tools{width:100%;margin-left:0}
+  #search{width:auto;flex:1 1 auto;min-width:0}
+  .row-title .tag{display:none}
+  .row{grid-template-columns:28px 1fr auto;gap:9px;padding:11px 11px}
+  .row-no{height:23px;font-size:12px;border-radius:7px}
+  .row-title{font-size:11.5px}
+  .row-text{font-size:13px;line-height:1.68}
+  .row-pick{font-size:11.5px;padding:7px 10px}
+  .row2{grid-template-columns:1fr}
+  .kv{grid-template-columns:84px 1fr}
+  .teacher,.main-card{scroll-margin-top:206px}
+  .mrow-top{flex-wrap:wrap;row-gap:6px}
+  .mrow-btns{width:100%;margin-left:0;justify-content:flex-end}
+  .manage-list{max-height:none}
+  .mrow-title{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div>
+      <div class="brand-row">
+        <span class="live-dot" aria-hidden="true"></span>
+        <h1>프롬프트 실시간 공유 Board</h1>
+      </div>
+      <p class="tb-sub">새 프롬프트가 올라왔어요 · 지금 바로 복사하세요</p>
+    </div>
+    <div class="tb-right">
+      <span class="conn is-wait" id="conn"><i></i><span id="connText">연결 확인 중</span></span>
+      <span class="clock-sep" aria-hidden="true">·</span>
+      <span class="clock" id="clock">00:00:00</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <button class="arrive" id="arrive" hidden type="button">
+    <span id="arriveText">새 프롬프트가 도착했어요!</span>
+    <span>보러 가기 →</span>
+  </button>
+
+  <p class="guide">↓ 아래 버튼을 눌러 바로 복사하세요</p>
+
+  <section class="main-card" aria-labelledby="mcTitle">
+    <div class="mc-head">
+      <span class="mc-title" id="mcTitle">📌 지금 올라온 프롬프트</span>
+      <span class="mc-meta" id="mainMeta"></span>
+      <span class="mc-time" id="mainTime"></span>
+      <button class="mc-back" id="backLatest" type="button" hidden>최신 프롬프트로 돌아가기</button>
+    </div>
+    <div class="mc-body" id="mainBody">
+      <pre class="prompt-text" id="mainText"></pre>
+    </div>
+    <div class="mc-foot">
+      <span class="mc-hint">버튼 한 번으로 복사됩니다. 혹시 안 되면 텍스트가 자동 선택되니 Ctrl/Cmd + C로 복사하세요.</span>
+      <button class="copy-btn" id="copyBtn" type="button">📋 복사하기</button>
+    </div>
+  </section>
+  <p class="foot-note">버튼 한 번으로 복사됩니다. 혹시 안 되면 텍스트가 자동 선택되니 Ctrl/Cmd + C로 복사하세요.</p>
+
+  <section class="history" aria-labelledby="histTitle">
+    <div class="hist-head">
+      <h2 id="histTitle">이전 프롬프트</h2>
+      <div class="hist-tools">
+        <span class="hist-count" id="histCount">전체 0개</span>
+        <input id="search" type="search" placeholder="🔍 키워드 검색" aria-label="이전 프롬프트 키워드 검색" autocomplete="off">
+      </div>
+    </div>
+    <ol class="hist-list" id="histList"></ol>
+    <p class="empty" id="histEmpty" hidden>검색 결과가 없습니다. 다른 키워드로 찾아보세요.</p>
+  </section>
+
+  <div class="teacher-toggle-wrap">
+    <button class="teacher-toggle" id="teacherToggle" type="button" aria-expanded="false" aria-controls="teacherPanel">강사 모드 켜기</button>
+  </div>
+
+  <section class="teacher" id="teacherPanel" hidden aria-label="강사 모드">
+    <div class="tp-head"><span>🔐 강사 모드</span><span class="tp-badge" id="tpBadge">로컬</span></div>
+    <div class="tp-body">
+
+      <div class="tp-sec">
+        <h3>새 프롬프트 올리기</h3>
+        <p class="tp-desc">올리면 새 번호가 붙어 ‘지금 올라온 프롬프트’로 바로 뜨고, 기존 프롬프트는 아래 목록에 그대로 남습니다.</p>
+        <div class="row2">
+          <div class="field"><label for="newTitle">제목 (선택)</label><input id="newTitle" type="text" placeholder="예: 부모-자녀 대화 질문 5가지"></div>
+          <div class="field"><label for="newTag">태그 (선택)</label><input id="newTag" type="text" placeholder="예: #부모교육"></div>
+        </div>
+        <div class="field"><label for="newText">프롬프트 본문</label><textarea id="newText" placeholder="수강생에게 바로 공유할 프롬프트를 붙여넣으세요."></textarea></div>
+        <div class="btn-row">
+          <button class="btn btn-gold" id="publishBtn" type="button">보드에 바로 올리기</button>
+          <span class="status" id="publishStatus" style="margin:0"></span>
+        </div>
+      </div>
+
+      <div class="tp-sec">
+        <h3>목록 관리</h3>
+        <p class="tp-desc">수정 · 삭제 · 📌 맨 위로 끌어올리기. 수정한 내용도 아래 ‘보드에 반영’으로 배포해야 수강생 화면에 반영됩니다.</p>
+        <ul class="manage-list" id="manageList"></ul>
+        <div class="btn-row">
+          <button class="btn btn-dark btn-mini" id="pushBtn" type="button">보드에 반영 (배포)</button>
+          <span class="status" id="manageStatus" style="margin:0"></span>
+        </div>
+      </div>
+
+      <div class="tp-sec">
+        <h3>실시간 공유 설정 (GitHub)</h3>
+        <p class="tp-desc">토큰을 한 번 저장해 두면 ‘보드에 바로 올리기’가 GitHub에 자동으로 커밋해 전 수강생 화면에 전파됩니다. 토큰은 이 브라우저(localStorage)에만 저장됩니다.</p>
+        <div class="row2">
+          <div class="field"><label for="ghRepo">저장소</label><input id="ghRepo" type="text" placeholder="moonflowergarden123-arch/lecture-board"></div>
+          <div class="field"><label for="ghBranch">브랜치</label><input id="ghBranch" type="text" placeholder="main"></div>
+        </div>
+        <div class="field"><label for="ghPath">파일 경로</label><input id="ghPath" type="text" placeholder="prompt/prompts.json"></div>
+        <div class="field"><label for="ghToken">GitHub 토큰 (PAT)</label><input id="ghToken" type="password" placeholder="github_pat_… 또는 ghp_…" autocomplete="off"></div>
+        <div class="btn-row">
+          <button class="btn btn-dark btn-mini" id="saveGh" type="button">토큰 저장</button>
+          <button class="btn btn-ghost btn-mini" id="testGh" type="button">연결 확인</button>
+          <button class="btn btn-ghost btn-mini" id="clearGh" type="button">토큰 삭제</button>
+        </div>
+        <p class="status" id="ghStatus"></p>
+        <p class="note"><b>토큰 만드는 법</b> GitHub → Settings → Developer settings → Personal access tokens → Fine-grained token → Repository access에서 <code>lecture-board</code> 선택 → Permissions의 <code>Contents: Read and write</code>만 체크. 공용 PC에서는 사용 후 ‘토큰 삭제’를 눌러 주세요.</p>
+      </div>
+
+      <div class="tp-sec">
+        <h3>토큰 없이 배포 · 공유</h3>
+        <p class="tp-desc">토큰이 없어도 지금 화면 상태를 파일로 내려받거나 링크로 공유할 수 있습니다.</p>
+        <div class="btn-row">
+          <button class="btn btn-ghost btn-mini" id="dlJson" type="button">prompts.json 내려받기</button>
+          <button class="btn btn-ghost btn-mini" id="copyShare" type="button">공유 링크 복사</button>
+        </div>
+        <dl class="kv">
+          <dt>현재 프롬프트</dt><dd id="kvCount">0개</dd>
+          <dt>마지막 갱신</dt><dd id="kvUpdated">-</dd>
+          <dt>배포 상태</dt><dd id="kvPushed">로컬에만 반영됨</dd>
+        </dl>
+        <p class="status" id="shareStatus"></p>
+      </div>
+
+      <div class="tp-sec">
+        <h3>강사 모드 잠금</h3>
+        <p class="tp-desc">이 페이지는 공개 페이지입니다. PIN은 수강생이 실수로 열지 않게 막는 잠금이고, 실제 배포 권한은 토큰을 가진 강사님 브라우저에만 있습니다.</p>
+        <div class="field" style="max-width:220px"><label for="pinNew">새 PIN (숫자 4~8자리)</label><input id="pinNew" type="password" inputmode="numeric" placeholder="변경할 때만 입력" autocomplete="off"></div>
+        <div class="btn-row">
+          <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:#4C5C54;font-weight:700">
+            <input type="checkbox" id="pinOn" style="width:15px;height:15px;accent-color:#1F3D2B"> PIN 잠금 사용
+          </label>
+          <button class="btn btn-ghost btn-mini" id="savePin" type="button">PIN 저장</button>
+        </div>
+        <p class="status" id="pinStatus"></p>
+        <p class="note">초기 비밀번호는 <b>1234</b>입니다. 강사 모드 안에서 바꾸면 이 브라우저에만 저장됩니다(수강생 화면에는 영향 없음).</p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="pinModal" hidden role="dialog" aria-modal="true" aria-labelledby="pinModalTitle">
+  <div class="modal-card" id="pinCard">
+    <h3 id="pinModalTitle">강사 모드</h3>
+    <p>강사용 비밀번호를 입력하세요.</p>
+    <input id="pinInput" type="password" inputmode="numeric" autocomplete="off" maxlength="12" aria-label="강사 모드 비밀번호">
+    <p class="pin-msg hint" id="pinMsg">초기 비밀번호: 1234</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="pinCancel" type="button">취소</button>
+      <button class="btn btn-dark" id="pinOk" type="button">확인</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var LS = {
+    pin: "tcsBoard.pin",
+    pinOn: "tcsBoard.pinOn",
+    gh: "tcsBoard.gh",
+    draft: "tcsBoard.draft"
+  };
+  var DEFAULT_PIN = "1234";
+  var GH_DEFAULT = {
+    repo: "moonflowergarden123-arch/lecture-board",
+    branch: "main",
+    path: "prompt/prompts.json",
+    token: ""
+  };
+
+  /* 폴백 데이터 — prompts.json 을 못 불러올 때(오프라인·file://) 쓰는 기본값 */
+  var FALLBACK = {
+  "updatedAt": "2026-11-18T14:38:00+09:00",
+  "prompts": [
+    {
+      "no": 1,
+      "title": "고교학점제 과목 선택 도우미",
+      "tag": "#고교학점제",
+      "createdAt": "2026-11-18T09:12:00+09:00",
+      "text": "너는 고등학교 진로진학 상담 선생님이야.\n아래 정보를 바탕으로 우리 아이의 고교학점제 과목 선택을 도와줘.\n\n[우리 아이 정보]\n- 학년: (예: 1학년)\n- 관심 분야: (예: 생명과학, 보건)\n- 강점 과목: (예: 생명과학, 화학)\n- 약한 과목: (예: 수학)\n- 희망 진로·학과: (예: 간호학과)\n- 학교 개설 과목표: (있으면 그대로 붙여넣기)\n\n[요청]\n1. 1순위로 들어야 할 과목 3개와 그 이유\n2. 함께 고르면 좋은 과목 3개 (진로 연계·내신 전략 관점)\n3. 피하는 게 좋은 과목과 그 이유\n4. 2·3학년으로 이어지는 학습 경로 (과목 → 세특 활동 → 진로)\n5. 학부모가 아이와 이야기할 때 쓸 질문 3가지\n\n[조건]\n- 학교 교육과정에 실제로 개설된 과목 안에서만 추천하고, 없는 과목은 만들지 마.\n- 확인되지 않은 정보는 \"확인 필요\"라고 표시해.\n- 결과는 표로 정리하고, 학부모가 읽기 쉬운 말로 써 줘."
+    },
+    {
+      "no": 2,
+      "title": "2028 대입 변화 한눈에 정리",
+      "tag": "#대입전략",
+      "createdAt": "2026-11-18T10:26:00+09:00",
+      "text": "너는 대입 전략을 설명하는 진학 담당 교사야.\n2028학년도 대학입시 제도 변화를 학부모가 5분 안에 이해할 수 있게 정리해 줘.\n\n[요청]\n1. 2028 대입에서 바뀌는 핵심 5가지 (한 줄 요약 + 우리 아이에게 미치는 영향)\n2. 지금 중3~고2 학부모가 꼭 알아야 할 체크포인트\n3. 내신·세특·수능 준비의 우선순위 (학년별)\n4. 흔히 오해하는 부분 3가지와 정확한 설명\n5. 이번 학기 부모가 아이와 함께 할 수 있는 준비 3가지\n\n[조건]\n- 교육부·한국대학교육협의회 공식 발표 기준으로만 설명해.\n- 아직 확정되지 않은 내용은 \"확정 전\"이라고 표시해.\n- 표로 정리하고, 어려운 용어는 괄호로 쉬운 말을 붙여 줘."
+    },
+    {
+      "no": 3,
+      "title": "가정통신문 핵심만 뽑아 정리",
+      "tag": "#학교생활",
+      "createdAt": "2026-11-18T11:40:00+09:00",
+      "text": "아래는 학교에서 온 가정통신문이야.\n학부모가 놓치면 안 되는 내용만 뽑아서 정리해 줘.\n\n[가정통신문 원문]\n(여기에 그대로 붙여넣기)\n\n[요청 1] 표로 정리\n| 제출할 것 | 마감일 | 준비물·금액 | 놓치면 생기는 일 |\n\n[요청 2] 표 아래에 따로 적어 줘\n1. 오늘 당장 해야 할 일 1가지\n2. 비용이 드는 항목과 합계\n3. 담임 선생님께 물어볼 질문 2가지\n4. 아이에게 확인할 것 1가지\n\n[조건]\n- 원문에 없는 내용은 추측하지 말고 \"원문에 없음\"이라고 써.\n- 날짜는 요일까지 함께 표시해.\n- 학부모가 휴대폰에서 바로 볼 수 있게 짧게 써."
+    },
+    {
+      "no": 4,
+      "title": "아이 성향별 자기주도 학습 루틴",
+      "tag": "#학습코칭",
+      "createdAt": "2026-11-18T12:55:00+09:00",
+      "text": "너는 학습 코치야.\n아래 우리 아이 성향을 보고, 억지로 시키지 않아도 굴러가는 주간 학습 루틴을 설계해 줘.\n\n[우리 아이 정보]\n- 학년: ( )\n- 성향: (예: 계획은 세우는데 못 지킴 / 시작이 느림 / 한 가지에 몰입)\n- 잘하는 과목: ( )\n- 힘들어하는 과목: ( )\n- 학원·수업 일정: (예: 월수금 수학학원 7~10시)\n- 평일 스스로 공부 가능한 시간: (예: 2시간)\n\n[요청]\n1. 하루 30분 단위 시간표 (평일·주말 따로, 시험 2주 전 버전도)\n2. 성향에 맞춘 \"시작 트리거\" 3가지 (예: 책상에 딱 1문제만 펴 두기)\n3. 계획이 무너졌을 때 3분 안에 복구하는 방법\n4. 부모가 개입할 선과 개입하지 않을 선\n5. 2주 뒤 아이와 함께 점검할 질문 5가지\n\n[조건]\n- 아이를 통제하는 루틴이 아니라 스스로 움직이게 하는 루틴으로 설계해.\n- 부모가 대신 해 주는 일은 넣지 마.\n- 지킬 수 있는 분량으로만 짜고, 빈 시간을 꼭 남겨 둬."
+    },
+    {
+      "no": 5,
+      "title": "시험 D-14 과목별 체크리스트",
+      "tag": "#시험대비",
+      "createdAt": "2026-11-18T13:48:00+09:00",
+      "text": "너는 중·고등학교 시험 대비 플래너야.\n아래 정보로 시험 D-14 체크리스트를 만들어 줘.\n\n[기본 정보]\n- 학교·학년: ( )\n- 시험 기간: (예: 12/8~12/11)\n- 시험 과목: (예: 국어, 영어, 수학, 통합과학, 한국사)\n- 시험 범위: (과목별 범위를 붙여넣기)\n- 지금 상태: (예: 수학은 진도가 안 나감, 영어 단어 밀림)\n- 하루 공부 가능 시간: (예: 3시간)\n\n[요청]\n1. D-14부터 D-1까지 날짜별 할 일 표 (과목·분량·시간·체크박스)\n2. 과목별 우선순위와 \"전략적으로 버릴 부분\" 판단\n3. 하루 20분 복습 루틴 (그날 배운 것만)\n4. 시험 전날·당일 아침 체크리스트\n5. 부모가 하면 안 되는 말 3가지 / 해 주면 좋은 말 3가지\n\n[조건]\n- 하루 총 학습 시간은 위에 적은 시간을 넘기지 마.\n- 무리한 계획보다 지킬 수 있는 분량으로 짜 줘.\n- 표는 인쇄해서 붙여 둘 수 있게 한 장으로 정리해."
+    },
+    {
+      "no": 6,
+      "title": "오늘 배운 내용, 부모-자녀 대화 질문 5가지",
+      "tag": "#부모교육",
+      "createdAt": "2026-11-18T14:31:00+09:00",
+      "text": "너는 학부모 교육 강사야.\n오늘 배운 내용을 아이와의 대화로 이어 갈 수 있게, 부모가 실제로 쓸 질문을 만들어 줘.\n\n[오늘 배운 내용]\n(여기에 붙여넣기 — 예: 생성형 AI로 공부하는 법)\n\n[우리 아이 정보]\n- 학년: ( )\n- 평소 대화 분위기: (예: 한 마디 하면 방으로 들어감)\n\n[요청] 질문 5개를 아래 형식으로\n1. 질문 (부모가 실제로 말할 문장 그대로)\n2. 이 질문의 의도\n3. 아이가 \"몰라\"·\"귀찮아\"라고 할 때 이어 갈 말\n4. 더 물어보지 말고 듣기만 해야 할 때의 신호\n\n[마지막에 꼭]\n- 오늘 대화에서 절대 하지 말아야 할 말 3가지 (비교·훈계·성적 압박)\n- 아이가 스스로 결정하게 남겨 둘 것 1가지\n\n[조건]\n- 훈계가 아니라 질문 중심으로 만들어 줘.\n- 부모가 외우기 쉽게, 질문은 한 문장으로 짧게 써."
+    }
+  ]
+};
+
+  var state = {
+    data: null,
+    currentNo: null,
+    followLatest: true,
+    teacherOpen: false,
+    unlocked: false,
+    dirty: false,
+    pushedAt: null,
+    remoteOk: false,
+    shared: false,
+    sig: "",
+    editingNo: null,
+    confirmingNo: null,
+    lastArriveNo: null
+  };
+
+  /* ── DOM ── */
+  var $ = function(id){ return document.getElementById(id); };
+  var clockEl = $("clock"), connEl = $("conn"), connText = $("connText");
+  var mainBody = $("mainBody"), mainText = $("mainText"), mainMeta = $("mainMeta"), mainTime = $("mainTime");
+  var backLatest = $("backLatest"), copyBtn = $("copyBtn");
+  var histList = $("histList"), histEmpty = $("histEmpty"), histCount = $("histCount"), searchEl = $("search");
+  var arriveEl = $("arrive"), arriveText = $("arriveText");
+  var teacherToggle = $("teacherToggle"), teacherPanel = $("teacherPanel");
+  var toastEl = $("toast");
+
+  /* ── 유틸 ── */
+  function maxNo(data){
+    var m = 0;
+    (data.prompts || []).forEach(function(p){ if (p.no > m) m = p.no; });
+    return m;
+  }
+  function toB64(str){
+    var bytes = new TextEncoder().encode(str), bin = "";
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function fromB64(b64){
+    var bin = atob(b64.replace(/-/g, "+").replace(/_/g, "/"));
+    var arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(arr);
+  }
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+  function relTime(iso){
+    if (!iso) return "";
+    var t = Date.parse(iso);
+    if (isNaN(t)) return "";
+    var diff = Math.floor((Date.now() - t) / 1000);
+    if (diff < 0) return "방금 전";
+    if (diff < 60) return "방금 전";
+    if (diff < 3600) return Math.floor(diff / 60) + "분 전";
+    if (diff < 86400) return Math.floor(diff / 3600) + "시간 전";
+    if (diff < 86400 * 7) return Math.floor(diff / 86400) + "일 전";
+    var d = new Date(t);
+    return (d.getMonth() + 1) + "월 " + d.getDate() + "일";
+  }
+  function clockText(iso){
+    if (!iso) return "-";
+    var d = new Date(Date.parse(iso));
+    if (isNaN(d.getTime())) return "-";
+    return (d.getMonth() + 1) + "/" + d.getDate() + " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+  }
+  function toast(msg, kind){
+    toastEl.textContent = msg;
+    toastEl.className = "toast is-on" + (kind ? " " + kind : "");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function(){ toastEl.className = "toast"; }, 2600);
+  }
+  function normalize(raw){
+    var out = { updatedAt: raw && raw.updatedAt ? raw.updatedAt : new Date().toISOString(), prompts: [] };
+    var nn = raw && parseInt(raw.nextNo, 10);
+    if (nn && nn > 0) out.nextNo = nn;
+    var list = raw && Array.isArray(raw.prompts) ? raw.prompts : [];
+    var used = {};
+    list.forEach(function(p, i){
+      if (!p || typeof p.text !== "string" || !p.text.trim()) return;
+      var no = parseInt(p.no, 10);
+      if (!no || used[no]) no = i + 1;
+      used[no] = true;
+      out.prompts.push({
+        no: no,
+        title: typeof p.title === "string" ? p.title : "",
+        tag: typeof p.tag === "string" ? p.tag : "",
+        text: p.text,
+        createdAt: p.createdAt || out.updatedAt,
+        pinnedAt: p.pinnedAt || null
+      });
+    });
+    out.prompts.sort(function(a, b){ return a.no - b.no; });
+    return out;
+  }
+  function sortedPrompts(){
+    return state.data.prompts.slice().sort(function(a, b){
+      var pa = a.pinnedAt ? Date.parse(a.pinnedAt) : 0;
+      var pb = b.pinnedAt ? Date.parse(b.pinnedAt) : 0;
+      if (pa !== pb) return pb - pa;
+      return b.no - a.no;
+    });
+  }
+  function byNo(no){
+    for (var i = 0; i < state.data.prompts.length; i++) if (state.data.prompts[i].no === no) return state.data.prompts[i];
+    return null;
+  }
+  function currentPrompt(){ return byNo(state.currentNo); }
+
+  /* ── 렌더 ── */
+  function renderMain(){
+    var p = currentPrompt();
+    if (!p){ mainText.textContent = "아직 올라온 프롬프트가 없습니다."; mainMeta.textContent = ""; mainTime.textContent = ""; return; }
+    mainText.textContent = p.text;
+    var meta = "No." + p.no;
+    if (p.tag) meta += " · " + p.tag;
+    else if (p.title) meta += " · " + p.title;
+    mainMeta.textContent = meta;
+    mainMeta.title = (p.title || "") + (p.tag ? " " + p.tag : "");
+    mainTime.textContent = relTime(p.createdAt);
+    backLatest.hidden = (state.currentNo === maxNo(state.data)) && !p.pinnedAt;
+  }
+  function renderList(){
+    var q = (searchEl.value || "").trim().toLowerCase();
+    var list = sortedPrompts();
+    histList.textContent = "";
+    var shown = 0;
+    list.forEach(function(p){
+      if (q){
+        var hay = (p.title + " " + p.tag + " " + p.text).toLowerCase();
+        if (hay.indexOf(q) === -1) return;
+      }
+      shown++;
+      var li = document.createElement("li");
+      li.className = "row" + (p.no === state.currentNo ? " is-cur" : "");
+
+      var noEl = document.createElement("span");
+      noEl.className = "row-no";
+      noEl.textContent = String(p.no);
+      if (p.pinnedAt){
+        var pin = document.createElement("span");
+        pin.className = "pin"; pin.textContent = "📌"; pin.title = "맨 위로 올린 프롬프트";
+        noEl.appendChild(pin);
+      }
+
+      var main = document.createElement("div");
+      main.className = "row-main";
+      if (p.title || p.tag){
+        var tt = document.createElement("p");
+        tt.className = "row-title";
+        tt.textContent = p.title || "";
+        if (p.tag){
+          var tg = document.createElement("span");
+          tg.className = "tag"; tg.textContent = p.tag;
+          tt.appendChild(tg);
+        }
+        main.appendChild(tt);
+      }
+      var tx = document.createElement("p");
+      tx.className = "row-text";
+      tx.textContent = p.text;
+      main.appendChild(tx);
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "row-pick";
+      btn.textContent = p.no === state.currentNo ? "선택됨" : "선택";
+      btn.setAttribute("aria-pressed", p.no === state.currentNo ? "true" : "false");
+      btn.addEventListener("click", function(){ selectPrompt(p.no); });
+
+      li.appendChild(noEl); li.appendChild(main); li.appendChild(btn);
+      histList.appendChild(li);
+    });
+    histEmpty.hidden = shown !== 0;
+    histCount.textContent = q ? ("검색 " + shown + " / 전체 " + list.length + "개") : ("전체 " + list.length + "개");
+  }
+  function renderManage(){
+    var listEl = $("manageList");
+    listEl.textContent = "";
+    var list = sortedPrompts();
+    list.forEach(function(p){
+      var li = document.createElement("li");
+      li.className = "mrow";
+
+      var top = document.createElement("div");
+      top.className = "mrow-top";
+      var no = document.createElement("span");
+      no.className = "mrow-no"; no.textContent = "No." + p.no;
+      var ti = document.createElement("span");
+      ti.className = "mrow-title"; ti.textContent = p.title || (p.text.split("\n")[0] || "").slice(0, 40);
+      var btns = document.createElement("div");
+      btns.className = "mrow-btns";
+
+      var bEdit = document.createElement("button");
+      bEdit.type = "button"; bEdit.className = "btn btn-ghost btn-mini"; bEdit.textContent = "수정";
+      bEdit.addEventListener("click", function(){ state.editingNo = state.editingNo === p.no ? null : p.no; state.confirmingNo = null; renderManage(); });
+
+      var bPin = document.createElement("button");
+      bPin.type = "button"; bPin.className = "btn btn-ghost btn-mini"; bPin.textContent = "📌 맨 위로";
+      bPin.addEventListener("click", function(){ bumpToTop(p.no); });
+
+      var bDel = document.createElement("button");
+      bDel.type = "button"; bDel.className = "btn btn-ghost btn-mini"; bDel.textContent = "삭제";
+      bDel.addEventListener("click", function(){ state.confirmingNo = p.no; state.editingNo = null; renderManage(); });
+
+      btns.appendChild(bEdit); btns.appendChild(bPin); btns.appendChild(bDel);
+      top.appendChild(no); top.appendChild(ti); top.appendChild(btns);
+      li.appendChild(top);
+
+      var snip = document.createElement("p");
+      snip.className = "mrow-snip"; snip.textContent = p.text;
+      li.appendChild(snip);
+
+      if (state.editingNo === p.no){
+        var ed = document.createElement("div");
+        ed.className = "mrow-edit";
+        var tTitle = document.createElement("input");
+        tTitle.type = "text"; tTitle.value = p.title || ""; tTitle.placeholder = "제목"; tTitle.setAttribute("aria-label", "제목 수정");
+        var tTag = document.createElement("input");
+        tTag.type = "text"; tTag.value = p.tag || ""; tTag.placeholder = "태그"; tTag.setAttribute("aria-label", "태그 수정");
+        var tText = document.createElement("textarea");
+        tText.value = p.text; tText.style.minHeight = "150px"; tText.setAttribute("aria-label", "본문 수정");
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        var bSave = document.createElement("button");
+        bSave.type = "button"; bSave.className = "btn btn-dark btn-mini"; bSave.textContent = "저장";
+        bSave.addEventListener("click", function(){
+          var val = tText.value.trim();
+          if (!val){ toast("본문이 비어 있어요.", "warn"); return; }
+          p.title = tTitle.value.trim(); p.tag = tTag.value.trim(); p.text = val;
+          state.editingNo = null; state.dirty = true;
+          persistDraft(); renderAll(); renderManage();
+          toast("수정했어요. ‘보드에 반영’을 눌러 배포하세요.", "warn");
+        });
+        var bCancel = document.createElement("button");
+        bCancel.type = "button"; bCancel.className = "btn btn-ghost btn-mini"; bCancel.textContent = "취소";
+        bCancel.addEventListener("click", function(){ state.editingNo = null; renderManage(); });
+        row.appendChild(bSave); row.appendChild(bCancel);
+        ed.appendChild(tTitle); ed.appendChild(tTag); ed.appendChild(tText); ed.appendChild(row);
+        li.appendChild(ed);
+      }
+
+      if (state.confirmingNo === p.no){
+        var cf = document.createElement("div");
+        cf.className = "mrow-confirm";
+        var msg = document.createElement("span");
+        msg.textContent = "정말 삭제할까요?";
+        var bYes = document.createElement("button");
+        bYes.type = "button"; bYes.className = "btn btn-mini"; bYes.style.cssText = "background:#B23A2E;color:#fff";
+        bYes.textContent = "삭제";
+        bYes.addEventListener("click", function(){ removePrompt(p.no); });
+        var bNo = document.createElement("button");
+        bNo.type = "button"; bNo.className = "btn btn-ghost btn-mini"; bNo.textContent = "취소";
+        bNo.addEventListener("click", function(){ state.confirmingNo = null; renderManage(); });
+        cf.appendChild(msg); cf.appendChild(bYes); cf.appendChild(bNo);
+        li.appendChild(cf);
+      }
+
+      listEl.appendChild(li);
+    });
+    if (!list.length){
+      var e = document.createElement("li");
+      e.className = "empty"; e.textContent = "프롬프트가 없습니다.";
+      listEl.appendChild(e);
+    }
+    $("kvCount").textContent = list.length + "개";
+    $("kvUpdated").textContent = clockText(state.data.updatedAt);
+    $("kvPushed").textContent = state.pushedAt ? ("배포됨 · " + clockText(state.pushedAt)) : "로컬에만 반영됨";
+    $("tpBadge").textContent = state.pushedAt ? "배포됨" : (state.dirty ? "미배포" : "로컬");
+  }
+  function renderAll(){
+    if (!state.data) return;
+    if (!currentPrompt()) state.currentNo = maxNo(state.data) || null;
+    renderMain();
+    renderList();
+    if (state.teacherOpen) renderManage();
+  }
+  function flashMain(){
+    mainBody.classList.remove("is-flash");
+    void mainBody.offsetWidth;
+    mainBody.classList.add("is-flash");
+  }
+
+  /* ── 선택 / 이동 ── */
+  function selectPrompt(no){
+    state.currentNo = no;
+    state.followLatest = (no === maxNo(state.data));
+    hideArrive();
+    renderMain(); renderList();
+    if (window.innerWidth < 700){
+      document.querySelector(".main-card").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+  function backToLatest(){
+    state.currentNo = maxNo(state.data);
+    state.followLatest = true;
+    hideArrive();
+    renderMain(); renderList();
+    flashMain();
+  }
+  function showArrive(no){
+    state.lastArriveNo = no;
+    arriveText.textContent = (no ? "No." + no + " 새 프롬프트가 도착했어요!" : "새 프롬프트가 도착했어요!");
+    arriveEl.hidden = false;
+  }
+  function hideArrive(){ arriveEl.hidden = true; }
+
+  /* ── 복사 ── */
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text);
+    }
+    return Promise.reject(new Error("no clipboard api"));
+  }
+  function selectMainText(){
+    try{
+      var range = document.createRange();
+      range.selectNodeContents(mainText);
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      return true;
+    } catch(e){ return false; }
+  }
+  function legacyCopy(){
+    selectMainText();
+    try { return document.execCommand("copy"); } catch(e){ return false; }
+  }
+  function onCopy(){
+    var p = currentPrompt();
+    if (!p) return;
+    copyText(p.text).then(function(){
+      successCopy();
+    }).catch(function(){
+      if (legacyCopy()){ successCopy(); }
+      else {
+        selectMainText();
+        toast("텍스트를 선택했어요. Ctrl/Cmd + C로 복사하세요.", "warn");
+      }
+    });
+  }
+  function successCopy(){
+    var old = copyBtn.textContent;
+    copyBtn.textContent = "✓ 복사 완료!";
+    copyBtn.classList.add("is-done");
+    toast("복사 완료!", "ok");
+    setTimeout(function(){
+      copyBtn.textContent = old;
+      copyBtn.classList.remove("is-done");
+    }, 1500);
+    try { window.getSelection().removeAllRanges(); } catch(e){}
+  }
+
+  /* ── 강사 모드 동작 ── */
+  function publishNew(){
+    var text = $("newText").value.trim();
+    if (!text){ toast("프롬프트 본문을 입력해 주세요.", "warn"); $("newText").focus(); return; }
+    var no = Math.max(maxNo(state.data) + 1, state.data.nextNo || 0);
+    state.data.nextNo = no + 1;
+    state.data.prompts.push({
+      no: no,
+      title: $("newTitle").value.trim(),
+      tag: $("newTag").value.trim(),
+      text: text,
+      createdAt: new Date().toISOString(),
+      pinnedAt: null
+    });
+    state.data.updatedAt = new Date().toISOString();
+    state.dirty = true;
+    state.currentNo = no;
+    state.followLatest = true;
+    hideArrive();
+    persistDraft();
+    renderAll(); renderManage();
+    $("newText").value = ""; $("newTitle").value = ""; $("newTag").value = "";
+    flashMain();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    toast("No." + no + " 프롬프트를 보드에 올렸어요.", "ok");
+    var cfg = ghConfig();
+    if (cfg.token){
+      setStatus("publishStatus", "GitHub에 올리는 중…", "");
+      pushToGitHub("feat(prompt): " + no + "번 프롬프트 추가 — " + (state.data.prompts[state.data.prompts.length - 1].title || "새 프롬프트"))
+        .then(function(){
+          setStatus("publishStatus", "배포 완료 · 수강생 화면에 30~60초 안에 반영됩니다.", "ok");
+          toast("배포 완료! 수강생 화면에 곧 반영됩니다.", "ok");
+        })
+        .catch(function(err){
+          setStatus("publishStatus", "로컬에는 올라갔지만 배포에 실패했어요: " + err.message, "err");
+          toast("로컬에만 반영됐어요. 아래 ‘prompts.json 내려받기’로 배포하세요.", "warn");
+        });
+    } else {
+      setStatus("publishStatus", "로컬 미리보기로 올렸어요. 배포하려면 토큰을 저장하거나 prompts.json을 내려받으세요.", "warn");
+    }
+  }
+  function removePrompt(no){
+    state.data.prompts = state.data.prompts.filter(function(p){ return p.no !== no; });
+    state.data.updatedAt = new Date().toISOString();
+    state.dirty = true; state.confirmingNo = null;
+    if (state.currentNo === no) state.currentNo = maxNo(state.data) || null;
+    persistDraft(); renderAll(); renderManage();
+    toast("No." + no + " 삭제했어요. 배포해야 반영됩니다.", "warn");
+  }
+  function bumpToTop(no){
+    var p = byNo(no);
+    if (!p) return;
+    p.pinnedAt = new Date().toISOString();
+    state.data.updatedAt = new Date().toISOString();
+    state.dirty = true;
+    state.currentNo = no;
+    state.followLatest = (no === maxNo(state.data));
+    persistDraft(); renderAll(); renderManage();
+    toast("No." + no + " 맨 위로 올렸어요. 배포해야 반영됩니다.", "warn");
+  }
+
+  /* ── 저장/배포 ── */
+  function persistDraft(){
+    try { localStorage.setItem(LS.draft, JSON.stringify(state.data)); } catch(e){}
+  }
+  function sourceJson(){
+    var out = { updatedAt: state.data.updatedAt };
+    if (state.data.nextNo) out.nextNo = state.data.nextNo;
+    out.prompts = state.data.prompts;
+    return JSON.stringify(out, null, 2);
+  }
+  function setStatus(elId, msg, kind){
+    var el = $(elId);
+    if (!el) return;
+    el.textContent = msg || "";
+    el.className = "status" + (kind ? " " + kind : "");
+  }
+  function ghConfig(){
+    var cfg = { repo: GH_DEFAULT.repo, branch: GH_DEFAULT.branch, path: GH_DEFAULT.path, token: "" };
+    try {
+      var saved = JSON.parse(localStorage.getItem(LS.gh) || "{}");
+      if (saved.repo) cfg.repo = saved.repo;
+      if (saved.branch) cfg.branch = saved.branch;
+      if (saved.path) cfg.path = saved.path;
+      if (saved.token) cfg.token = saved.token;
+    } catch(e){}
+    return cfg;
+  }
+  function ghHeaders(cfg){
+    return {
+      "Authorization": "Bearer " + cfg.token,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json"
+    };
+  }
+  function pushToGitHub(message){
+    var cfg = ghConfig();
+    if (!cfg.token) return Promise.reject(new Error("토큰이 저장되어 있지 않습니다"));
+    var base = "https://api.github.com/repos/" + cfg.repo + "/contents/" + cfg.path;
+    var sha = null;
+    return fetch(base + "?ref=" + encodeURIComponent(cfg.branch) + "&t=" + Date.now(), { headers: ghHeaders(cfg), cache: "no-store" })
+      .then(function(r){
+        if (r.status === 404) return null;
+        if (r.status === 401 || r.status === 403) throw new Error("토큰 권한을 확인해 주세요 (" + r.status + ")");
+        if (!r.ok) throw new Error("기존 파일 조회 실패 (" + r.status + ")");
+        return r.json();
+      })
+      .then(function(j){
+        if (j && j.sha) sha = j.sha;
+        var body = { message: message, content: toB64(sourceJson()), branch: cfg.branch };
+        if (sha) body.sha = sha;
+        return fetch(base, { method: "PUT", headers: ghHeaders(cfg), body: JSON.stringify(body) });
+      })
+      .then(function(r){
+        if (r.status === 409) throw new Error("다른 곳에서 먼저 수정했어요. 새로고침 후 다시 시도해 주세요");
+        if (!r.ok) return r.text().then(function(t){ throw new Error("커밋 실패 (" + r.status + ") " + t.slice(0, 140)); });
+        return r.json();
+      })
+      .then(function(j){
+        state.pushedAt = new Date().toISOString();
+        state.dirty = false;
+        renderManage();
+        return j;
+      });
+  }
+  function testConnection(){
+    var cfg = ghConfig();
+    if (!cfg.token){ setStatus("ghStatus", "토큰을 먼저 입력하고 저장해 주세요.", "warn"); return; }
+    setStatus("ghStatus", "연결 확인 중…", "");
+    var base = "https://api.github.com/repos/" + cfg.repo;
+    fetch(base, { headers: ghHeaders(cfg), cache: "no-store" })
+      .then(function(r){
+        if (r.status === 401) throw new Error("토큰이 유효하지 않습니다 (401)");
+        if (r.status === 403) throw new Error("토큰 권한이 부족합니다 (403)");
+        if (r.status === 404) throw new Error("저장소를 찾을 수 없습니다 — 이름과 토큰 권한을 확인해 주세요 (404)");
+        if (!r.ok) throw new Error("연결 실패 (" + r.status + ")");
+        return r.json();
+      })
+      .then(function(j){
+        var canWrite = j.permissions && (j.permissions.push || j.permissions.admin);
+        return fetch(base + "/contents/" + cfg.path + "?ref=" + encodeURIComponent(cfg.branch) + "&t=" + Date.now(), { headers: ghHeaders(cfg), cache: "no-store" })
+          .then(function(r){
+            var fileMsg = r.ok ? "파일 확인됨" : (r.status === 404 ? "파일 없음(첫 배포 때 새로 만들어집니다)" : "파일 확인 실패 (" + r.status + ")");
+            setStatus("ghStatus",
+              "연결됨 · " + (j.full_name || cfg.repo) + (canWrite ? " (쓰기 가능)" : " (쓰기 권한 없음 — Contents: Read and write 필요)") + " · " + fileMsg,
+              canWrite ? "ok" : "warn");
+          });
+      })
+      .catch(function(err){ setStatus("ghStatus", err.message, "err"); });
+  }
+
+  /* ── PIN ── */
+  function getPin(){
+    var v = null;
+    try { v = localStorage.getItem(LS.pin); } catch(e){}
+    return v || DEFAULT_PIN;
+  }
+  function pinEnabled(){
+    try { return localStorage.getItem(LS.pinOn) !== "0"; } catch(e){ return true; }
+  }
+  var pinFails = 0, pinLockUntil = 0;
+  function openPinModal(){
+    $("pinModal").hidden = false;
+    $("pinInput").value = "";
+    $("pinMsg").className = "pin-msg hint";
+    $("pinMsg").textContent = "초기 비밀번호: 1234";
+    setTimeout(function(){ $("pinInput").focus(); }, 30);
+  }
+  function closePinModal(){ $("pinModal").hidden = true; }
+  function submitPin(){
+    if (Date.now() < pinLockUntil){
+      $("pinMsg").className = "pin-msg";
+      $("pinMsg").textContent = "잠시 후 다시 시도해 주세요.";
+      return;
+    }
+    var val = $("pinInput").value.trim();
+    if (val === getPin()){
+      state.unlocked = true;
+      closePinModal();
+      setTeacher(true);
+      return;
+    }
+    pinFails++;
+    $("pinMsg").className = "pin-msg";
+    $("pinMsg").textContent = "비밀번호가 맞지 않습니다. (" + pinFails + "/5)";
+    var card = $("pinCard");
+    card.classList.remove("is-shake"); void card.offsetWidth; card.classList.add("is-shake");
+    $("pinInput").value = "";
+    if (pinFails >= 5){
+      pinLockUntil = Date.now() + 30000;
+      pinFails = 0;
+      $("pinMsg").textContent = "5회 틀렸습니다. 30초 뒤 다시 시도해 주세요.";
+    }
+  }
+
+  /* ── 강사 모드 열기/닫기 ── */
+  function setTeacher(open){
+    state.teacherOpen = open;
+    teacherPanel.hidden = !open;
+    teacherToggle.textContent = open ? "강사 모드 닫기" : "강사 모드 켜기";
+    teacherToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open){
+      fillGhFields();
+      $("pinOn").checked = pinEnabled();
+      renderManage();
+      if (state.dirty) setStatus("manageStatus", "아직 배포하지 않은 변경이 있어요. ‘보드에 반영’을 눌러 주세요.", "warn");
+      setTimeout(function(){ teacherPanel.scrollIntoView({ behavior: "smooth", block: "start" }); }, 60);
+    }
+  }
+  function toggleTeacher(){
+    if (state.teacherOpen){ setTeacher(false); return; }
+    if (!pinEnabled() || state.unlocked){ setTeacher(true); return; }
+    openPinModal();
+  }
+  function fillGhFields(){
+    var cfg = ghConfig();
+    $("ghRepo").value = cfg.repo;
+    $("ghBranch").value = cfg.branch;
+    $("ghPath").value = cfg.path;
+    $("ghToken").value = cfg.token;
+  }
+
+  /* ── 수집/감시 ── */
+  var POLL_MS = 5000;
+  var lastPollOk = null;
+  function setConn(ok){
+    if (ok === lastPollOk) return;
+    lastPollOk = ok;
+    if (ok){ connEl.className = "conn"; connText.textContent = "실시간 연결됨"; }
+    else { connEl.className = "conn is-off"; connText.textContent = "로컬 모드"; }
+  }
+  function fetchRemote(){
+    return fetch("prompts.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
+  function sigOf(d){
+    if (!d) return "";
+    return d.updatedAt + "|" + d.prompts.map(function(p){
+      return p.no + ":" + p.text.length + ":" + (p.pinnedAt || "") + ":" + p.title.length;
+    }).join(",");
+  }
+  function applyRemote(raw){
+    var incoming = normalize(raw);
+    var sig = sigOf(incoming);
+    setConn(true);
+    if (sig === state.sig){ return; }   /* 바뀐 게 없으면 화면을 다시 그리지 않는다 */
+    state.sig = sig;
+    var prevMax = maxNo(state.data);
+    var newMax = maxNo(incoming);
+    var had = !!byNo(state.currentNo);
+    state.data = incoming;
+    if (newMax > prevMax && prevMax > 0){
+      if (state.followLatest || !had){
+        state.currentNo = newMax;
+        renderAll();
+        flashMain();
+        toast("새 프롬프트가 올라왔어요! (No." + newMax + ")", "ok");
+      } else {
+        if (had) { renderAll(); }
+        showArrive(newMax);
+      }
+    } else {
+      if (!had) state.currentNo = newMax || null;
+      renderAll();
+    }
+  }
+  function poll(){
+    if (state.teacherOpen) return;
+    if (state.dirty){
+      connEl.className = "conn is-wait";
+      connText.textContent = "배포 대기";
+      lastPollOk = null;
+      return;
+    }
+    fetchRemote().then(function(j){ applyRemote(j); })
+      .catch(function(){
+        setConn(false);
+      });
+  }
+
+  /* ── 초기화 ── */
+  function boot(){
+    /* 시계 */
+    function tick(){
+      var fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, timeZone: "Asia/Seoul" });
+      clockEl.textContent = fmt.format(new Date());
+    }
+    tick(); setInterval(tick, 1000);
+    setInterval(function(){
+      var p = currentPrompt();
+      if (p) mainTime.textContent = relTime(p.createdAt);
+    }, 30000);
+
+    /* 공유 링크(#d=) 우선 */
+    var hash = location.hash || "";
+    if (hash.indexOf("#d=") === 0){
+      try {
+        var shared = normalize(JSON.parse(fromB64(hash.slice(3))));
+        state.data = shared; state.shared = true;
+        state.sig = sigOf(shared);
+        state.currentNo = maxNo(shared);
+        renderAll();
+        connEl.className = "conn is-wait";
+        connText.textContent = "공유 링크";
+        lastPollOk = null;
+        toast("공유 링크로 받은 프롬프트입니다.", "ok");
+        return;
+      } catch(e){}
+    }
+
+    fetchRemote().then(function(raw){
+      var remote = normalize(raw);
+      var draft = null;
+      try { draft = JSON.parse(localStorage.getItem(LS.draft) || "null"); } catch(e){}
+      if (draft && draft.prompts && Array.isArray(draft.prompts)){
+        var d = normalize(draft);
+        if (Date.parse(d.updatedAt) > Date.parse(remote.updatedAt)){
+          remote = d;
+          state.dirty = true;
+        }
+      }
+      state.data = remote;
+      state.sig = sigOf(remote);
+      state.currentNo = maxNo(remote) || null;
+      setConn(true);
+      renderAll();
+    }).catch(function(){
+      state.data = normalize(FALLBACK);
+      state.currentNo = maxNo(state.data);
+      setConn(false);
+      renderAll();
+    });
+
+    setInterval(poll, POLL_MS);
+  }
+
+  /* ── 이벤트 ── */
+  copyBtn.addEventListener("click", onCopy);
+  backLatest.addEventListener("click", backToLatest);
+  arriveEl.addEventListener("click", backToLatest);
+  searchEl.addEventListener("input", renderList);
+  teacherToggle.addEventListener("click", toggleTeacher);
+
+  $("publishBtn").addEventListener("click", publishNew);
+  $("pushBtn").addEventListener("click", function(){
+    var cfg = ghConfig();
+    if (!cfg.token){ setStatus("manageStatus", "토큰이 없어 배포할 수 없어요. 아래 설정에서 토큰을 저장해 주세요.", "warn"); return; }
+    setStatus("manageStatus", "배포 중…", "");
+    pushToGitHub("chore(prompt): 프롬프트 보드 갱신 (" + state.data.prompts.length + "개)")
+      .then(function(){ setStatus("manageStatus", "배포 완료 · 30~60초 안에 전 수강생 화면에 반영됩니다.", "ok"); toast("배포 완료!", "ok"); })
+      .catch(function(err){ setStatus("manageStatus", "배포 실패: " + err.message, "err"); });
+  });
+
+  $("saveGh").addEventListener("click", function(){
+    var cfg = {
+      repo: $("ghRepo").value.trim() || GH_DEFAULT.repo,
+      branch: $("ghBranch").value.trim() || GH_DEFAULT.branch,
+      path: $("ghPath").value.trim() || GH_DEFAULT.path,
+      token: $("ghToken").value.trim()
+    };
+    try {
+      localStorage.setItem(LS.gh, JSON.stringify(cfg));
+      setStatus("ghStatus", cfg.token ? "토큰을 이 브라우저에 저장했습니다. ‘연결 확인’으로 확인해 보세요." : "토큰 없이 저장했습니다 (로컬 미리보기 전용).", cfg.token ? "ok" : "warn");
+      toast(cfg.token ? "토큰 저장 완료" : "저장 완료 (토큰 없음)", "ok");
+    } catch(e){ setStatus("ghStatus", "저장하지 못했습니다: " + e.message, "err"); }
+  });
+  $("testGh").addEventListener("click", testConnection);
+  $("clearGh").addEventListener("click", function(){
+    try { localStorage.removeItem(LS.gh); } catch(e){}
+    $("ghToken").value = "";
+    setStatus("ghStatus", "이 브라우저에서 토큰을 삭제했습니다.", "ok");
+  });
+
+  $("dlJson").addEventListener("click", function(){
+    var blob = new Blob([sourceJson()], { type: "application/json;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "prompts.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    setStatus("shareStatus", "prompts.json을 내려받았습니다. lecture-board/prompt/ 폴더에 올려 주세요.", "ok");
+  });
+  $("copyShare").addEventListener("click", function(){
+    var url = location.origin + location.pathname + "#d=" + toB64(JSON.stringify(state.data));
+    copyText(url).then(function(){
+      setStatus("shareStatus", "공유 링크를 복사했어요. 링크를 연 사람은 이 시점의 프롬프트를 그대로 봅니다.", "ok");
+    }).catch(function(){
+      window.prompt("아래 링크를 복사하세요 (Ctrl/Cmd + C):", url);
+      setStatus("shareStatus", "링크를 복사할 수 없어 직접 선택 창으로 띄웠습니다.", "warn");
+    });
+  });
+
+  $("savePin").addEventListener("click", function(){
+    var v = $("pinNew").value.trim();
+    if (v && !/^[0-9]{4,8}$/.test(v)){ setStatus("pinStatus", "PIN은 숫자 4~8자리로 정해 주세요.", "err"); return; }
+    try {
+      if (v) localStorage.setItem(LS.pin, v);
+      localStorage.setItem(LS.pinOn, $("pinOn").checked ? "1" : "0");
+      setStatus("pinStatus", v ? "PIN을 바꿨습니다. 이 브라우저에만 적용됩니다." : "PIN 설정을 저장했습니다.", "ok");
+      $("pinNew").value = "";
+    } catch(e){ setStatus("pinStatus", "저장하지 못했습니다: " + e.message, "err"); }
+  });
+
+  $("pinOk").addEventListener("click", submitPin);
+  $("pinCancel").addEventListener("click", closePinModal);
+  $("pinInput").addEventListener("keydown", function(e){ if (e.key === "Enter") submitPin(); });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && !$("pinModal").hidden) closePinModal();
+  });
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>2028 대입 준비 가상 전시관 · 더콘텐츠스쿨</title>
+<meta name="description" content="중1·중2·중3 학부모를 위한 2028 대입제도 안내 — 5개 관 14점의 인터랙티브 3D 가상 전시관. 더콘텐츠스쿨 오현주 강사.">
+<meta name="theme-color" content="#1F3D2B">
+<meta property="og:title" content="2028 대입 준비 가상 전시관">
+<meta property="og:description" content="고교학점제 · 내신 5등급제 · 통합형 수능을 3D 전시관에서 14점의 안내판으로. 더콘텐츠스쿨 오현주 강사.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="all">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+<div id="app">
+  <canvas id="scene" aria-label="3D 가상 전시관"></canvas>
+  <div id="vignette"></div>
+
+  <header id="hud-top">
+    <div class="brand">
+      <span class="brand-mark">The Contents School</span>
+      <span class="brand-title">2028 대입 준비 가상 전시관 · 오현주 강사</span>
+    </div>
+    <button id="btn-help" type="button" aria-label="관람 안내와 전체 지도">?</button>
+  </header>
+
+  <div id="joy" aria-hidden="true"><div id="joy-knob"></div></div>
+
+  <div id="peek"></div>
+
+  <nav id="hud-bottom">
+    <button class="nav-btn" id="btn-prev" type="button">◀ 이전</button>
+    <div id="counter"><b id="c-no">1</b><span>/ 14</span><span class="c-zone" id="c-zone">입구 홀</span></div>
+    <button class="nav-btn" id="btn-next" type="button">다음 ▶</button>
+  </nav>
+
+  <div id="wm-bottom">더콘텐츠스쿨 <span>·</span> 오현주 강사 <span>·</span> 무단 복제·배포 금지</div>
+
+  <!-- 입장 안내 -->
+  <div class="modal-layer" id="intro">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+      <div class="intro-body">
+        <div class="intro-venue">Gallery · The Contents School</div>
+        <h1 class="intro-title" id="intro-title">2028 대입 준비<br>가상 전시관</h1>
+        <p class="intro-sub">중1 · 중2 · 중3 학부모를 위한<br>5개 관 · 14점의 안내판</p>
+        <div class="intro-rule"></div>
+        <ul class="guide">
+          <li><span class="ic">🕹️</span><span>왼쪽 아래 동그라미를 밀어 걸어 다녀요</span></li>
+          <li><span class="ic">👆</span><span>화면을 끌어 주위를 둘러봐요</span></li>
+          <li><span class="ic">🖼️</span><span>액자를 누르면 설명 카드가 열려요</span></li>
+          <li><span class="ic">▶</span><span>‘다음’ 버튼으로 순서대로 관람해요</span></li>
+        </ul>
+        <div class="grade-pick">
+          <div class="gl">우리 아이 학년</div>
+          <div class="grade-btns" id="grade-btns"></div>
+        </div>
+        <button class="enter-btn" id="btn-enter" type="button">입장하기</button>
+        <p class="intro-note">이 전시관은 모집인원·등급컷 같은 수치를 다루지 않습니다.<br>대학별 수치는 각 대학 모집요강 원문으로 확인하세요.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 작품 해설 카드 -->
+  <div class="modal-layer" id="card">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="card-title">
+      <div class="sheet-head">
+        <div class="kicker"><span id="card-kicker">입구 홀</span><span class="dot"></span><span id="card-count">01 / 14</span></div>
+        <h2 id="card-title">제목</h2>
+        <div class="en" id="card-en"></div>
+        <div class="meta" id="card-meta"></div>
+        <button class="x-btn" data-close-card type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="sheet-body" id="card-body"></div>
+    </div>
+  </div>
+
+  <!-- 관람 안내 / 미니맵 -->
+  <div class="modal-layer" id="help">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="help-title">
+      <div class="sheet-head">
+        <div class="kicker">Guide</div>
+        <h2 id="help-title">관람 안내 · 전체 지도</h2>
+        <div class="meta">전시관은 입구에서 출구까지 한 줄로 이어집니다</div>
+        <button class="x-btn" data-close="help" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="help-sec">
+          <h3>지도</h3>
+          <div class="map-scroll"><svg id="minimap" width="720" height="118" viewBox="0 0 720 118" aria-label="전시관 미니맵"></svg></div>
+          <p class="help-tip">점을 누르면 그 작품 앞으로 이동합니다. 현재 위치는 금색 점입니다.</p>
+        </div>
+        <div class="help-sec">
+          <h3>관람법</h3>
+          <ul class="zone-list" id="help-guide" style="list-style:none">
+            <li style="font-size:12.5px;color:#4A4238;line-height:1.75">왼쪽 아래 조이스틱으로 이동 · 화면을 끌면 둘러보기 · 액자를 누르면 해설 카드 · 아래 ‘이전 / 다음’으로 순서 관람</li>
+          </ul>
+        </div>
+        <div class="help-sec">
+          <h3>구역</h3>
+          <ul class="zone-list" id="zone-list"></ul>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="btn-list" type="button">목록으로 보기</button>
+          <button class="btn primary" data-close="help" type="button">계속 관람하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 퀴즈 -->
+  <div class="modal-layer" id="quiz">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+      <div class="sheet-head">
+        <div class="kicker">Exit · Quiz</div>
+        <h2 id="quiz-title">오늘 배운 것 확인하기</h2>
+        <div class="meta">두 문제 · 정답은 해설과 함께</div>
+        <button class="x-btn" data-close="quiz" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="sheet-body" id="quiz-body"></div>
+      <div class="sheet-foot">
+        <div class="actions" style="margin-top:0">
+          <button class="btn ghost" data-close="quiz" type="button">나가기</button>
+          <button class="btn primary" id="btn-check" type="button">정답 확인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수료 관람권 -->
+  <div class="modal-layer" id="ticket">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ticket-title">
+      <div class="sheet-head">
+        <div class="kicker">Certificate</div>
+        <h2 id="ticket-title">수료 관람권</h2>
+        <div class="meta">전시관의 안내를 모두 확인하셨습니다</div>
+        <button class="x-btn" data-close="ticket" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="sheet-body ticket-wrap">
+        <div class="ticket" id="ticket-card"></div>
+      </div>
+      <div class="sheet-foot">
+        <div class="actions" style="margin-top:0">
+          <button class="btn" id="btn-save-ticket" type="button">이미지로 저장</button>
+          <button class="btn primary" data-close="ticket" type="button">관람 마치기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 목록 보기 (WebGL 미지원 대비) -->
+  <div class="modal-layer" id="fallback">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="fb-title">
+      <div class="sheet-head">
+        <div class="kicker">List</div>
+        <h2 id="fb-title">전시 목록</h2>
+        <div class="meta">14점의 안내판을 글로 읽습니다</div>
+        <button class="x-btn" data-close="fallback" type="button" aria-label="닫기">✕</button>
+      </div>
+      <div class="sheet-body fb-body">
+        <p id="fb-note">3D 관람이 어려운 환경에서는 목록으로 볼 수 있습니다.</p>
+        <div class="fb-list" id="fb-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="loading">
+    <div class="ld-mark">The Contents School</div>
+    <div class="ld-bar"><i></i></div>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="gallery.js?v=4"></script>
+</body>
+</html>

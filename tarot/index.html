@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>합격 부적 · 탄생월 12종 | 더콘텐츠스쿨</title>
+<meta name="description" content="태어난 달의 그림(호랑이·청룡·잉어·봉황)과 경면주사 부적을 담은 12장의 합격 부적. 아이 이름을 넣어 바로 저장하세요.">
+<meta property="og:title" content="합격 부적 · 탄생월 12종">
+<meta property="og:description" content="태어난 달의 그림과 주사 부적을 담은 합격 부적 12장. 이름을 넣어 바로 저장하세요.">
+<meta property="og:image" content="preview.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1F3D2B">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-cons" aria-hidden="true">
+      <svg viewBox="0 0 240 120" width="150" height="75">
+        <g fill="none" stroke="#FFC24B" stroke-width="1.2" opacity="0.42">
+          <circle cx="152" cy="52" r="15"/>
+          <g stroke-linecap="round">
+            <line x1="152" y1="24" x2="152" y2="14"/><line x1="152" y1="90" x2="152" y2="80"/>
+            <line x1="124" y1="52" x2="114" y2="52"/><line x1="180" y1="52" x2="190" y2="52"/>
+            <line x1="132" y1="32" x2="125" y2="25"/><line x1="172" y1="32" x2="179" y2="25"/>
+            <line x1="132" y1="72" x2="125" y2="79"/><line x1="172" y1="72" x2="179" y2="79"/>
+          </g>
+        </g>
+        <path d="M34 98c14-10 26-10 40 0 12-8 24-8 36 0 12-8 24-8 36 0 12-8 24-8 36 0" fill="none" stroke="#FFC24B" stroke-width="1.2" opacity="0.34"/>
+        <path d="M60 28a17 17 0 1 0 0 24 21 21 0 0 1 0-24z" fill="#FFC24B" opacity="0.32"/>
+      </svg>
+    </div>
+    <p class="brand">더콘텐츠스쿨</p>
+    <p class="kicker">탄생월 맞춤</p>
+    <h1>합격 부적</h1>
+    <p class="sub">탄생월별 행운 카드 · 저장해서 소장하세요</p>
+    <p class="hero-date">2026. 11. 19 — 합격을 기원합니다</p>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="부적 만들기">
+    <button class="tab is-on" data-tab="pick" role="tab" aria-selected="true">내 부적 뽑기</button>
+    <button class="tab" data-tab="all" role="tab" aria-selected="false">1~12월 전체 저장</button>
+  </nav>
+
+  <main>
+    <!-- 탭 1 -->
+    <section id="tab-pick" class="panel is-on" role="tabpanel">
+      <form class="sheet" id="pickForm" novalidate>
+        <div class="field">
+          <span class="label">이름 <em>애칭도 좋아요</em></span>
+          <input id="nameInput" type="text" maxlength="12" placeholder="예) 민준 · 미입력 시 ‘수험생’" autocomplete="off" enterkeyhint="done">
+        </div>
+
+        <div class="field">
+          <span class="label">태어난 달</span>
+          <div class="chips months" id="monthChips" role="group" aria-label="태어난 달"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">시험 유형</span>
+          <div class="chips exams" id="examChips" role="group" aria-label="시험 유형"></div>
+        </div>
+
+        <button class="cta" type="submit" id="drawBtn">내 부적 뽑기</button>
+        <p class="form-warn" id="formWarn" hidden>태어난 달을 먼저 골라 주세요!</p>
+      </form>
+
+      <div class="stage" id="stage" hidden>
+        <div class="flip" id="flipCard">
+          <div class="face back">
+            <div class="back-inner">
+              <span class="back-mark">符</span>
+              <span class="back-text">합격 부적</span>
+            </div>
+          </div>
+          <div class="face front">
+            <img id="resultImg" alt="탄생월 맞춤 합격 부적 카드">
+          </div>
+        </div>
+        <div class="sparkles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <div class="result" id="result" hidden>
+        <p class="result-cap" id="resultCap"></p>
+        <p class="tip" id="examTip"></p>
+        <div class="actions">
+          <button class="btn primary" id="saveBtn">📥 내 휴대폰에 이미지로 저장</button>
+          <button class="btn ghost" id="shareBtn">🔗 학부모·친구에게 공유하기</button>
+        </div>
+        <p class="hint">이미지가 새 창으로 열리면 사진을 길게 눌러 <b>‘사진에 저장’</b>을 눌러 주세요.</p>
+      </div>
+    </section>
+
+    <!-- 탭 2 -->
+    <section id="tab-all" class="panel" role="tabpanel">
+      <p class="lead">바쁜 날엔 뽑기 없이 저장만 하세요.<br>12장 모두 <b>1080×1440 (3:4)</b> 사이즈라<br>인스타 피드에도 잘리지 않아요.</p>
+      <div class="grid" id="monthGrid"></div>
+      <p class="hint">각 카드는 그 달 15일생 기준 별자리예요. 경계일(예: 1월 20일)에 태어났다면 옆 달 카드도 함께 봐 주세요.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p class="foot-brand">더콘텐츠스쿨</p>
+    <p class="foot-note">재미와 마음을 담은 오락용 콘텐츠예요. 저장해서 오래 소장하세요.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="card.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
