@@ -175,9 +175,10 @@ textarea{resize:vertical;min-height:64px;line-height:1.45}
 .step h2{margin:0;font-size:18px;font-weight:800;color:var(--green)}
 .step .lead{margin:10px 0 0;font-size:13.5px;color:#46564C;line-height:1.6}
 .step .lead b{color:var(--green)}
+.prompthint{margin:8px 0 0;font-size:11.5px;color:var(--muted);text-align:center;line-height:1.5}
 .promptbox{position:relative;margin-top:12px;background:#12291F;border-radius:16px;padding:14px 13px 12px}
 .promptbox pre{
-  margin:0;max-height:230px;overflow:auto;color:#EAF2E4;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Paperozi',monospace;
+  margin:0;max-height:233px;overflow:auto;color:#EAF2E4;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Paperozi',monospace;
   font-size:12px;line-height:1.62;white-space:pre-wrap;word-break:keep-all;
 }
 .promptbox pre::-webkit-scrollbar{width:6px}
@@ -331,10 +332,10 @@ footer .dot{color:#B9C4B7;margin:0 6px}
         <div class="field">
           <label>오늘 아침 미션 <span class="hint">(4줄 · 이모지 넣어도 좋아요)</span></label>
           <div class="stacked">
-            <input type="text" id="f-m0" maxlength="40" placeholder="💧 물 한 잔 마시기">
-            <input type="text" id="f-m1" maxlength="40" placeholder="🎒 알림장 준비물: 리코더·실내화">
-            <input type="text" id="f-m2" maxlength="40" placeholder="👟 체육복 입기">
-            <input type="text" id="f-m3" maxlength="40" placeholder="🦷 양치하기">
+            <input type="text" id="f-m0" maxlength="40" aria-label="아침 미션 1" placeholder="💧 물 한 잔 마시기">
+            <input type="text" id="f-m1" maxlength="40" aria-label="아침 미션 2" placeholder="🎒 알림장 준비물: 리코더·실내화">
+            <input type="text" id="f-m2" maxlength="40" aria-label="아침 미션 3" placeholder="👟 체육복 입기">
+            <input type="text" id="f-m3" maxlength="40" aria-label="아침 미션 4" placeholder="🦷 양치하기">
           </div>
         </div>
 
@@ -351,9 +352,9 @@ footer .dot{color:#B9C4B7;margin:0 6px}
         <div class="field">
           <label>하교 후 일정 <span class="hint">(3줄 · 시간과 내용)</span></label>
           <div class="stacked">
-            <input type="text" id="f-a0" maxlength="40" placeholder="15:00 태권도 🥋">
-            <input type="text" id="f-a1" maxlength="40" placeholder="16:30 연산 2장 ✏️">
-            <input type="text" id="f-a2" maxlength="40" placeholder="17:30 책 읽기 📖">
+            <input type="text" id="f-a0" maxlength="40" aria-label="하교 후 일정 1" placeholder="15:00 태권도 🥋">
+            <input type="text" id="f-a1" maxlength="40" aria-label="하교 후 일정 2" placeholder="16:30 연산 2장 ✏️">
+            <input type="text" id="f-a2" maxlength="40" aria-label="하교 후 일정 3" placeholder="17:30 책 읽기 📖">
           </div>
         </div>
 
@@ -378,7 +379,7 @@ footer .dot{color:#B9C4B7;margin:0 6px}
 
       <div class="step">
         <div class="step-top"><span class="step-badge">STEP 1</span><h2>AI에게 이렇게 시키세요</h2></div>
-        <p class="lead">코딩은 하나도 몰라도 됩니다. 아래 글을 <b>그대로 복사해서</b> 챗GPT·클로드·제미나이에 붙여넣고, 대괄호 안의 우리 아이 정보만 바꿔 주세요.</p>
+        <p class="lead">코딩은 하나도 몰라도 됩니다. 아래 글을 <b>그대로 복사해서</b> 챗GPT·클로드·제미나이에 붙여넣고, 맨 아래 <b>'우리 아이 정보'</b>만 우리 집 아이 것으로 바꿔 주세요.</p>
         <div class="promptbox">
 <pre id="promptText">너는 초등학생 자녀를 둔 학부모를 돕는 선생님이야.
 아래 내용으로 '우리 아이 아침 대시보드'를 HTML 파일 1개로 만들어 줘.
@@ -408,6 +409,7 @@ footer .dot{color:#B9C4B7;margin:0 6px}
 
 (위 '우리 아이 정보'는 우리 집 아이 것으로 바꿔서 넣어 주세요.)</pre>
           <button class="copybtn" id="copyPromptBtn" type="button">📋 엄마용 프롬프트 1클릭 복사</button>
+          <p class="prompthint">↑↓ 스크롤해서 전체를 볼 수 있어요 · 복사 버튼을 누르면 보이지 않는 부분까지 전부 복사됩니다</p>
         </div>
         <p class="lead" style="margin-top:10px">💡 알림장 사진이 있다면, <b>"이 사진 속 준비물과 시간표를 넣어 줘"</b>라고 사진을 함께 올려도 됩니다.</p>
       </div>
