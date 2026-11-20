@@ -166,6 +166,7 @@ h2.sec{margin:0 0 10px;font-size:16px;font-weight:800;color:var(--green);display
   font-size:12px;font-weight:800;display:grid;place-items:center;
 }
 .rt svg{width:100%;height:auto;max-height:112px;margin-top:6px}
+.rt .art{display:block;width:100%}
 .rt .nm{font-size:15px;font-weight:800;color:var(--green);line-height:1.25}
 .rt .st{font-size:11px;font-weight:800;color:#9AAE9F}
 .rt.checked{background:linear-gradient(170deg,#F3FDF7,#EAFBF2);border-color:#94DEB6}
@@ -516,10 +517,10 @@ footer .dot{margin:0 7px;color:#C6CEC2}
       <div class="formsec">
         <h3>2. 아침 루틴 4가지</h3>
         <div class="frow">
-          <div class="field"><label for="f-r0">① 루틴</label><input type="text" id="f-r0" maxlength="16" placeholder="아침 먹기"></div>
-          <div class="field"><label for="f-r1">② 루틴</label><input type="text" id="f-r1" maxlength="16" placeholder="세수·양치"></div>
-          <div class="field"><label for="f-r2">③ 루틴</label><input type="text" id="f-r2" maxlength="16" placeholder="옷 입기"></div>
-          <div class="field"><label for="f-r3">④ 루틴</label><input type="text" id="f-r3" maxlength="16" placeholder="가방·출발"></div>
+          <div class="field"><label for="f-r0">① 루틴</label><input type="text" id="f-r0" maxlength="16" aria-label="1번째 루틴 이름" placeholder="아침 먹기"></div>
+          <div class="field"><label for="f-r1">② 루틴</label><input type="text" id="f-r1" maxlength="16" aria-label="2번째 루틴 이름" placeholder="세수·양치"></div>
+          <div class="field"><label for="f-r2">③ 루틴</label><input type="text" id="f-r2" maxlength="16" aria-label="3번째 루틴 이름" placeholder="옷 입기"></div>
+          <div class="field"><label for="f-r3">④ 루틴</label><input type="text" id="f-r3" maxlength="16" aria-label="4번째 루틴 이름" placeholder="가방·출발"></div>
         </div>
       </div>
 
@@ -885,10 +886,10 @@ footer .dot{margin:0 7px;color:#C6CEC2}
       main.innerHTML = '🏫 등교까지 <b>' + left + '</b>분 남았어요!';
     } else if (left > -180){
       main.className = 'cd-main';
-      main.innerHTML = '🏫 등교 시간이 지났어요 — 오늘도 최고! 🌟';
+      main.innerHTML = '🏫 오늘 등교 완료 — 정말 잘했어요! 🌟';
     } else {
       main.className = 'cd-main';
-      main.innerHTML = '🌙 내일 등교는 ' + state.cfg.schoolTime + ' 이에요';
+      main.innerHTML = '🌙 내일 등교는 ' + state.cfg.schoolTime + ' 에 만나요';
     }
   }
 
@@ -923,7 +924,13 @@ footer .dot{margin:0 7px;color:#C6CEC2}
         if (!d || !d.current) return;
         var info = weatherCodeInfo(d.current.weather_code);
         if (!info) return;
-        realWeather = { i:info.i, t:info.t, temp:Math.round(d.current.temperature_2m) };
+        var hr = new Date().getHours();
+        var icon = info.i, cond = info.t;
+        if (hr < 6 || hr >= 19){
+          if (info.t === '맑음'){ icon = '🌙'; cond = '맑은 밤'; }
+          else if (info.t === '구름 조금'){ icon = '☁️'; }
+        }
+        realWeather = { i:icon, t:cond, temp:Math.round(d.current.temperature_2m) };
         renderWeather();
       }).catch(function(){});
     } catch(e){}
@@ -995,11 +1002,12 @@ footer .dot{margin:0 7px;color:#C6CEC2}
       b.className = 'rt' + (checked ? ' checked' : '');
       b.setAttribute('aria-pressed', checked ? 'true' : 'false');
       b.innerHTML =
-        '<span class="no">' + (i + 1) + '</span>' +
-        '<span class="donebadge">완료!</span>' +
-        svgArt(i) +
+        '<span class="no" aria-hidden="true">' + (i + 1) + '</span>' +
+        '<span class="donebadge" aria-hidden="true">완료!</span>' +
+        '<span class="art" aria-hidden="true">' + svgArt(i) + '</span>' +
         '<span class="nm">' + escapeHtml(name) + '</span>' +
         '<span class="st">' + (checked ? '잘했어요! ⭐' : '톡 눌러서 완료') + '</span>';
+      b.setAttribute('aria-label', (i + 1) + '번 루틴 ' + name + (checked ? ', 완료' : ', 아직 안 함'));
       b.addEventListener('click', function(){ toggleRoutine(i, b); });
       grid.appendChild(b);
     });
@@ -1080,9 +1088,11 @@ footer .dot{margin:0 7px;color:#C6CEC2}
     }
 
     var unlockedToday = opened ? MONSTERS[state.treasure.idx] : null;
-    $('dexNote').textContent = unlockedToday
-      ? '오늘의 몬스터 ' + unlockedToday.e + ' ' + unlockedToday.n + ' 을(를) 만났어요!'
+    var note = $('dexNote');
+    note.textContent = unlockedToday
+      ? '오늘의 몬스터 ' + unlockedToday.e + ' ' + unlockedToday.n + ' — 도감에서 확인!'
       : '루틴을 끝내면 오늘의 몬스터가 도감에 들어와요.';
+    note.setAttribute('aria-live', 'polite');
   }
 
   function openBox(){
@@ -1105,7 +1115,8 @@ footer .dot{margin:0 7px;color:#C6CEC2}
     SFX.fanfare();
     var m = MONSTERS[idx];
     toast(isNew ? ('🎊 새로운 몬스터 ' + m.e + ' ' + m.n + ' 획득!') : ('🎊 ' + m.e + ' ' + m.n + ' 또 만났어요!'));
-    showModal(m.e, isNew ? '새로운 몬스터를 만났어요!' : '오늘의 몬스터!', m.n + ' 이(가) 도감에 들어왔어요!' + (isNew ? '' : ' (이미 있던 친구예요)'));
+    showModal(m.e, m.e + ' ' + m.n + (isNew ? ' 획득!' : ' 다시 만남!'),
+      isNew ? '도감에 새 친구가 들어왔어요. 도감에서 만나 보세요!' : '이미 도감에 있던 친구예요. 내일은 새로운 친구가 기다려요!');
   }
 
   function renderDex(){
