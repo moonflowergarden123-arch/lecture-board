@@ -439,11 +439,12 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
   /* ---------------- 흐름 ---------------- */
   var seqLive = 0;
 
-  function handleUtterance(text, tag, isFinal){
+  function handleUtterance(text, tag, isFinal, fromSpeech){
     text = (text || "").trim();
     if(!text) return;
-    if(isFinal && text === state.lastFinal) return;   // 크롬 중복 결과 방지
-    if(isFinal) state.lastFinal = text;
+    // 크롬이 같은 문장을 두 번 확정하는 경우만 걸러낸다 (버튼 재테스트는 통과)
+    if(fromSpeech && isFinal && text === state.lastFinal) return;
+    if(isFinal) state.lastFinal = fromSpeech ? text : "";
 
     var my = ++seqLive;
     liveEn.textContent = text;
@@ -519,14 +520,14 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
         if(!t) continue;
         if(r.isFinal){
           clearTimeout(previewTimer);
-          handleUtterance(t, "", true);
+          handleUtterance(t, "", true, true);
         } else {
           interim += t + " ";
         }
       }
       interim = interim.trim();
       if(interim){
-        handleUtterance(interim, "", false);
+        handleUtterance(interim, "", false, true);
         schedulePreview(interim);
       }
     };
@@ -715,7 +716,6 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     var input = $("#manual");
     var v = (input.value || "").trim();
     if(!v) { input.focus(); return; }
-    state.lastFinal = v;
     handleUtterance(v, "직접 입력", true);
     input.select();
   }
