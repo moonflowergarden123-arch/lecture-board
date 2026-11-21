@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>🐰 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트</title>
-<meta name="description" content="내 AI 에이전트에게 프롬프트를 그대로 건네면 20초 세로 릴스가 완성됩니다 — 내 3D 마스코트 만들기부터 효과음까지.">
+<title>🐰 더콘텐츠스쿨 · 모션 릴스 풀키트</title>
+<meta name="description" content="프롬프트 2개만 건네면 20초 세로 릴스가 완성됩니다 — 내 캐릭터 만들기부터 효과음까지.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="🐰 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트">
-<meta property="og:description" content="프롬프트 2개만 건네면 20초 세로 릴스 완성 · 캐릭터 3장 + 4막 모션 + 효과음">
+<meta property="og:title" content="🐰 더콘텐츠스쿨 · 모션 릴스 풀키트">
+<meta property="og:description" content="프롬프트 2개만 건네면 20초 세로 릴스 완성">
 <meta property="og:image" content="https://moonflowergarden123-arch.github.io/lecture-board/motion-kit/img/act1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
@@ -43,129 +43,111 @@ body{
 .hero{
   background:
     radial-gradient(120% 90% at 85% -10%, rgba(255,194,75,.22) 0%, rgba(255,194,75,0) 55%),
-    radial-gradient(100% 80% at 0% 0%, rgba(250,248,242,.12) 0%, rgba(250,248,242,0) 60%),
     linear-gradient(160deg, var(--green) 0%, var(--deep) 100%);
-  color:var(--cream);padding:34px 20px 30px;
+  color:var(--cream);padding:30px 20px 26px;
   border-bottom:3px solid var(--gold);
 }
-.hero-inner{max-width:860px;margin:0 auto}
+.hero-inner{max-width:820px;margin:0 auto}
 .hero .kicker{
   display:inline-flex;align-items:center;gap:7px;
-  font-size:12px;font-weight:600;letter-spacing:.08em;
+  font-size:12px;font-weight:600;letter-spacing:.04em;
   color:var(--gold);border:1px solid rgba(255,194,75,.45);
-  border-radius:999px;padding:4px 12px;margin-bottom:16px;
+  border-radius:999px;padding:4px 12px;margin-bottom:14px;
 }
 .hero h1{
-  margin:0 0 10px;font-size:clamp(23px,5.6vw,34px);font-weight:900;
+  margin:0 0 8px;font-size:clamp(22px,5.4vw,32px);font-weight:900;
   line-height:1.32;letter-spacing:-0.03em;
 }
 .hero h1 .rabbit{color:var(--gold)}
 .hero .sub{
-  margin:0 0 16px;font-size:clamp(14px,3.7vw,16px);font-weight:400;
-  color:rgba(250,248,242,.82);line-height:1.65;
+  margin:0 0 14px;font-size:clamp(14px,3.6vw,15.5px);font-weight:400;
+  color:rgba(250,248,242,.84);line-height:1.68;
 }
+.hero .sub b{color:var(--cream);font-weight:700}
 .hero .handle{
-  display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
   background:rgba(250,248,242,.10);border:1px solid rgba(250,248,242,.22);
-  padding:7px 14px;border-radius:999px;color:var(--cream);text-decoration:none;
+  padding:6px 13px;border-radius:999px;color:var(--cream);text-decoration:none;
 }
 .hero .handle .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
 
 /* ── 결과물 미리보기 ─────────────────────── */
-.preview{max-width:860px;margin:0 auto;padding:26px 20px 0}
+.preview{max-width:820px;margin:0 auto;padding:22px 20px 0}
 .preview-head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-  margin-bottom:12px;flex-wrap:wrap;
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  margin-bottom:10px;flex-wrap:wrap;
 }
 .preview-head h2{
-  margin:0;font-size:15px;font-weight:800;color:var(--green);letter-spacing:-0.02em;
+  margin:0;font-size:14.5px;font-weight:800;color:var(--green);letter-spacing:-0.02em;
 }
 .preview-head .meta{font-size:12px;color:var(--muted);font-weight:500}
-.strip{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
-}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .frame{
-  position:relative;border-radius:14px;overflow:hidden;background:#E8E4D8;
-  border:1px solid var(--line);box-shadow:0 6px 16px rgba(13,43,34,.08);
+  position:relative;border-radius:12px;overflow:hidden;background:#E8E4D8;
+  border:1px solid var(--line);box-shadow:0 5px 14px rgba(13,43,34,.08);
 }
 .frame img{display:block;width:100%;height:auto}
 .frame .cap{
   position:absolute;left:0;right:0;bottom:0;
-  background:linear-gradient(to top, rgba(13,43,34,.86), rgba(13,43,34,0));
-  color:var(--cream);font-size:11px;font-weight:700;text-align:center;
-  padding:16px 4px 6px;letter-spacing:0;
+  background:linear-gradient(to top, rgba(13,43,34,.88), rgba(13,43,34,0));
+  color:var(--cream);font-size:10.5px;font-weight:700;text-align:center;
+  padding:14px 2px 5px;
 }
 
 /* ── 본문 ───────────────────────────────── */
-main{max-width:860px;margin:0 auto;padding:8px 20px 60px}
-.section{padding-top:44px}
-.section-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+main{max-width:820px;margin:0 auto;padding:4px 20px 48px}
+.section{padding-top:34px}
+.section-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
 .num{
-  flex:0 0 auto;width:44px;height:44px;border-radius:13px;
+  flex:0 0 auto;width:40px;height:40px;border-radius:12px;
   background:var(--deep);color:var(--gold);
   display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:900;letter-spacing:0;margin-top:2px;
+  font-size:14px;font-weight:900;margin-top:2px;
 }
 .section-head h2{
-  margin:0;font-size:clamp(19px,4.6vw,24px);font-weight:900;color:var(--green);
+  margin:0;font-size:clamp(18px,4.4vw,22px);font-weight:900;color:var(--green);
   line-height:1.4;letter-spacing:-0.03em;
 }
 .section-head .lead{
-  margin:5px 0 0;font-size:14px;color:var(--muted);font-weight:500;line-height:1.6;
+  margin:4px 0 0;font-size:13.5px;color:var(--muted);font-weight:500;line-height:1.6;
 }
-.section > p.intro{
-  margin:12px 0 18px;font-size:15px;line-height:1.75;color:#33443B;
-}
-.section > p.intro strong{color:var(--green);font-weight:800}
 
 /* 준비물 스텝 */
-.steps{counter-reset:s;list-style:none;margin:18px 0 0;padding:0}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
 .steps > li{
   counter-increment:s;position:relative;
-  background:#fff;border:1px solid var(--line);border-radius:18px;
-  padding:18px 20px 18px 62px;margin-bottom:12px;
-  box-shadow:0 4px 14px rgba(13,43,34,.05);
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:15px 18px 15px 56px;margin-bottom:10px;
+  box-shadow:0 4px 12px rgba(13,43,34,.05);
 }
 .steps > li::before{
   content:counter(s);
-  position:absolute;left:18px;top:17px;
-  width:28px;height:28px;border-radius:9px;
-  background:rgba(255,194,75,.28);color:var(--green);
-  font-size:13px;font-weight:900;
+  position:absolute;left:16px;top:14px;
+  width:26px;height:26px;border-radius:8px;
+  background:rgba(255,194,75,.3);color:var(--green);
+  font-size:12.5px;font-weight:900;
   display:flex;align-items:center;justify-content:center;
 }
-.steps h3{margin:0 0 6px;font-size:16px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
-.steps p{margin:0;font-size:14px;color:#3C4C44;line-height:1.65}
-.steps a{color:var(--green);font-weight:700;text-decoration:underline;text-decoration-color:rgba(255,194,75,.9);text-underline-offset:3px}
-.steps .fine{display:block;margin-top:7px;font-size:12.5px;color:var(--muted)}
-
-code.inline{
-  font-family:var(--mono);font-size:.92em;background:rgba(31,61,43,.07);
-  border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--green);
-}
-.cmd{
-  display:block;margin-top:9px;font-family:var(--mono);font-size:13px;
-  background:var(--deep);color:#F3EFE4;border-radius:10px;padding:11px 14px;
-  overflow-x:auto;white-space:pre;line-height:1.65;
-}
-.cmd .c{color:#8FA396}
+.steps h3{margin:0 0 5px;font-size:15.5px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
+.steps p{margin:0;font-size:14px;color:#3C4C44;line-height:1.62}
+.steps p b{color:var(--green);font-weight:800}
 
 /* 프롬프트 카드 */
 .card{
-  background:#fff;border:1px solid var(--line);border-radius:20px;
-  padding:20px;margin-bottom:16px;
-  box-shadow:0 6px 20px rgba(13,43,34,.06);
+  background:#fff;border:1px solid var(--line);border-radius:18px;
+  padding:18px;margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(13,43,34,.06);
 }
-.card-head{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.card-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .card-tag{
   font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--deep);
   background:var(--gold);border-radius:7px;padding:3px 9px;
 }
-.card h3{margin:0;font-size:17px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
-.card .note{margin:8px 0 0;font-size:13.5px;color:var(--muted);line-height:1.65}
-.card .note b{color:var(--green);font-weight:700}
+.card h3{margin:0;font-size:16.5px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
+.card .note{margin:9px 0 0;font-size:13.5px;color:#4C5C53;line-height:1.65}
+.card .note b{color:var(--green);font-weight:800}
 
-.prompt{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid rgba(13,43,34,.35)}
+.prompt{margin-top:13px;border-radius:13px;overflow:hidden;border:1px solid rgba(13,43,34,.35)}
 .prompt-bar{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   background:#123528;padding:9px 12px;
@@ -182,75 +164,48 @@ code.inline{
 .copy.done{background:#CFE3D4;color:var(--deep)}
 .prompt pre{
   margin:0;background:var(--deep);color:#F1EDE1;
-  font-family:var(--mono);font-size:12.8px;line-height:1.78;
-  padding:16px 15px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
+  font-family:var(--mono);font-size:13px;line-height:1.85;
+  padding:15px 14px;overflow-x:auto;white-space:pre-wrap;word-break:break-word;
   letter-spacing:0;
 }
-.prompt pre::-webkit-scrollbar{height:8px}
-.prompt pre::-webkit-scrollbar-thumb{background:rgba(250,248,242,.22);border-radius:4px}
 
 /* 팁 */
-.tips{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.tips{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .tips li{
-  background:#fff;border:1px solid var(--line);border-radius:18px;
-  padding:18px 20px 18px 66px;position:relative;
-  box-shadow:0 4px 14px rgba(13,43,34,.05);
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:15px 18px 15px 58px;position:relative;
+  box-shadow:0 4px 12px rgba(13,43,34,.05);
 }
 .tips li .n{
-  position:absolute;left:18px;top:16px;
-  font-size:26px;font-weight:900;color:var(--gold);line-height:1;
+  position:absolute;left:17px;top:13px;
+  font-size:24px;font-weight:900;color:var(--gold);line-height:1;
 }
-.tips h3{margin:0 0 6px;font-size:16px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
-.tips p{margin:0;font-size:14px;color:#3C4C44;line-height:1.7}
+.tips h3{margin:0 0 5px;font-size:15.5px;font-weight:800;color:var(--green);letter-spacing:-0.02em}
+.tips p{margin:0;font-size:14px;color:#3C4C44;line-height:1.65}
 .tips p em{font-style:normal;font-weight:700;color:var(--green);background:rgba(255,194,75,.32);padding:0 3px;border-radius:4px}
-
-/* 도움말 접기 */
-details.help{
-  margin-top:16px;background:#fff;border:1px dashed rgba(31,61,43,.3);
-  border-radius:16px;padding:14px 18px;
-}
-details.help summary{
-  cursor:pointer;font-size:14px;font-weight:800;color:var(--green);line-height:1.55;
-  list-style:none;
-}
-details.help summary::-webkit-details-marker{display:none}
-details.help summary::before{content:'＋ ';color:var(--gold);font-weight:900}
-details.help[open] summary::before{content:'− '}
-details.help ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;color:#3C4C44;line-height:1.8}
-details.help li{margin-bottom:5px}
-details.help b{color:var(--green)}
-
-.closing{
-  margin-top:34px;background:linear-gradient(160deg,var(--green),var(--deep));
-  border-radius:20px;padding:24px 22px;color:var(--cream);
-  border:1px solid rgba(255,194,75,.35);
-}
-.closing p{margin:0;font-size:15px;line-height:1.8;color:rgba(250,248,242,.9)}
-.closing p + p{margin-top:10px}
-.closing strong{color:var(--gold);font-weight:800}
 
 /* 푸터 */
 footer{
   background:var(--deep);color:rgba(250,248,242,.72);
-  text-align:center;padding:26px 20px 34px;font-size:12.5px;line-height:1.8;
+  text-align:center;padding:24px 20px 30px;font-size:12.5px;line-height:1.8;
   border-top:3px solid var(--gold);
 }
 footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px;margin-bottom:4px}
 
 @media (max-width:430px){
-  .hero{padding:28px 18px 24px}
-  .preview{padding:22px 18px 0}
-  main{padding:4px 18px 48px}
-  .section{padding-top:36px}
-  .card{padding:17px 15px;border-radius:18px}
-  .steps > li{padding:16px 16px 16px 56px}
-  .steps > li::before{left:15px;top:15px}
-  .tips li{padding:16px 16px 16px 56px}
-  .tips li .n{left:15px;top:13px;font-size:23px}
-  .prompt pre{font-size:12px;padding:14px 12px}
-  .strip{gap:7px}
-  .frame .cap{font-size:10px;padding:12px 2px 4px}
-  .num{width:38px;height:38px;font-size:13.5px;border-radius:11px}
+  .hero{padding:26px 18px 22px}
+  .preview{padding:20px 18px 0}
+  main{padding:2px 18px 40px}
+  .section{padding-top:30px}
+  .card{padding:16px 14px;border-radius:16px}
+  .steps > li{padding:14px 15px 14px 52px}
+  .steps > li::before{left:14px;top:13px}
+  .tips li{padding:14px 15px 14px 50px}
+  .tips li .n{left:14px;top:12px;font-size:21px}
+  .prompt pre{font-size:12.4px;padding:13px 12px;line-height:1.8}
+  .strip{gap:6px}
+  .frame .cap{font-size:9.5px;padding:11px 2px 4px}
+  .num{width:36px;height:36px;font-size:13px;border-radius:10px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -259,22 +214,22 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
 
 <header class="hero">
   <div class="hero-inner">
-    <span class="kicker">AI AGENT · MOTION REELS · 9:16</span>
-    <h1><span class="rabbit">🐰</span> 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트</h1>
-    <p class="sub">릴스에 <b>‘자료’</b> 댓글 남겨주신 분들께 보내드리는 페이지예요.<br>편집 툴도, 복잡한 코딩도 없이 내 AI 에이전트 <b>피클</b>에게 아래 프롬프트를 그대로 건네기만 하면 20초 세로 릴스가 완성됩니다.</p>
+    <span class="kicker">20초 세로 릴스 · 프롬프트 2개</span>
+    <h1><span class="rabbit">🐰</span> 더콘텐츠스쿨 · 모션 릴스 풀키트</h1>
+    <p class="sub">릴스에 <b>‘자료’</b> 댓글 남겨주신 분들께 보내드리는 페이지예요.<br>프롬프트 <b>2개</b>만 복사해서 피클에게 주면 20초 릴스가 완성됩니다.</p>
     <a class="handle" href="https://www.instagram.com/momteachers_official/" target="_blank" rel="noopener"><span class="dot"></span>@momteachers_official</a>
   </div>
 </header>
 
 <section class="preview">
   <div class="preview-head">
-    <h2>이렇게 나옵니다 — 20초 · 1080×1920 · 효과음 포함</h2>
+    <h2>이렇게 나옵니다 — 20초 · 9:16 · 효과음 포함</h2>
     <span class="meta">편집 툴 없이, 말로 시켜서</span>
   </div>
   <div class="strip">
     <div class="frame">
       <img src="img/act1.jpg" alt="1막 진자처럼 흔들리며 문장이 바뀌는 장면" loading="lazy">
-      <span class="cap">1막 · 진자</span>
+      <span class="cap">1막 · 그네</span>
     </div>
     <div class="frame">
       <img src="img/act2.jpg" alt="2막 노트북 창에 할 일이 타이핑되는 장면" loading="lazy">
@@ -285,7 +240,7 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
       <span class="cap">3막 · 카드</span>
     </div>
     <div class="frame">
-      <img src="img/act4.jpg" alt="4막 캐릭터가 착지하며 CTA가 뜨는 장면" loading="lazy">
+      <img src="img/act4.jpg" alt="4막 캐릭터가 착지하며 안내 문구가 뜨는 장면" loading="lazy">
       <span class="cap">4막 · 착지</span>
     </div>
   </div>
@@ -299,24 +254,22 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
       <span class="num">00</span>
       <div>
         <h2>준비물 — 딱 3가지</h2>
-        <p class="lead">이 세 가지만 준비되면 바로 만들 수 있어요.</p>
+        <p class="lead">이 세 가지만 있으면 바로 만들 수 있어요.</p>
       </div>
     </div>
 
     <ol class="steps">
       <li>
         <h3>피클을 준비한다</h3>
-        <p>내 AI 에이전트 <b>피클</b>을 켭니다. 복잡한 프로그램 설치나 편집 툴 없이 <b>대화창 하나</b>면 충분해요.</p>
+        <p>내 AI 에이전트 <b>피클</b>을 켭니다. 복잡한 설치나 편집 툴 없이 <b>대화창 하나</b>면 충분해요.</p>
       </li>
       <li>
         <h3>캐릭터를 만드는 프롬프트를 준비한다</h3>
-        <p>아래 <b>01번 캐릭터 프롬프트</b>를 복사해 피클에게 건네 내 마스코트 이미지를 먼저 만듭니다.</p>
-        <span class="fine">받은 이미지 3장(캐릭터 시트 · 공 탄 포즈 · 손 흔드는 포즈)은 잘 보관하세요. 02번의 재료가 됩니다.</span>
+        <p>아래 <b>01번 캐릭터 프롬프트 1개</b>를 피클에게 주면서, 내가 원하는 캐릭터 특징(예: “토끼 모자 쓴 귀여운 스타일로 바꿔줘”)을 말로 덧붙입니다.</p>
       </li>
       <li>
         <h3>마지막 모션 프롬프트를 준비한다</h3>
-        <p>캐릭터 이미지가 나오면, 아래 <b>02번 마지막 모션 프롬프트</b>를 그 이미지들과 <b>함께</b> 건네 20초 릴스 영상을 완성합니다.</p>
-        <span class="fine">“이 이미지들로 이 프롬프트대로 20초 릴스 만들어줘” — 이 한마디면 됩니다. 피클이 먼저 미리보기를 보여주니, 어색한 곳만 한 번에 하나씩 고쳐 달라고 하세요.</span>
+        <p>캐릭터가 나오면, 아래 <b>02번 모션 프롬프트 1개</b>를 함께 주면서 “이 캐릭터랑 합쳐서 내 내용으로 20초 릴스 만들어줘”라고 시키면 완성됩니다.</p>
       </li>
     </ol>
   </section>
@@ -326,70 +279,27 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
     <div class="section-head">
       <span class="num">01</span>
       <div>
-        <h2>내 마스코트 3D 캐릭터 만들기</h2>
-        <p class="lead">01-A → 01-B → 01-C 순서로 부탁하세요 — 캐릭터 시트 · 공 탄 포즈 · 손 흔드는 포즈</p>
-      </div>
-    </div>
-    <p class="intro">
-      릴스에 나오는 캐릭터는 <strong>내 캐릭터</strong>여야 오래 갑니다. 먼저 기준이 되는 <strong>캐릭터 시트</strong>를 뽑고, 그 시트를 기준으로 나머지 두 포즈를 뽑으면 같은 캐릭터로 이어집니다. 색·옷·머리는 마음대로 바꿔도 되지만, <strong>한 번 정한 뒤로는 끝까지 똑같이</strong> 유지하세요. 아래 카드의 <strong>[프롬프트 복사]</strong>를 누르고, 피클에게 그대로 붙여넣으면 됩니다.
-    </p>
-
-    <div class="card">
-      <div class="card-head">
-        <span class="card-tag">01-A</span>
-        <h3>캐릭터 시트 · 16:9</h3>
-      </div>
-      <p class="note">정면·3/4·측면·뒷면 네 컷이 한 장에 나옵니다. <b>이 이미지를 꼭 저장</b>하세요. 다음 두 프롬프트의 기준이 됩니다.</p>
-      <div class="prompt">
-        <div class="prompt-bar"><span class="label">PROMPT · 캐릭터 시트</span><button class="copy" data-target="p1">프롬프트 복사</button></div>
-<pre id="p1">내 릴스에 쓸 3D 마스코트를 만들 거야. 아래 영문 프롬프트로 이미지를 생성해줘. (16:9 가로, 캐릭터 시트)
-만든 이미지는 character-sheet.png 이름으로 보관해줘.
-
-Character turnaround model sheet, 16:9 wide layout, four consistent full-body views in a row — front view, three-quarter view, side profile, back view — evenly spaced, identical original mascot character on every view, pure white seamless studio background, professional character sheet presentation.
-A cute chibi-proportioned stylized 3D creator mascot with a large head and a small body (about 2.5 heads tall), round soft face with rosy cheeks, big expressive dark brown eyes with gentle highlights, small button nose, small happy smile, short chin-length dark brown bob with soft bangs, wearing a plush cream-white bunny-ear knit hat with long floppy ears lined in soft pastel pink and fluffy pom-pom ties, an oversized pastel-pink and cream chunky knit hoodie with a small embroidered heart patch on the chest, soft warm-beige jogger pants, chunky pastel-pink and white sneakers with white soles, hugging a small rounded cream-colored laptop under one arm.
-Stylized 3D character render, smooth soft matte materials, visible plush and knit texture, soft global illumination, three-point studio lighting, gentle rim light, high-end 3D animation studio quality, 4K.
-Single character only shown four times, no other characters, no text, no watermark, no logos, an original character that does not resemble any existing copyrighted character.</pre>
+        <h2>캐릭터 프롬프트 — 딱 1개</h2>
+        <p class="lead">이 프롬프트 하나로 내 캐릭터가 만들어집니다</p>
       </div>
     </div>
 
     <div class="card">
       <div class="card-head">
-        <span class="card-tag">01-B</span>
-        <h3>공 탄 포즈 · ride.png (투명)</h3>
+        <span class="card-tag">01</span>
+        <h3>캐릭터 턴어라운드 프롬프트</h3>
       </div>
-      <p class="note">1막에서 이 캐릭터가 <b>줄을 축으로 진자처럼 흔들립니다</b>. 그래서 줄이 이미지 맨 위 끝까지 끊김 없이 이어져 있어야 하고, 배경은 진짜 투명이어야 해요.</p>
+      <p class="note"><b>[프롬프트 복사]</b>를 눌러 피클에게 주면서, <b>“이걸 토끼 모자 쓴 귀여운 옷으로 바꿔줘”</b>처럼 원하는 스타일만 덧붙이세요.</p>
       <div class="prompt">
-        <div class="prompt-bar"><span class="label">PROMPT · ride.png</span><button class="copy" data-target="p2">프롬프트 복사</button></div>
-<pre id="p2">방금 만든 캐릭터 시트(character-sheet.png)와 똑같은 캐릭터로, 릴스 1막에 쓸 '줄 잡고 공 위에 앉은' 포즈를 만들어줘.
-
-[조건]
-- 배경은 투명 PNG(RGBA). 흰 배경으로 뽑았다면 배경을 지워서 진짜 투명으로 만들어줘. 니트·흰 운동화 같은 밝은 부분이 잘리지 않게 조심하고, 결과는 꼭 눈으로 확인해줘.
-- 줄은 이미지 맨 위 끝까지 끊김 없이 수직으로 이어져야 해. 이 줄을 축으로 회전시킬 거라서 위쪽 끝까지 있어야 자연스러워.
-- 줄의 가로 위치는 이미지 폭의 49.75% 지점. 캐릭터는 이미지 아래 2/3 안에 들어오게.
-- 세로로 긴 이미지(약 393 × 1670). 저장할 때 이름은 ride.png.
-
-[영문 프롬프트]
-Same character as the reference sheet — identical bunny-ear knit hat, heart-patch knit hoodie, jogger pants, sneakers, face and hair. Full body sitting on a large soft round cream-mint ball, knees up with a small cream laptop resting on the knees, both arms stretched up and gripping one thin dark rope; the rope runs perfectly straight and vertical and continues past the very top edge of the image, centered at 49.75% of the image width. Cheerful confident expression. Pure white seamless background for clean cutout, no ground shadow, no text, no watermark, vertical composition, silhouette clear against the background, soft studio lighting, stylized 3D render matching the reference.</pre>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-head">
-        <span class="card-tag">01-C</span>
-        <h3>손 흔드는 포즈 · wave.png (투명)</h3>
-      </div>
-      <p class="note">4막에서 위에서 <b>통통 튀며 착지</b>하는 캐릭터입니다. 머리부터 발끝까지 전신이 다 들어와야 착지가 예뻐요.</p>
-      <div class="prompt">
-        <div class="prompt-bar"><span class="label">PROMPT · wave.png</span><button class="copy" data-target="p3">프롬프트 복사</button></div>
-<pre id="p3">같은 캐릭터로, 릴스 4막 착지 장면에 쓸 '손 흔드는' 포즈를 만들어줘.
-
-[조건]
-- 배경은 투명 PNG(RGBA). 흰 배경이면 지워서 진짜 투명으로.
-- 머리부터 발끝까지 전신, 바닥 그림자 없이. 정면을 보고 활짝 웃으며 한 손을 위로 들어 흔드는 모습.
-- 저장할 때 이름은 wave.png.
-
-[영문 프롬프트]
-Same character as the reference sheet — identical bunny-ear knit hat, heart-patch knit hoodie, jogger pants, sneakers, face and hair. Standing and facing the camera with a big happy smile, waving one raised hand in greeting, the other hand relaxed at the side. Full body from head to toe, centered. Pure white seamless background for clean cutout, no ground shadow, no text, no watermark, vertical composition, soft studio lighting, stylized 3D render matching the reference.</pre>
+        <div class="prompt-bar"><span class="label">PROMPT · 캐릭터 1개</span><button class="copy" data-target="p1">프롬프트 복사</button></div>
+<pre id="p1">내 릴스에 쓸 3D 캐릭터를 만들어줘.
+- 정면·옆면·뒷면이 한 장에 다 보이는 캐릭터 시트로, 가로로 넓게
+- 귀여운 3D 스타일, 큰 머리에 작은 몸, 볼이 발그레한 둥근 얼굴
+- 포근한 니트 옷과 운동화, 노트북을 안고 있는 모습
+- 배경은 깨끗한 흰색, 글자·로고 없이
+- 네 컷 모두 같은 얼굴·같은 옷으로, 캐릭터는 한 명만
+색이나 옷은 내가 말하는 대로 바꿔줘.
+완성되면 이미지로 보내주고, 다음 단계에서도 계속 쓸 수 있게 잘 보관해줘.</pre>
       </div>
     </div>
   </section>
@@ -399,89 +309,33 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
     <div class="section-head">
       <span class="num">02</span>
       <div>
-        <h2>20초 진자 라이더 완성 프롬프트</h2>
-        <p class="lead">피클에게 이 한 덩어리만 그대로 전달하면 됩니다</p>
+        <h2>마지막 모션 프롬프트 — 딱 1개</h2>
+        <p class="lead">캐릭터 이미지와 함께 주면 20초 릴스가 나옵니다</p>
       </div>
     </div>
-    <p class="intro">
-      01번에서 받은 캐릭터 이미지 두 장(<strong>공 탄 포즈 · 손 흔드는 포즈</strong>)과 아래 프롬프트를 <strong>함께</strong> 피클에게 건네세요. 파일 이름이나 폴더는 피클이 알아서 정리합니다. 4막 구성·프레임 단위 타이밍·효과음까지 다 들어 있어서, <strong>문구와 색만 바꾸면 다른 주제의 릴스</strong>로도 그대로 씁니다.
-    </p>
 
     <div class="card">
       <div class="card-head">
         <span class="card-tag">02</span>
-        <h3>진자 라이더 · 4막 20초</h3>
+        <h3>20초 모션 릴스</h3>
       </div>
-      <p class="note">아래에서 <b>문구만 내 주제로</b> 바꿔 쓰세요. CTA는 실제 안내와 맞아야 합니다(예: 댓글에 ‘자료’).</p>
+      <p class="note"><b>[프롬프트 복사]</b>를 눌러 위에서 만든 <b>캐릭터 이미지와 함께</b> 피클에게 건네세요. <b>“이 캐릭터랑 합쳐서 내 주제로 바꿔줘”</b> 하면 끝납니다.</p>
       <div class="prompt">
-        <div class="prompt-bar"><span class="label">PROMPT · 20초 릴스 전체</span><button class="copy" data-target="p4">프롬프트 복사</button></div>
-<pre id="p4">내 인스타 릴스로 올릴 9:16 세로 모션그래픽 영상(1080×1920, 30fps, 20초 = 600프레임)을 만들어줘. 편집 툴 없이 통째로 만들어서, 다 되면 MP4 파일로 보내줘. 만드는 방식은 네가 편한 대로 정하고, 아래 화면 구성과 타이밍 스펙만 그대로 지켜줘.
+        <div class="prompt-bar"><span class="label">PROMPT · 20초 릴스 1개</span><button class="copy" data-target="p2">프롬프트 복사</button></div>
+<pre id="p2">위 캐릭터 이미지 그대로, 9:16 세로 20초 릴스 영상을 만들어줘.
+내용은 더콘텐츠스쿨 홍보로 바꿔서 만들면 돼.
+캐릭터 포즈가 더 필요하면 같은 캐릭터로 네가 만들어서 써도 돼.
 
-[준비물 — 내가 같이 보낸 이미지]
-- bg.png : 1080×1920 크림 아이보리(#FAF8F2) 종이 질감 배경, 글자 없음
-- ride.png : 줄을 잡고 공 위에 앉은 토끼 모자 캐릭터, 투명 PNG, 줄이 이미지 위쪽 끝까지 이어져 있음
-- wave.png : 같은 캐릭터가 손 흔드는 모습, 투명 PNG, 전신
-(이미지가 없으면 위 설명대로 네가 먼저 만들어서 써도 돼)
+1막(0~7초): 캐릭터가 그네처럼 좌우로 흔들리면서 문장 5개가 차례로 바뀌기
+2막(7~11초): 캐릭터 앞에 노트북 창이 열리고 할 일 3개가 타이핑된 뒤 체크 표시
+3막(11~16초): 단계 카드 3장이 좌우에서 차례로 날아와 쌓이기
+4막(16~20초): 캐릭터가 위에서 통통 튀며 착지하고 마지막 안내 문구(댓글 CTA)가 뜨기
 
-[전체 색·글꼴]
-- 바탕 크림 #FAF8F2 / 주 색 딥 그린 #1F3D2B·#0D2B22 / 포인트 골드 #FFC24B
-- 1막 문장은 윗줄 딥 그린(굵게) + 아랫줄 골드, 본문 폰트 Pretendard Black/ExtraBold/Bold/SemiBold
-- 글자는 104px 기준 한 줄에 한글 9~10자가 딱 맞음. 넘치면 글자 크기를 줄여줘
-
-[1막 · 0~7초 (0~210프레임) · 진자 + 문장 5개]
-- 캐릭터는 화면 위 바깥 고정점 (540, -200)에 줄로 매달려 진자처럼 좌우로 흔들림. 진폭 0.5rad, 반주기 36프레임, 앞 30프레임에 걸쳐 진폭이 서서히 커짐
-- 중요: 0~12프레임은 가운데에 정지(오프닝 훅). 처음부터 흔들면 첫 프레임에 캐릭터가 반만 보여서 피드에서 어색해짐
-- 문장은 진자가 한쪽 끝에 닿을 때마다 다음 문장으로 교체 (첫 교체 30프레임, 그 뒤 36프레임 간격). 문장 5개:
-  1) 아직도 자료 / 혼자 다 만드세요?
-  2) 이미지 한 장 / 프롬프트 하나면
-  3) 3D 캐릭터가 / 영상까지 뚝딱
-  4) 강의·릴스·카드 / 한 번에 끝내요
-  5) 더콘텐츠스쿨과 / 지금 시작해요
-- 문장 전환은 커튼 와이프로: 진자 기울기만큼 기운 커튼이 화면을 가로질러 지나가고, 새 문장은 진자가 지나간 쪽에서 미끄러져 들어오고, 옛 문장은 12프레임에 걸쳐 페이드아웃. 커튼 뒤에 배경색을 한 겹 깔아 두 문장이 겹쳐 보이지 않게 할 것
-  (고정점을 지나는 직선 하나만으로 자르면 각도가 커질 때 화면 폭을 다 못 덮어서 옛 글자가 일부 남고, 두 문장이 반씩 섞여 오타처럼 보임)
-- 화면 아래 작은 푸터: 더콘텐츠스쿨 · AI 릴스 클래스
-
-[2막 · 7~11초 (210~330프레임) · 노트북 창]
-- 진자는 감쇠하며 멈춤. 캐릭터 무릎 위에서 작은 노트북 창이 열리며 화면 중앙(540, 1120)까지 커짐 (26프레임, scale 0.06 → 1)
-- 창 위치는 캐릭터 얼굴을 가리지 않게 (540, 1120), 크기 840×486
-- 창 제목 "릴스 제작, 이렇게 됩니다", 배지 "AI WORKFLOW"
-- 할 일 3개가 타자기처럼 입력되고(프레임당 1.15자, 시작 228·254·280프레임) 입력이 끝나면 6프레임 뒤에 체크가 통통 튀며 나타남. 체크 전에도 빈 원은 보이게
-  1) 캐릭터 프롬프트 1줄 입력
-  2) 3D 턴어라운드 이미지 생성
-  3) 9:16 릴스 영상 자동 완성
-- 오른쪽 아래 "3개 완료" 배지, 커서 깜빡임 포함
-
-[3막 · 11~16초 (330~480프레임) · 카드 3장]
-- 제목 "딱 3단계면 끝나요"가 336프레임에 떠오름
-- 카드 3장이 진자가 반대쪽 끝에 닿는 순간 반대편에서 미끄러져 들어와 위에서부터 차곡차곡 쌓임 (시작 345·375·405프레임, 18프레임, 살짝 튀는 backOut 이징)
-  1) STEP 01 · 캐릭터 만들기 / 내 캐릭터를 프롬프트 한 줄로
-  2) STEP 02 · 움직임 입히기 / 진자·타이핑 모션 자동 적용
-  3) STEP 03 · 릴스 바로 업로드 / 9:16 · 20초 · 효과음까지
-- 중요: 3막 카드와 제목은 462프레임에 완전히 퇴장시킬 것. 남아 있으면 4막 CTA와 겹침
-
-[4막 · 16~20초 (480~600프레임) · 착지 + CTA]
-- 480프레임에 진자(캐릭터+줄)가 위로 빠르게 사라짐 (16프레임, 위로 2200px, easeIn)
-- 486프레임부터 wave.png가 위에서 떨어져 14프레임 만에 착지. 착지 순간 살짝 눌리는 squash(0.12) 후, 13프레임 주기로 점점 작게 통통 튀며 감쇠
-- 510프레임에 CTA 등장 (14프레임, easeOutCubic):
-  윗줄 "댓글에 '자료' 남기면" / 아랫줄 "풀키트 보내드려요!"
-
-[효과음 — 직접 합성해서 얹어줘]
-- 다음 5종을 직접 합성해서 영상에 얹을 것
-  whoosh(휙): 문장이 바뀔 때, 진자가 사라질 때 / type(톡톡): 타이핑 / check(틱): 체크 / pop(팝): 카드 등장 / thud(쿵): 착지
-- 큐 시점(밀리초): 1000 whoosh, 7600 whoosh, 8300 check, 11500 pop, 12500 pop, 13500 pop, 16200 whoosh, 16667 thud
-- 효과음은 위 시점에 정확히 맞춰서, 영상 전체 길이가 딱 20초가 되게 얹을 것
-- 혹시 효과음이 잘 안 어울리면, 20초짜리 사운드트랙 하나를 따로 만들어 두고 그것도 같이 보내줘
-
-[전달]
-- 먼저 미리보기(움짤이나 짧은 영상)를 보여줘. 내가 직접 보고 고칠 수 있게
-- 최종은 효과음까지 포함한 MP4로 만들어서 보내줘
-- 글자·색 바꾸는 법, 타이밍 바꾸는 법, 이미지 교체법을 짧게 정리해서 같이 알려줘
-
-[완성 후 확인]
-- 600프레임 전체에서 글자가 화면 밖으로 넘치는 곳이 없는지
-- 같은 문장이 두 장 겹쳐 보이는 프레임이 없는지 (특히 문장 교체 순간)
-- 마지막 프레임(20초)에 CTA가 다 보이는지
-문제를 찾으면 고치고, 어떤 프레임에서 무엇이 문제였는지 나에게 보고해줘.</pre>
+1막 문구: "아직도 자료 혼자 다 만드세요?" → "이미지 한 장, 프롬프트 하나면" → "3D 캐릭터가 영상까지 뚝딱" → "강의·릴스·카드 한 번에" → "더콘텐츠스쿨과 지금 시작해요"
+마지막 문구: 댓글에 '자료' 남기면 풀키트 보내드려요
+색상: 크림 아이보리 바탕 + 딥 다크 그린 + 골드 포인트
+효과음(휙·톡톡·팝·쿵)까지 넣어서 MP4 파일로 보내줘.
+먼저 미리보기 보여주고, 내가 고칠 곳 말하면 반영해줘.</pre>
       </div>
     </div>
   </section>
@@ -491,38 +345,28 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
     <div class="section-head">
       <span class="num">03</span>
       <div>
-        <h2>영상 퀄리티 높이는 4가지 팁</h2>
-        <p class="lead">피클에게 다시 시킬 때 이렇게 말하면 결과가 확 달라집니다</p>
+        <h2>잘 나오게 시키는 말 한마디</h2>
+        <p class="lead">이 세 마디만 기억하세요</p>
       </div>
     </div>
 
     <ol class="tips">
       <li>
         <span class="n">1</span>
-        <h3>“1초”가 아니라 “프레임”으로 말하기</h3>
-        <p>“1.5초쯤 카드가 나와”라고 하면 피클도 대충 맞춥니다. <em>45프레임</em>처럼 숫자로 말하세요. 30fps니까 <em>초 × 30</em>이 프레임입니다. 20초 영상이면 600프레임, 1막은 0~210, 2막 210~330처럼 구간을 잘라 말하면 훨씬 정확하게 나옵니다.</p>
+        <h3>원하는 캐릭터 느낌을 콕 짚어주기</h3>
+        <p>“토끼 모자 쓴 귀여운 옷”, “크림색 니트에 골드 포인트”처럼 <em>구체적으로</em> 말하면 한 번에 나옵니다.</p>
       </li>
       <li>
         <span class="n">2</span>
-        <h3>한 번에 하나씩만 바꾸기</h3>
-        <p>문구·색·타이밍을 한꺼번에 바꾸면 결과가 이상해졌을 때 뭐 때문인지 못 찾습니다. <em>바꾸고 → 미리보기 → 확인</em>을 한 번에 하나씩. 잘 나온 버전은 그때 파일을 따로 저장해 두세요. 언제든 그 버전으로 돌아올 수 있습니다.</p>
+        <h3>넣을 문구와 마지막 댓글 안내 알려주기</h3>
+        <p>영상에 넣고 싶은 문장과 마지막 안내를 미리 주세요. “댓글에 <em>‘자료’</em> 남기면 보내드려요”처럼 실제 안내와 똑같이.</p>
       </li>
       <li>
         <span class="n">3</span>
-        <h3>0초의 첫 문장이 승부처</h3>
-        <p>릴스는 소리 없이 자동재생됩니다. 그래서 <em>첫 1초에 핵심 문구</em>가 보여야 넘겨보지 않습니다. 대신 인스타 UI가 위 250px·아래 420px를 가리니 문구는 <em>화면 가운데</em>에 두세요. 이 키트의 0~12프레임 정지 구간이 그 역할입니다.</p>
-      </li>
-      <li>
-        <span class="n">4</span>
-        <h3>실제 수치만 쓰기</h3>
-        <p>“조회수 100만”, “수강생 1만 명”처럼 확인되지 않은 숫자를 넣으면 한 번에 신뢰를 잃습니다. <em>내가 겪은 것, 확인된 수치</em>만. 대신 그 숫자로 무엇이 달라졌는지(시간이 얼마나 줄었는지)를 붙이면 훨씬 세집니다.</p>
+        <h3>첫 영상 보고, 어색한 곳만 하나씩 고치기</h3>
+        <p>“2막에서 글자가 잘려. 노트북 창을 조금 내려줘.”처럼 <em>어느 장면, 무엇을</em> 한 번에 하나씩.</p>
       </li>
     </ol>
-
-    <div class="closing">
-      <p><strong>막히면 프롬프트에 이렇게만 말하세요.</strong> “지금 1막 42프레임에서 두 문장이 겹쳐 보여. 커튼이 화면을 다 못 덮는 것 같아. 고쳐줘.” — 어느 장면, 몇 프레임, 무엇이 문제인지. 이 세 개면 피클이 거의 다 잡습니다.</p>
-      <p>잘 나온 결과는 꼭 저장해 두고, 다음 편은 문구만 바꿔서 이어가세요. 시리즈가 되면 채널이 됩니다.</p>
-    </div>
   </section>
 
 </main>
