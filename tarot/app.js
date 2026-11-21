@@ -11,6 +11,24 @@
   var resultBox = $('#result'), resultImg = $('#resultImg'), resultCap = $('#resultCap'), examTip = $('#examTip');
   var warn = $('#formWarn'), drawBtn = $('#drawBtn');
 
+  /* ── D-Day — 2028학년도 수능(교육부 발표: 2027. 11. 18. 목) ── */
+  (function heroDday() {
+    var box = document.getElementById('heroDday');
+    var num = document.getElementById('heroDdayNum');
+    var when = document.getElementById('heroDdayWhen');
+    var iso = (EXAMS.suneung && EXAMS.suneung.date) || '';
+    if (!box || !num || !when || !iso) return;
+    var p = iso.split('-');
+    var target = Date.UTC(+p[0], +p[1] - 1, +p[2]);
+    var kst = new Date(Date.now() + 9 * 60 * 60 * 1000);   /* 한국 시간 기준 날짜 */
+    var today = Date.UTC(kst.getUTCFullYear(), kst.getUTCMonth(), kst.getUTCDate());
+    var left = Math.round((target - today) / 86400000);
+    if (left > 0) { when.textContent = '수능까지'; num.textContent = 'D-' + left; }
+    else if (left === 0) { when.textContent = '오늘'; num.textContent = '수능 D-DAY'; }
+    else { when.textContent = '2028학년도 수능'; num.textContent = 'D+' + (-left); }
+    box.hidden = false;
+  })();
+
   /* 월 칩 */
   MONTHS.forEach(function (m) {
     var b = document.createElement('button');
