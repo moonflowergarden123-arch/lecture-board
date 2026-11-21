@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>🐰 더콘텐츠스쿨 · 클로드 모션 릴스 풀키트 안내</title>
-<meta name="description" content="클로드 코드 + Remotion으로 20초 세로 릴스를 만드는 프롬프트 풀키트 — 내 3D 마스코트 만들기부터 효과음까지.">
+<title>🐰 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트</title>
+<meta name="description" content="내 AI 에이전트에게 프롬프트를 그대로 건네면 20초 세로 릴스가 완성됩니다 — 내 3D 마스코트 만들기부터 효과음까지.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="🐰 더콘텐츠스쿨 · 클로드 모션 릴스 풀키트 안내">
-<meta property="og:description" content="프롬프트 복사해서 붙여넣으면 20초 세로 릴스가 나옵니다 · 캐릭터 3장 + Remotion 4막 + 효과음">
+<meta property="og:title" content="🐰 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트">
+<meta property="og:description" content="프롬프트 2개만 건네면 20초 세로 릴스 완성 · 캐릭터 3장 + 4막 모션 + 효과음">
 <meta property="og:image" content="https://moonflowergarden123-arch.github.io/lecture-board/motion-kit/img/act1.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
@@ -210,12 +210,12 @@ details.help{
   border-radius:16px;padding:14px 18px;
 }
 details.help summary{
-  cursor:pointer;font-size:14px;font-weight:800;color:var(--green);
-  list-style:none;display:flex;align-items:center;gap:8px;
+  cursor:pointer;font-size:14px;font-weight:800;color:var(--green);line-height:1.55;
+  list-style:none;
 }
 details.help summary::-webkit-details-marker{display:none}
-details.help summary::before{content:'＋';color:var(--gold);font-weight:900}
-details.help[open] summary::before{content:'−'}
+details.help summary::before{content:'＋ ';color:var(--gold);font-weight:900}
+details.help[open] summary::before{content:'− '}
 details.help ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;color:#3C4C44;line-height:1.8}
 details.help li{margin-bottom:5px}
 details.help b{color:var(--green)}
@@ -259,9 +259,9 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
 
 <header class="hero">
   <div class="hero-inner">
-    <span class="kicker">CLAUDE CODE · REMOTION · 9:16 REELS</span>
-    <h1><span class="rabbit">🐰</span> 더콘텐츠스쿨 · 클로드 모션 릴스 풀키트 안내</h1>
-    <p class="sub">릴스에 <b>‘자료’</b>라고 댓글 남겨주신 분들께 보내드리는 페이지예요.<br>프롬프트 복사해서 클로드 코드에 붙여넣기만 하면, 20초 세로 릴스가 내 PC에서 나옵니다.</p>
+    <span class="kicker">AI AGENT · MOTION REELS · 9:16</span>
+    <h1><span class="rabbit">🐰</span> 더콘텐츠스쿨 · AI 에이전트 모션 릴스 풀키트</h1>
+    <p class="sub">릴스에 <b>‘자료’</b> 댓글 남겨주신 분들께 보내드리는 페이지예요.<br>편집 툴이나 복잡한 코딩 없이, <b>내가 쓰는 AI 에이전트</b>에게 아래 프롬프트를 그대로 건네기만 하면 20초 세로 릴스가 완성됩니다.</p>
     <a class="handle" href="https://www.instagram.com/momteachers_official/" target="_blank" rel="noopener"><span class="dot"></span>@momteachers_official</a>
   </div>
 </header>
@@ -269,7 +269,7 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
 <section class="preview">
   <div class="preview-head">
     <h2>이렇게 나옵니다 — 20초 · 1080×1920 · 효과음 포함</h2>
-    <span class="meta">편집 툴 없이 프롬프트만으로</span>
+    <span class="meta">편집 툴 없이, 말로 시켜서</span>
   </div>
   <div class="strip">
     <div class="frame">
@@ -294,42 +294,39 @@ footer .school{display:block;color:var(--cream);font-weight:800;font-size:13.5px
 <main>
 
   <!-- 00 -->
-  <section class="section" id="prep">
+  <section class="section" id="how">
     <div class="section-head">
       <span class="num">00</span>
       <div>
-        <h2>1분 준비 — 딱 세 가지</h2>
-        <p class="lead">처음 한 번만 하면 됩니다. 다음부터는 프롬프트만 붙여넣으면 끝나요.</p>
+        <h2>이렇게 만들었어요 — 딱 3단계</h2>
+        <p class="lead">프로그램 설치도, 코딩도 없습니다. 프롬프트 두 개를 내 AI 에이전트에게 건네고, 나온 영상 문구만 다듬으면 끝이에요.</p>
       </div>
     </div>
 
     <ol class="steps">
       <li>
-        <h3>Node.js LTS 설치</h3>
-        <p><a href="https://nodejs.org/ko" target="_blank" rel="noopener">nodejs.org</a>에서 초록색 <b>LTS</b> 버튼을 눌러 설치하고, 설치가 끝나면 창을 껐다가 다시 열어주세요.</p>
-        <span class="cmd">node -v   <span class="c"># v20 이상이면 OK</span></span>
+        <h3>캐릭터 이미지 만들기</h3>
+        <p><b>01번 프롬프트</b>를 내 AI 에이전트에게 그대로 전달하세요. 내 마스코트 <b>턴어라운드(4면 캐릭터 시트)</b>와 <b>포즈 2장</b>(공 탄 포즈 · 손 흔드는 포즈)을 만들어 줍니다. 머리·옷·색만 내 것으로 바꿔 주세요.</p>
+        <span class="fine">받은 이미지 3장은 잘 보관하세요. 02번의 재료가 됩니다. 채팅창에 붙여넣는 것만으로 시작할 수 있어요.</span>
       </li>
       <li>
-        <h3>Claude Code 설치하고 로그인</h3>
-        <p>터미널(맥) 또는 PowerShell(윈도우)에서 아래 한 줄을 실행하고, 안내가 나오면 로그인하세요. 설치는 <a href="https://claude.com/claude-code" target="_blank" rel="noopener">claude.com/claude-code</a> 공식 안내를 따라도 됩니다.</p>
-        <span class="cmd">npm install -g @anthropic-ai/claude-code
-claude</span>
+        <h3>모션·효과음 프롬프트 건네기</h3>
+        <p><b>02번 완성 프롬프트</b>에 내 문구와 CTA를 넣고, 위에서 받은 캐릭터 이미지와 <b>함께</b> 에이전트에게 전달하세요. 4막 구성·프레임 단위 타이밍·효과음까지 이미 다 적혀 있어서 따로 설명할 게 없습니다.</p>
+        <span class="fine">“이 이미지들로 이 프롬프트대로 20초 릴스 만들어줘” — 이 한마디면 됩니다.</span>
       </li>
       <li>
-        <h3>Remotion 프로젝트 생성 — 한 줄</h3>
-        <p>영상을 만들 폴더에서 아래를 실행하면 빈 Remotion 프로젝트가 생깁니다. 물어보는 항목은 <b>TypeScript</b>·<b>빈 템플릿</b>을 고르세요.</p>
-        <span class="cmd">npx create-video@latest my-reels</span>
-        <span class="fine">그다음 <code class="inline">cd my-reels</code> → <code class="inline">npm i</code> → 프로젝트 폴더 안에서 <code class="inline">claude</code>를 실행하면 준비 끝. 이제부터는 01·02 프롬프트를 붙여넣기만 하면 됩니다.</span>
+        <h3>미리보기 &amp; 완성본 받기</h3>
+        <p>에이전트가 보내준 <b>미리보기</b>를 보고, 어색한 곳만 <b>한 번에 하나씩</b> 고쳐 달라고 하세요. 최종 <b>MP4 영상</b>을 받아 그대로 인스타에 올리면 끝입니다.</p>
+        <span class="fine">보통 2~3번 손보면 충분합니다. 첫 결과를 80점이라고 생각하고 문구만 다듬으세요.</span>
       </li>
     </ol>
 
     <details class="help">
-      <summary>자주 막히는 곳 (펼쳐보기)</summary>
+      <summary>[참고] 내 PC에서 코드로 직접 돌리고 싶다면? (Remotion)</summary>
       <ul>
-        <li><b>‘npm을 찾을 수 없습니다’</b> — Node.js 설치 후 창을 완전히 껐다가 새로 여세요.</li>
-        <li><b>설치가 자꾸 실패</b> — 폴더 경로에 한글이 많으면 <code class="inline">C:\reels</code>처럼 짧은 영문 경로로 옮겨서 다시 해보세요.</li>
-        <li><b>효과음까지 넣고 싶다면</b> — ffmpeg가 필요합니다. 맥은 <code class="inline">brew install ffmpeg</code>, 윈도우는 gyan.dev의 release-essentials를 받아 bin 폴더를 PATH에 추가하세요. 없어도 무음 영상은 얼마든지 나옵니다.</li>
-        <li><b>렌더가 메모리 부족으로 죽을 때</b> — 렌더 명령 뒤에 <code class="inline">--concurrency=1</code>을 붙여주세요.</li>
+        <li>에이전트에게 맡기지 않고 내 컴퓨터에서 직접 렌더하고 싶을 때만 보세요. <a href="https://nodejs.org/ko" target="_blank" rel="noopener">nodejs.org</a>에서 <b>LTS</b>를 설치한 뒤, 영상을 만들 폴더에서 <code class="inline">npx create-video@latest my-reels</code>를 실행합니다.</li>
+        <li>프로젝트 폴더에서 02번 프롬프트를 그대로 실행하고, <code class="inline">npx remotion render Reels out/final.mp4</code>로 뽑으면 됩니다. 효과음까지 넣으려면 ffmpeg가 필요합니다(없어도 무음 영상은 나옵니다).</li>
+        <li>렌더가 메모리 부족으로 죽으면 렌더 명령 뒤에 <code class="inline">--concurrency=1</code>을 붙여 주세요.</li>
       </ul>
     </details>
   </section>
@@ -340,11 +337,11 @@ claude</span>
       <span class="num">01</span>
       <div>
         <h2>내 마스코트 3D 캐릭터 만들기</h2>
-        <p class="lead">세 장을 순서대로 뽑습니다 — 캐릭터 시트 → 공 탄 포즈 → 손 흔드는 포즈</p>
+        <p class="lead">01-A → 01-B → 01-C 순서로 부탁하세요 — 캐릭터 시트 · 공 탄 포즈 · 손 흔드는 포즈</p>
       </div>
     </div>
     <p class="intro">
-      릴스에 나오는 캐릭터는 <strong>내 캐릭터</strong>여야 오래 갑니다. 먼저 기준이 되는 <strong>캐릭터 시트</strong>를 한 장 뽑고, 그 시트를 기준으로 나머지 두 포즈를 뽑으면 같은 캐릭터로 이어집니다. 색·옷·머리는 마음대로 바꿔도 되지만, <strong>한 번 정한 뒤로는 끝까지 똑같이</strong> 유지하세요.
+      릴스에 나오는 캐릭터는 <strong>내 캐릭터</strong>여야 오래 갑니다. 먼저 기준이 되는 <strong>캐릭터 시트</strong>를 뽑고, 그 시트를 기준으로 나머지 두 포즈를 뽑으면 같은 캐릭터로 이어집니다. 색·옷·머리는 마음대로 바꿔도 되지만, <strong>한 번 정한 뒤로는 끝까지 똑같이</strong> 유지하세요. 아래 카드의 <strong>[프롬프트 복사]</strong>를 누르고, 내 AI 에이전트에게 그대로 붙여넣으면 됩니다.
     </p>
 
     <div class="card">
@@ -352,11 +349,11 @@ claude</span>
         <span class="card-tag">01-A</span>
         <h3>캐릭터 시트 · 16:9</h3>
       </div>
-      <p class="note">정면·3/4·측면·뒷면 네 컷이 한 장에 나옵니다. <b>이 파일을 꼭 저장</b>하세요. 다음 두 프롬프트의 기준이 됩니다.</p>
+      <p class="note">정면·3/4·측면·뒷면 네 컷이 한 장에 나옵니다. <b>이 이미지를 꼭 저장</b>하세요. 다음 두 프롬프트의 기준이 됩니다.</p>
       <div class="prompt">
         <div class="prompt-bar"><span class="label">PROMPT · 캐릭터 시트</span><button class="copy" data-target="p1">프롬프트 복사</button></div>
 <pre id="p1">내 릴스에 쓸 3D 마스코트를 만들 거야. 아래 영문 프롬프트로 이미지를 생성해줘. (16:9 가로, 캐릭터 시트)
-생성한 이미지는 프로젝트 폴더에 character-sheet.png 로 저장해줘.
+만든 이미지는 character-sheet.png 이름으로 보관해줘.
 
 Character turnaround model sheet, 16:9 wide layout, four consistent full-body views in a row — front view, three-quarter view, side profile, back view — evenly spaced, identical original mascot character on every view, pure white seamless studio background, professional character sheet presentation.
 A cute chibi-proportioned stylized 3D creator mascot with a large head and a small body (about 2.5 heads tall), round soft face with rosy cheeks, big expressive dark brown eyes with gentle highlights, small button nose, small happy smile, short chin-length dark brown bob with soft bangs, wearing a plush cream-white bunny-ear knit hat with long floppy ears lined in soft pastel pink and fluffy pom-pom ties, an oversized pastel-pink and cream chunky knit hoodie with a small embroidered heart patch on the chest, soft warm-beige jogger pants, chunky pastel-pink and white sneakers with white soles, hugging a small rounded cream-colored laptop under one arm.
@@ -379,7 +376,7 @@ Single character only shown four times, no other characters, no text, no waterma
 - 배경은 투명 PNG(RGBA). 흰 배경으로 뽑았다면 배경을 지워서 진짜 투명으로 만들어줘. 니트·흰 운동화 같은 밝은 부분이 잘리지 않게 조심하고, 결과는 꼭 눈으로 확인해줘.
 - 줄은 이미지 맨 위 끝까지 끊김 없이 수직으로 이어져야 해. 이 줄을 축으로 회전시킬 거라서 위쪽 끝까지 있어야 자연스러워.
 - 줄의 가로 위치는 이미지 폭의 49.75% 지점. 캐릭터는 이미지 아래 2/3 안에 들어오게.
-- 세로로 긴 이미지(약 393 × 1670). 파일 이름은 public/img/ride.png.
+- 세로로 긴 이미지(약 393 × 1670). 저장할 때 이름은 ride.png.
 
 [영문 프롬프트]
 Same character as the reference sheet — identical bunny-ear knit hat, heart-patch knit hoodie, jogger pants, sneakers, face and hair. Full body sitting on a large soft round cream-mint ball, knees up with a small cream laptop resting on the knees, both arms stretched up and gripping one thin dark rope; the rope runs perfectly straight and vertical and continues past the very top edge of the image, centered at 49.75% of the image width. Cheerful confident expression. Pure white seamless background for clean cutout, no ground shadow, no text, no watermark, vertical composition, silhouette clear against the background, soft studio lighting, stylized 3D render matching the reference.</pre>
@@ -399,7 +396,7 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
 [조건]
 - 배경은 투명 PNG(RGBA). 흰 배경이면 지워서 진짜 투명으로.
 - 머리부터 발끝까지 전신, 바닥 그림자 없이. 정면을 보고 활짝 웃으며 한 손을 위로 들어 흔드는 모습.
-- 파일 이름은 public/img/wave.png.
+- 저장할 때 이름은 wave.png.
 
 [영문 프롬프트]
 Same character as the reference sheet — identical bunny-ear knit hat, heart-patch knit hoodie, jogger pants, sneakers, face and hair. Standing and facing the camera with a big happy smile, waving one raised hand in greeting, the other hand relaxed at the side. Full body from head to toe, centered. Pure white seamless background for clean cutout, no ground shadow, no text, no watermark, vertical composition, soft studio lighting, stylized 3D render matching the reference.</pre>
@@ -412,12 +409,12 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
     <div class="section-head">
       <span class="num">02</span>
       <div>
-        <h2>20초 진자 라이더 Remotion 완성 프롬프트</h2>
-        <p class="lead">클로드 코드에 이 한 덩어리만 붙여넣으면 됩니다</p>
+        <h2>20초 진자 라이더 완성 프롬프트</h2>
+        <p class="lead">AI 에이전트에게 이 한 덩어리만 그대로 전달하면 됩니다</p>
       </div>
     </div>
     <p class="intro">
-      캐릭터 두 장(<strong>ride.png · wave.png</strong>)과 배경(<strong>bg.png</strong>)을 <strong>public/img/</strong> 폴더에 넣고 아래 프롬프트를 붙여넣으세요. 4막 구성·타이밍·효과음·렌더 명령까지 다 들어 있습니다. 영문 프롬프트가 길어 보여도, <strong>문구와 색만 바꾸면 다른 주제의 릴스</strong>로도 그대로 쓸 수 있어요.
+      01번에서 받은 캐릭터 이미지 두 장(<strong>공 탄 포즈 · 손 흔드는 포즈</strong>)과 아래 프롬프트를 <strong>함께</strong> 에이전트에게 건네세요. 파일 이름이나 폴더는 에이전트가 알아서 정리합니다. 4막 구성·프레임 단위 타이밍·효과음까지 다 들어 있어서, <strong>문구와 색만 바꾸면 다른 주제의 릴스</strong>로도 그대로 씁니다.
     </p>
 
     <div class="card">
@@ -428,19 +425,21 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
       <p class="note">아래에서 <b>문구만 내 주제로</b> 바꿔 쓰세요. CTA는 실제 안내와 맞아야 합니다(예: 댓글에 ‘자료’).</p>
       <div class="prompt">
         <div class="prompt-bar"><span class="label">PROMPT · 20초 릴스 전체</span><button class="copy" data-target="p4">프롬프트 복사</button></div>
-<pre id="p4">지금 이 Remotion 프로젝트에 9:16 세로 릴스(1080×1920, 30fps, 20초 = 600프레임)를 만들어줘. 편집 툴 없이 코드만으로 움직이는 모션그래픽이야.
+<pre id="p4">내 인스타 릴스용으로 9:16 세로 영상(1080×1920, 30fps, 20초 = 600프레임)을 만들어줘. 편집 툴 없이 코드로 만드는 모션그래픽이고, 다 만들면 MP4 파일로 보내줘.
 
-[준비물 — 이미 public/img 폴더에 넣어둠]
+[준비물 — 내가 같이 보낸 이미지]
 - bg.png : 1080×1920 크림 아이보리(#FAF8F2) 종이 질감 배경, 글자 없음
 - ride.png : 줄을 잡고 공 위에 앉은 토끼 모자 캐릭터, 투명 PNG, 줄이 이미지 위쪽 끝까지 이어져 있음
 - wave.png : 같은 캐릭터가 손 흔드는 모습, 투명 PNG, 전신
+(이미지가 없으면 위 설명대로 네가 먼저 만들어서 써도 돼)
 
-[파일 구조 — 이렇게 나눠줘]
+[파일 구조 — Remotion으로 만들 경우 이렇게 나눠줘]
 - src/config.ts : 문구·색·카드 텍스트만 모아둘 것 (내가 여기만 고치면 영상이 바뀌게)
 - src/timeline.ts : 모든 움직임 계산식(프레임 → 값)만. React 없이 순수 함수로. 나중에 브라우저 미리보기에서도 같은 식을 재사용할 거야
 - src/Composition.tsx : 화면 구성. 움직임은 반드시 timeline.ts에서 가져다 쓸 것
 - src/Root.tsx : Composition 등록 (id "Reels", 1080×1920, fps 30, 600프레임)
 - src/fonts.ts : Pretendard 웹폰트 로드(@remotion/fonts). PC에 폰트가 없어도 결과가 같아야 함
+(HTML5 canvas나 CSS + ffmpeg로 만들어도 좋아. 방식은 네가 편한 쪽으로 정하고, 화면 구성과 타이밍만 아래 스펙대로 지켜줘)
 
 [전체 색·글꼴]
 - 바탕 크림 #FAF8F2 / 주 색 딥 그린 #1F3D2B·#0D2B22 / 포인트 골드 #FFC24B
@@ -484,18 +483,17 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
 - 510프레임에 CTA 등장 (14프레임, easeOutCubic):
   윗줄 "댓글에 '자료' 남기면" / 아랫줄 "풀키트 보내드려요!"
 
-[효과음 — ffmpeg로 합성]
-- public/sfx/ 에 다음 5종을 만들어 넣고, render_with_sfx.sh(맥) / render_with_sfx.bat(윈도우)로 영상과 합칠 것
+[효과음 — 직접 합성해서 얹어줘]
+- 다음 5종을 ffmpeg로 합성해서 영상에 얹을 것
   whoosh(휙): 문장이 바뀔 때, 진자가 사라질 때 / type(톡톡): 타이핑 / check(틱): 체크 / pop(팝): 카드 등장 / thud(쿵): 착지
 - 큐 시점(밀리초): 1000 whoosh, 7600 whoosh, 8300 check, 11500 pop, 12500 pop, 13500 pop, 16200 whoosh, 16667 thud
 - adelay + amix + apad=whole_dur=20 으로 20초에 정확히 맞출 것
-- ffmpeg 필터가 실패할 때를 대비해 20초짜리 완성 사운드트랙(public/sfx/story_20s.wav)도 만들어 두고, README에 대체 한 줄 명령을 적어둘 것
+- 합성이 실패할 때를 대비해 20초짜리 완성 사운드트랙(story_20s.wav)도 만들어 두고, README에 대체 한 줄 명령을 적어둘 것
 
-[렌더 · 실행 안내]
-- npx remotion studio 로 미리보기
-- npx remotion render Reels out/video_mute.mp4 (무음)
-- render_with_sfx → out/final_reels.mp4 (효과음 포함, 이걸 인스타에 올림)
-- README를 만들어서 글자·색 바꾸는 법(config.ts), 타이밍 바꾸는 법(timeline.ts), 이미지 교체법, 자주 막히는 곳을 정리해줄 것
+[전달]
+- 먼저 미리보기(움짤이나 짧은 영상)를 보여줘. 내가 직접 보고 고칠 수 있게
+- 최종은 효과음까지 포함한 MP4로 렌더해서 보내줘 (Remotion이면 npx remotion render Reels out/final_reels.mp4)
+- README를 만들어서 글자·색 바꾸는 법, 타이밍 바꾸는 법, 이미지 교체법, 자주 막히는 곳을 정리해줄 것
 
 [완성 후 확인]
 - 600프레임 전체에서 글자가 화면 밖으로 넘치는 곳이 없는지
@@ -512,7 +510,7 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
       <span class="num">03</span>
       <div>
         <h2>영상 퀄리티 높이는 4가지 팁</h2>
-        <p class="lead">같은 프롬프트로도 결과가 갈리는 지점입니다</p>
+        <p class="lead">에이전트에게 다시 시킬 때 이렇게 말하면 결과가 확 달라집니다</p>
       </div>
     </div>
 
@@ -520,12 +518,12 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
       <li>
         <span class="n">1</span>
         <h3>“1초”가 아니라 “프레임”으로 말하기</h3>
-        <p>“1.5초쯤 카드가 나와”라고 하면 AI가 대충 맞춥니다. <em>45프레임</em>처럼 숫자로 말하세요. 30fps니까 <em>초 × 30</em>이 프레임입니다. 20초 영상이면 600프레임, 1막은 0~210, 2막 210~330처럼 구간을 잘라 말하면 훨씬 정확하게 나옵니다.</p>
+        <p>“1.5초쯤 카드가 나와”라고 하면 에이전트도 대충 맞춥니다. <em>45프레임</em>처럼 숫자로 말하세요. 30fps니까 <em>초 × 30</em>이 프레임입니다. 20초 영상이면 600프레임, 1막은 0~210, 2막 210~330처럼 구간을 잘라 말하면 훨씬 정확하게 나옵니다.</p>
       </li>
       <li>
         <span class="n">2</span>
         <h3>한 번에 하나씩만 바꾸기</h3>
-        <p>문구·색·타이밍을 한꺼번에 바꾸면 결과가 이상해졌을 때 뭐 때문인지 못 찾습니다. <em>바꾸고 → 미리보기 → 확인</em>을 한 번에 하나씩. 잘 나온 버전은 폴더째 복사해 두면 언제든 되돌아올 수 있어요.</p>
+        <p>문구·색·타이밍을 한꺼번에 바꾸면 결과가 이상해졌을 때 뭐 때문인지 못 찾습니다. <em>바꾸고 → 미리보기 → 확인</em>을 한 번에 하나씩. 잘 나온 버전은 그때 파일을 따로 저장해 두세요. 언제든 그 버전으로 돌아올 수 있습니다.</p>
       </li>
       <li>
         <span class="n">3</span>
@@ -540,7 +538,7 @@ Same character as the reference sheet — identical bunny-ear knit hat, heart-pa
     </ol>
 
     <div class="closing">
-      <p><strong>막히면 프롬프트에 이렇게만 말하세요.</strong> “지금 1막 42프레임에서 두 문장이 겹쳐 보여. 커튼이 화면을 다 못 덮는 것 같아. 고쳐줘.” — 어느 장면, 몇 프레임, 무엇이 문제인지. 이 세 개면 클로드가 거의 다 잡습니다.</p>
+      <p><strong>막히면 프롬프트에 이렇게만 말하세요.</strong> “지금 1막 42프레임에서 두 문장이 겹쳐 보여. 커튼이 화면을 다 못 덮는 것 같아. 고쳐줘.” — 어느 장면, 몇 프레임, 무엇이 문제인지. 이 세 개면 에이전트가 거의 다 잡습니다.</p>
       <p>잘 나온 결과는 꼭 저장해 두고, 다음 편은 문구만 바꿔서 이어가세요. 시리즈가 되면 채널이 됩니다.</p>
     </div>
   </section>
