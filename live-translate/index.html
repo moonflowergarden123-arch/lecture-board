@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="더콘텐츠스쿨 실시간 영어→한국어 번역 테스트 (설치 없이 브라우저에서)">
-<title>더콘텐츠스쿨 · 실시간 영어→한국어 번역 테스트</title>
+<meta name="description" content="더콘텐츠스쿨 실시간 영어→한국어 번역 + 한국어를 독서 토론 영어로 (설치 없이 브라우저에서)">
+<title>더콘텐츠스쿨 · 실시간 번역 + 내 말 영어로 만들기</title>
 <style>
 @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'Paperozi';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
@@ -107,6 +107,36 @@ details.notice[open] summary .caret{transform:rotate(180deg)}
 .manual input::placeholder{color:var(--dim2)}
 .manual input:focus{border-color:rgba(255,194,75,.6)}
 
+/* 내 말 영어로 만들기 */
+.say{background:rgba(31,61,43,.72);border:1px solid var(--line);border-radius:18px;padding:15px 16px 16px;margin-bottom:14px}
+.say h2{margin:0 0 3px;font-size:.98rem;font-weight:800;color:var(--cream);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.say h2 span{font-size:.76rem;font-weight:600;color:var(--dim2)}
+.say-in{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 9px}
+.say-in textarea{flex:1 1 320px;min-width:0;font-family:inherit;font-size:.98rem;line-height:1.55;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:rgba(13,43,34,.6);color:var(--cream);outline:none;resize:vertical;min-height:58px}
+.say-in textarea::placeholder{color:var(--dim2)}
+.say-in textarea:focus{border-color:rgba(255,194,75,.6)}
+.say-in .btn.primary{flex:0 0 auto;align-self:stretch;padding:12px 20px;font-size:.95rem}
+.say-quick{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:11px}
+.qchip{font-family:inherit;font-size:.8rem;font-weight:600;color:var(--cream);background:rgba(255,194,75,.1);border:1px solid rgba(255,194,75,.32);border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .15s,border-color .15s}
+.qchip:hover{background:rgba(255,194,75,.2);border-color:rgba(255,194,75,.6)}
+.say-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 12px;font-size:.79rem;color:var(--dim2)}
+.say-status{margin-left:auto;font-weight:700;color:var(--dim2)}
+.say-status.busy{color:var(--gold)}
+.say-status.err{color:#FFB4A8}
+.say-out{display:grid;gap:11px}
+.say-out:empty{display:none}
+.card{border:1px solid var(--line-soft);border-radius:14px;background:rgba(13,43,34,.5);padding:12px 14px 13px;border-left-width:3px}
+.card.basic{border-left-color:rgba(250,248,242,.28)}
+.card.talk{border-left-color:var(--gold);background:rgba(255,194,75,.07)}
+.card .chead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.badge{font-size:.71rem;font-weight:800;padding:4px 9px;border-radius:999px;background:rgba(250,248,242,.1);color:var(--dim);letter-spacing:.01em}
+.card.talk .badge{background:var(--gold);color:#241a08}
+.card .cbtns{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.card .en{font-size:clamp(1.06rem,1rem + .55vw,1.32rem);line-height:1.56;color:var(--cream);font-weight:500;margin:0 0 7px;word-break:break-word;white-space:pre-wrap}
+.card.talk .en{font-size:clamp(1.1rem,1rem + .8vw,1.45rem);font-weight:600}
+.card .ko{font-size:.83rem;line-height:1.6;color:var(--dim2);margin:0;white-space:pre-wrap;word-break:break-word}
+.btn.speaking{background:rgba(255,194,75,.22);color:var(--gold);border-color:rgba(255,194,75,.55)}
+
 /* stage */
 .stage{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
 .panel{background:rgba(31,61,43,.72);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
@@ -150,6 +180,10 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
   .brand{align-items:flex-start}
   .brand h1{font-size:1.06rem}
   .manual button{flex:1 1 100%;justify-content:center}
+  .say-in .btn.primary{flex:1 1 100%;justify-content:center;padding:13px 18px}
+  .card .cbtns{margin-left:0;width:100%;margin-top:2px}
+  .card .cbtns .btn.small{flex:1 1 auto;justify-content:center}
+  .say-status{margin-left:0;width:100%}
 }
 
 @media (max-width:860px){
@@ -171,7 +205,7 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     <div class="brand">
       <div class="mark">더</div>
       <div>
-        <h1>실시간 영어 → 한국어 번역 테스트</h1>
+        <h1>실시간 번역 + 💬 내 말 영어로 만들기</h1>
         <p>더콘텐츠스쿨 · 설치 없이 브라우저에서 바로 (영어 독서 모임용)</p>
       </div>
     </div>
@@ -188,6 +222,7 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
         <li><b>PC 크롬·엣지에서 가장 잘 됩니다.</b> 마이크 사용을 물으면 <b>허용</b>을 눌러 주세요. (HTTPS 주소에서만 마이크가 열립니다)</li>
         <li><b>Zoom 앱 소리를 직접 가로채지는 못합니다.</b> ① PC 스피커 소리를 마이크가 함께 듣게 하거나, ② 크롬 브라우저에서 Zoom에 참가하면 가장 안정적으로 들립니다.</li>
         <li>영어 음성 인식은 <b>인터넷 연결</b>이 필요합니다(크롬이 구글 음성 인식 서버를 씁니다). 크롬에 <b>로그인해 두면</b> 가장 확실하고, 인식이 멈추면 아래 <b>자동 재시작</b>이 켜져 있을 때 스스로 다시 붙습니다.</li>
+        <li><b>💬 내 말 영어로 만들기</b>는 한국어로 쓴 문장을 독서 토론에서 바로 읽을 수 있는 영어 두 가지(<b>한 줄 기본형·독서 토론 확장형</b>)로 바꿔 줍니다. 표현이 마음에 안 들면 <b>영어로 만들기</b>를 다시 눌러 다른 표현으로 받아 보세요.</li>
       </ul>
       <p style="margin:9px 0 0">번역이 안 되거나 늦으면 표 위쪽 <b>번역 엔진</b> 표시를 확인하세요. 자동으로 다른 엔진으로 넘어갑니다.</p>
     </div>
@@ -197,7 +232,7 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     <button class="btn primary" id="btnMic" type="button">🎤 듣기 시작</button>
     <label class="toggle"><input type="checkbox" id="autoRestart" checked> 자동 재시작</label>
     <div class="meter" id="meter" aria-hidden="true"></div>
-    <div class="seg" role="group" aria-label="글자 크기">
+    <div class="seg" id="sizeSeg" role="group" aria-label="글자 크기">
       <button type="button" data-size="normal" class="act">보통</button>
       <button type="button" data-size="big">크게</button>
     </div>
@@ -212,6 +247,24 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
       <input id="manual" type="text" placeholder="영어 문장을 직접 입력해도 됩니다 (예: Nice to meet you.)" autocomplete="off" spellcheck="false">
       <button class="btn" id="btnManual" type="button">번역하기</button>
     </div>
+  </section>
+
+  <section class="say" id="saySection">
+    <h2>💬 내 말 영어로 만들기 <span>한국어로 치면 → 독서 토론 영어 문장 2가지</span></h2>
+    <div class="say-in">
+      <textarea id="sayKo" rows="2" placeholder="하고 싶은 말을 한국어로 편하게 쓰세요. (예: 주인공이 왜 그런 선택을 했는지 이해가 잘 안 돼요)" autocomplete="off"></textarea>
+      <button class="btn primary" id="btnSay" type="button">영어로 만들기</button>
+    </div>
+    <div class="say-quick" id="sayQuick" aria-label="자주 쓰는 독서 토론 문장"></div>
+    <div class="say-tools">
+      <div class="seg" id="sayRate" role="group" aria-label="읽는 속도">
+        <button type="button" data-rate="normal" class="act">🔊 보통</button>
+        <button type="button" data-rate="slow">🐢 천천히</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="sayAutoLog"> 자동으로 기록에 넣기</label>
+      <span class="say-status" id="sayStatus" aria-live="polite"></span>
+    </div>
+    <div class="say-out" id="sayOut"></div>
   </section>
 
   <div class="stage">
@@ -288,8 +341,8 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
   var engines = [
     {
       id: "clients5", name: "구글(dict-chrome)",
-      run: function(text){
-        var u = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=en&tl=ko&q=" + encodeURIComponent(text);
+      run: function(text, pair){
+        var u = "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=" + pair[0] + "&tl=" + pair[1] + "&q=" + encodeURIComponent(text);
         return getJSON(u).then(function(d){
           if(!Array.isArray(d)) throw new Error("bad json");
           var out = d.map(function(it){
@@ -303,8 +356,8 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     },
     {
       id: "gtx", name: "구글(gtx)",
-      run: function(text){
-        var u = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ko&dt=t&q=" + encodeURIComponent(text);
+      run: function(text, pair){
+        var u = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + pair[0] + "&tl=" + pair[1] + "&dt=t&q=" + encodeURIComponent(text);
         return getJSON(u).then(function(d){
           var segs = (d && d[0]) || [];
           var out = segs.map(function(s){ return (s && s[0]) || ""; }).join("").trim();
@@ -315,8 +368,8 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     },
     {
       id: "mymemory", name: "MyMemory",
-      run: function(text){
-        var u = "https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=en%7Cko";
+      run: function(text, pair){
+        var u = "https://api.mymemory.translated.net/get?q=" + encodeURIComponent(text) + "&langpair=" + pair[0] + "%7C" + pair[1];
         return getJSON(u, 12000).then(function(d){
           var out = d && d.responseData && d.responseData.translatedText;
           if(!out) throw new Error("empty");
@@ -356,9 +409,11 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     }, function(e){ clearTimeout(t); throw e; });
   }
 
-  function translate(text){
-    var key = text.trim();
-    if(!key) return Promise.resolve("");
+  function translate(text, dir){
+    var pair = dir === "ko-en" ? ["ko", "en"] : ["en", "ko"];
+    var clean = (text || "").trim();
+    if(!clean) return Promise.resolve("");
+    var key = pair[0] + "2" + pair[1] + "|" + clean;
     if(cache[key]) { setEngineChip(lastOK || "캐시", false); return Promise.resolve(cache[key]); }
     if(inflight[key]) return inflight[key];
 
@@ -379,7 +434,12 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
       }
       var idx = order[pos], eng = engines[idx];
       if((cooldown[eng.id]||0) > Date.now()) { return tryEngine(pos+1, lastErr); }
-      return eng.run(key).then(function(out){
+      return eng.run(clean, pair).then(function(out){
+        // 한국어→영어인데 한글이 남아 있으면 그 엔진은 실패로 보고 다음 엔진으로 넘긴다
+        if(pair[0] === "ko" && /[가-힣]/.test(out)){
+          console.warn("[translate] " + eng.id + " 한글 잔존:", out.slice(0, 40));
+          return tryEngine(pos + 1, new Error("untranslated"));
+        }
         cache[key] = out;
         preferred = idx;
         lastOK = eng.name;
@@ -848,12 +908,338 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
   });
 
   /* ---------------- 글자 크기 ---------------- */
-  document.querySelectorAll(".seg button").forEach(function(b){
+  document.querySelectorAll("#sizeSeg button").forEach(function(b){
     b.addEventListener("click", function(){
-      document.querySelectorAll(".seg button").forEach(function(x){ x.classList.remove("act"); });
+      document.querySelectorAll("#sizeSeg button").forEach(function(x){ x.classList.remove("act"); });
       b.classList.add("act");
       document.body.classList.toggle("big", b.getAttribute("data-size") === "big");
     });
+  });
+
+  /* ---------------- 💬 내 말 영어로 만들기 (한국어 → 독서 토론 회화) ---------------- */
+  var sayEl = $("#sayKo"), sayOutEl = $("#sayOut"), sayStatusEl = $("#sayStatus");
+  var sayBtn = $("#btnSay"), sayAutoLogEl = $("#sayAutoLog");
+  var sayRate = 1, sayBusy = false, sayPick = 0, sayLast = null;
+
+  var SAY_QUICK = [
+    "이 부분이 가장 인상 깊었어요",
+    "주인공 선택이 조금 이해 안 돼요",
+    "저도 그 의견에 공감해요",
+    "이 문장을 다시 얘기해 볼까요?",
+    "개인적인 경험이 떠올랐어요"
+  ];
+
+  // 입력 앞에 붙는 '말 꺼내는' 틀 — 원문 내용을 되풀이하지 않는 문장만 골랐다
+  var SAY_FLOORS = [
+    "제가 느낀 점을 먼저 말씀드리면, ",
+    "솔직하게 말씀드리면, ",
+    "읽으면서 이런 생각이 들었어요. ",
+    "이 책을 읽고 나서 계속 생각난 게 있어요. ",
+    "제 생각을 먼저 말씀드리면, "
+  ];
+
+  var SAY_TAILS = {
+    impression: ["다들 이 장면에서 어떤 느낌을 받으셨어요?", "여러분은 이 장면을 어떻게 느끼셨어요?"],
+    agree: ["다들 비슷하게 느끼셨나요?", "혹시 다르게 보신 분도 계실까요?"],
+    disagree: ["혹시 제가 놓친 부분이 있으면 알려 주세요.", "여러분은 이 부분을 어떻게 생각하세요?"],
+    question: ["다 같이 한번 짚어 보면 좋겠어요.", "어떻게 생각하세요?"],
+    experience: ["혹시 비슷한 경험이 있으신가요?", "여러분은 어떤 경험이 떠오르세요?"],
+    "default": ["여러분은 어떻게 생각하세요?", "이 부분에 대해 어떻게 느끼셨어요?"]
+  };
+
+  function sayIntent(ko){
+    if(/\?|까요|나요|볼까|궁금/.test(ko)) return "question";
+    if(/공감|동의|같은 생각|맞아요|맞습니다|그렇죠|저도 그래/.test(ko)) return "agree";
+    if(/이해가 ?(잘 )?안|이해 ?안|납득|모르겠|다르게|반대|헷갈|어렵|의문/.test(ko)) return "disagree";
+    if(/경험|떠올|생각났|기억나|예전에/.test(ko)) return "experience";
+    if(/인상|마음에 ?남|기억에 ?남|감동|멋있|훌륭|대단|좋았/.test(ko)) return "impression";
+    return "default";
+  }
+
+  // 직역체에서 자주 나오는 표현만 독서 모임 말투로 바꿔 준다 (뜻은 그대로)
+  var SAY_FIXES = [
+    [/\bmain character\b/g, "protagonist"],
+    [/\bMain character\b/g, "Protagonist"],
+    [/\bI also agree with that opinion\b/g, "I agree with that too"],
+    [/\bimpressed me the most\b/g, "stayed with me the most"],
+    [/\bShall we say this sentence again\b/g, "Shall we talk about this sentence again"],
+    [/\bDid others feel similarly\b/g, "Did everyone feel the same way"],
+    [/\bWhat do others think\b/g, "What does everyone else think"]
+  ];
+
+  // 기계 직역 느낌을 줄이는 가벼운 다듬기 (뜻은 건드리지 않는 축약·문장부호만)
+  function sayTidy(s){
+    s = (s || "").replace(/\s+/g, " ").trim();
+    if(!s) return "";
+    for(var f = 0; f < SAY_FIXES.length; f++) s = s.replace(SAY_FIXES[f][0], SAY_FIXES[f][1]);
+    var pairs = [
+      [/\bI am\b/g, "I'm"], [/\bI do not\b/g, "I don't"], [/\bI did not\b/g, "I didn't"],
+      [/\bI cannot\b/g, "I can't"], [/\bI will not\b/g, "I won't"],
+      [/\bcannot\b/g, "can't"], [/\bdo not\b/g, "don't"], [/\bdoes not\b/g, "doesn't"],
+      [/\bdid not\b/g, "didn't"], [/\bis not\b/g, "isn't"], [/\bare not\b/g, "aren't"],
+      [/\bwas not\b/g, "wasn't"], [/\bwere not\b/g, "weren't"], [/\bhave not\b/g, "haven't"],
+      [/\bhas not\b/g, "hasn't"], [/\bwould not\b/g, "wouldn't"], [/\bcould not\b/g, "couldn't"],
+      [/\bshould not\b/g, "shouldn't"], [/\bwill not\b/g, "won't"], [/\bI would\b/g, "I'd"]
+    ];
+    for(var i = 0; i < pairs.length; i++) s = s.replace(pairs[i][0], pairs[i][1]);
+    s = s.replace(/\bIt is\b/g, "It's").replace(/\bit is\b/g, "it's")
+         .replace(/\bThat is\b/g, "That's").replace(/\bthat is\b/g, "that's")
+         .replace(/\bThere is\b/g, "There's").replace(/\bthere is\b/g, "there's")
+         .replace(/\bWe are\b/g, "We're").replace(/\bwe are\b/g, "we're")
+         .replace(/\bThey are\b/g, "They're").replace(/\bthey are\b/g, "they're")
+         .replace(/\bYou are\b/g, "You're").replace(/\byou are\b/g, "you're");
+    s = s.charAt(0).toUpperCase() + s.slice(1);
+    if(!/[.!?…"'”)]$/.test(s)) s += ".";
+    return s;
+  }
+
+  function sayExtensionKo(koMain, intent){
+    var tails = SAY_TAILS[intent] || SAY_TAILS["default"];
+    var idx = (sayPick + koMain.length) % tails.length;
+    var tail = tails[idx];
+    if(intent === "question") return koMain + " " + tail;
+    var floor = SAY_FLOORS[(sayPick + koMain.length) % SAY_FLOORS.length];
+    return floor + koMain + " " + tail;
+  }
+
+  function setSayStatus(msg, kind){
+    sayStatusEl.textContent = msg || "";
+    sayStatusEl.className = "say-status" + (kind ? " " + kind : "");
+  }
+
+  function mkSmallBtn(label, fn){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn small";
+    b.textContent = label;
+    b.addEventListener("click", fn);
+    return b;
+  }
+
+  function copyPlain(txt, btn){
+    var done = function(){
+      if(!btn) return;
+      var old = btn.textContent;
+      btn.textContent = "복사됨 ✓";
+      setTimeout(function(){ btn.textContent = old; }, 1400);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ fallbackCopy(txt, done); });
+    } else {
+      fallbackCopy(txt, done);
+    }
+  }
+
+  /* --- 내가 말할 문장도 기록에 쌓기 --- */
+  function addOwnItem(koText, enText){
+    koText = (koText || "").trim();
+    enText = (enText || "").trim();
+    if(!koText && !enText) return;
+    if(logEmpty && logEmpty.parentNode) logEmpty.parentNode.removeChild(logEmpty);
+
+    var item = document.createElement("div");
+    item.className = "item";
+
+    var meta = document.createElement("div");
+    meta.className = "meta";
+    var time = document.createElement("span");
+    time.textContent = nowLabel();
+    meta.appendChild(time);
+    var tg = document.createElement("span");
+    tg.className = "tag";
+    tg.textContent = "내 말";
+    meta.appendChild(tg);
+
+    var enEl = document.createElement("div");
+    enEl.className = "en";
+    enEl.textContent = enText;
+
+    var koEl = document.createElement("div");
+    koEl.className = "ko";
+    koEl.textContent = koText;
+
+    item.appendChild(meta); item.appendChild(enEl); item.appendChild(koEl);
+    logEl.appendChild(item);
+    logCount.textContent = String(logEl.querySelectorAll(".item").length);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  /* --- 소리 내어 읽기 (en-US) --- */
+  var sayVoices = [], speakingBtn = null, speakToken = 0;
+
+  function loadSayVoices(){
+    if(!("speechSynthesis" in window)) return;
+    try{ sayVoices = window.speechSynthesis.getVoices() || []; }catch(e){ sayVoices = []; }
+  }
+  if("speechSynthesis" in window){
+    loadSayVoices();
+    window.speechSynthesis.onvoiceschanged = loadSayVoices;
+  }
+
+  function pickEnVoice(){
+    if(!sayVoices.length) loadSayVoices();
+    if(!sayVoices.length) return null;
+    var want = ["Google US English", "Samantha", "Microsoft Aria", "Microsoft Jenny", "Google UK English Female"];
+    var i, v;
+    for(i = 0; i < want.length; i++){
+      for(var j = 0; j < sayVoices.length; j++){
+        if(sayVoices[j].name === want[i]) return sayVoices[j];
+      }
+    }
+    for(i = 0; i < sayVoices.length; i++){
+      v = sayVoices[i];
+      if((v.lang || "").toLowerCase() === "en-us") return v;
+    }
+    for(i = 0; i < sayVoices.length; i++){
+      v = sayVoices[i];
+      if(/^en/i.test(v.lang || "")) return v;
+    }
+    return null;
+  }
+
+  function resetSpeaking(){
+    if(speakingBtn){
+      speakingBtn.classList.remove("speaking");
+      speakingBtn.textContent = "🔊 들어보기";
+    }
+    speakingBtn = null;
+  }
+
+  function speakEn(text, btn){
+    if(!("speechSynthesis" in window)){
+      setSayStatus("이 브라우저는 소리 내어 읽기를 지원하지 않아요.", "err");
+      return;
+    }
+    var wasSame = (speakingBtn === btn);
+    var my = ++speakToken;
+    try{ window.speechSynthesis.cancel(); }catch(e){}
+    resetSpeaking();
+    if(wasSame) return;
+
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US";
+    u.rate = sayRate;
+    u.pitch = 1;
+    var v = pickEnVoice();
+    if(v) u.voice = v;
+    u.onend = function(){ if(my === speakToken) resetSpeaking(); };
+    u.onerror = function(){ if(my === speakToken) resetSpeaking(); };
+
+    speakingBtn = btn;
+    if(btn){ btn.classList.add("speaking"); btn.textContent = "■ 멈추기"; }
+    try{ window.speechSynthesis.speak(u); }
+    catch(e){ resetSpeaking(); setSayStatus("소리 내어 읽기를 시작하지 못했어요.", "err"); }
+  }
+
+  /* --- 결과 카드 --- */
+  function sayCard(kind, label, en, ko){
+    var card = document.createElement("div");
+    card.className = "card " + kind;
+
+    var head = document.createElement("div");
+    head.className = "chead";
+    var badge = document.createElement("span");
+    badge.className = "badge";
+    badge.textContent = label;
+    head.appendChild(badge);
+
+    var btns = document.createElement("div");
+    btns.className = "cbtns";
+    var bCopy = mkSmallBtn("📋 복사", function(){ copyPlain(en, bCopy); });
+    var bSpeak = mkSmallBtn("🔊 들어보기", function(){ speakEn(en, bSpeak); });
+    var bLog = mkSmallBtn("💬 기록에 넣기", function(){
+      addOwnItem(ko, en);
+      bLog.textContent = "기록됨 ✓";
+      setTimeout(function(){ bLog.textContent = "💬 기록에 넣기"; }, 1600);
+    });
+    btns.appendChild(bCopy);
+    btns.appendChild(bSpeak);
+    btns.appendChild(bLog);
+    head.appendChild(btns);
+
+    var pEn = document.createElement("p");
+    pEn.className = "en";
+    pEn.textContent = en;
+
+    var pKo = document.createElement("p");
+    pKo.className = "ko";
+    pKo.textContent = ko;
+
+    card.appendChild(head);
+    card.appendChild(pEn);
+    card.appendChild(pKo);
+    return card;
+  }
+
+  function renderSay(koMain, basicEn, koExt, talkEn){
+    sayOutEl.innerHTML = "";
+    if(basicEn) sayOutEl.appendChild(sayCard("basic", "한 줄 기본형", basicEn, koMain));
+    if(talkEn) sayOutEl.appendChild(sayCard("talk", "📖 독서 토론 확장형", talkEn, koExt));
+  }
+
+  function settle(p){
+    return p.then(function(v){ return { ok: true, v: v }; }, function(){ return { ok: false, v: "" }; });
+  }
+
+  function makeSay(){
+    if(sayBusy) return;
+    var raw = (sayEl.value || "").trim();
+    if(!raw){ sayEl.focus(); setSayStatus("한국어로 하고 싶은 말을 먼저 적어 주세요.", ""); return; }
+
+    var ko = raw.replace(/\s+/g, " ");
+    var intent = sayIntent(ko);
+    var koMain = ko;
+    if(!/[.?!…]$/.test(koMain)) koMain += (intent === "question" ? "?" : ".");
+    var koExt = sayExtensionKo(koMain, intent);
+
+    sayBusy = true;
+    sayPick += 1;
+    sayBtn.disabled = true;
+    setSayStatus("영어로 만드는 중…", "busy");
+
+    Promise.all([ settle(translate(koMain, "ko-en")), settle(translate(koExt, "ko-en")) ])
+      .then(function(res){
+        sayBusy = false;
+        sayBtn.disabled = false;
+        var basicEn = res[0].ok ? sayTidy(res[0].v) : "";
+        var talkEn = res[1].ok ? sayTidy(res[1].v) : "";
+        if(!basicEn && !talkEn){
+          setSayStatus("번역 엔진이 잠시 응답하지 않아요. 5초 뒤 다시 눌러 주세요.", "err");
+          return;
+        }
+        renderSay(koMain, basicEn, koExt, talkEn);
+        sayLast = { ko: koMain, basic: basicEn, koExt: koExt, talk: talkEn };
+        setSayStatus(talkEn ? "완성 · 다시 누르면 다른 표현" : "한 줄만 완성 · 다시 눌러 보세요", "");
+        if(sayAutoLogEl && sayAutoLogEl.checked && talkEn) addOwnItem(koExt, talkEn);
+      });
+  }
+
+  SAY_QUICK.forEach(function(q){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "qchip";
+    b.textContent = q;
+    b.addEventListener("click", function(){ sayEl.value = q; makeSay(); });
+    $("#sayQuick").appendChild(b);
+  });
+
+  sayBtn.addEventListener("click", makeSay);
+  sayEl.addEventListener("keydown", function(e){
+    if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); makeSay(); }
+  });
+
+  document.querySelectorAll("#sayRate button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll("#sayRate button").forEach(function(x){ x.classList.remove("act"); });
+      b.classList.add("act");
+      sayRate = b.getAttribute("data-rate") === "slow" ? 0.68 : 1;
+      if(speakingBtn){ try{ window.speechSynthesis.cancel(); }catch(e){} resetSpeaking(); }
+      setSayStatus(sayRate < 1 ? "천천히 읽기 · 🔊 버튼을 누르면 이 속도로 읽어 줍니다" : "", "");
+    });
+  });
+
+  window.addEventListener("beforeunload", function(){
+    if("speechSynthesis" in window){ try{ window.speechSynthesis.cancel(); }catch(e){} }
   });
 
   /* ---------------- 시작 상태 ---------------- */
