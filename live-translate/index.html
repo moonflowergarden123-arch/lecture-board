@@ -931,11 +931,11 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
 
   // 입력 앞에 붙는 '말 꺼내는' 틀 — 원문 내용을 되풀이하지 않는 문장만 골랐다
   var SAY_FLOORS = [
-    "제가 느낀 점을 먼저 말씀드리면, ",
+    "제가 느낀 점을 먼저 말씀드릴게요. ",
     "솔직하게 말씀드리면, ",
     "읽으면서 이런 생각이 들었어요. ",
     "이 책을 읽고 나서 계속 생각난 게 있어요. ",
-    "제 생각을 먼저 말씀드리면, "
+    "제 생각을 먼저 말씀드릴게요. "
   ];
 
   var SAY_TAILS = {
@@ -961,6 +961,7 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     [/\bmain character\b/g, "protagonist"],
     [/\bMain character\b/g, "Protagonist"],
     [/\bI also agree with that opinion\b/g, "I agree with that too"],
+    [/\bI agree with that opinion\b/g, "I agree with that"],
     [/\bimpressed me the most\b/g, "stayed with me the most"],
     [/\bShall we say this sentence again\b/g, "Shall we talk about this sentence again"],
     [/\bDid others feel similarly\b/g, "Did everyone feel the same way"],
