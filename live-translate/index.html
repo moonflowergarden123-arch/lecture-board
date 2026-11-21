@@ -489,6 +489,19 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
   var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   var rec = null;
   var restartDelay = 400, restartTimer = null, previewTimer = null, previewText = "";
+  var recStartedAt = 0, quickRests = 0;
+
+  function giveUpMic(){
+    // 붙자마자 바로 끊기는 것이 반복되면 마이크가 안 들어오는 상태 — 솔직하게 알려준다
+    state.wantListen = false;
+    stopMicMeter();
+    setState("error");
+    btnMic.textContent = "🎤 듣기 시작";
+    btnMic.classList.remove("on");
+    liveKo.className = "err";
+    liveKo.textContent = "마이크 소리가 안 들어오는 것 같아요. ① 주소창 자물쇠 → 마이크 ‘허용’, ② 윈도우 소리 설정에서 ‘입력 장치’를 확인한 뒤 다시 시작해 주세요. (샘플 문장 테스트는 정상 작동합니다)";
+    hintBox.style.display = "";
+  }
 
   function setState(kind){
     chipState.classList.toggle("live", kind === "listening");
@@ -508,11 +521,13 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
 
     rec.onstart = function(){
       state.listening = true;
+      recStartedAt = Date.now();
       restartDelay = 400;
       setState("listening");
     };
 
     rec.onresult = function(e){
+      quickRests = 0;
       var interim = "";
       for(var i = e.resultIndex; i < e.results.length; i++){
         var r = e.results[i];
@@ -555,6 +570,8 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
 
     rec.onend = function(){
       state.listening = false;
+      if(Date.now() - recStartedAt < 1200) quickRests++; else quickRests = 0;
+      if(state.wantListen && quickRests >= 5){ giveUpMic(); return; }
       if(state.wantListen){
         if(state.autoRestart){
           setState("wait");
@@ -594,6 +611,7 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
     }
     state.wantListen = true;
     state.lastFinal = "";
+    quickRests = 0;
     btnMic.textContent = "■ 멈추기";
     btnMic.classList.add("on");
     setState("wait");
