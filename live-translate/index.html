@@ -146,6 +146,11 @@ footer.foot{margin-top:18px;font-size:.78rem;line-height:1.75;color:var(--dim2)}
 footer.foot b{color:var(--dim);font-weight:700}
 footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px;font-size:.74rem;color:var(--cream)}
 
+@media (max-width:520px){
+  .brand{align-items:flex-start}
+  .brand h1{font-size:1.06rem}
+}
+
 @media (max-width:860px){
   .wrap{padding:16px 12px 32px}
   .stage{grid-template-columns:1fr}
@@ -862,6 +867,11 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
 
   /* ---------------- 시작 상태 ---------------- */
   setState("idle");
+  // 좁은 화면에서는 안내문을 접어 두고 바로 테스트할 수 있게 한다
+  if(window.innerWidth < 760){
+    var nd = document.querySelector("details.notice");
+    if(nd) nd.open = false;
+  }
   if(!SR){
     chipEngineTx.textContent = "음성인식 미지원 브라우저";
     chipEngine.classList.add("error");
