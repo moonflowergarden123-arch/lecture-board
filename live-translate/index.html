@@ -464,31 +464,21 @@ footer.foot .kbd{font-family:inherit;background:rgba(250,248,242,.1);border:1px 
       koEl = addItem(text, tag);
       liveKo.className = "";
       liveKo.textContent = "번역 중…";
-    } else {
-      liveKo.className = "preview";
-    }
-
-    translate(text).then(function(ko){
-      if(my !== seqLive && !isFinal) return;      // 더 새로운 문장이 이미 떴으면 중간 결과는 버림
-      if(isFinal){
+      translate(text).then(function(ko){
+        if(my !== seqLive) return;      // 더 새로운 문장이 이미 떴으면 늦게 온 번역은 버림
         liveKo.className = "";
         liveKo.textContent = ko;
         if(koEl){ koEl.className = "ko"; koEl.textContent = ko; }
-      } else {
-        liveKo.className = "preview";
-        liveKo.textContent = ko;
-      }
-    }).catch(function(){
-      if(my !== seqLive) return;
-      if(isFinal){
+      }).catch(function(){
+        if(my !== seqLive) return;
         liveKo.className = "err";
         liveKo.textContent = "번역이 지금 안 됩니다. (원문은 위에 그대로 남아 있어요)";
         if(koEl){ koEl.className = "ko"; koEl.textContent = "번역 실패 — 원문만 기록"; }
-      } else {
-        liveKo.className = "preview";
-        liveKo.textContent = "";
-      }
-    });
+      });
+    } else {
+      // 말하는 중: 영어 자막만 먼저 보여주고, 번역은 1.4초 조용해질 때 schedulePreview가 한 번만 호출
+      liveKo.className = "preview";
+    }
   }
 
   /* ---------------- 음성 인식 ---------------- */
