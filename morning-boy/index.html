@@ -109,6 +109,7 @@ main{
 .wx-meta{font-size:.7rem;color:var(--ink2)}
 .wx-dust{display:inline-flex;align-items:center;gap:.26rem;font-size:.68rem;padding:.2rem .5rem;border-radius:999px;background:var(--tile);border:1px solid var(--line);white-space:nowrap}
 .wx-hours{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.32rem;margin-top:.1rem}
+.wx-empty{grid-column:1 / -1;font-size:.72rem;color:var(--ink3);text-align:center;padding:.5rem;border:1px dashed var(--line);border-radius:.7rem}
 .wx-hour{background:var(--tile);border:1px solid var(--line);border-radius:.75rem;padding:.36rem .1rem;text-align:center}
 .wx-hour b{display:block;font-size:.62rem;color:var(--ink2);font-weight:400}
 .wx-hour span{display:block;font-size:.88rem;margin-top:.04rem}
@@ -1037,7 +1038,7 @@ main{
       var ci = codeInfo(h.c);
       return '<div class="wx-hour"><b>' + parseInt(h.h, 10) + '시</b><span>' + h.t + '°</span><i>' + ci.emoji + '</i></div>';
     }).join('');
-    $('#wxHours').innerHTML = hourHtml;
+    $('#wxHours').innerHTML = hourHtml || '<div class="wx-empty">실시간 날씨를 불러오면 시간별 기온이 보여요</div>';
 
     var advIcon = out.key === 'rain' ? '☂️' : out.key === 'snow' ? '❄️' : out.key === 'padding' ? '🥶' : out.key === 'long' ? '🧥' : '👕';
     var kt = $('#kidTag');
@@ -1168,7 +1169,12 @@ main{
     if (S.rewardToday) return;
     var next = null;
     for (var i = 0; i < T.rewards.length; i++) { if (S.collection.indexOf(T.rewards[i].id) < 0) { next = T.rewards[i]; break; } }
-    if (!next) next = T.rewards[S.collection.length % T.rewards.length];
+    if (!next) {
+      S.rewardToday = true; save();
+      confetti(34); fanfare();
+      speak('도감을 모두 모았어! 오늘 아침 정말 대단했어!');
+      return;
+    }
     if (S.collection.indexOf(next.id) < 0) S.collection.push(next.id);
     S.rewardToday = true;
     save();
