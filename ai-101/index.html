@@ -269,6 +269,12 @@ a{color:var(--gold)}
   .search input{height:46px;font-size:14px}
   .count{width:100%;padding-left:2px}
   .flash{min-height:380px}
+  .quiz-actions{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"prev next" "again know";gap:8px}
+  .quiz-actions .qbtn{flex:0 0 auto}
+  .qbtn[data-q="prev"]{grid-area:prev}
+  .qbtn[data-q="next"]{grid-area:next}
+  .qbtn[data-q="again"]{grid-area:again}
+  .qbtn[data-q="know"]{grid-area:know}
   .face{padding:24px 20px}
   .quiz-actions{flex-wrap:wrap}
   .qbtn.small{flex:1}
