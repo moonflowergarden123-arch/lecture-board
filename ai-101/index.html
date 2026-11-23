@@ -582,7 +582,7 @@ $('#resetBtn').addEventListener('click', e => {
     b.classList.add('arm');
     b.textContent = '한 번 더 누르면 초기화';
     clearTimeout(armTimer);
-    armTimer = setTimeout(() => { b.classList.remove('arm'); b.textContent = '진도 초기화'; }, 3500);
+    armTimer = setTimeout(() => { b.classList.remove('arm'); b.textContent = '진도 초기화'; }, 8000);
     return;
   }
   state.done.clear(); state.star.clear(); save();
