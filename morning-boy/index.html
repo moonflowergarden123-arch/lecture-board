@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123061">
+<meta name="description" content="5세 아이를 위한 아침 루틴 대시보드 — 실시간 시계·옷 입은 날씨 캐릭터·등원 카운트다운·4단계 루틴·비밀 도감">
+<title>🦖 공룡 우주 기지 모닝 · 5세 아침 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<style>:root{--bg1:#0b1a33;--bg2:#123061;--bg3:#1f5691;--glow1:rgba(79,201,255,.30);--glow2:rgba(255,216,61,.18);--ink:#eef8ff;--ink2:#a9c6e6;--ink3:#7d9cc0;--card:rgba(14,38,74,.70);--line:rgba(120,200,255,.22);--tile:rgba(255,255,255,.08);--shadow:0 14px 34px rgba(3,12,28,.5);--accent:#ffd83d;--accent2:#4fc9ff;--accent3:#7af7c9;--gold:#ffe45c;--ok:#3ce6a0;--gauge:linear-gradient(90deg,#4fc9ff,#7af7c9,#ffe45c);--sheet:#0f2748;--moodHappy:rgba(79,201,255,.30);--moodSleepy:rgba(40,60,140,.55);--moodGrumpy:rgba(120,60,80,.40);--logoBg:linear-gradient(160deg,#1b3f74,#0e2647);--kidSkin:#f7d0ae;--kidHair:#2b2118;--kidShoe:#2f7fd0;--shirt:#59c6ff;--shirt2:#8fe0ff;--jacket:#2f4f8a;--jacket2:#42689f;--scarf:#ffd83d;--pants:#274a7d;--t1:rgba(79,201,255,.18);--t2:rgba(122,247,201,.15);--t3:rgba(160,140,255,.18);--t4:rgba(255,216,61,.14);--halo:rgba(255,255,255,.09);}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+html{font-size:clamp(11.5px,1.42vh + .33vw,19px)}
+body{
+  font-family:'Jua','Paperozi','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
+  color:var(--ink);
+  background:linear-gradient(168deg,var(--bg1) 0%,var(--bg2) 52%,var(--bg3) 100%);
+  background-attachment:fixed;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"tnum";
+  -webkit-user-select:none;user-select:none;
+}
+body::before{
+  content:"";position:fixed;inset:-8%;z-index:0;pointer-events:none;
+  background:radial-gradient(42% 38% at 10% 2%,var(--glow1) 0%,transparent 72%),
+             radial-gradient(38% 36% at 92% 6%,var(--glow2) 0%,transparent 72%);
+}
+.veil{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .7s ease,background .7s ease}
+body[data-mood="happy"] .veil{opacity:.6;background:radial-gradient(58% 46% at 50% 0%,var(--moodHappy),transparent 78%)}
+body[data-mood="sleepy"] .veil{opacity:.75;background:linear-gradient(180deg,var(--moodSleepy),transparent 82%)}
+body[data-mood="grumpy"] .veil{opacity:.7;background:linear-gradient(180deg,var(--moodGrumpy),transparent 82%)}
+.decor{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.decor span{position:absolute;opacity:.34;font-size:1.3rem;animation:floaty 11s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+
+.app{position:relative;z-index:1;height:100dvh;display:flex;flex-direction:column;gap:.62rem;padding:.72rem 1.05rem .85rem}
+
+/* ---------------- 상단 바 ---------------- */
+.topbar{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+.brand{display:flex;align-items:center;gap:.6rem;min-width:0}
+.logo{width:2.9rem;height:2.9rem;border-radius:.9rem;display:grid;place-items:center;font-size:1.5rem;background:var(--logoBg);box-shadow:0 6px 16px rgba(0,0,0,.10);border:1px solid var(--line)}
+.brand-t{font-size:1.22rem;line-height:1.15;white-space:nowrap}
+.brand-s{font-size:.74rem;color:var(--ink2);margin-top:.12rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips{display:flex;gap:.42rem;align-items:center;flex:0 0 auto}
+.chip{
+  display:inline-flex;gap:.32rem;align-items:center;padding:.5rem .82rem;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);font-family:inherit;font-size:.8rem;color:var(--ink);
+  box-shadow:0 4px 12px rgba(0,0,0,.07);cursor:pointer;transition:transform .12s ease,background .2s ease;white-space:nowrap
+}
+.chip:hover{transform:translateY(-1px)}
+.chip:active{transform:scale(.96)}
+.chip.off{opacity:.55}
+.chip .dotlive{width:.45rem;height:.45rem;border-radius:50%;background:var(--ok);display:inline-block;box-shadow:0 0 0 3px rgba(60,230,160,.18)}
+
+/* ---------------- 메인 그리드 ---------------- */
+main{
+  flex:1 1 auto;min-height:0;display:grid;gap:.62rem;
+  grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);
+  grid-template-rows:minmax(0,1.3fr) auto auto auto minmax(0,1fr);
+  grid-template-areas:"clock weather" "cheer cheer" "gauge gauge" "supply supply" "routine routine";
+}
+.card{
+  position:relative;min-height:0;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:1.35rem;
+  box-shadow:var(--shadow);backdrop-filter:blur(12px);
+}
+
+/* 시계 + 마스코트 */
+.clock{grid-area:clock;display:grid;grid-template-columns:minmax(0,1fr) 10.6rem;gap:.5rem;align-items:center;padding:.5rem .9rem .55rem;background:linear-gradient(158deg,var(--t1),var(--card) 56%,var(--t3))}
+.clock::before{content:"";position:absolute;inset:auto -10% -45% -10%;height:75%;border-radius:50%;background:radial-gradient(closest-side,var(--glow1),transparent 78%);opacity:.75;pointer-events:none}
+.clock-left{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.05rem;min-width:0}
+.clock-right{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;min-width:0;height:100%}
+.clock .greet{font-size:.92rem;color:var(--ink2);display:flex;align-items:center;gap:.3rem}
+.clock .date{font-size:1rem;color:var(--ink2);letter-spacing:.01em}
+.clock .time{display:flex;align-items:baseline;line-height:.94;font-size:clamp(2.9rem,9.4vh,6.9rem);letter-spacing:.01em;text-shadow:0 6px 18px rgba(120,80,150,.14)}
+.clock .time #h1,.clock .time #h2{min-width:1.35em;text-align:center}
+.clock .colon{color:var(--accent);transition:opacity .35s ease;transform:translateY(-.06em)}
+.clock .colon.blink{opacity:.32}
+.clock .secs{font-size:.8rem;color:var(--ink3);letter-spacing:.12em;margin-top:.1rem}
+.wtag{font-size:.66rem;color:var(--ink2);background:var(--tile);border:1px solid var(--line);border-radius:999px;padding:.18rem .55rem;white-space:nowrap}
+
+/* 마스코트 */
+.kid{height:clamp(6rem,18vh,10.4rem);width:auto;max-width:100%;animation:bob 3.4s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-.35rem) rotate(1deg)}}
+.bubble{
+  position:relative;z-index:6;max-width:9.8rem;min-height:2.2rem;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:#fff;color:#4a2f60;border-radius:.9rem;padding:.36rem .55rem;
+  font-size:.7rem;line-height:1.3;box-shadow:0 8px 18px rgba(0,0,0,.16);
+  opacity:0;transform:translateY(5px);transition:opacity .28s ease,transform .28s ease;pointer-events:none
+}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-.36rem;margin-left:-.36rem;border:.36rem solid transparent;border-top-color:#fff}
+.bubble.show{opacity:1;transform:none}
+
+/* 날씨 */
+.weather{grid-area:weather;display:flex;flex-direction:column;justify-content:space-between;gap:.45rem;padding:.7rem .85rem .55rem}
+.wx-top{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:.15rem .55rem;align-items:center}
+.wx-ico{width:3.4rem;height:3.4rem}
+.wx-svg{width:100%;height:100%;filter:drop-shadow(0 5px 9px rgba(0,0,0,.12))}
+.wx-now{min-width:0}
+.wx-temp{font-size:2.2rem;line-height:1}
+.wx-temp small{font-size:1.15rem;vertical-align:super;margin-left:.08rem;color:var(--ink2)}
+.wx-desc{font-size:.78rem;color:var(--ink2);margin-top:.12rem;white-space:nowrap}
+.wx-side{display:flex;flex-direction:column;align-items:flex-end;gap:.24rem;min-width:0;text-align:right}
+.wx-meta{font-size:.7rem;color:var(--ink2)}
+.wx-dust{display:inline-flex;align-items:center;gap:.26rem;font-size:.68rem;padding:.2rem .5rem;border-radius:999px;background:var(--tile);border:1px solid var(--line);white-space:nowrap}
+.wx-hours{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.32rem;margin-top:.1rem}
+.wx-hour{background:var(--tile);border:1px solid var(--line);border-radius:.75rem;padding:.36rem .1rem;text-align:center}
+.wx-hour b{display:block;font-size:.62rem;color:var(--ink2);font-weight:400}
+.wx-hour span{display:block;font-size:.88rem;margin-top:.04rem}
+.wx-hour i{display:block;font-size:.68rem;font-style:normal;margin-top:.02rem}
+.wx-advice{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:.42rem;font-size:.86rem;line-height:1.32;padding:.55rem .7rem;border-radius:.9rem;background:var(--tile);border:1px dashed var(--line);min-height:4.6rem;flex:1 1 auto}
+.adv-line{display:flex;gap:.35rem;align-items:center}
+.wx-take{display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;font-size:.72rem;margin-top:auto}
+.wx-take b{font-weight:500;color:var(--ink2);font-size:.66rem;margin-right:.1rem}
+.take-chip{font-size:.72rem;padding:.2rem .52rem;border-radius:999px;background:var(--tile);border:1px solid var(--line);white-space:nowrap}
+.wx-foot{display:flex;justify-content:flex-end;font-size:.58rem;color:var(--ink3)}
+
+/* 옷 갈아입기 */
+.kid .hood,.kid .quilt,.kid .sleeve-short,.kid .sleeve-long,.kid .sleeve-puff,
+.kid .scarf,.kid .umbrella,.kid .pants,.kid .snowdots,.kid .raindots{display:none}
+.kid .torso{fill:var(--shirt);stroke:none}
+.kid.w-long .torso{fill:var(--shirt2)}
+.kid.w-padding .torso{fill:var(--jacket)}
+.kid.w-padding .hood,.kid.w-padding .quilt,.kid.w-padding .sleeve-puff,.kid.w-padding .scarf{display:inline}
+.kid.w-padding .pants,.kid.w-long .pants{display:inline}
+.kid.w-long .sleeve-long{display:inline}
+.kid.w-short .sleeve-short{display:inline}
+.kid.is-rain .umbrella{display:inline}
+.kid.is-rain .raindots{display:inline}
+.kid.is-snow .snowdots{display:inline}
+.kid .umbrella{animation:umbrellaSpin 6s ease-in-out infinite;transform-origin:50% 46%}
+@keyframes umbrellaSpin{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+
+/* 오늘의 한마디 */
+.cheer{grid-area:cheer;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem .85rem;min-height:4.1rem}
+.c-left{display:flex;align-items:center;gap:.6rem;min-width:0}
+.c-badge{width:2.4rem;height:2.4rem;border-radius:.85rem;display:grid;place-items:center;font-size:1.2rem;background:var(--tile);border:1px solid var(--line);flex:0 0 auto}
+.c-title{font-size:.68rem;color:var(--ink2);letter-spacing:.02em}
+.c-quote{font-size:.95rem;line-height:1.25;margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-moods{display:flex;gap:.35rem;flex:0 0 auto}
+.mood{
+  font-family:inherit;font-size:.8rem;color:var(--ink);cursor:pointer;border-radius:999px;padding:.5rem .78rem;
+  background:var(--tile);border:1px solid var(--line);transition:transform .14s ease,box-shadow .2s ease;white-space:nowrap
+}
+.mood:hover{transform:translateY(-2px)}
+.mood:active{transform:scale(.94)}
+.mood.on{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(0,0,0,.16)}
+
+/* 카운트다운 */
+.gauge{grid-area:gauge;display:flex;flex-direction:column;justify-content:center;gap:.36rem;padding:.55rem .95rem .6rem}
+.g-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.g-title{display:flex;align-items:baseline;gap:.5rem;font-size:.95rem}
+.g-min{font-size:1.3rem;color:var(--accent);letter-spacing:.01em}
+.g-chips{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:flex-end}
+.mini{font-size:.7rem;padding:.2rem .55rem;border-radius:999px;background:var(--tile);border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+.g-bar{position:relative;height:.95rem;border-radius:999px;background:var(--tile);border:1px solid var(--line);overflow:visible}
+.g-fill{position:relative;height:100%;width:0%;border-radius:999px;background:var(--gauge);transition:width .6s cubic-bezier(.3,.9,.3,1);box-shadow:0 0 0 1px rgba(255,255,255,.25) inset}
+.g-dot{position:absolute;right:-.5rem;top:50%;transform:translateY(-50%);font-size:1rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));transition:left .6s ease}
+.g-foot{display:flex;justify-content:space-between;font-size:.72rem;color:var(--ink2)}
+.g-foot b{color:var(--accent);font-weight:400}
+
+/* 준비물 */
+.supply{grid-area:supply;display:flex;align-items:center;gap:.7rem;padding:.42rem .95rem;min-height:3.1rem}
+.s-label{font-size:.86rem;white-space:nowrap;color:var(--ink)}
+.s-items{display:flex;gap:.35rem;flex-wrap:wrap;min-width:0}
+.s-item{font-size:.76rem;padding:.22rem .6rem;border-radius:.65rem;background:var(--tile);border:1px solid var(--line);white-space:nowrap}
+.s-empty{font-size:.76rem;color:var(--ink2)}
+
+/* 루틴 */
+.routine{grid-area:routine;display:grid;grid-template-columns:13.2rem minmax(0,1fr);gap:.62rem;min-height:0}
+.growth{
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:.2rem;
+  padding:.6rem .55rem .65rem;text-align:center;border-style:dashed;
+  background:linear-gradient(180deg,var(--t2),var(--card) 70%)
+}
+.gr-title{font-size:.76rem;color:var(--ink2)}
+.gr-art{flex:1 1 auto;min-height:3rem;display:flex;align-items:center;justify-content:center;width:100%;overflow:hidden}
+.gr-art svg,.stage-svg{width:100%;height:100%;max-height:8.6rem;animation:popIn .45s ease}
+.gr-text{font-size:.66rem;line-height:1.24;color:var(--ink2);min-height:2.3em;display:flex;align-items:center}
+.rgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.62rem;min-height:0}
+.rcard{
+  position:relative;overflow:hidden;cursor:pointer;font-family:inherit;color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.34rem;
+  padding:.75rem .4rem .8rem;border-radius:1.35rem;border:1.8px solid var(--line);
+  background:linear-gradient(170deg,var(--tint,var(--tile)),var(--card) 78%);
+  box-shadow:var(--shadow);transition:transform .16s ease,box-shadow .2s ease,border-color .2s ease
+}
+.rcard:nth-child(1){--tint:var(--t1)}
+.rcard:nth-child(2){--tint:var(--t2)}
+.rcard:nth-child(3){--tint:var(--t3)}
+.rcard:nth-child(4){--tint:var(--t4)}
+.rcard:hover{transform:translateY(-3px)}
+.rcard:active{transform:scale(.97)}
+.rcard .rnum{position:absolute;left:.55rem;top:.5rem;width:1.35rem;height:1.35rem;border-radius:50%;display:grid;place-items:center;font-size:.7rem;color:var(--ink2);background:var(--halo);border:1px solid var(--line)}
+.rcard .remoji{width:4.9rem;height:4.9rem;border-radius:50%;display:grid;place-items:center;font-size:2.9rem;line-height:1;background:radial-gradient(circle at 38% 32%,var(--halo),transparent 72%);filter:drop-shadow(0 8px 12px rgba(0,0,0,.14));transition:transform .3s ease}
+.rcard .rlabel{font-size:.94rem;margin-top:.05rem}
+.rcard .rhint{font-size:.6rem;color:var(--ink3);min-height:.9em}
+.rcard .rstamp{
+  position:absolute;right:.45rem;bottom:.45rem;font-size:1.5rem;opacity:0;transform:scale(.4) rotate(-24deg);
+  transition:opacity .25s ease,transform .35s cubic-bezier(.2,1.5,.4,1)
+}
+.rcard.done{border-color:var(--ok)}
+.rcard.done .remoji{transform:scale(1.06) rotate(-4deg)}
+.rcard.done .rstamp{opacity:1;transform:scale(1) rotate(-12deg)}
+.rcard.done::after{content:"";position:absolute;inset:0;background:var(--ok);opacity:.09}
+.rcard.cheer{animation:cheerPop .5s ease}
+@keyframes cheerPop{0%{transform:scale(1)}40%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes popIn{0%{transform:scale(.82);opacity:0}100%{transform:scale(1);opacity:1}}
+.rcard .spark{position:absolute;font-size:.95rem;opacity:0;pointer-events:none}
+.rcard.done .spark.a{opacity:.9;left:.5rem;bottom:2.2rem;animation:twinkle 2.4s ease-in-out infinite}
+.rcard.done .spark.b{opacity:.8;right:1.1rem;top:.9rem;animation:twinkle 2.9s ease-in-out infinite .4s}
+@keyframes twinkle{0%,100%{transform:scale(.8);opacity:.25}50%{transform:scale(1.15);opacity:.95}}
+
+/* 버튼 */
+.btn{font-family:inherit;cursor:pointer;border-radius:.9rem;padding:.62rem 1rem;font-size:.86rem;border:1px solid var(--line);background:var(--tile);color:var(--ink);transition:transform .14s ease,filter .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.btn.tiny{font-size:.7rem;padding:.34rem .6rem;border-radius:.7rem;white-space:nowrap}
+.btn.ghost{background:transparent}
+.btn.warn{color:#e0526b;border-color:rgba(224,82,107,.45)}
+
+/* 모달 */
+.modal{position:fixed;inset:0;z-index:50;display:none;place-items:center;padding:1rem;background:rgba(28,12,44,.48);backdrop-filter:blur(7px)}
+.modal.open{display:grid;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.sheet{
+  width:min(38rem,94vw);max-height:90dvh;overflow:auto;background:var(--sheet);border:1px solid var(--line);
+  border-radius:1.5rem;padding:1.2rem 1.4rem 1.3rem;box-shadow:0 30px 70px rgba(0,0,0,.35);animation:sheetUp .28s cubic-bezier(.2,1,.3,1)
+}
+@keyframes sheetUp{from{transform:translateY(14px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.sheet h2{margin:0 0 .2rem;font-size:1.2rem;font-weight:400}
+.sheet p.sub{margin:0 0 .9rem;font-size:.78rem;color:var(--ink2);line-height:1.45}
+.sheet .x{position:absolute;right:1rem;top:1rem}
+.sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem;margin-bottom:.5rem}
+.quiz{display:flex;flex-direction:column;align-items:center;gap:.6rem;padding:.6rem 0 .2rem;text-align:center}
+.quiz .q{font-size:2rem;letter-spacing:.06em;color:var(--accent)}
+.quiz input{font-family:inherit;font-size:1.4rem;width:6.4rem;text-align:center;padding:.45rem .6rem;border-radius:.8rem;border:1.6px solid var(--line);background:var(--tile);color:var(--ink)}
+.quiz .msg{font-size:.76rem;color:var(--ink2);min-height:1.2em}
+.quiz .msg.bad{color:#e0526b}
+.shake{animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+.form{display:grid;grid-template-columns:1fr 1fr;gap:.7rem .8rem}
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field.full{grid-column:1 / -1}
+.field label{font-size:.72rem;color:var(--ink2)}
+.field input[type=text],.field input[type=time]{
+  font-family:inherit;font-size:.92rem;padding:.5rem .68rem;border-radius:.75rem;border:1.4px solid var(--line);
+  background:var(--tile);color:var(--ink);width:100%
+}
+.switchrow{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.5rem .7rem;border:1.4px solid var(--line);border-radius:.8rem;background:var(--tile)}
+.switchrow span{font-size:.84rem}
+.sw{position:relative;width:2.9rem;height:1.55rem;flex:0 0 auto}
+.sw input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.sw i{position:absolute;inset:0;border-radius:999px;background:rgba(140,140,160,.35);transition:background .2s ease;pointer-events:none}
+.sw i::after{content:"";position:absolute;width:1.15rem;height:1.15rem;border-radius:50%;background:#fff;top:.2rem;left:.2rem;transition:transform .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.sw input:checked + i{background:var(--accent)}
+.sw input:checked + i::after{transform:translateX(1.35rem)}
+.sheet-actions{display:flex;justify-content:space-between;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+
+/* 도감 */
+.dex{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.dex-card{border-radius:1.1rem;border:1.4px solid var(--line);background:var(--tile);padding:.5rem .45rem .7rem;text-align:center;position:relative;overflow:hidden;transition:transform .2s ease}
+.dex-card .pic{height:7.6rem;display:grid;place-items:center;margin-bottom:.3rem}
+.dex-card .pic svg{width:100%;height:100%;max-height:7.4rem}
+.dex-card b{display:block;font-size:.8rem;font-weight:400}
+.dex-card span{display:block;font-size:.62rem;color:var(--ink2);line-height:1.3;margin-top:.15rem}
+.dex-card.locked .pic{filter:grayscale(1) brightness(.7);opacity:.35}
+.dex-card.locked:not(.revealed) .pic{padding:1.4rem}
+.dex-card.locked b{color:var(--ink3)}
+.dex-card .lock{font-size:2.4rem;opacity:.5}
+.dex-card.new::after{content:"NEW";position:absolute;right:.35rem;top:.35rem;font-size:.54rem;background:var(--accent);color:#fff;padding:.1rem .32rem;border-radius:.4rem;letter-spacing:.04em}
+.dex-hint{margin-top:.9rem;font-size:.72rem;color:var(--ink2);text-align:center}
+
+/* 보상 */
+.reward-sheet{width:min(30rem,92vw);text-align:center;padding-top:1rem}
+.rkicker{display:inline-block;font-size:.68rem;letter-spacing:.14em;color:#fff;background:var(--accent);padding:.24rem .7rem;border-radius:.6rem}
+.r-art{height:11rem;display:grid;place-items:center;margin:.4rem 0 .2rem;animation:rewardPop .6s cubic-bezier(.2,1.4,.4,1)}
+.r-art svg{width:100%;height:100%}
+@keyframes rewardPop{0%{transform:scale(.4) rotate(-12deg);opacity:0}70%{transform:scale(1.08) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
+.r-name{font-size:1.4rem;margin-top:.1rem}
+.r-desc{font-size:.8rem;color:var(--ink2);margin:.3rem 0 .9rem}
+.wand{position:absolute;font-size:1.6rem;pointer-events:none;animation:wand 1.2s ease-out forwards}
+@keyframes wand{0%{transform:scale(.4) rotate(0);opacity:0}40%{opacity:1}100%{transform:scale(1.4) rotate(90deg);opacity:0}}
+
+/* 컨페티 */
+.confetti{position:fixed;inset:0;z-index:70;pointer-events:none;overflow:hidden}
+.confetti span{position:absolute;top:-8vh;animation:fall linear forwards;will-change:transform}
+@keyframes fall{0%{transform:translateY(-8vh) rotate(0);opacity:1}100%{transform:translateY(112vh) rotate(600deg);opacity:.9}}
+
+/* 좁은 화면 */
+@media (max-width:1000px){
+  .routine{grid-template-columns:11rem minmax(0,1fr)}
+  .c-quote{white-space:normal}
+}
+@media (max-width:860px){
+  html{font-size:15px}
+  body{overflow:auto}
+  .app{height:auto;min-height:100dvh;padding:.7rem .7rem 1rem}
+  main{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:"clock" "weather" "cheer" "gauge" "supply" "routine"}
+  .clock{grid-template-columns:minmax(0,1fr) 7.4rem;min-height:11rem;padding:.55rem .7rem}
+  .kid{height:6.4rem}
+  .bubble{max-width:7.4rem;font-size:.66rem}
+  .weather{min-height:14rem}
+  .g-head{flex-wrap:wrap;row-gap:.35rem}
+  .g-title{white-space:nowrap}
+  .g-min{white-space:nowrap}
+  .g-chips{width:100%;justify-content:flex-start}
+  .cheer{flex-direction:column;align-items:stretch;gap:.5rem;min-height:auto}
+  .c-quote{font-size:.9rem}
+  .c-moods{justify-content:space-between}
+  .mood{flex:1 1 0;text-align:center}
+  .routine{grid-template-columns:1fr;gap:.6rem}
+  .growth{flex-direction:row;gap:.6rem;justify-content:flex-start;text-align:left;padding:.5rem .6rem}
+  .gr-art{width:4.4rem;flex:0 0 auto}
+  .gr-art svg{max-height:4.2rem}
+  .gr-text{min-height:0;flex:1 1 auto}
+  .rgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rcard{min-height:8.6rem}
+  .wx-top{grid-template-columns:auto auto minmax(0,1fr)}
+  .brand-s{display:none}
+  .chips .chip{padding:.45rem .6rem;font-size:.72rem}
+}
+@media (max-width:520px){
+  .brand-t{font-size:1rem}
+  .chips .chip span.lbl{display:none}
+  .g-title{font-size:.82rem}
+  .g-min{font-size:1.05rem}
+  .sheet{padding:1rem}
+  .form{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s !important;transition-duration:.001s !important}
+}
+</style>
+</head>
+<body class="theme-boy" data-mood="none">
+<div class="veil"></div>
+<div class="decor"><span style="left:8%;top:10%;animation-delay:0.0s">🚀</span><span style="left:90%;top:16%;animation-delay:0.7s">⭐</span><span style="left:74%;top:70%;animation-delay:1.4s">🪐</span><span style="left:12%;top:80%;animation-delay:2.1s">🦖</span><span style="left:46%;top:5%;animation-delay:2.8s">✨</span><span style="left:64%;top:40%;animation-delay:3.5s">🌙</span><span style="left:24%;top:46%;animation-delay:4.2s">🛰️</span><span style="left:95%;top:88%;animation-delay:4.9s">☄️</span><span style="left:4%;top:58%;animation-delay:5.6s">⭐</span><span style="left:58%;top:92%;animation-delay:6.3s">🦕</span></div>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🚀</div>
+      <div>
+        <div class="brand-t">공룡 우주 기지 모닝</div>
+        <div class="brand-s" id="brandSub">우주 기지에서 출발하는 힘찬 아침</div>
+      </div>
+    </div>
+    <div class="chips">
+      <button class="chip" id="dexChip" type="button"><span>📖</span><span class="lbl">비밀 도감</span><b id="dexChipCount">0/3</b></button>
+      <button class="chip" id="soundChip" type="button"><span id="soundIco">🔔</span><span class="lbl" id="soundLbl">효과음</span></button>
+      <button class="chip" id="parentBtn" type="button"><span>⚙️</span><span class="lbl">부모 설정</span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 시계 + 마스코트 -->
+    <section class="card clock" aria-label="지금 시각과 오늘의 옷차림">
+      <div class="clock-left">
+        <div class="greet" id="greet">좋은 아침!</div>
+        <div class="date" id="dateText">불러오는 중…</div>
+        <div class="time"><span id="h1">--</span><span class="colon" id="colon">:</span><span id="h2">--</span></div>
+        <div class="secs"><span id="secs">--:--:--</span></div>
+      </div>
+      <div class="clock-right">
+        <div class="bubble" id="bubble">안녕! 나를 눌러 봐!</div>
+        
+<svg id="kid" class="kid w-long" viewBox="0 0 200 214" aria-hidden="true">
+  <g class="umbrella">
+    <path d="M100 6 C56 6 28 38 24 58 C48 48 74 44 100 46 C126 44 152 48 176 58 C172 38 144 6 100 6 Z" fill="#b79cff"/>
+    <path d="M100 6 C78 6 60 20 52 44 C68 44 84 46 100 46 Z" fill="#ff9ecd"/>
+    <path d="M100 46 L100 96" stroke="#7c5fb0" stroke-width="5" stroke-linecap="round"/>
+    <path d="M100 96 q1 11 -10 10" fill="none" stroke="#7c5fb0" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <ellipse cx="100" cy="204" rx="52" ry="9" fill="rgba(0,0,0,.10)"/>
+  <path class="leg" d="M86 166 L84 188" stroke="#f7d0ae" stroke-width="16" stroke-linecap="round"/>
+  <path class="leg" d="M114 166 L116 188" stroke="#f7d0ae" stroke-width="16" stroke-linecap="round"/>
+  <g class="pants">
+    <path d="M80 146 L78 186" stroke="#274a7d" stroke-width="20" stroke-linecap="round"/>
+    <path d="M120 146 L122 186" stroke="#274a7d" stroke-width="20" stroke-linecap="round"/>
+    <rect x="74" y="140" width="52" height="18" rx="9" fill="#274a7d"/>
+  </g>
+  <ellipse cx="82" cy="196" rx="15" ry="8" fill="#2f7fd0"/>
+  <ellipse cx="118" cy="196" rx="15" ry="8" fill="#2f7fd0"/>
+  <path class="arm" d="M80 124 Q64 146 63 166" stroke="#f7d0ae" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <path class="arm" d="M120 124 Q136 146 137 166" stroke="#f7d0ae" stroke-width="15" fill="none" stroke-linecap="round"/>
+  <rect class="torso" x="76" y="110" width="48" height="64" rx="22"/>
+  <g class="quilt">
+    <path d="M80 134 h40 M80 152 h40" stroke="rgba(255,255,255,.45)" stroke-width="3"/>
+  </g>
+  <g class="sleeve-short">
+    <path d="M78 118 q-10 8 -14 20" stroke="#59c6ff" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <path d="M122 118 q10 8 14 20" stroke="#59c6ff" stroke-width="20" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="sleeve-long">
+    <path d="M80 122 Q64 146 63 164" stroke="#59c6ff" stroke-width="17" fill="none" stroke-linecap="round"/>
+    <path d="M120 122 Q136 146 137 164" stroke="#59c6ff" stroke-width="17" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="sleeve-puff">
+    <path d="M76 120 Q60 146 60 168" stroke="#2f4f8a" stroke-width="24" fill="none" stroke-linecap="round"/>
+    <path d="M124 120 Q140 146 140 168" stroke="#2f4f8a" stroke-width="24" fill="none" stroke-linecap="round"/>
+  </g>
+  <g class="hood">
+    <ellipse cx="100" cy="72" rx="50" ry="48" fill="#42689f"/>
+  </g>
+  <rect x="92" y="100" width="16" height="16" fill="#f7d0ae"/>
+  <circle cx="100" cy="72" r="41" fill="#f7d0ae"/>
+  <circle cx="60" cy="80" r="8" fill="#f7d0ae"/>
+  <circle cx="140" cy="80" r="8" fill="#f7d0ae"/>
+  
+      <path d="M58 78 A42 42 0 0 1 142 78 L142 68 Q100 58 58 68 Z" fill="#3d2b1e" stroke="#221a13" stroke-width="1.4"/>
+      <path d="M72 67 l5 10 l5 -10 z M96 65 l5 11 l5 -11 z M120 67 l5 10 l5 -10 z" fill="#3d2b1e"/>
+      <path d="M66 62 C78 54 90 52 100 53 C88 54 74 57 66 62 Z" fill="#6b5138" opacity=".45"/>
+      <path d="M58 74 q-7 6 -5 16 q6 -6 9 -10 z" fill="#3d2b1e"/>
+      <path d="M142 74 q7 6 5 16 q-6 -6 -9 -10 z" fill="#3d2b1e"/>
+      <path d="M116 56 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z" fill="#ffe45c"/>
+    
+  <g class="face">
+    <ellipse cx="86" cy="74" rx="5.2" ry="6.4" fill="#43302a"/>
+    <ellipse cx="114" cy="74" rx="5.2" ry="6.4" fill="#43302a"/>
+    <circle cx="87.6" cy="71.8" r="1.9" fill="#fff"/>
+    <circle cx="115.6" cy="71.8" r="1.9" fill="#fff"/>
+    <path d="M91 87 Q100 96 109 87" stroke="#c2687a" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="73" cy="86" rx="7" ry="4.6" fill="#ff9fb8" opacity=".55"/>
+    <ellipse cx="127" cy="86" rx="7" ry="4.6" fill="#ff9fb8" opacity=".55"/>
+  </g>
+  <g class="scarf">
+    <rect x="74" y="100" width="52" height="16" rx="8" fill="#ffd83d"/>
+    <rect x="104" y="112" width="15" height="30" rx="7" fill="#ffd83d"/>
+    <path d="M78 108 h44" stroke="rgba(255,255,255,.55)" stroke-width="3"/>
+  </g>
+  <g class="snowdots">
+    <circle cx="34" cy="30" r="3.4" fill="#ffffff" opacity=".9"/>
+    <circle cx="166" cy="44" r="2.8" fill="#ffffff" opacity=".8"/>
+    <circle cx="150" cy="16" r="2.4" fill="#ffffff" opacity=".7"/>
+    <circle cx="46" cy="58" r="2.2" fill="#ffffff" opacity=".6"/>
+  </g>
+  <g class="raindots">
+    <path d="M40 44 q-3 8 0 10 q3 -2 0 -10" fill="#7ec8f7"/>
+    <path d="M164 52 q-3 8 0 10 q3 -2 0 -10" fill="#7ec8f7"/>
+    <path d="M150 20 q-3 8 0 10 q3 -2 0 -10" fill="#7ec8f7"/>
+  </g>
+</svg>
+
+        <div class="wtag" id="kidTag">🌤️ --°</div>
+      </div>
+    </section>
+
+    <!-- 날씨 + 캐릭터 -->
+    <section class="card weather" id="wxCard" aria-label="오늘 날씨">
+      <div class="wx-top">
+        <div class="wx-ico" id="wxIcon"></div>
+        <div class="wx-now">
+          <div class="wx-temp"><span id="wxTemp">--</span><small>°</small></div>
+          <div class="wx-desc" id="wxDesc">날씨를 불러오는 중…</div>
+        </div>
+        <div class="wx-side">
+          <div class="wx-meta" id="wxMeta">최고 --° · 최저 --°</div>
+          <div class="wx-dust" id="wxDust">🌿 미세먼지 확인 중</div>
+        </div>
+      </div>
+      <div class="wx-hours" id="wxHours"></div>
+      <div class="wx-advice">
+        <div class="adv-line" id="wxAdvice">🧣 오늘 옷차림을 확인하고 있어요…</div>
+        <div class="wx-take" id="wxTake"></div>
+      </div>
+      <div class="wx-foot"><span id="wxUpdated">불러오는 중…</span></div>
+    </section>
+
+    <!-- 오늘의 한마디 + 기분 -->
+    <section class="card cheer" aria-label="오늘의 한마디와 기분">
+      <div class="c-left">
+        <div class="c-badge">⭐</div>
+        <div style="min-width:0">
+          <div class="c-title" id="cheerTitle">오늘의 한마디</div>
+          <div class="c-quote" id="cheerQuote">…</div>
+        </div>
+      </div>
+      <div class="c-moods" id="moodBtns">
+        <button class="mood" type="button" data-mood="happy">😊 신나요</button>
+        <button class="mood" type="button" data-mood="sleepy">😴 졸려요</button>
+        <button class="mood" type="button" data-mood="grumpy">😠 심통났어요</button>
+      </div>
+    </section>
+
+    <!-- 카운트다운 -->
+    <section class="card gauge" aria-label="등원까지 남은 시간">
+      <div class="g-head">
+        <div class="g-title"><span>🚀 로켓 연료</span><span class="g-min" id="gaugeMin">--</span></div>
+        <div class="g-chips">
+          <span class="mini" id="departChip">🚪 출발 --:--</span>
+          <span class="mini" id="arriveChip">🏫 등교 --:--</span>
+          <span class="mini" id="gaugeRoutine">루틴 0/4</span>
+        </div>
+      </div>
+      <div class="g-bar"><div class="g-fill" id="gaugeFill"><span class="g-dot" id="gaugeDot">🚀</span></div></div>
+      <div class="g-foot"><span id="gaugeMsg">…</span><span id="gaugePct">0%</span></div>
+    </section>
+
+    <!-- 준비물 -->
+    <section class="card supply" aria-label="오늘 준비물">
+      <div class="s-label">🎒 오늘 준비물</div>
+      <div class="s-items" id="supplyList"></div>
+    </section>
+
+    <!-- 루틴 -->
+    <section class="routine" aria-label="아침 루틴 4단계">
+      <div class="card growth">
+        <div class="gr-title">🦖 공룡 기지</div>
+        <div class="gr-art" id="growthArt"></div>
+        <div class="gr-text" id="growthText">…</div>
+        <button class="btn tiny" id="dexBtn" type="button">📖 비밀 도감 <b id="dexCount">0/3</b></button>
+      </div>
+      <div class="rgrid" id="routineGrid"></div>
+    </section>
+  </main>
+</div>
+
+<!-- 부모 설정 -->
+<div class="modal" id="settingsModal" role="dialog" aria-modal="true" aria-label="부모 설정">
+  <div class="sheet" style="position:relative">
+    <button class="btn tiny ghost x" id="settingsClose" type="button">닫기</button>
+    <div id="quizStep">
+      <h2>🔒 어른만 열 수 있어요</h2>
+      <p class="sub">부모님, 아래 덧셈을 풀어 주세요.</p>
+      <div class="quiz">
+        <div class="q" id="quizQ">3 + 4 = ?</div>
+        <input id="quizInput" type="number" inputmode="numeric" autocomplete="off" aria-label="답">
+        <button class="btn primary" id="quizOk" type="button">확인</button>
+        <div class="msg" id="quizMsg"></div>
+      </div>
+    </div>
+    <div id="settingsStep" hidden>
+      <h2>⚙️ 부모 설정</h2>
+      <p class="sub">아이 이름·출발 시간·준비물을 바꾸면 화면에 바로 반영돼요.</p>
+      <div class="form">
+        <div class="field">
+          <label for="setName">아이 이름</label>
+          <input id="setName" type="text" maxlength="8" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="setDepart">등원 출발 시간</label>
+          <input id="setDepart" type="time">
+        </div>
+        <div class="field">
+          <label for="setArrive">등교 시간</label>
+          <input id="setArrive" type="time">
+        </div>
+        <div class="field">
+          <label for="setSound">효과음</label>
+          <div class="switchrow"><span>딩동댕 소리</span>
+            <label class="sw"><input id="setSound" type="checkbox"><i></i></label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="setVoice">말소리</label>
+          <div class="switchrow"><span>한국어 음성 안내</span>
+            <label class="sw"><input id="setVoice" type="checkbox"><i></i></label>
+          </div>
+        </div>
+        <div class="field full">
+          <label for="setSupplies">오늘 준비물 (쉼표로 구분)</label>
+          <input id="setSupplies" type="text" maxlength="60" autocomplete="off" placeholder="예: 물통, 손수건, 마스크">
+        </div>
+      </div>
+      <div class="sheet-actions">
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+          <button class="btn tiny ghost warn" id="resetRoutine" type="button">오늘 루틴 다시 하기</button>
+          <button class="btn tiny ghost warn" id="resetDex" type="button">도감 초기화</button>
+        </div>
+        <button class="btn primary" id="saveSettings" type="button">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 도감 -->
+<div class="modal" id="dexModal" role="dialog" aria-modal="true" aria-label="비밀 도감">
+  <div class="sheet" style="position:relative">
+    <button class="btn tiny ghost x" id="dexClose" type="button">닫기</button>
+    <h2>🦖 비밀 도감 · 공룡 우주 친구들</h2>
+    <p class="sub">아침 루틴 4개를 모두 마치면 하루에 한 명씩 새 친구가 찾아와요.</p>
+    <div class="dex" id="dexGrid"></div>
+    <div class="dex-hint" id="dexHint">아침 루틴 4개를 모두 하면 알이 부화해요!</div>
+  </div>
+</div>
+
+<!-- 보상 -->
+<div class="modal" id="rewardModal" role="dialog" aria-modal="true" aria-label="새 친구">
+  <div class="sheet reward-sheet" style="position:relative">
+    <div class="rkicker">새 친구 부화!</div>
+    <div class="r-art" id="rewardArt"></div>
+    <div class="r-name" id="rewardName">…</div>
+    <div class="r-desc" id="rewardDesc">…</div>
+    <div style="display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn primary" id="rewardDex" type="button">도감 보기</button>
+      <button class="btn" id="rewardClose" type="button">닫기</button>
+    </div>
+  </div>
+</div>
+
+<div class="confetti" id="confetti"></div>
+
+<div id="artbank" hidden>
+  <div data-wxbank>
+<div data-wx="clear"><svg viewBox="0 0 100 100" class="wx-svg"><circle cx="50" cy="50" r="24" fill="#ffd36b"/><g stroke="#ffc44d" stroke-width="5" stroke-linecap="round"><path d="M50 10 v10"/><path d="M50 80 v10"/><path d="M10 50 h10"/><path d="M80 50 h10"/><path d="M22 22 l7 7"/><path d="M71 71 l7 7"/><path d="M78 22 l-7 7"/><path d="M29 71 l-7 7"/></g></svg></div>
+<div data-wx="cloud"><svg viewBox="0 0 100 100" class="wx-svg"><circle cx="40" cy="40" r="18" fill="#ffd36b"/><path d="M26 74 q-12 0 -12 -12 q0 -11 12 -12 q3 -14 18 -14 q16 0 19 15 q14 0 14 12 q0 11 -13 11 z" fill="#ffffff"/><path d="M28 74 q-8 0 -8 -8" stroke="#d8e6f3" stroke-width="3" fill="none"/></svg></div>
+<div data-wx="rain"><svg viewBox="0 0 100 100" class="wx-svg"><path d="M26 66 q-14 0 -14 -13 q0 -12 14 -13 q4 -15 19 -15 q17 0 20 16 q15 0 15 13 q0 12 -15 12 z" fill="#eef3fb" stroke="#cfe0f0" stroke-width="2.5"/><g stroke="#57b6ee" stroke-width="4" stroke-linecap="round"><path d="M32 76 l-3 10"/><path d="M48 76 l-3 10"/><path d="M64 76 l-3 10"/></g></svg></div>
+<div data-wx="snow"><svg viewBox="0 0 100 100" class="wx-svg"><path d="M26 66 q-14 0 -14 -13 q0 -12 14 -13 q4 -15 19 -15 q17 0 20 16 q15 0 15 13 q0 12 -15 12 z" fill="#f6fbff" stroke="#cfe0f0" stroke-width="2.5"/><g fill="#9fd6ff"><circle cx="34" cy="80" r="3.4"/><circle cx="50" cy="86" r="3"/><circle cx="66" cy="80" r="3.4"/></g></svg></div>
+<div data-wx="storm"><svg viewBox="0 0 100 100" class="wx-svg"><path d="M26 62 q-14 0 -14 -13 q0 -12 14 -13 q4 -15 19 -15 q17 0 20 16 q15 0 15 13 q0 12 -15 12 z" fill="#dfe8f5"/><path d="M52 62 l-10 18 h9 l-5 14 l16 -20 h-10 l6 -12 z" fill="#ffd83d"/></svg></div>
+<div data-wx="fog"><svg viewBox="0 0 100 100" class="wx-svg"><path d="M26 58 q-14 0 -14 -12 q0 -11 14 -12 q4 -14 19 -14 q16 0 19 15 q14 0 14 12 q0 11 -14 11 z" fill="#e8eef6"/><g stroke="#c9d8e8" stroke-width="4" stroke-linecap="round"><path d="M22 72 h56"/><path d="M30 84 h48"/></g></svg></div>
+</div>
+  <div data-art="art-trex">
+<svg viewBox="0 0 140 140" class="art-svg">
+  <ellipse cx="70" cy="128" rx="34" ry="6" fill="rgba(0,0,0,.20)"/>
+  <path d="M44 110 q-24 2 -32 -14 q16 2 24 -6 z" fill="#4fb018"/>
+  <path d="M52 110 l-3 14 h13 l2 -12 z" fill="#4fb018"/>
+  <path d="M78 110 l-3 14 h13 l2 -12 z" fill="#4fb018"/>
+  <ellipse cx="57" cy="126" rx="9" ry="4.6" fill="#3f9a12"/>
+  <ellipse cx="84" cy="126" rx="9" ry="4.6" fill="#3f9a12"/>
+  <ellipse cx="70" cy="98" rx="26" ry="24" fill="#5fc21f"/>
+  <ellipse cx="70" cy="102" rx="16" ry="16" fill="#d8f0a8"/>
+  <path d="M47 92 q-9 4 -9 11" stroke="#5fc21f" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M93 92 q9 4 9 11" stroke="#5fc21f" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <ellipse cx="70" cy="56" rx="34" ry="30" fill="#5fc21f"/>
+  <ellipse cx="70" cy="44" rx="29" ry="18" fill="#6fd32a"/>
+  <path d="M46 30 l-3 -9 l8 3 z M94 30 l3 -9 l-8 3 z" fill="#ffd83d"/>
+  <ellipse cx="70" cy="74" rx="23" ry="13" fill="#7fd83f"/>
+  <path d="M50 74 q20 13 40 0 q-20 7 -40 0 z" fill="#2f5f10"/>
+  <path d="M58 76 l3.5 6 l3.5 -6 z M71 78 l3.5 6 l3.5 -6 z" fill="#ffffff"/>
+  <circle cx="56" cy="48" r="7" fill="#ffffff"/><circle cx="58" cy="49" r="3.4" fill="#22331a"/>
+  <circle cx="84" cy="48" r="7" fill="#ffffff"/><circle cx="86" cy="49" r="3.4" fill="#22331a"/>
+  <ellipse cx="44" cy="64" rx="6" ry="4" fill="#ff9fb8" opacity=".45"/>
+  <ellipse cx="96" cy="64" rx="6" ry="4" fill="#ff9fb8" opacity=".45"/>
+  <path d="M112 22 l2.5 7 l7 2.5 l-7 2.5 l-2.5 7 l-2.5 -7 l-7 -2.5 l7 -2.5 z" fill="#ffe45c"/>
+</svg></div><div data-art="art-trike">
+<svg viewBox="0 0 140 140" class="art-svg">
+  <ellipse cx="70" cy="128" rx="34" ry="6" fill="rgba(0,0,0,.20)"/>
+  <path d="M46 108 q-22 2 -30 -12 q14 2 22 -6 z" fill="#2b88b8"/>
+  <path d="M52 110 l-3 14 h13 l2 -12 z" fill="#48b6e6"/>
+  <path d="M78 110 l-3 14 h13 l2 -12 z" fill="#48b6e6"/>
+  <ellipse cx="57" cy="126" rx="9" ry="4.6" fill="#2b88b8"/>
+  <ellipse cx="84" cy="126" rx="9" ry="4.6" fill="#2b88b8"/>
+  <ellipse cx="70" cy="98" rx="26" ry="24" fill="#3aa8d8"/>
+  <ellipse cx="70" cy="102" rx="16" ry="16" fill="#d8f0ff"/>
+  <ellipse cx="70" cy="56" rx="43" ry="37" fill="#2f8fbf"/>
+  <ellipse cx="70" cy="55" rx="35" ry="29" fill="#46b3e2"/>
+  <path d="M44 48 L28 26 L52 38 Z" fill="#fff3d0" stroke="#e0cf9a" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M96 48 L112 26 L88 38 Z" fill="#fff3d0" stroke="#e0cf9a" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="70" cy="64" rx="28" ry="24" fill="#6fd3ff"/>
+  <path d="M70 76 L77 90 L63 90 Z" fill="#fff3d0" stroke="#e0cf9a" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="57" cy="60" r="6.5" fill="#ffffff"/><circle cx="59" cy="61" r="3.2" fill="#123"/>
+  <circle cx="83" cy="60" r="6.5" fill="#ffffff"/><circle cx="85" cy="61" r="3.2" fill="#123"/>
+  <path d="M64 86 q6 4 12 0" stroke="#1c6b94" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="46" cy="76" rx="6" ry="4" fill="#ff9fb8" opacity=".45"/>
+  <ellipse cx="94" cy="76" rx="6" ry="4" fill="#ff9fb8" opacity=".45"/>
+  <path d="M116 18 l2.5 7 l7 2.5 l-7 2.5 l-2.5 7 l-2.5 -7 l-7 -2.5 l7 -2.5 z" fill="#ffe45c"/>
+</svg></div><div data-art="art-rocket">
+<svg viewBox="0 0 140 140" class="art-svg">
+  <ellipse cx="70" cy="128" rx="30" ry="5" fill="rgba(0,0,0,.22)"/>
+  <path d="M70 12 q22 24 22 54 q0 26 -22 42 q-22 -16 -22 -42 q0 -30 22 -54 z" fill="#eef6ff" stroke="#9fc4e6" stroke-width="3"/>
+  <path d="M70 12 q10 11 15 27 q-15 -6 -30 0 q5 -16 15 -27 z" fill="#4fc9ff"/>
+  <circle cx="70" cy="60" r="13" fill="#7af7c9" stroke="#39c39c" stroke-width="3"/>
+  <circle cx="70" cy="60" r="6" fill="#0e2748" opacity=".22"/>
+  <path d="M48 88 q-16 8 -18 26 q14 -6 22 -12 z" fill="#ffd83d" stroke="#e0b82a" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M92 88 q16 8 18 26 q-14 -6 -22 -12 z" fill="#ffd83d" stroke="#e0b82a" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M62 106 q8 22 8 22 q0 0 8 -22 q-8 6 -16 0 z" fill="#ff9b3d"/>
+  <path d="M66 106 q4 14 4 14 q0 0 4 -14 q-4 3 -8 0 z" fill="#ffe45c"/>
+  <circle cx="26" cy="34" r="2.6" fill="#ffe45c"/>
+  <circle cx="114" cy="46" r="2.2" fill="#4fc9ff"/>
+  <circle cx="104" cy="20" r="1.8" fill="#ffffff"/>
+</svg></div><div data-stage="0"><svg viewBox="0 0 140 140" class="stage-svg">
+  <ellipse cx="70" cy="118" rx="40" ry="9" fill="rgba(255,255,255,.12)"/>
+  <path d="M70 26 q16 16 16 38 q0 20 -16 30 q-16 -10 -16 -30 q0 -22 16 -38 z" fill="#dbe9f6" opacity=".45" stroke="#8fb6d6" stroke-width="2.5"/>
+  <circle cx="70" cy="62" r="9" fill="none" stroke="#8fb6d6" stroke-width="2.5"/>
+  <rect x="44" y="106" width="52" height="10" rx="5" fill="#2b5f96"/>
+  <g stroke="#2b5f96" stroke-width="2" opacity=".5"><path d="M30 120 h80"/></g>
+</svg></div><div data-stage="1"><svg viewBox="0 0 140 140" class="stage-svg">
+  <ellipse cx="70" cy="118" rx="40" ry="9" fill="rgba(255,255,255,.12)"/>
+  <path d="M70 26 q16 16 16 38 q0 20 -16 30 q-16 -10 -16 -30 q0 -22 16 -38 z" fill="#eef6ff" stroke="#9fc4e6" stroke-width="2.5"/>
+  <circle cx="70" cy="62" r="9" fill="#4fc9ff"/>
+  <path d="M57 104 q-8 8 -6 16 q8 -2 12 -8 z" fill="#ffd83d"/>
+  <path d="M83 104 q8 8 6 16 q-8 -2 -12 -8 z" fill="#ffd83d"/>
+  <rect x="44" y="106" width="52" height="10" rx="5" fill="#2b5f96"/>
+  <path d="M62 108 q4 10 8 10 q4 0 8 -10 q-8 4 -16 0 z" fill="#ff9b3d" opacity=".8"/>
+  <ellipse cx="104" cy="106" rx="13" ry="12" fill="#f3f7ff" stroke="#b9d3e8" stroke-width="2.5"/>
+</svg></div><div data-stage="2"><svg viewBox="0 0 140 140" class="stage-svg">
+  <ellipse cx="70" cy="118" rx="40" ry="9" fill="rgba(255,255,255,.12)"/>
+  <path d="M70 20 q16 16 16 38 q0 20 -16 30 q-16 -10 -16 -30 q0 -22 16 -38 z" fill="#eef6ff" stroke="#9fc4e6" stroke-width="2.5"/>
+  <circle cx="70" cy="56" r="9" fill="#4fc9ff"/>
+  <path d="M57 98 q-8 8 -6 16 q8 -2 12 -8 z" fill="#ffd83d"/>
+  <path d="M83 98 q8 8 6 16 q-8 -2 -12 -8 z" fill="#ffd83d"/>
+  <path d="M62 102 q4 14 8 14 q4 0 8 -14 q-8 5 -16 0 z" fill="#ff9b3d"/>
+  <ellipse cx="104" cy="104" rx="13" ry="12" fill="#f3f7ff" stroke="#b9d3e8" stroke-width="2.5"/>
+  <path d="M96 96 l4 6 l5 -1 l-2 5" stroke="#7d9cc0" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg></div><div data-stage="3"><svg viewBox="0 0 140 140" class="stage-svg">
+  <ellipse cx="70" cy="118" rx="40" ry="9" fill="rgba(255,255,255,.12)"/>
+  <path d="M70 16 q16 16 16 38 q0 20 -16 30 q-16 -10 -16 -30 q0 -22 16 -38 z" fill="#eef6ff" stroke="#9fc4e6" stroke-width="2.5"/>
+  <circle cx="70" cy="52" r="9" fill="#4fc9ff"/>
+  <path d="M57 94 q-8 8 -6 16 q8 -2 12 -8 z" fill="#ffd83d"/>
+  <path d="M83 94 q8 8 6 16 q-8 -2 -12 -8 z" fill="#ffd83d"/>
+  <path d="M62 98 q4 16 8 16 q4 0 8 -16 q-8 6 -16 0 z" fill="#ff9b3d"/>
+  <ellipse cx="104" cy="102" rx="13" ry="12" fill="#f3f7ff" stroke="#b9d3e8" stroke-width="2.5"/>
+  <path d="M94 96 l5 6 l6 -2 l-1 6 M100 106 l5 4" stroke="#7d9cc0" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="104" cy="102" r="3" fill="#ffd83d"/>
+</svg></div><div data-stage="4"><svg viewBox="0 0 140 140" class="stage-svg">
+  <ellipse cx="70" cy="118" rx="42" ry="9" fill="rgba(255,255,255,.12)"/>
+  <path d="M70 12 q16 16 16 38 q0 20 -16 30 q-16 -10 -16 -30 q0 -22 16 -38 z" fill="#eef6ff" stroke="#9fc4e6" stroke-width="2.5"/>
+  <circle cx="70" cy="48" r="9" fill="#4fc9ff"/>
+  <path d="M57 90 q-8 8 -6 16 q8 -2 12 -8 z" fill="#ffd83d"/>
+  <path d="M83 90 q8 8 6 16 q-8 -2 -12 -8 z" fill="#ffd83d"/>
+  <path d="M62 94 q4 20 8 20 q4 0 8 -20 q-8 7 -16 0 z" fill="#ff9b3d"/>
+  <path d="M66 96 q4 12 4 12 q0 0 4 -12 q-4 3 -8 0 z" fill="#ffe45c"/>
+  <g>
+    <ellipse cx="104" cy="104" rx="15" ry="13" fill="#5fc21f"/>
+    <circle cx="110" cy="98" r="9" fill="#5fc21f"/>
+    <circle cx="113" cy="96" r="2.4" fill="#123"/>
+    <path d="M116 104 q5 2 8 0" stroke="#3f9a12" stroke-width="2" fill="none"/>
+    <path d="M96 100 l2 8 M100 98 l1 9" stroke="#3f9a12" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <path d="M24 30 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 z" fill="#ffe45c"/>
+  <circle cx="118" cy="40" r="2.4" fill="#4fc9ff"/>
+</svg></div>
+</div>
+
+<script>(function () {
+  'use strict';
+
+  var T = {"key": "boy", "defName": "도윤", "defDepart": "08:30", "defArrive": "09:00", "defSupplies": "물통, 마스크, 손수건", "quotes": ["나는 오늘 새로운 것을 하나 배울 수 있어.", "나는 천천히 해도 괜찮아. 한 걸음이면 충분해.", "나는 씩씩한 우주 조종사! 오늘도 출발!", "나는 친구에게 먼저 인사하는 멋진 아이예요.", "힘들면 쉬어도 돼. 다시 세면 다시 출발!", "내 안에는 커다란 공룡 힘이 숨어 있어요.", "오늘도 나는 나의 우주를 만들어요.", "작은 용기가 로켓을 하늘로 띄워요."], "cheers": {"happy": "우주 기지 가득 에너지! 로켓 발사 준비 완료! 오늘 최고로 신나 볼까?", "sleepy": "기지에 연료가 부족해! 물 한 잔이 슈퍼 연료야. 한 모금 마셔 볼까?", "grumpy": "공룡 친구들이 옆에 있어! 크앙~ 하고 기운 내면 다 괜찮아!", "none": "우주 기지에 아침이 왔어! 오늘도 힘차게 출발하자!"}, "outfit": {"padding": "{n}{j}, 오늘 엄청 추워! 두꺼운 패딩에 목도리 꼭 하고 출발!", "long": "{n}{j}, 오늘은 쌀쌀해. 긴팔 입고 나가자!", "short": "{n}{j}, 오늘은 따뜻해! 반팔도 괜찮아~", "rain": "{n}{j}, 비가 와! 우산 꼭 챙겨!", "snow": "{n}{j}, 눈이 와! 장갑 끼고 미끄럼 조심!"}, "routines": [{"emoji": "💧", "label": "물 한 잔", "praise": "물 한 잔 충전 완료! 연료 탱크 가득!"}, {"emoji": "🪥", "label": "치카치카", "praise": "치카치카! 우주 조종사의 반짝 이빨!"}, {"emoji": "👕", "label": "혼자 옷 입기", "praise": "혼자 옷 입기 성공! 우주복 장착 완료!"}, {"emoji": "🎒", "label": "가방 메고 인사", "praise": "가방 메고 출발 준비 끝! 로켓 발사!"}], "rewards": [{"id": "trex", "name": "티라노 렉스", "desc": "크앙! 우주 기지의 대장 공룡"}, {"id": "trike", "name": "트리케라", "desc": "세 뿔로 길을 뚫는 든든한 친구"}, {"id": "rocket", "name": "스타 로켓", "desc": "하늘 끝까지 날아가는 나의 로켓"}], "growth": ["로켓에 연료를 채워 볼까? 루틴 하나에 한 칸!", "연료 한 칸 충전! 공룡알이 꿈틀꿈틀!", "연료 두 칸! 알에 금이 갔어요!", "연료 세 칸! 알 속에서 소리가 들려요!", "발사 준비 완료! 아기 공룡이 부화했어요!"], "confetti": ["🦖", "🚀", "⭐", "🪐", "✨", "🦕"], "gaugeWord": "연료 충전", "gaugeLines": {"far": "기지 점검 완료! 천천히 준비하자", "mid": "우주복 장착 중! 힘내자!", "near": "이제 헬멧 쓸 시간이야!", "close": "발사 5초 전! 가방 메고 출발!"}, "rewardLine": "크앙! 우주 기지에 새 친구가 도착했어! 도감을 열어 봐!", "dexEmpty": "아침 루틴 4개를 모두 하면 알이 부화해요!", "stamp": "🚀"};
+  var LSKEY = 'morning-' + T.key + '-v1';
+  var $ = function (s) { return document.querySelector(s); };
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+
+  /* ------------------------------------------------ 상태 */
+  var S = {
+    name: T.defName, depart: T.defDepart, arrive: T.defArrive, supplies: T.defSupplies,
+    sound: true, voice: true, collection: [], routines: [false, false, false, false],
+    mood: 'none', dateKey: '', rewardToday: false
+  };
+
+  function todayKey() {
+    try {
+      return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    } catch (e) {
+      var d = new Date();
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    }
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(LSKEY);
+      if (raw) {
+        var o = JSON.parse(raw);
+        if (o && typeof o === 'object') {
+          Object.keys(S).forEach(function (k) { if (o[k] !== undefined) S[k] = o[k]; });
+        }
+      }
+    } catch (e) { /* 저장소를 쓸 수 없어도 화면은 동작 */ }
+    if (!Array.isArray(S.routines) || S.routines.length !== 4) S.routines = [false, false, false, false];
+    if (!Array.isArray(S.collection)) S.collection = [];
+    if (!S.name) S.name = T.defName;
+    if (!S.depart) S.depart = T.defDepart;
+    if (!S.arrive) S.arrive = T.defArrive;
+    var tk = todayKey();
+    if (S.dateKey !== tk) {
+      S.dateKey = tk; S.routines = [false, false, false, false]; S.mood = 'none'; S.rewardToday = false;
+    }
+  }
+
+  function save() {
+    try { localStorage.setItem(LSKEY, JSON.stringify(S)); } catch (e) { }
+  }
+
+  /* ------------------------------------------------ 소리 */
+  var actx = null;
+  function ac() {
+    try {
+      if (!actx) {
+        var C = window.AudioContext || window.webkitAudioContext;
+        if (!C) return null;
+        actx = new C();
+      }
+      if (actx.state === 'suspended') actx.resume();
+      return actx;
+    } catch (e) { return null; }
+  }
+  function tone(freq, at, dur, type, gain) {
+    if (!S.sound) return;
+    var c = ac(); if (!c) return;
+    try {
+      var o = c.createOscillator(), g = c.createGain();
+      o.type = type || 'sine';
+      o.frequency.value = freq;
+      var t0 = c.currentTime + at;
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(gain || 0.12, t0 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(t0); o.stop(t0 + dur + 0.05);
+    } catch (e) { }
+  }
+  function chime() { tone(988, 0, 0.16, 'sine', 0.11); tone(1319, 0.11, 0.28, 'sine', 0.09); }
+  function fanfare() { [523, 659, 784, 1047, 1319].forEach(function (f, i) { tone(f, i * 0.11, 0.32, 'triangle', 0.1); }); }
+  function popSound() { tone(660, 0, 0.1, 'square', 0.05); }
+
+  /* ------------------------------------------------ 음성 */
+  var voices = [];
+  function loadVoices() {
+    try { voices = window.speechSynthesis ? (window.speechSynthesis.getVoices() || []) : []; } catch (e) { voices = []; }
+  }
+  if (window.speechSynthesis) {
+    loadVoices();
+    window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
+  }
+  var bubbleTimer = null;
+  function showBubble(t) {
+    var b = $('#bubble'); if (!b) return;
+    b.textContent = t; b.classList.add('show');
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(function () { b.classList.remove('show'); }, 5600);
+  }
+  function speak(t) {
+    showBubble(t);
+    if (!S.voice) return;
+    try {
+      if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+      var u = new SpeechSynthesisUtterance(t);
+      u.lang = 'ko-KR'; u.rate = 0.94; u.pitch = 1.16;
+      var ko = voices.filter(function (v) { return /^ko/i.test(v.lang || ''); });
+      if (ko.length) {
+        var pick = ko.filter(function (v) { return /female|여성|Sora|Yuna|Google/i.test(v.name || ''); })[0] || ko[0];
+        u.voice = pick;
+      }
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    } catch (e) { }
+  }
+
+  /* ------------------------------------------------ 시계 */
+  var timeFmt = new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+  var dateFmt = new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', weekday: 'long' });
+  function seoul() {
+    var p = timeFmt.formatToParts(new Date());
+    var g = function (t) { var f = p.filter(function (x) { return x.type === t; })[0]; return f ? parseInt(f.value, 10) : 0; };
+    return { h: g('hour') % 24, m: g('minute'), s: g('second') };
+  }
+  function toMin(hm) { var a = String(hm || '0:0').split(':'); return (parseInt(a[0], 10) || 0) * 60 + (parseInt(a[1], 10) || 0); }
+
+  function tickClock() {
+    var c = seoul();
+    $('#h1').textContent = pad(c.h);
+    $('#h2').textContent = pad(c.m);
+    $('#secs').textContent = pad(c.h) + ':' + pad(c.m) + ':' + pad(c.s);
+    $('#colon').classList.toggle('blink', c.s % 2 === 0);
+    try { $('#dateText').textContent = dateFmt.format(new Date()); } catch (e) { }
+    var g = c.h < 4 ? '조용한 밤이야' : c.h < 11 ? '좋은 아침' : c.h < 17 ? '즐거운 하루' : c.h < 21 ? '좋은 저녁' : '포근한 밤';
+    $('#greet').textContent = g + ', ' + called() + '!';
+    updateGauge(c);
+  }
+
+  function updateGauge(now) {
+    var c = now || seoul();
+    var dep = toMin(S.depart);
+    var cur = c.h * 60 + c.m + c.s / 60;
+    var rem = dep - cur;
+    var done = S.routines.filter(Boolean).length;
+
+    $('#gaugeRoutine').textContent = '루틴 ' + done + '/4';
+    $('#departChip').textContent = '🚪 출발 ' + S.depart;
+    $('#arriveChip').textContent = '🏫 등교 ' + S.arrive;
+
+    var pct = Math.max(0, Math.min(1, 1 - rem / 60));
+    $('#gaugeFill').style.width = (pct * 100).toFixed(1) + '%';
+    $('#gaugePct').textContent = Math.round(pct * 100) + '% · ' + T.gaugeWord;
+
+    if (rem > 0) {
+      var m = Math.ceil(rem);
+      $('#gaugeMin').textContent = m + '분 남았어요';
+      $('#gaugeMsg').textContent = done >= 4 ? '루틴 완료! 이제 문 앞에서 기다리면 돼요' : gaugeLine(m);
+    } else {
+      $('#gaugeMin').textContent = '지금 출발!';
+      $('#gaugeMsg').textContent = done >= 4 ? '완벽해! 오늘 아침 대성공이야!' : '서두르자! 가방 메고 인사하고 출발!';
+      $('#gaugeFill').style.width = '100%';
+      $('#gaugePct').textContent = '100% · ' + T.gaugeWord;
+    }
+  }
+
+  function gaugeLine(m) {
+    if (m <= 5) return T.gaugeLines.close;
+    if (m <= 15) return T.gaugeLines.near;
+    if (m <= 35) return T.gaugeLines.mid;
+    return T.gaugeLines.far;
+  }
+
+  /* ------------------------------------------------ 날씨 */
+  var WX_URL = 'https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780'
+    + '&current=temperature_2m,apparent_temperature,weather_code,is_day'
+    + '&daily=temperature_2m_max,temperature_2m_min'
+    + '&hourly=temperature_2m,weather_code&timezone=Asia%2FSeoul&forecast_days=2';
+  var AQ_URL = 'https://air-quality-api.open-meteo.com/v1/air-quality?latitude=37.5665&longitude=126.9780'
+    + '&current=pm10,pm2_5&timezone=Asia%2FSeoul';
+  var WX = null;
+  var DUST = null;
+
+  function getJSON(url, ms) {
+    return new Promise(function (resolve, reject) {
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); reject(new Error('timeout')); }, ms || 8000);
+      fetch(url, { signal: ctrl ? ctrl.signal : undefined, cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+        .then(function (j) { clearTimeout(timer); resolve(j); })
+        .catch(function (e) { clearTimeout(timer); reject(e); });
+    });
+  }
+
+  function codeInfo(c) {
+    if (c === 0) return { kind: 'clear', label: '맑음', emoji: '☀️' };
+    if (c <= 3) return { kind: 'cloud', label: c === 1 ? '구름 조금' : c === 2 ? '구름 많음' : '흐림', emoji: '⛅' };
+    if (c === 45 || c === 48) return { kind: 'fog', label: '안개', emoji: '🌫️' };
+    if (c >= 51 && c <= 57) return { kind: 'rain', label: '이슬비', emoji: '🌦️' };
+    if (c >= 61 && c <= 67) return { kind: 'rain', label: '비', emoji: '🌧️' };
+    if (c >= 71 && c <= 77) return { kind: 'snow', label: '눈', emoji: '🌨️' };
+    if (c >= 80 && c <= 82) return { kind: 'rain', label: '소나기', emoji: '🌧️' };
+    if (c >= 85 && c <= 86) return { kind: 'snow', label: '눈', emoji: '❄️' };
+    if (c >= 95) return { kind: 'storm', label: '천둥번개', emoji: '⛈️' };
+    return { kind: 'cloud', label: '구름', emoji: '☁️' };
+  }
+
+  function outfitFor(t, kind) {
+    if (kind === 'rain' || kind === 'storm') return { cls: 'w-long is-rain', key: 'rain' };
+    if (kind === 'snow') return { cls: 'w-padding is-snow', key: 'snow' };
+    if (t <= 4) return { cls: 'w-padding', key: 'padding' };
+    if (t <= 15) return { cls: 'w-long', key: 'long' };
+    return { cls: 'w-short', key: 'short' };
+  }
+
+  function hourlyChips(hourly, nowH) {
+    if (!hourly || !hourly.time) return [];
+    var today = todayKey();
+    var i = hourly.time.findIndex(function (t) { return t.slice(0, 10) === today && parseInt(t.slice(11, 13), 10) === nowH; });
+    if (i < 0) i = hourly.time.findIndex(function (t) { return t.slice(0, 10) === today && parseInt(t.slice(11, 13), 10) > nowH; });
+    if (i < 0) i = 0;
+    var out = [];
+    for (var k = 0; k < 4; k++) {
+      var j = i + k * 3;
+      if (j >= hourly.time.length) break;
+      out.push({ h: hourly.time[j].slice(11, 13), t: Math.round(hourly.temperature_2m[j]), c: hourly.weather_code[j] });
+    }
+    return out;
+  }
+
+  function fallbackWx() {
+    var d = new Date();
+    var m = d.getMonth() + 1;
+    var t = (m === 12 || m <= 2) ? -2 : (m <= 4) ? 12 : (m <= 6) ? 22 : (m <= 9) ? 26 : 15;
+    return { temp: t, feel: t - 2, code: (m >= 6 && m <= 8) ? 1 : 2, max: t + 5, min: t - 6, hours: [], offline: true };
+  }
+
+  function bank(name) {
+    var n = document.querySelector('#artbank [data-art="' + name + '"]');
+    if (n) return n.innerHTML;
+    var m = document.querySelector('#artbank [data-stage="' + String(name).replace('stage-', '') + '"]');
+    return m ? m.innerHTML : '';
+  }
+
+  function josa(name) {
+    var t = String(name || '').trim();
+    if (!t) return '아';
+    var c = t.charCodeAt(t.length - 1);
+    if (c >= 0xAC00 && c <= 0xD7A3) return ((c - 0xAC00) % 28 === 0) ? '야' : '아';
+    return '아';
+  }
+  function called() { return S.name + josa(S.name); }
+  function outfitLine(o) { return T.outfit[o.key].replace('{n}', S.name).replace('{j}', josa(S.name)); }
+
+  function loadWeather() {
+    getJSON(WX_URL).then(function (d) {
+      var c = d.current || {};
+      WX = {
+        temp: Math.round(c.temperature_2m),
+        feel: Math.round(c.apparent_temperature == null ? c.temperature_2m : c.apparent_temperature),
+        code: c.weather_code == null ? 0 : c.weather_code,
+        max: Math.round(((d.daily || {}).temperature_2m_max || [c.temperature_2m])[0]),
+        min: Math.round(((d.daily || {}).temperature_2m_min || [c.temperature_2m])[0]),
+        hours: hourlyChips(d.hourly, seoul().h),
+        offline: false
+      };
+      renderWeather();
+    }).catch(function () {
+      WX = fallbackWx();
+      renderWeather();
+    });
+    loadDust();
+  }
+
+  function loadDust() {
+    getJSON(AQ_URL, 7000).then(function (d) {
+      var pm = ((d.current || {}).pm2_5);
+      if (pm == null) throw new Error('no pm');
+      var g = pm <= 15 ? '좋음 😊' : pm <= 35 ? '보통 🙂' : pm <= 75 ? '나쁨 😷' : '매우 나쁨 🤢';
+      DUST = pm;
+      $('#wxDust').textContent = '🌿 미세먼지 ' + g + ' · PM2.5 ' + Math.round(pm) + 'µm';
+      renderTake();
+    }).catch(function () {
+      $('#wxDust').textContent = '🌿 미세먼지 정보 없음';
+    });
+  }
+
+  function renderWeather() {
+    if (!WX) return;
+    var info = codeInfo(WX.code);
+    var out = outfitFor(WX.temp, info.kind);
+    var advice = outfitLine(out);
+
+    $('#wxTemp').textContent = WX.temp;
+    $('#wxDesc').textContent = info.label + (WX.offline ? ' · 어림값' : '');
+    $('#wxMeta').textContent = '최고 ' + WX.max + '° · 최저 ' + WX.min + '° · 체감 ' + WX.feel + '°';
+
+    var icon = document.querySelector('#artbank [data-wx="' + info.kind + '"]');
+    if (icon) $('#wxIcon').innerHTML = icon.innerHTML;
+
+    var kid = $('#kid');
+    if (kid) {
+      var extra = (S.mood === 'sleepy') ? ' sleepy' : '';
+      kid.setAttribute('class', 'kid ' + out.cls + extra);
+    }
+
+    var hourHtml = (WX.hours || []).map(function (h) {
+      var ci = codeInfo(h.c);
+      return '<div class="wx-hour"><b>' + parseInt(h.h, 10) + '시</b><span>' + h.t + '°</span><i>' + ci.emoji + '</i></div>';
+    }).join('');
+    $('#wxHours').innerHTML = hourHtml;
+
+    var advIcon = out.key === 'rain' ? '☂️' : out.key === 'snow' ? '❄️' : out.key === 'padding' ? '🥶' : out.key === 'long' ? '🧥' : '👕';
+    var kt = $('#kidTag');
+    if (kt) kt.textContent = info.emoji + ' ' + WX.temp + '° ' + info.label;
+    $('#wxAdvice').textContent = advIcon + ' ' + advice; + (WX.hours && WX.hours[0] ? ' (' + parseInt(WX.hours[0].h, 10) + '시 ' + WX.hours[0].t + '°)' : '');
+    $('#wxUpdated').textContent = WX.offline
+      ? '오프라인 모드 · 기온 어림값'
+      : '지금 ' + pad(seoul().h) + ':' + pad(seoul().m) + ' · Open-Meteo';
+    $('#wxCard').dataset.advice = advice;
+    renderTake();
+  }
+
+  function renderTake() {
+    var box = $('#wxTake');
+    if (!box || !WX) return;
+    var info = codeInfo(WX.code);
+    var out = outfitFor(WX.temp, info.kind);
+    var take = [];
+    if (out.key === 'padding' || out.key === 'snow') take.push('🧣 목도리');
+    if (out.key === 'padding' || out.key === 'snow') take.push('🧤 장갑');
+    if (out.key === 'rain') take.push('☂️ 우산');
+    if (info.kind === 'clear' && WX.temp >= 21) take.push('🧢 모자');
+    if (DUST != null && DUST > 35) take.push('😷 마스크');
+    take.push('💧 물통');
+    box.innerHTML = '<b>오늘 챙길 것</b>' + take.map(function (t) { return '<span class="take-chip">' + t + '</span>'; }).join('');
+  }
+
+  /* ------------------------------------------------ 오늘의 한마디 · 기분 */
+  function dayOfYear() {
+    var d = new Date(todayKey() + 'T00:00:00');
+    return Math.floor(d.getTime() / 86400000);
+  }
+  function dailyQuote() { return T.quotes[dayOfYear() % T.quotes.length]; }
+
+  function renderMood() {
+    document.body.setAttribute('data-mood', S.mood || 'none');
+    var moods = document.querySelectorAll('#moodBtns .mood');
+    for (var i = 0; i < moods.length; i++) moods[i].classList.toggle('on', moods[i].dataset.mood === S.mood);
+    if (S.mood && S.mood !== 'none') {
+      $('#cheerTitle').textContent = '오늘의 응원 한마디';
+      $('#cheerQuote').textContent = T.cheers[S.mood] || dailyQuote();
+    } else {
+      $('#cheerTitle').textContent = '오늘의 한마디';
+      $('#cheerQuote').textContent = dailyQuote();
+    }
+  }
+
+  function setMood(m) {
+    var same = (S.mood === m);
+    S.mood = same ? 'none' : m;
+    save();
+    renderMood();
+    popSound();
+    if (!same) speak(T.cheers[m]);
+    if (kidEl()) kidEl().setAttribute('class', currentKidClass());
+  }
+  function kidEl() { return $('#kid'); }
+  function currentKidClass() {
+    var info = WX ? codeInfo(WX.code) : { kind: 'cloud' };
+    var out = outfitFor(WX ? WX.temp : 12, info.kind);
+    return 'kid ' + out.cls + (S.mood === 'sleepy' ? ' sleepy' : '');
+  }
+
+  /* ------------------------------------------------ 루틴 */
+  function buildRoutines() {
+    var g = $('#routineGrid');
+    g.innerHTML = '';
+    T.routines.forEach(function (r, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rcard';
+      b.dataset.i = i;
+      b.innerHTML = '<span class="rnum">' + (i + 1) + '</span>'
+        + '<span class="spark a">✨</span><span class="spark b">⭐</span>'
+        + '<span class="remoji">' + r.emoji + '</span>'
+        + '<span class="rlabel">' + r.label + '</span>'
+        + '<span class="rhint">' + (i === 0 ? '누르면 완료!' : '') + '</span>'
+        + '<span class="rstamp">' + T.stamp + '</span>';
+      b.addEventListener('click', function () { onRoutine(i, b); });
+      g.appendChild(b);
+    });
+  }
+
+  function renderRoutines() {
+    var cards = document.querySelectorAll('.rcard');
+    for (var i = 0; i < cards.length; i++) cards[i].classList.toggle('done', !!S.routines[i]);
+    renderGrowth();
+    updateGauge();
+  }
+
+  function onRoutine(i, card) {
+    if (S.routines[i]) { speak('이미 했어! 다른 것도 해 볼까?'); popSound(); return; }
+    S.routines[i] = true; save();
+    chime();
+    confetti(16);
+    if (card) { card.classList.add('cheer'); setTimeout(function () { card.classList.remove('cheer'); }, 520); }
+    speak((S.name ? called() + ', ' : '') + T.routines[i].praise);
+    renderRoutines();
+    if (S.routines.every(Boolean)) setTimeout(grantReward, 620);
+  }
+
+  /* ------------------------------------------------ 성장/도감 */
+  function renderGrowth() {
+    var done = S.routines.filter(Boolean).length;
+    $('#growthArt').innerHTML = bank('stage-' + done);
+    $('#growthText').textContent = T.growth[done];
+    $('#dexCount').textContent = S.collection.length + '/3';
+    $('#dexChipCount').textContent = S.collection.length + '/3';
+  }
+
+  function renderDex() {
+    var g = $('#dexGrid');
+    g.innerHTML = '';
+    T.rewards.forEach(function (r) {
+      var got = S.collection.indexOf(r.id) >= 0;
+      var d = document.createElement('div');
+      d.className = 'dex-card' + (got ? '' : ' locked');
+      d.innerHTML = got
+        ? '<div class="pic">' + bank('art-' + r.id) + '</div><b>' + r.name + '</b><span>' + r.desc + '</span>'
+        : '<div class="pic"><span class="lock">❔</span></div><b>???</b><span>아직 만나지 못했어요</span>';
+      g.appendChild(d);
+    });
+    var all = S.collection.length >= 3;
+    $('#dexHint').textContent = all ? '도감을 모두 모았어요! 정말 대단해요 🎉' : (S.collection.length ? '한 명 더 만나면 도감 완성! 내일 아침에도 해 봐요.' : T.dexEmpty);
+  }
+
+  function grantReward() {
+    if (S.rewardToday) return;
+    var next = null;
+    for (var i = 0; i < T.rewards.length; i++) { if (S.collection.indexOf(T.rewards[i].id) < 0) { next = T.rewards[i]; break; } }
+    if (!next) next = T.rewards[S.collection.length % T.rewards.length];
+    if (S.collection.indexOf(next.id) < 0) S.collection.push(next.id);
+    S.rewardToday = true;
+    save();
+    renderGrowth(); renderDex();
+    showReward(next);
+  }
+
+  function showReward(r) {
+    $('#rewardArt').innerHTML = bank('art-' + r.id);
+    $('#rewardName').textContent = r.name;
+    $('#rewardDesc').textContent = r.desc;
+    openModal('#rewardModal');
+    fanfare();
+    setTimeout(function () { confetti(46); }, 120);
+    speak(T.rewardLine);
+    wand();
+  }
+
+  function wand() {
+    var sheet = document.querySelector('#rewardModal .sheet');
+    if (!sheet) return;
+    for (var i = 0; i < 7; i++) {
+      var s = document.createElement('span');
+      s.className = 'wand';
+      s.textContent = i % 2 ? '✨' : '⭐';
+      s.style.left = (12 + Math.random() * 76) + '%';
+      s.style.top = (12 + Math.random() * 60) + '%';
+      s.style.animationDelay = (i * 0.08) + 's';
+      sheet.appendChild(s);
+      (function (el) { setTimeout(function () { el.remove(); }, 1600); })(s);
+    }
+  }
+
+  function confetti(n) {
+    var wrap = $('#confetti');
+    var pool = T.confetti;
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      s.textContent = pool[Math.floor(Math.random() * pool.length)];
+      s.style.left = (6 + Math.random() * 88) + '%';
+      s.style.fontSize = (13 + Math.random() * 18) + 'px';
+      s.style.animationDelay = (Math.random() * 0.45) + 's';
+      s.style.animationDuration = (1.5 + Math.random() * 1.1) + 's';
+      wrap.appendChild(s);
+      (function (el) { setTimeout(function () { el.remove(); }, 3200); })(s);
+    }
+  }
+
+  /* ------------------------------------------------ 모달 */
+  function openModal(sel) {
+    var m = $(sel);
+    if (!m) return;
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(sel) {
+    var m = $(sel);
+    if (!m) return;
+    m.classList.remove('open');
+    if (!document.querySelector('.modal.open')) document.body.style.overflow = '';
+  }
+  function closeAll() {
+    document.querySelectorAll('.modal.open').forEach(function (m) { m.classList.remove('open'); });
+    document.body.style.overflow = '';
+  }
+
+  /* ------------------------------------------------ 부모 설정 */
+  var quiz = { a: 3, b: 4 };
+
+  function openSettings() {
+    quiz.a = 3 + Math.floor(Math.random() * 5);
+    quiz.b = 2 + Math.floor(Math.random() * 5);
+    $('#quizQ').textContent = quiz.a + ' + ' + quiz.b + ' = ?';
+    $('#quizInput').value = '';
+    $('#quizMsg').textContent = '';
+    $('#quizMsg').className = 'msg';
+    $('#quizStep').hidden = false;
+    $('#settingsStep').hidden = true;
+    openModal('#settingsModal');
+    setTimeout(function () { try { $('#quizInput').focus(); } catch (e) { } }, 150);
+  }
+
+  function checkQuiz() {
+    var v = parseInt($('#quizInput').value, 10);
+    if (v === quiz.a + quiz.b) {
+      $('#quizStep').hidden = true;
+      $('#settingsStep').hidden = false;
+      fillSettings();
+      chime();
+    } else {
+      var box = $('#quizInput');
+      box.classList.remove('shake');
+      void box.offsetWidth;
+      box.classList.add('shake');
+      $('#quizMsg').textContent = '앗, 다시 한번 계산해 볼까요?';
+      $('#quizMsg').className = 'msg bad';
+      box.value = '';
+      box.focus();
+    }
+  }
+
+  function fillSettings() {
+    $('#setName').value = S.name;
+    $('#setDepart').value = S.depart;
+    $('#setArrive').value = S.arrive;
+    $('#setSupplies').value = S.supplies;
+    $('#setSound').checked = !!S.sound;
+    $('#setVoice').checked = !!S.voice;
+  }
+
+  function validTime(t) { return /^([01]\d|2[0-3]):[0-5]\d$/.test(t || ''); }
+
+  function saveSettings() {
+    var name = ($('#setName').value || '').trim();
+    S.name = name ? name : T.defName;
+    S.depart = validTime($('#setDepart').value) ? $('#setDepart').value : S.depart;
+    S.arrive = validTime($('#setArrive').value) ? $('#setArrive').value : S.arrive;
+    S.supplies = ($('#setSupplies').value || '').trim();
+    S.sound = $('#setSound').checked;
+    S.voice = $('#setVoice').checked;
+    save();
+    renderAll();
+    closeModal('#settingsModal');
+    chime();
+    speak(S.name + '아, 설정을 저장했어!');
+  }
+
+  function renderSupplies() {
+    var box = $('#supplyList');
+    var items = String(S.supplies || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!items.length) { box.innerHTML = '<span class="s-empty">오늘은 준비물이 없어요! 가볍게 출발~</span>'; return; }
+    box.innerHTML = items.map(function (t) { return '<span class="s-item">' + t + '</span>'; }).join('');
+  }
+
+  function renderSound() {
+    $('#soundIco').textContent = S.sound ? '🔔' : '🔕';
+    $('#soundChip').classList.toggle('off', !S.sound);
+    $('#soundLbl').textContent = S.sound ? '효과음 켜짐' : '효과음 꺼짐';
+  }
+
+  function renderAll() {
+    $('#brandSub').textContent = S.name + '의 아침 대시보드';
+    $('#greet').textContent = '좋은 아침, ' + called() + '!';
+    renderSupplies();
+    renderSound();
+    renderMood();
+    renderRoutines();
+    renderDex();
+    updateGauge();
+    if (WX) renderWeather();
+    if (kidEl()) kidEl().setAttribute('class', currentKidClass());
+  }
+
+  /* ------------------------------------------------ 이벤트 */
+  function bind() {
+    document.querySelectorAll('#moodBtns .mood').forEach(function (b) {
+      b.addEventListener('click', function () { setMood(b.dataset.mood); });
+    });
+
+    var speakWeather = function () {
+      if (!WX) { speak('날씨를 아직 불러오는 중이야!'); return; }
+      popSound();
+      var info = codeInfo(WX.code);
+      speak('오늘 ' + WX.temp + '도, ' + info.label + '! ' + outfitLine(outfitFor(WX.temp, info.kind)));
+    };
+    $('#wxCard').addEventListener('click', speakWeather);
+    var kidNode = $('#kid');
+    if (kidNode) kidNode.addEventListener('click', speakWeather);
+
+    $('#soundChip').addEventListener('click', function () {
+      S.sound = !S.sound; save(); renderSound(); popSound();
+    });
+    $('#parentBtn').addEventListener('click', openSettings);
+    $('#settingsClose').addEventListener('click', function () { closeModal('#settingsModal'); });
+    $('#quizOk').addEventListener('click', checkQuiz);
+    $('#quizInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') checkQuiz(); });
+    $('#saveSettings').addEventListener('click', saveSettings);
+    $('#setSound').addEventListener('change', function () { S.sound = this.checked; renderSound(); });
+    $('#setVoice').addEventListener('change', function () { S.voice = this.checked; });
+
+    $('#resetRoutine').addEventListener('click', function () {
+      if (!window.confirm('오늘 루틴을 처음부터 다시 할까요?')) return;
+      S.routines = [false, false, false, false];
+      S.rewardToday = false;
+      save(); renderRoutines(); renderGrowth(); updateGauge();
+      $('#rewardClose').blur();
+    });
+    $('#resetDex').addEventListener('click', function () {
+      if (!window.confirm('도감을 처음부터 다시 모을까요? 모은 친구가 모두 사라져요.')) return;
+      S.collection = []; S.rewardToday = false;
+      save(); renderDex(); renderGrowth();
+    });
+
+    $('#dexBtn').addEventListener('click', function () { renderDex(); openModal('#dexModal'); });
+    $('#dexChip').addEventListener('click', function () { renderDex(); openModal('#dexModal'); });
+    $('#dexClose').addEventListener('click', function () { closeModal('#dexModal'); });
+    $('#rewardClose').addEventListener('click', function () { closeModal('#rewardModal'); });
+    $('#rewardDex').addEventListener('click', function () { closeModal('#rewardModal'); renderDex(); openModal('#dexModal'); });
+
+    document.querySelectorAll('.modal').forEach(function (m) {
+      m.addEventListener('click', function (e) { if (e.target === m) closeModal('#' + m.id); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll();
+    });
+  }
+
+  /* ------------------------------------------------ 시작 */
+  load();
+  buildRoutines();
+  bind();
+  renderAll();
+  tickClock();
+  setInterval(tickClock, 1000);
+  loadWeather();
+  setInterval(loadWeather, 10 * 60 * 1000);
+  setTimeout(function () { if (WX && !WX.offline) speak('좋은 아침! ' + S.name + '아, 오늘도 반짝이는 하루야!'); }, 1200);
+
+  window.__morning = { state: S, refresh: renderAll, weather: function () { return WX; } };
+})();
+</script>
+</body>
+</html>
