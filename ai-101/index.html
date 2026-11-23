@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문과생 AI 용어 101 | 더콘텐츠스쿨</title>
+<meta name="description" content="비개발자·문과 출신을 위한 AI·테크 핵심 용어 101선. 레벨별 학습, 북마크, 플래시카드 퀴즈로 익히는 대시보드형 학습 앱.">
+<meta property="og:title" content="문과생 AI 용어 101 | 더콘텐츠스쿨">
+<meta property="og:description" content="LLM부터 MCP까지, 강사와 콘텐츠 창작자를 위한 AI 용어 101선.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230D2B22'/%3E%3Ctext x='50' y='68' font-size='46' text-anchor='middle' fill='%23FFC24B' font-family='sans-serif' font-weight='bold'%3E101%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Paperozi';font-weight:300;font-style:normal;font-display:swap;src:url('fonts/Paperozi-300.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:400;font-style:normal;font-display:swap;src:url('fonts/Paperozi-400.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:500;font-style:normal;font-display:swap;src:url('fonts/Paperozi-500.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:700;font-style:normal;font-display:swap;src:url('fonts/Paperozi-700.woff2') format('woff2')}
+@font-face{font-family:'Paperozi';font-weight:800;font-style:normal;font-display:swap;src:url('fonts/Paperozi-800.woff2') format('woff2')}
+
+:root{
+  --green:#1F3D2B;
+  --deep:#0D2B22;
+  --cream:#FAF8F2;
+  --gold:#FFC24B;
+  --ink:#132A20;
+  --ink-soft:#4E6157;
+  --ink-faint:#7C8C83;
+  --line:rgba(250,248,242,.14);
+  --card-line:#E6E2D6;
+  --shadow:0 18px 40px rgba(3,14,10,.28);
+  --radius:18px;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Paperozi','Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(1200px 600px at 12% -10%, #244835 0%, rgba(36,72,53,0) 62%),
+    radial-gradient(900px 500px at 100% 0%, #1B3A2C 0%, rgba(27,58,44,0) 55%),
+    var(--deep);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+  min-height:100vh;
+}
+h1,h2,h3,h4,p{margin:0}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input{font-family:inherit}
+a{color:var(--gold)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* ── top bar ─────────────────────────────── */
+.topbar{position:sticky;top:0;z-index:40;
+  background:rgba(13,43,34,.88);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand .mark{width:30px;height:30px;border-radius:9px;background:var(--green);
+  border:1px solid rgba(255,194,75,.45);display:grid;place-items:center;
+  color:var(--gold);font-weight:800;font-size:11px;letter-spacing:.02em}
+.brand .txt{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.brand .school{font-size:11px;letter-spacing:.14em;color:rgba(250,248,242,.55);font-weight:500}
+.brand .name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .spacer{flex:1}
+.btn{display:inline-flex;align-items:center;gap:7px;border-radius:999px;
+  padding:9px 16px;font-size:13.5px;font-weight:700;transition:.18s;white-space:nowrap}
+.btn-gold{background:var(--gold);color:#22190A;box-shadow:0 6px 18px rgba(255,194,75,.22)}
+.btn-gold:hover{background:#FFD07A;transform:translateY(-1px)}
+.btn-ghost{border:1px solid rgba(250,248,242,.28);color:var(--cream)}
+.btn-ghost:hover{border-color:rgba(250,248,242,.6);background:rgba(250,248,242,.06)}
+.btn-sm{padding:7px 12px;font-size:12.5px}
+
+/* ── hero ────────────────────────────────── */
+.hero{padding:44px 0 22px}
+.hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
+  letter-spacing:.1em;color:var(--gold);border:1px solid rgba(255,194,75,.35);
+  border-radius:999px;padding:6px 13px;margin-bottom:18px;background:rgba(255,194,75,.07)}
+.hero h1{font-size:clamp(30px,4.6vw,50px);line-height:1.16;font-weight:800;letter-spacing:-.01em}
+.hero h1 .accent{color:var(--gold)}
+.hero .sub{margin-top:14px;font-size:clamp(14px,1.6vw,16.5px);color:rgba(250,248,242,.72);max-width:640px}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{font-size:12px;font-weight:600;color:rgba(250,248,242,.8);
+  border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:rgba(250,248,242,.04)}
+
+/* ── dashboard ───────────────────────────── */
+.dash{display:grid;grid-template-columns:1.55fr 1fr 1fr 1fr;gap:14px;margin:26px 0 8px}
+.panel{background:linear-gradient(180deg,rgba(250,248,242,.075),rgba(250,248,242,.035));
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;position:relative;overflow:hidden}
+.panel .label{font-size:12px;font-weight:600;letter-spacing:.02em;color:rgba(250,248,242,.62);
+  display:flex;align-items:center;gap:6px}
+.panel .big{display:flex;align-items:baseline;gap:6px;margin-top:8px}
+.panel .big b{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.panel .big span{font-size:14px;color:rgba(250,248,242,.55);font-weight:600}
+.panel .rate{margin-left:auto;font-size:13px;font-weight:800;color:var(--gold)}
+.bar{height:8px;border-radius:99px;background:rgba(250,248,242,.13);margin-top:14px;overflow:hidden}
+.bar > i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,#FFC24B,#FFE1A3);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.panel.total{background:linear-gradient(150deg,rgba(255,194,75,.16),rgba(250,248,242,.03) 62%);
+  border-color:rgba(255,194,75,.3)}
+.panel.total .big b{font-size:42px;color:var(--gold)}
+.panel .foot{margin-top:10px;font-size:11.5px;color:rgba(250,248,242,.5);display:flex;gap:10px;flex-wrap:wrap}
+.panel .lvdot{width:7px;height:7px;border-radius:99px;display:inline-block}
+.lv1dot{background:var(--gold)}.lv2dot{background:#8FCBA9}.lv3dot{background:#D9C9A3}
+
+/* ── toolbar ─────────────────────────────── */
+.toolbar{margin:26px 0 0;display:flex;flex-direction:column;gap:14px}
+.searchrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.search{position:relative;flex:1;min-width:240px}
+.search input{width:100%;height:50px;border-radius:14px;border:1px solid rgba(250,248,242,.2);
+  background:rgba(250,248,242,.06);color:var(--cream);font-size:14.5px;padding:0 46px 0 44px;outline:none;transition:.18s}
+.search input::placeholder{color:rgba(250,248,242,.42)}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.search input:focus{border-color:var(--gold);background:rgba(250,248,242,.09);box-shadow:0 0 0 3px rgba(255,194,75,.14)}
+.search .ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);opacity:.55;font-size:15px;pointer-events:none}
+.search .clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;
+  border-radius:99px;display:none;place-items:center;color:rgba(250,248,242,.65);font-size:15px}
+.search .clear:hover{background:rgba(250,248,242,.1)}
+.search.has-value .clear{display:grid}
+.count{font-size:13px;color:rgba(250,248,242,.6);font-weight:600;white-space:nowrap;padding-left:4px}
+.count b{color:var(--gold)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid rgba(250,248,242,.18);border-radius:999px;padding:9px 16px;
+  font-size:13.5px;font-weight:700;color:rgba(250,248,242,.72);background:rgba(250,248,242,.04);transition:.16s}
+.tab small{font-size:11px;font-weight:700;opacity:.72;margin-left:3px}
+.tab:hover{border-color:rgba(250,248,242,.45);color:var(--cream)}
+.tab.on{background:var(--cream);color:var(--green);border-color:var(--cream)}
+.tab.on small{opacity:.75}
+
+/* ── cards ───────────────────────────────── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(316px,1fr));gap:16px;
+  margin:20px 0 8px;align-items:start}
+.card{background:var(--cream);color:var(--ink);border-radius:var(--radius);
+  padding:18px 18px 14px;border:1px solid var(--card-line);
+  box-shadow:0 10px 26px rgba(3,14,10,.18);position:relative;overflow:hidden;
+  transition:transform .18s,box-shadow .18s,border-color .18s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(3,14,10,.26)}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:.18s}
+.card.is-done:before{background:var(--gold)}
+.card.is-done{background:#FDFBF4}
+.card-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.num{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:var(--ink-faint);
+  font-variant-numeric:tabular-nums}
+.badge{font-size:11px;font-weight:800;letter-spacing:.02em;border-radius:6px;padding:3px 7px;line-height:1.35}
+.b-lv1{background:rgba(255,194,75,.26);color:#7A5000;border:1px solid rgba(255,194,75,.5)}
+.b-lv2{background:rgba(31,61,43,.1);color:#1F3D2B;border:1px solid rgba(31,61,43,.18)}
+.b-lv3{background:#1F3D2B;color:var(--gold);border:1px solid #1F3D2B}
+.cat{font-size:10.5px;font-weight:700;color:var(--ink-faint);border:1px solid #DCD7C8;
+  border-radius:6px;padding:3px 7px}
+.star{margin-left:auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
+  font-size:15px;color:#BCB7A6;transition:.15s;flex:0 0 auto}
+.star:hover{background:rgba(255,194,75,.16);color:#B8860B}
+.star.on{color:#E8A300}
+.card h3{font-size:17.5px;line-height:1.3;font-weight:800;letter-spacing:-.01em;word-break:break-word}
+.card .ko{margin-top:3px;font-size:13px;font-weight:700;color:#2C5A43}
+.card .def{margin-top:11px;font-size:13.7px;line-height:1.62;color:#33463B}
+.metaphor{margin-top:13px;background:rgba(255,194,75,.14);border-radius:12px;padding:11px 13px;
+  border:1px solid rgba(255,194,75,.34)}
+.metaphor .t,.use .t{display:block;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#8A6100;margin-bottom:4px}
+.metaphor p{font-size:13.2px;line-height:1.55;color:#3B3524}
+.use{margin-top:9px;padding:0 2px}
+.use .t{color:#5C7A69}
+.use p{font-size:12.8px;line-height:1.58;color:#4C5F54}
+.card-foot{display:flex;gap:8px;margin-top:auto;padding-top:14px;flex-wrap:wrap}
+.cbtn{font-size:12.3px;font-weight:700;border-radius:9px;padding:8px 11px;display:inline-flex;
+  align-items:center;gap:5px;border:1px solid #DCD7C8;color:#3A4A40;background:#fff;transition:.15s}
+.cbtn:hover{border-color:#B9B2A0;background:#FBF8EF}
+.cbtn.done{background:#1F3D2B;border-color:#1F3D2B;color:var(--cream)}
+.cbtn.done.on{background:var(--gold);border-color:var(--gold);color:#2A2000}
+.cbtn.starbtn.on{background:rgba(255,194,75,.22);border-color:rgba(255,194,75,.6);color:#7A5000}
+.cbtn.copy{margin-left:auto}
+
+.empty{grid-column:1/-1;text-align:center;padding:70px 20px;border:1px dashed rgba(250,248,242,.25);
+  border-radius:var(--radius);color:rgba(250,248,242,.65)}
+.empty b{display:block;font-size:17px;color:var(--cream);margin-bottom:6px}
+.empty span{font-size:13.5px}
+
+/* ── footer ──────────────────────────────── */
+.footer{margin:54px 0 0;padding:26px 0 40px;border-top:1px solid var(--line);
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  font-size:12.5px;color:rgba(250,248,242,.5)}
+.footer b{color:rgba(250,248,242,.8)}
+.footer .reset{border:1px solid rgba(250,248,242,.2);border-radius:999px;padding:6px 12px;
+  font-size:12px;color:rgba(250,248,242,.6);transition:.15s}
+.footer .reset:hover{color:var(--cream);border-color:rgba(250,248,242,.45)}
+.footer .reset.arm{color:#FF9F9F;border-color:rgba(255,159,159,.6)}
+
+/* ── quiz modal ──────────────────────────── */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(6,20,15,.78);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:18px}
+.overlay.open{display:flex}
+.quiz{width:min(640px,100%);max-height:calc(100vh - 40px);display:flex;flex-direction:column;gap:14px}
+.quiz-head{display:flex;align-items:center;gap:10px;color:rgba(250,248,242,.75);font-size:13px;font-weight:700}
+.quiz-head .qcount{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--gold)}
+.qclose{width:34px;height:34px;border-radius:99px;border:1px solid rgba(250,248,242,.25);
+  display:grid;place-items:center;font-size:16px;color:rgba(250,248,242,.8)}
+.qclose:hover{background:rgba(250,248,242,.1)}
+.qbar{height:5px;border-radius:99px;background:rgba(250,248,242,.16);overflow:hidden}
+.qbar > i{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+.flash{perspective:1600px;cursor:pointer;flex:1 1 auto;min-height:420px;display:flex}
+.flash-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.9,.25,1)}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;
+  flex-direction:column;justify-content:center;padding:30px 28px;overflow:auto}
+.face.front{background:linear-gradient(155deg,#1F3D2B,#142E22);border:1px solid rgba(255,194,75,.35);
+  align-items:center;text-align:center;box-shadow:var(--shadow)}
+.face.front .fnum{font-size:12px;font-weight:800;letter-spacing:.1em;color:rgba(250,248,242,.45)}
+.face.front .fbadge{margin:12px 0 18px}
+.face.front h2{font-size:clamp(24px,4.4vw,34px);font-weight:800;line-height:1.24;color:var(--cream);word-break:break-word}
+.face.front .fko{margin-top:10px;font-size:15px;font-weight:700;color:var(--gold)}
+.face.front .flipnote{margin-top:24px;font-size:12px;color:rgba(250,248,242,.5)}
+.face.back{transform:rotateY(180deg);background:var(--cream);color:var(--ink);
+  border:1px solid var(--card-line);display:block;box-shadow:var(--shadow);padding:24px}
+.face.back h3{font-size:19px;font-weight:800;color:var(--ink)}
+.face.back .fko{font-size:13px;font-weight:700;color:#2C5A43;margin-top:2px}
+.face.back .def{margin-top:12px;font-size:13.8px;line-height:1.6;color:#33463B}
+.face.back .metaphor{margin-top:12px}
+.face.back .use{margin-top:10px;padding:0}
+.quiz-actions{display:flex;gap:9px}
+.qbtn{flex:1;border-radius:12px;padding:13px 10px;font-size:13.5px;font-weight:800;transition:.16s;
+  border:1px solid rgba(250,248,242,.28);color:var(--cream);background:rgba(250,248,242,.06)}
+.qbtn:hover{background:rgba(250,248,242,.14)}
+.qbtn.gold{background:var(--gold);color:#22190A;border-color:var(--gold)}
+.qbtn.gold:hover{background:#FFD07A}
+.qbtn.small{flex:0 0 auto;padding:13px 14px;font-size:12.5px}
+.quiz-done{background:var(--cream);color:var(--ink);border-radius:20px;padding:34px 28px;text-align:center}
+.quiz-done h2{font-size:22px;font-weight:800}
+.quiz-done .score{font-size:44px;font-weight:800;color:#1F3D2B;margin:14px 0 4px;letter-spacing:-.02em}
+.quiz-done p{font-size:13.5px;color:var(--ink-soft);margin-top:6px}
+.quiz-done .quiz-actions{margin-top:22px}
+.quiz-done .qbtn{border-color:#DCD7C8;color:#1F3D2B;background:#fff}
+.quiz-done .qbtn.gold{background:#1F3D2B;color:var(--cream);border-color:#1F3D2B}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:200;
+  background:rgba(250,248,242,.97);color:#1F3D2B;font-size:13px;font-weight:700;
+  padding:11px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(0,0,0,.3);
+  opacity:0;pointer-events:none;transition:.22s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ── responsive ──────────────────────────── */
+@media (max-width:900px){
+  .dash{grid-template-columns:1fr 1fr}
+  .panel.total{grid-column:1/-1}
+  .hero{padding:30px 0 16px}
+}
+@media (max-width:620px){
+  .wrap{padding:0 15px}
+  .topbar .wrap{height:58px;gap:8px}
+  .brand .school{display:none}
+  .topbar .btn span.lbl{display:none}
+  .topbar .btn{padding:9px 12px}
+  .dash{grid-template-columns:1fr 1fr;gap:10px}
+  .panel{padding:14px}
+  .panel .big b{font-size:26px}
+  .panel.total .big b{font-size:34px}
+  .grid{grid-template-columns:1fr;gap:13px}
+  .card{padding:16px 15px 12px}
+  .search input{height:46px;font-size:14px}
+  .count{width:100%;padding-left:2px}
+  .flash{min-height:370px}
+  .face{padding:24px 20px}
+  .quiz-actions{flex-wrap:wrap}
+  .qbtn.small{flex:1}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">101</div>
+      <div class="txt">
+        <span class="school">THE CONTENTS SCHOOL</span>
+        <span class="name">문과생 AI 용어 101</span>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn btn-gold" id="quizBtn">🃏 <span class="lbl">플래시카드 퀴즈</span></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="kicker">비개발자 · 문과 출신을 위한</span>
+    <h1>AI·테크 용어 <span class="accent">101</span>개를<br>내 말로 이해하기</h1>
+    <p class="sub">LLM부터 MCP까지, 강의와 콘텐츠를 만들다 보면 만나는 말들. 쉬운 정의 · 문과생 비유 · 실전 활용 예시로 익히고, 체크하며 진도를 남기세요.</p>
+    <div class="chips">
+      <span class="chip">📚 3단계 레벨 (33 · 33 · 35)</span>
+      <span class="chip">🃏 플래시카드 셀프 테스트</span>
+      <span class="chip">💾 이 브라우저에 자동 저장</span>
+    </div>
+  </section>
+
+  <section class="dash" aria-label="학습 진도">
+    <div class="panel total">
+      <div class="label">전체 학습 진도</div>
+      <div class="big"><b id="dTotal">0</b><span>/ 101</span><b class="rate" id="dRate">0%</b></div>
+      <div class="bar"><i id="dBar"></i></div>
+      <div class="foot"><span id="dDone">완료 0개</span><span id="dLeft">남은 101개</span></div>
+    </div>
+    <div class="panel">
+      <div class="label"><span class="lvdot lv1dot"></span>Lv.1 입문</div>
+      <div class="big"><b id="d1">0</b><span>/ 33</span></div>
+      <div class="bar"><i id="b1"></i></div>
+      <div class="foot"><span>AI를 처음 쓸 때</span></div>
+    </div>
+    <div class="panel">
+      <div class="label"><span class="lvdot lv2dot"></span>Lv.2 실전</div>
+      <div class="big"><b id="d2">0</b><span>/ 33</span></div>
+      <div class="bar"><i id="b2"></i></div>
+      <div class="foot"><span>바이브코딩·웹앱·배포</span></div>
+    </div>
+    <div class="panel">
+      <div class="label"><span class="lvdot lv3dot"></span>Lv.3 고급</div>
+      <div class="big"><b id="d3">0</b><span>/ 35</span></div>
+      <div class="bar"><i id="b3"></i></div>
+      <div class="foot"><span>에이전트·보안·확장</span></div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="searchrow">
+      <div class="search" id="searchBox">
+        <span class="ico">🔍</span>
+        <input id="search" type="search" placeholder="용어·뜻·비유 키워드로 검색 (예: 프롬프트, 주방, 배포)" autocomplete="off" aria-label="용어 검색">
+        <button class="clear" id="clearSearch" aria-label="검색어 지우기">✕</button>
+      </div>
+      <div class="count" id="countText">101개 용어 · 완료 <b>0</b>개</div>
+    </div>
+    <div class="tabs" id="tabs" role="tablist">
+      <button class="tab on" data-tab="all" role="tab">전체<small>101</small></button>
+      <button class="tab" data-tab="1" role="tab">Lv.1 입문<small>33</small></button>
+      <button class="tab" data-tab="2" role="tab">Lv.2 실전<small>33</small></button>
+      <button class="tab" data-tab="3" role="tab">Lv.3 고급<small>35</small></button>
+      <button class="tab" data-tab="star" role="tab">★ 찜한 용어<small id="tabStarCount">0</small></button>
+      <button class="tab" data-tab="todo" role="tab">○ 미완료만<small id="tabTodoCount">101</small></button>
+    </div>
+  </section>
+
+  <section class="grid" id="grid" aria-live="polite"></section>
+</main>
+
+<footer class="wrap footer">
+  <span><b>더콘텐츠스쿨</b> · 오현주 | 문과생 AI 용어 101</span>
+  <span>학습 기록은 이 브라우저에만 저장됩니다 · <button class="reset" id="resetBtn">진도 초기화</button></span>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="플래시카드 퀴즈">
+  <div class="quiz" id="quizRoot"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const TERMS = [{"n":1,"en":"AI (Artificial Intelligence)","ko":"인공지능","cat":"기초 개념","lv":1,"def":"사람이 하던 판단·분류·생성 같은 일을 컴퓨터가 데이터를 보고 흉내 내도록 만든 기술 전반을 말해요.","metaphor":"아주 많이 읽고 아주 빨리 흉내 내는 신입 사원이에요. 경력은 없지만 자료는 산더미만큼 봤어요.","use":"강의 첫 시간에 \"AI는 만능이 아니라 흉내를 잘하는 도구\"라고 3분 안에 설명할 때 쓰는 기본 뼈대예요."},{"n":2,"en":"Generative AI","ko":"생성형 AI","cat":"기초 개념","lv":1,"def":"질문을 받으면 새로운 글·이미지·음성·영상을 만들어 내는 AI예요. 찾아 주는 AI와 달리 없는 것도 지어 만들어요.","metaphor":"백지에 그림을 그려 주는 화가예요. 잘 그리지만 가끔 없는 사과를 그려 넣어요.","use":"블로그 글 초안, 카드뉴스 문구, 강의안 목차를 백지에서 만들어 달라고 할 때 부르는 AI가 생성형 AI예요."},{"n":3,"en":"Machine Learning · Deep Learning","ko":"머신러닝 · 딥러닝","cat":"모델·학습","lv":1,"def":"규칙을 사람이 다 적어 주는 대신 예시 데이터를 많이 보여 줘서 컴퓨터가 스스로 규칙을 찾게 하는 방식이 머신러닝이고, 그 안에서 층을 여러 겹 쌓은 것이 딥러닝이에요.","metaphor":"요리책을 외우게 하는 게 아니라 1,000번 같이 요리해 보며 손맛을 익히게 하는 거예요.","use":"\"AI는 사람이 규칙을 넣는 게 아니라 데이터에서 배운다\"를 설명할 때 이 두 단어를 나눠 쓰면 수강생이 훨씬 쉽게 잡아요."},{"n":4,"en":"LLM (Large Language Model)","ko":"거대언어모델","cat":"기초 개념","lv":1,"def":"인터넷의 방대한 글을 학습해 '다음에 올 단어'를 확률로 맞히며 문장을 만드는 큰 언어 모델이에요. 챗GPT·제미나이·클로드가 모두 LLM이에요.","metaphor":"세상 모든 책을 읽은, 말은 빠른데 가끔 자신 있게 틀리는 작가예요.","use":"수강생이 \"챗GPT랑 LLM이 뭐가 달라요?\"라고 물으면 \"LLM은 엔진, 챗GPT는 그 엔진을 단 자동차\"라고 답해 주세요."},{"n":5,"en":"Model","ko":"모델","cat":"모델·학습","lv":1,"def":"데이터로 학습을 마쳐 실제로 답을 만들어 내는 '완성된 두뇌'예요. GPT, 제미나이, 클로드처럼 이름과 버전이 붙어 있어요.","metaphor":"졸업을 마친 요리사예요. 같은 재료라도 요리사마다 손맛이 달라요.","use":"강의에서 \"모델은 골라 쓰는 것이고, 최신 모델이 항상 내 업무에 최고는 아니다\"를 보여 줄 때 모델 이름과 버전을 나란히 띄워 비교해요."},{"n":6,"en":"Parameter","ko":"파라미터","cat":"모델·학습","lv":1,"def":"모델이 학습하면서 조정한 숫자 값들이에요. 보통 '파라미터 70억 개'처럼 모델의 크기를 말할 때 써요.","metaphor":"사람으로 치면 뇌세포 연결의 수예요. 많다고 무조건 똑똑한 것은 아니에요.","use":"'경량 모델 vs 대형 모델'을 설명할 때, 파라미터가 많을수록 좋은 게 아니라 속도·비용과 맞바꿔야 한다는 점을 짚어 주세요."},{"n":7,"en":"Training","ko":"학습","cat":"모델·학습","lv":1,"def":"모델에게 대량의 데이터를 보여 주며 정답에 가까워지도록 숫자를 조정하는 과정이에요. 한 번 끝내는 데 시간과 비용이 크게 들어요.","metaphor":"수험생이 기출문제를 수만 장 풀며 감각을 만드는 시기예요. 시험(사용)은 그 뒤에 봐요.","use":"\"AI는 내가 쓸 때 배우는 게 아니라, 이미 학습이 끝난 상태로 온다\"는 것을 수강생에게 알려 줄 때 씁니다."},{"n":8,"en":"Inference","ko":"추론","cat":"모델·학습","lv":1,"def":"학습을 마친 모델이 실제로 질문을 받아 답을 계산해 내는 순간이에요. 우리가 쓸 때마다 요금이 나가는 구간이기도 해요.","metaphor":"요리사가 주문을 받고 그릇을 내는 순간이에요. 재료비(토큰)가 여기서 나가요.","use":"\"같은 질문을 100번 하면 100번 사용량이 나간다\"는 크레딧 이야기를 할 때 '추론'이라는 말로 정확히 설명할 수 있어요."},{"n":9,"en":"Dataset","ko":"데이터셋","cat":"모델·학습","lv":1,"def":"AI에게 보여 주는 예시 자료 묶음이에요. 무엇을 학습했는지가 결과의 성격과 한계를 정해요.","metaphor":"요리사에게 건네는 재료 상자예요. 상자에 든 것만 요리할 수 있어요.","use":"우리 반 강의 후기와 질문 300개를 모아 두면 그 자체가 나만의 데이터셋이 되고, 분류·요약 자동화의 재료가 돼요."},{"n":10,"en":"Prompt","ko":"프롬프트","cat":"프롬프트","lv":1,"def":"AI에게 일을 시키려고 입력하는 말·자료·조건 전부를 말해요. 질문 한 줄도 프롬프트예요.","metaphor":"신입 사원에게 주는 업무 지시서예요. 두루뭉술하면 두루뭉술한 결과가 와요.","use":"블로그 글을 맡길 때 \"누구에게, 무슨 목적으로, 몇 자로, 어떤 말투로\" 네 가지를 꼭 넣는 것이 좋은 프롬프트의 기본이에요."},{"n":11,"en":"System Prompt","ko":"시스템 프롬프트","cat":"프롬프트","lv":1,"def":"대화가 시작되기 전에 AI의 역할·말투·금지 사항을 미리 정해 두는 상위 지시문이에요. 사용자가 매번 말하지 않아도 계속 적용돼요.","metaphor":"알바생에게 첫날 건네는 '우리 가게 매뉴얼'이에요. 손님마다 설명하지 않아도 돼요.","use":"'더콘텐츠스쿨 강사 보조' 봇을 만들 때 \"존댓말·짧게·출처 없는 수치는 쓰지 말 것\"을 시스템 프롬프트에 고정해 두면 매번 말할 필요가 없어요."},{"n":12,"en":"Zero-shot · Few-shot","ko":"제로샷 · 퓨샷","cat":"프롬프트","lv":1,"def":"예시 없이 바로 시키는 것이 제로샷, 원하는 결과의 예시 2~3개를 먼저 보여 주고 시키는 것이 퓨샷이에요. 예시가 있으면 형식이 훨씬 잘 맞아요.","metaphor":"\"알아서 해\"와 \"이렇게 해\"의 차이예요. 견본 두세 개만 붙여도 결과가 달라져요.","use":"인스타 카드 문구를 뽑을 때 지난번에 반응이 좋았던 문구 3개를 예시로 붙여 주면 말투가 그대로 재현돼요."},{"n":13,"en":"Prompt Engineering","ko":"프롬프트 엔지니어링","cat":"프롬프트","lv":1,"def":"원하는 결과를 얻기 위해 지시문을 설계하고 고쳐 나가는 일이에요. 코딩이라기보다 글쓰기와 업무 설계에 가까워요.","metaphor":"좋은 상사가 되기 위한 '지시 잘하는 기술'이에요.","use":"한 번에 완벽한 프롬프트를 쓰려 하지 말고, 결과를 보고 조건을 한 줄씩 더해 가는 과정을 강의에서 그대로 시연하면 수강생이 따라 하기 쉬워요."},{"n":14,"en":"Token","ko":"토큰","cat":"한도·비용","lv":1,"def":"AI가 글을 세는 최소 단위예요. 한글은 대략 한 글자에 1~2토큰, 영어는 단어보다 조금 작게 잡혀요. 요금과 입력 한도의 기준이 돼요.","metaphor":"택시 미터기의 거리 단위예요. 말이 길어질수록 요금이 올라가요.","use":"강의 자료를 통째로 붙여 넣기 전에 \"이 파일이 몇 토큰쯤인지\" 확인하면 요금과 한도 초과를 미리 막을 수 있어요."},{"n":15,"en":"Context Window","ko":"컨텍스트 윈도우","cat":"한도·비용","lv":1,"def":"모델이 한 번에 기억할 수 있는 분량의 한계예요. 이 한도를 넘으면 앞부분이 잘리거나 잊혀요.","metaphor":"책상 넓이예요. 책상을 넘치면 서류가 바닥으로 떨어져요.","use":"100쪽 교안을 한 번에 넣고 \"전체를 요약해 줘\"라고 하면 뒤쪽이 빠지기 쉬워요. 장을 나눠 넣는 것이 이 한도를 다루는 요령이에요."},{"n":16,"en":"Temperature","ko":"온도","cat":"출력 제어","lv":1,"def":"답의 다양성을 조절하는 설정값이에요. 낮으면 매번 비슷하고 안정적이며, 높으면 새롭지만 엉뚱해져요.","metaphor":"라면에 넣는 고춧가루 양이에요. 0이면 맵지 않고, 너무 많으면 먹기 힘들어요.","use":"계약서·공문 요약은 낮게(0~0.3), 카피·제목 아이디어 뽑기는 높게(0.8~1.0)로 나눠 쓰면 결과가 안정적이에요."},{"n":17,"en":"Seed","ko":"시드","cat":"출력 제어","lv":1,"def":"같은 결과를 다시 뽑기 위해 고정하는 숫자예요. 시드가 같으면 거의 같은 답이 나와요.","metaphor":"복권 번호를 미리 정해 두는 것과 비슷해요. 같은 번호를 넣으면 같은 결과가 나와요.","use":"시연 중 \"아까 그 디자인 그대로\"가 필요할 때 시드를 고정해 두면 강의 화면이 흔들리지 않아요."},{"n":18,"en":"Hallucination","ko":"할루시네이션","cat":"신뢰성","lv":1,"def":"AI가 모르는 것을 모른다고 하지 않고 그럴듯하게 지어내는 현상이에요. 출처·수치·인용에서 특히 위험해요.","metaphor":"자신감 100%로 틀린 답을 말하는 학생이에요. 목소리가 커서 더 위험해요.","use":"블로그와 강의 자료에 들어가는 통계와 인용은 반드시 원문을 열어 확인하는 절차를 강의 루틴으로 정해 두세요."},{"n":19,"en":"Fine-tuning","ko":"파인튜닝","cat":"모델·학습","lv":1,"def":"이미 학습된 모델에 우리 회사·내 자료를 추가로 학습시켜 말투와 전문성을 맞추는 작업이에요.","metaphor":"신입 사원을 우리 회사 규정에 맞춰 재교육하는 거예요. 기본기는 이미 있어요.","use":"더콘텐츠스쿨 고유의 말투와 강의 철학을 매번 설명하기 싫다면 자료를 정리해 파인튜닝 또는 시스템 프롬프트로 고정하는 두 방법을 비교해 보세요."},{"n":20,"en":"RAG (Retrieval-Augmented Generation)","ko":"검색증강생성","cat":"데이터","lv":1,"def":"AI가 답하기 전에 내 문서·자료를 먼저 검색해 근거로 삼고 답하게 하는 방식이에요. 최신 정보와 사내 자료에 강해요.","metaphor":"오픈북 시험이에요. 외우지 않고 필요한 페이지를 펴서 답해요.","use":"우리 블로그 200편, 강의안, 계약서를 RAG에 넣어 두면 \"작년 광진구 강의 조건이 뭐였지?\"를 근거와 함께 물을 수 있어요."},{"n":21,"en":"Multimodal","ko":"멀티모달","cat":"멀티미디어","lv":1,"def":"글뿐 아니라 이미지·음성·영상까지 함께 읽고 만들 수 있는 능력이에요.","metaphor":"눈과 귀가 함께 달린 비서예요. 사진을 보여 주며 설명할 수 있어요.","use":"칠판 사진을 올리고 \"이 판서를 강의 요약으로 정리해 줘\", 카드뉴스 시안을 보여 주며 \"이 색으로 표지를 만들어 줘\"가 멀티모달 활용이에요."},{"n":22,"en":"Text-to-Image","ko":"이미지 생성","cat":"멀티미디어","lv":1,"def":"글로 설명하면 그림을 만들어 주는 기능이에요. 대상·스타일·색·구도를 적을수록 정확해져요.","metaphor":"말로 주문하는 그림 공장이에요. \"예쁘게\"보다 \"크림색 배경에 골드 테두리\"가 통해요.","use":"블로그 썸네일과 카드뉴스 배경을 무료 도구로 만들고, 캡션에 'AI 생성 이미지' 표기를 붙이는 규칙을 함께 지켜요."},{"n":23,"en":"OCR (Optical Character Recognition)","ko":"광학 문자 인식","cat":"멀티미디어","lv":1,"def":"사진·스캔 속 글자를 컴퓨터가 읽을 수 있는 텍스트로 바꿔 주는 기술이에요.","metaphor":"사진을 '복사해서 붙여넣기'가 되는 글자로 바꿔 주는 안경이에요.","use":"종이 공문과 안내장을 찍어 OCR로 텍스트를 뽑으면 옮겨 적지 않고 요약과 일정 등록까지 한 번에 할 수 있어요."},{"n":24,"en":"STT · TTS","ko":"음성인식 · 음성합성","cat":"멀티미디어","lv":1,"def":"STT는 말을 글자로, TTS는 글자를 말소리로 바꾸는 기술이에요.","metaphor":"받아쓰기를 잘하는 비서와, 내 글을 대신 읽어 주는 성우예요.","use":"강의 녹음을 STT로 풀어 블로그 글로 다듬거나, TTS로 예습용 오디오를 만들어 수강생에게 보낼 수 있어요."},{"n":25,"en":"Chatbot","ko":"챗봇","cat":"서비스","lv":1,"def":"대화창에서 사람과 주고받듯 답하는 프로그램이에요. 정해진 답만 하는 규칙 기반 챗봇과 AI 챗봇이 있어요.","metaphor":"24시간 문 앞에 서 있는 안내 데스크예요.","use":"강의 신청·환불·일정 문의를 자주 받는다면 자주 묻는 질문 20개로 챗봇을 만들면 반복 응대가 크게 줄어요."},{"n":26,"en":"GPTs (Custom GPT)","ko":"커스텀 GPT","cat":"서비스","lv":1,"def":"챗GPT 안에서 지시문·자료·도구를 묶어 만든 '나만의 챗봇'이에요. 코딩 없이 만들 수 있어요.","metaphor":"내 업무 매뉴얼과 자료를 들고 출근하는 전용 비서예요.","use":"'더콘텐츠스쿨 블로그 도우미' GPT를 만들어 제목 규칙·금지어·이미지 표기 규칙을 넣어 두면 매번 같은 설명을 반복하지 않아도 돼요."},{"n":27,"en":"Watermark","ko":"워터마크","cat":"신뢰성","lv":1,"def":"AI가 만든 이미지·영상에 'AI 생성'임을 알 수 있게 넣는 표시예요. 눈에 보이는 것과 파일에 숨겨 넣는 것이 있어요.","metaphor":"작품 구석의 도장이에요. 누가 만들었는지 알려 주는 표시예요.","use":"블로그·인스타에 AI 이미지를 쓸 때 'AI 생성 이미지'를 적고, 도구가 넣은 표시를 일부러 지우지 않는 것이 신뢰에 도움이 돼요."},{"n":28,"en":"API (Application Programming Interface)","ko":"응용 프로그램 인터페이스","cat":"연결·자동화","lv":1,"def":"다른 프로그램이 AI 기능을 가져다 쓸 수 있게 열어 둔 '창구'예요. 사람이 쓰는 화면 대신 정해진 형식으로 주고받아요.","metaphor":"식당의 주문 창구예요. 메뉴(규칙)대로 주문하면 주방이 음식을 내줘요.","use":"강의 자료 자동 요약, 예약 알림 같은 자동화는 챗GPT 화면이 아니라 API로 만들어요. 그래서 API 키와 사용 요금 개념이 따라와요."},{"n":29,"en":"JSON","ko":"제이슨","cat":"데이터 형식","lv":1,"def":"이름표(키)와 값(밸류)을 짝지어 담는 데이터 형식이에요. 프로그램끼리 주고받는 표준 봉투예요.","metaphor":"이름표가 붙은 서류 봉투예요. '제목:', '날짜:'처럼 칸이 정해져 있어요.","use":"AI에게 \"아래 형식의 JSON으로만 답해 줘\"라고 지정하면 결과를 엑셀·노션·웹앱에 그대로 넣을 수 있어요."},{"n":30,"en":"Markdown","ko":"마크다운","cat":"파일·형식","lv":1,"def":"#, -, ** 같은 기호로 제목·목록·강조를 표현하는 가벼운 글쓰기 형식이에요.","metaphor":"글에 포스트잇을 붙이는 규칙이에요. 복잡한 서식 없이도 구조가 보여요.","use":"AI가 답을 마크다운으로 주면 그대로 블로그 편집기와 노션에 붙여 넣어 서식이 살아나요."},{"n":31,"en":"HTML","ko":"에이치티엠엘","cat":"파일·형식","lv":1,"def":"웹페이지의 뼈대를 만드는 언어예요. 제목·문단·버튼·이미지의 자리를 정해요.","metaphor":"집의 골조예요. 벽지(색·글꼴)는 CSS가 입혀요.","use":"바이브코딩으로 만든 웹앱은 결국 HTML 한 장인 경우가 많아요. 파일 하나를 열면 앱이 되는 구조를 알면 강의 시연이 쉬워져요."},{"n":32,"en":"URL","ko":"유알엘 · 인터넷 주소","cat":"파일·형식","lv":1,"def":"인터넷에서 특정 페이지나 파일을 가리키는 주소예요.","metaphor":"집 주소예요. 정확해야 찾아갈 수 있어요.","use":"수강생에게 자료를 줄 때 파일 첨부 대신 URL 하나로 보내면, 수정한 내용이 항상 최신으로 보여요."},{"n":33,"en":"PDF Embed","ko":"PDF 임베드","cat":"파일·형식","lv":1,"def":"웹페이지 안에 PDF를 미리보기로 넣는 것이에요. 내려받지 않아도 화면에서 바로 읽을 수 있어요.","metaphor":"책을 꽂아 두지 않고 책장에 펼쳐 두는 거예요.","use":"강의 안내 페이지에 커리큘럼 PDF를 임베드해 두면 신청자가 내려받지 않고 그 자리에서 확인할 수 있어요."},{"n":34,"en":"Vibe Coding","ko":"바이브코딩","cat":"실전 방식","lv":2,"def":"코드를 몰라도 \"이렇게 만들어 줘\"라고 말로 설명하며 AI가 만들어 준 코드를 확인·수정해 가는 제작 방식이에요.","metaphor":"인테리어 업자에게 말로 주문하는 셈이에요. 도면을 못 그려도 원하는 집을 말할 수 있어요.","use":"카드뉴스 생성기, 진도 대시보드, 발표 타이머처럼 강의에 필요한 작은 도구를 하루 만에 만들어 쓰는 방식이에요."},{"n":35,"en":"GitHub","ko":"깃허브","cat":"깃허브","lv":2,"def":"코드와 파일의 변경 이력을 저장하고 여러 사람이 함께 관리하는 온라인 서비스예요.","metaphor":"코드 전용 구글 드라이브에 타임머신을 붙여 둔 거예요.","use":"웹앱 파일을 GitHub에 올려 두면 어디서든 다시 열 수 있고, GitHub Pages로 무료 공개 주소까지 만들 수 있어요."},{"n":36,"en":"Repository (Repo)","ko":"저장소","cat":"깃허브","lv":2,"def":"프로젝트 파일과 그 변경 기록을 담는 폴더 단위예요. 공개(Public)와 비공개(Private)로 나뉘어요.","metaphor":"프로젝트 한 건을 담는 서류철이에요. 서류철마다 공개 여부를 정할 수 있어요.","use":"학생 정보가 든 상담 앱은 Private 저장소에, 강의 공개 자료는 Public 저장소에 두는 식으로 나눠 관리하세요."},{"n":37,"en":"Commit","ko":"커밋","cat":"깃허브","lv":2,"def":"파일의 변경 내용을 \"이번 변경은 이렇습니다\"라는 메모와 함께 한 번에 기록으로 남기는 것이에요.","metaphor":"작업 일지에 오늘 바꾼 내용과 이유를 한 줄 적어 두는 거예요.","use":"앱을 고칠 때마다 \"표지 색 변경\", \"퀴즈 버튼 추가\"처럼 한글 메모로 커밋하면 나중에 되돌릴 때 찾기 쉬워요."},{"n":38,"en":"Push · Pull","ko":"푸시 · 풀","cat":"깃허브","lv":2,"def":"푸시는 내 컴퓨터의 변경을 원격 저장소로 올리는 것, 풀은 반대로 최신 내용을 내려받는 것이에요.","metaphor":"푸시는 본사로 보고, 풀은 본사 최신 공문 받기예요.","use":"다른 기기에서 이어 작업할 때는 작업 전 풀, 작업 후 푸시를 습관으로 삼으면 파일이 어긋나지 않아요."},{"n":39,"en":"Branch","ko":"브랜치","cat":"깃허브","lv":2,"def":"원본은 그대로 두고 별도의 갈래에서 실험하는 것이에요. 마음에 들면 합치고(머지), 아니면 버려요.","metaphor":"원고를 복사해 새 파일에서 고쳐 보는 거예요. 원본은 안전해요.","use":"강의 당일에는 원본을 건드리지 않고 새 브랜치에서 다음 버전을 준비한 뒤, 검사가 끝나면 합치는 방식이 안전해요."},{"n":40,"en":"Pull Request (PR)","ko":"풀 리퀘스트","cat":"깃허브","lv":2,"def":"\"이 변경을 합쳐도 될까요?\"라고 검토를 요청하는 기능이에요. 무엇이 어떻게 바뀌는지 화면으로 확인할 수 있어요.","metaphor":"결재 서류를 올리는 거예요. 누가 봐도 무엇이 바뀌는지 보여요.","use":"AI에게 맡긴 큰 수정은 PR로 올려 바뀐 화면을 확인하고 직접 승인하는 절차를 두면 사고를 줄일 수 있어요."},{"n":41,"en":"Open Source","ko":"오픈소스","cat":"깃허브","lv":2,"def":"소스 코드를 공개해 누구나 보고 고쳐 쓸 수 있게 한 프로젝트예요. 무료여도 사용 조건(라이선스)이 있어요.","metaphor":"레시피를 공개한 식당이에요. 집에서 따라 해도 되지만 출처는 밝혀야 해요.","use":"강의용 웹앱에 무료 라이브러리를 쓸 때는 출처와 라이선스 표기를 남기는 습관이 필요해요."},{"n":42,"en":"Frontend","ko":"프론트엔드","cat":"웹 기초","lv":2,"def":"사용자가 보고 누르는 화면 쪽을 만드는 영역이에요. 색·배치·버튼·움직임이 여기에 속해요.","metaphor":"가게의 홀과 인테리어, 메뉴판이에요.","use":"카드뉴스와 웹앱에서 '예쁘고 누르기 쉬운' 부분을 고칠 때 손대는 곳이 프론트엔드예요."},{"n":43,"en":"Backend","ko":"백엔드","cat":"웹 기초","lv":2,"def":"화면 뒤에서 데이터를 저장하고 계산하고 신원을 확인하는 서버 쪽 영역이에요.","metaphor":"주방과 창고예요. 손님 눈에 안 보이지만 음식과 재고를 책임져요.","use":"신청 폼을 받아 명단에 쌓고, 비밀번호를 확인하고, 결제를 처리하는 일에는 백엔드가 필요해요."},{"n":44,"en":"CSS","ko":"씨에스에스","cat":"웹 기초","lv":2,"def":"웹페이지의 색·글꼴·간격·배치를 정하는 스타일 언어예요.","metaphor":"집의 벽지와 조명, 가구 배치예요.","use":"더콘텐츠스쿨 색(#1F3D2B·#FAF8F2·#FFC24B)과 페이퍼로지체를 CSS 변수로 고정해 두면 모든 페이지가 한 번에 통일돼요."},{"n":45,"en":"JavaScript","ko":"자바스크립트","cat":"웹 기초","lv":2,"def":"웹페이지에 움직임을 넣는 언어예요. 버튼 클릭, 검색, 저장 같은 동작을 담당해요.","metaphor":"집의 전기와 스위치예요. 눌렀을 때 불이 켜지게 해요.","use":"용어 카드의 완료 체크, 실시간 검색, 브라우저 저장은 모두 자바스크립트가 하는 일이에요."},{"n":46,"en":"Responsive Web","ko":"반응형 웹","cat":"웹 기초","lv":2,"def":"화면 크기에 따라 배치가 자동으로 바뀌어 폰·태블릿·PC에서 모두 편하게 보이는 웹이에요.","metaphor":"늘었다 줄었다 하는 옷이에요. 한 벌로 몸에 맞춰요.","use":"수강생 대부분이 폰으로 접속하므로, 배포용 페이지는 폰 화면부터 확인하는 순서로 만들어요."},{"n":47,"en":"Static Site","ko":"정적 사이트","cat":"웹 기초","lv":2,"def":"서버 계산 없이 미리 만들어 둔 HTML·CSS·JS 파일만으로 동작하는 사이트예요. 빠르고 무료로 공개하기 쉬워요.","metaphor":"인쇄해 둔 전단지예요. 누가 와도 같은 내용을 바로 건네요.","use":"용어 101 같은 학습 앱은 정적 사이트로 충분해서 Vercel이나 GitHub Pages에 0원으로 올릴 수 있어요."},{"n":48,"en":"localStorage","ko":"로컬스토리지","cat":"브라우저","lv":2,"def":"브라우저에 작은 데이터를 저장해 두는 공간이에요. 같은 기기·같은 브라우저에서 새로고침해도 남아 있어요.","metaphor":"내 책상 서랍이에요. 다른 사람 책상에는 없어요.","use":"학습 완료 체크와 북마크를 서버 없이 저장하는 데 써요. 기기를 바꾸면 초기화된다는 점은 미리 안내해야 해요."},{"n":49,"en":"Browser Cache · Cookie","ko":"브라우저 캐시 · 쿠키","cat":"브라우저","lv":2,"def":"캐시는 자주 쓰는 파일을 임시 저장해 빠르게 여는 것, 쿠키는 사이트가 브라우저에 남기는 작은 기록이에요.","metaphor":"캐시는 냉장고에 미리 꺼내 둔 반찬, 쿠키는 출입증이에요.","use":"\"수정했는데 옛 화면이 보인다\"면 대부분 캐시 때문이에요. 강제 새로고침을 먼저 안내하세요."},{"n":50,"en":"Developer Tools (F12)","ko":"개발자도구","cat":"브라우저","lv":2,"def":"브라우저에서 페이지 구조·오류 메시지·저장된 데이터를 확인하는 창이에요.","metaphor":"가게의 관리자실이에요. 손님은 못 보지만 문제를 찾을 수 있어요.","use":"웹앱이 안 될 때 빨간 오류 문구를 복사해 AI에게 보여 주면 원인을 훨씬 빨리 찾아요."},{"n":51,"en":"Base64","ko":"베이스64","cat":"파일·형식","lv":2,"def":"이미지·파일을 글자로만 된 긴 문자열로 바꾸는 인코딩 방식이에요. HTML 한 파일에 이미지를 넣을 때 써요.","metaphor":"사진을 글자로 번역해 편지에 끼워 넣는 거예요.","use":"로고와 아이콘을 파일로 두지 않고 HTML에 직접 넣으면, 파일 하나만 보내도 디자인이 그대로 유지돼요."},{"n":52,"en":"Webhook","ko":"웹훅","cat":"자동화","lv":2,"def":"어떤 일이 생겼을 때 다른 프로그램으로 자동으로 알림을 보내는 장치예요. 물어보지 않아도 먼저 알려 줘요.","metaphor":"초인종이에요. 손님이 오면 저절로 울려요.","use":"신청 폼이 접수되면 노션에 행이 생기고 알림이 오게 만드는 연결이 웹훅이에요."},{"n":53,"en":"Crawling · Scraping","ko":"크롤링 · 스크래핑","cat":"자동화","lv":2,"def":"웹페이지의 정보를 프로그램으로 자동 수집하는 기술이에요. 크롤링은 돌아다니며 모으는 것, 스크래핑은 필요한 값만 뽑는 것에 가까워요.","metaphor":"도서관에서 필요한 페이지만 사진 찍어 오는 일이에요.","use":"강사 모집 공고를 매일 모아 한 표로 정리할 때, 사이트 이용약관과 수집 규칙(robots)을 먼저 확인해야 해요."},{"n":54,"en":"SEO (Search Engine Optimization)","ko":"검색엔진 최적화","cat":"검색·노출","lv":2,"def":"구글·네이버 같은 검색에서 잘 찾아지도록 제목·구조·속도를 정리하는 일이에요.","metaphor":"가게 간판과 진열이에요. 잘 보여야 손님이 들어와요.","use":"블로그 제목에 사람들이 실제로 검색할 말을 넣고, 소제목과 이미지 설명을 채우는 것이 강의 홍보 글의 기본이에요."},{"n":55,"en":"AEO (Answer Engine Optimization)","ko":"답변엔진 최적화","cat":"검색·노출","lv":2,"def":"AI 검색과 챗봇이 답을 만들 때 인용되기 쉽게 글을 정리하는 일이에요. 질문-답 형태, 분명한 수치, 출처가 중요해요.","metaphor":"선생님이 참고자료로 집어 들기 좋게 정리해 둔 노트예요.","use":"블로그 글에 \"Q. 강사료는? A. …\"처럼 질문형 소제목과 근거를 넣으면 AI가 인용할 확률이 높아져요."},{"n":56,"en":"No-code · Low-code","ko":"노코드 · 로우코드","cat":"실전 도구","lv":2,"def":"코드를 거의 쓰지 않고 화면에서 조립해 앱과 자동화를 만드는 도구와 방식이에요.","metaphor":"블록으로 집을 짓는 장난감이에요. 설계만 잘하면 돼요.","use":"신청 접수·명단 관리·알림은 노코드(구글 폼·노션·자동화 도구)로, 디자인이 중요한 페이지는 바이브코딩으로 나눠 만들면 빨라요."},{"n":57,"en":"CLI (Command Line Interface)","ko":"명령줄","cat":"개발 기초","lv":2,"def":"마우스 대신 글자로 명령을 입력해 컴퓨터를 다루는 방식이에요.","metaphor":"점원에게 말로 주문하는 창구예요. 메뉴를 외우면 빠르지만 처음엔 낯설어요.","use":"AI가 \"이 명령을 붙여 넣어\"라고 준 한 줄이 대부분 CLI 명령이에요. 복사·붙여넣기만 해도 따라 할 수 있어요."},{"n":58,"en":"Environment Variable (.env)","ko":"환경변수","cat":"보안","lv":2,"def":"비밀번호·API 키처럼 코드에 직접 쓰면 안 되는 값을 따로 보관하는 설정 파일이에요.","metaphor":"금고 비밀번호를 벽에 붙이지 않고 금고 안에 넣어 두는 거예요.","use":"공개 저장소에 API 키를 그대로 올리면 곧바로 악용될 수 있어요. .env로 분리하고 .gitignore에 넣는 것이 원칙이에요."},{"n":59,"en":"Deploy","ko":"배포","cat":"배포","lv":2,"def":"내 컴퓨터에서만 보이던 파일을 인터넷 주소로 누구나 열 수 있게 올리는 일이에요.","metaphor":"완성한 원고를 인쇄해 서점에 거는 일이에요.","use":"수정한 뒤 다시 배포하면 같은 주소에서 최신 내용이 보여요. 링크를 다시 보낼 필요가 없어요."},{"n":60,"en":"Vercel","ko":"버셀","cat":"배포","lv":2,"def":"웹 프로젝트를 GitHub와 연결해 자동으로 배포해 주는 서비스예요. 무료(Hobby) 한도가 있어요.","metaphor":"원고를 넘기면 바로 책으로 찍어 주는 인쇄소예요.","use":"학생 정보처럼 잠가야 하는 보드는 Vercel의 로그인 잠금과 함께 쓰고, 누구나 봐야 하는 학습 앱은 공개 배포로 나눠 쓰세요."},{"n":61,"en":"Netlify","ko":"넷리파이","cat":"배포","lv":2,"def":"정적 웹사이트를 파일 업로드나 GitHub 연결로 배포하는 서비스예요. 무료 한도와 폼 기능이 있어요.","metaphor":"전단지를 맡기면 바로 게시해 주는 대행소예요.","use":"폴더째 끌어다 놓기만 해도 주소가 나와서, 수강생 실습용 배포에 적합해요."},{"n":62,"en":"GitHub Pages","ko":"깃허브 페이지스","cat":"배포","lv":2,"def":"GitHub 저장소의 파일을 그대로 웹사이트로 공개해 주는 무료 기능이에요.","metaphor":"서류철을 유리 진열장에 그대로 걸어 두는 거예요.","use":"index.html을 올리면 아이디.github.io/저장소명/ 주소가 생겨, 서버 없이 과제와 자료를 공개할 수 있어요."},{"n":63,"en":"Domain · DNS","ko":"도메인 · 디엔에스","cat":"배포","lv":2,"def":"도메인은 사람이 읽는 주소이고, DNS는 그 주소를 실제 서버 위치로 연결해 주는 전화번호부예요.","metaphor":"가게 이름(도메인)과 그 이름을 실제 건물로 안내하는 지도(DNS)예요.","use":"기본 주소가 길고 어색하면 짧은 도메인을 사서 연결할 수 있어요. 비용과 갱신 주기가 따로 든다는 점을 기억하세요."},{"n":64,"en":"HTTPS","ko":"에이치티티피에스","cat":"보안","lv":2,"def":"브라우저와 사이트 사이의 통신을 암호화하는 보안 연결이에요. 주소창의 자물쇠 표시가 그 증거예요.","metaphor":"엽서 대신 봉인된 편지로 보내는 거예요.","use":"신청 폼과 비밀번호를 받는 페이지는 반드시 HTTPS여야 해요. Vercel과 GitHub Pages는 기본으로 제공해요."},{"n":65,"en":"Hardcoding","ko":"하드코딩","cat":"개발 기초","lv":2,"def":"값·주소·비밀번호를 코드 안에 직접 박아 넣는 것이에요. 바꿀 때마다 코드를 고쳐야 해요.","metaphor":"가격표를 붙박이로 새겨 넣은 가게예요. 값을 바꾸려면 간판을 다시 만들어야 해요.","use":"학기·강의명·연락처를 한 곳(설정 변수)에 모아 두면 매 학기 파일을 뜯어고치지 않아도 돼요."},{"n":66,"en":"QR Code · Short URL","ko":"QR 코드 · 단축 URL","cat":"실전 도구","lv":2,"def":"긴 주소를 QR 이미지나 짧은 링크로 바꾸는 도구예요. 종이 자료와 화면을 연결할 때 유용해요.","metaphor":"긴 주소를 담은 작은 우표예요. 스캔하면 바로 그 집으로 가요.","use":"강의안 마지막 장에 실습 링크 QR을 넣으면 수강생이 타이핑 없이 접속해요. 인쇄 전에 꼭 스캔 테스트를 하세요."},{"n":67,"en":"Agent","ko":"에이전트","cat":"에이전트","lv":3,"def":"목표를 주면 스스로 계획을 세우고 도구를 써서 여러 단계를 실행하는 AI예요. 질문에 답하는 데서 그치지 않고 일을 끝내요.","metaphor":"일만 던져 주면 알아서 순서를 짜고 다니는 유능한 인턴이에요.","use":"\"이번 주 강사 모집 공고를 찾아서 강사료까지 정리해 줘\"처럼 여러 단계 일을 통째로 맡길 때 쓰는 형태예요."},{"n":68,"en":"Multi-agent","ko":"멀티에이전트","cat":"에이전트","lv":3,"def":"역할이 다른 여러 AI가 일을 나눠 하고 서로 결과를 넘기며 하나의 일을 끝내는 구조예요.","metaphor":"작가·편집자·디자이너가 한 팀으로 움직이는 편집국이에요.","use":"대본 작성·톤 검수·이미지 제작을 역할별 AI로 나눠 맡기면 한 AI에게 다 시킬 때보다 결과가 안정적이에요."},{"n":69,"en":"Harness","ko":"하네스","cat":"에이전트","lv":3,"def":"AI가 실제 일을 할 수 있도록 도구·파일·권한·기록을 묶어 주는 '작업 환경'이에요.","metaphor":"요리사에게 주방과 재료와 주문서를 갖춰 주는 거예요. 실력이 같아도 주방이 다르면 결과가 달라져요.","use":"같은 모델이라도 파일을 읽고 저장하고 검색하는 환경이 붙으면 \"앱을 만들고 배포까지\" 하는 일이 가능해져요."},{"n":70,"en":"MCP (Model Context Protocol)","ko":"엠씨피 · 모델 컨텍스트 프로토콜","cat":"에이전트","lv":3,"def":"AI가 외부 도구와 데이터에 표준 방식으로 연결되게 해 주는 규칙이에요. 도구마다 따로 연결을 만들 필요가 없어요.","metaphor":"여러 가전을 한 가지 규격의 콘센트에 꽂게 해 주는 표준 플러그예요.","use":"캘린더·드라이브·노션을 AI가 직접 읽고 쓰게 만드는 연결이 MCP 방식이에요."},{"n":71,"en":"SKILL","ko":"스킬","cat":"에이전트","lv":3,"def":"특정 일을 정해진 순서와 형식으로 처리하도록 묶어 둔 실행 안내서예요. 필요할 때만 불러 써요.","metaphor":"사무실 서랍에 꽂아 둔 업무 매뉴얼 파일이에요. 그 일이 생기면 꺼내 봐요.","use":"'블로그 발행', '카드뉴스 제작'처럼 반복되는 일은 절차와 규격을 스킬로 정해 두면 매번 설명하지 않아도 같은 품질이 나와요."},{"n":72,"en":"Sub-agent","ko":"서브에이전트","cat":"에이전트","lv":3,"def":"큰 작업을 나눠 맡기려고 따로 띄우는 보조 AI예요. 맡은 조사·작업을 끝내고 결과만 돌려줘요.","metaphor":"팀장이 조사만 맡기는 조사원이에요. 회의실을 어지럽히지 않고 보고서만 냅니다.","use":"자료 조사와 검증을 서브에이전트에 맡기면 본 작업의 흐름을 끊지 않고 진행할 수 있어요."},{"n":73,"en":"Context Engineering","ko":"컨텍스트 엔지니어링","cat":"에이전트","lv":3,"def":"AI가 좋은 답을 내도록 그 순간에 필요한 자료·규칙·이전 내용을 골라 담아 주는 설계예요. 프롬프트 한 줄보다 넓은 개념이에요.","metaphor":"요리사에게 필요한 재료만 골라 탁자에 올려 주는 일이에요.","use":"강의 자료 전체를 붓는 대신 관련 장과 규칙, 지난 결정만 넣어 주면 답의 정확도와 비용이 모두 좋아져요."},{"n":74,"en":"Function Calling · Tool Use","ko":"펑션 콜링 · 툴 유즈","cat":"에이전트","lv":3,"def":"AI가 필요할 때 정해진 기능(검색·계산·저장)을 직접 호출해 쓰는 능력이에요.","metaphor":"비서에게 계산기와 전화를 쥐여 주는 거예요. 말로만 하는 것보다 정확해요.","use":"\"오늘 날씨 확인해서 강의 준비물 알려 줘\"처럼 실제 데이터가 필요한 일은 도구 호출로 처리돼요."},{"n":75,"en":"Reasoning Model","ko":"추론 모델","cat":"모델 기술","lv":3,"def":"답하기 전에 여러 단계를 생각하도록 학습된 모델이에요. 수학·계획·복잡한 판단에 강하지만 느리고 비싸요.","metaphor":"답을 바로 말하지 않고 풀이 과정을 쓰는 학생이에요.","use":"시간표 짜기나 지원서 전략 검토처럼 단계가 많은 일은 추론 모델, 문구 다듬기는 일반 모델로 나누면 효율적이에요."},{"n":76,"en":"MoE (Mixture of Experts)","ko":"전문가 혼합","cat":"모델 기술","lv":3,"def":"여러 전문가 모델을 두고 질문에 맞는 일부만 골라 쓰는 구조예요. 큰 모델의 성능을 적은 비용으로 내려는 방식이에요.","metaphor":"병원의 진료과예요. 증상에 맞는 과만 보고 전체 의사를 다 부르지 않아요.","use":"\"왜 어떤 모델은 크면서도 빠른가\"를 설명할 때 MoE 구조를 예로 들면 수강생이 이해하기 쉬워요."},{"n":77,"en":"SLM (Small Language Model)","ko":"소형 언어모델","cat":"모델 기술","lv":3,"def":"파라미터를 줄여 가볍고 빠르게 만든 언어 모델이에요. 폰이나 노트북에서도 돌아가는 경우가 있어요.","metaphor":"동네 작은 문구점이에요. 대형마트보다 물건은 적지만 바로 옆에서 빠르게 해결돼요.","use":"인터넷 없이 강의장에서 시연해야 하거나 요금을 아껴야 할 때 SLM이 대안이 돼요."},{"n":78,"en":"Foundation Model","ko":"파운데이션 모델","cat":"모델 기술","lv":3,"def":"여러 목적에 두루 쓸 수 있게 크게 학습된 기반 모델이에요. 그 위에 요약·번역·상담용 앱이 얹혀 만들어져요.","metaphor":"밀가루 반죽이에요. 여기에 무엇을 얹느냐로 빵·피자·국수가 돼요.","use":"\"챗GPT·제미나이·클로드 같은 기반 모델 위에 우리 업무용 앱을 얹는다\"는 구조로 설명하면 전체 그림이 잡혀요."},{"n":79,"en":"Embedding","ko":"임베딩","cat":"데이터·검색","lv":3,"def":"글·이미지를 의미가 비슷하면 가까운 숫자 좌표로 바꾼 것이에요. 검색·추천·분류의 바탕이 돼요.","metaphor":"도서관에서 비슷한 책을 같은 서가에 꽂는 일이에요.","use":"강의 후기 300개를 임베딩하면 '환불 문의'와 '결제 문의'를 자동으로 나눌 수 있어요."},{"n":80,"en":"Vector DB","ko":"벡터 디비","cat":"데이터·검색","lv":3,"def":"임베딩된 숫자들을 저장해 의미가 가까운 자료를 빠르게 찾아 주는 데이터베이스예요.","metaphor":"주제별로 정리된 사물함이에요. '비슷한 것'을 바로 꺼내 줘요.","use":"내 문서를 RAG로 쓰려면 벡터 DB에 넣어 두고 질문할 때마다 관련 부분을 꺼내요."},{"n":81,"en":"Chunking","ko":"청킹","cat":"데이터·검색","lv":3,"def":"긴 문서를 검색하기 좋은 크기로 잘라 나누는 일이에요. 너무 잘게 자르면 맥락이 끊기고, 너무 크면 검색이 둔해져요.","metaphor":"긴 문서를 카드 한 장 크기로 나누는 일이에요.","use":"100쪽 교안은 장·절 단위로 잘라 넣어야 '3장 실습 순서'를 정확히 찾아요."},{"n":82,"en":"RAG Pipeline","ko":"RAG 파이프라인","cat":"데이터·검색","lv":3,"def":"문서 수집 → 자르기 → 임베딩 저장 → 검색 → 답변 생성으로 이어지는 RAG의 전체 흐름이에요.","metaphor":"도서관 운영이에요. 책을 들여와 정리하고, 찾아 주고, 사서가 설명해 주는 과정이에요.","use":"강의 자료 검색 봇을 만들 때 어느 단계가 약한지 나눠 점검하면 원인을 빨리 찾아요."},{"n":83,"en":"Reranking","ko":"리랭킹","cat":"데이터·검색","lv":3,"def":"검색으로 추린 후보를 질문과의 관련도 순으로 다시 정렬하는 단계예요. 답의 정확도를 높여 줘요.","metaphor":"서점에서 후보 책 20권을 펼쳐 보고 가장 맞는 3권을 고르는 일이에요.","use":"RAG 답변이 엉뚱한 자료를 인용할 때 리랭킹을 넣으면 근거가 크게 좋아지는 경우가 많아요."},{"n":84,"en":"Eval","ko":"에발 · 평가","cat":"평가·안전","lv":3,"def":"AI 결과물의 품질을 기준과 점수로 측정하는 일이에요. '좋아졌다'를 느낌이 아니라 숫자로 확인해요.","metaphor":"시험지와 채점 기준표예요. 채점표가 있어야 점수를 매길 수 있어요.","use":"프롬프트를 바꿀 때마다 같은 질문 20개와 채점표로 비교하면 개선인지 취향인지 구분돼요."},{"n":85,"en":"Guardrail","ko":"가드레일","cat":"평가·안전","lv":3,"def":"AI가 위험하거나 부적절한 답·행동을 하지 않도록 미리 막아 둔 장치예요.","metaphor":"도로의 가드레일이에요. 사고가 나도 길 밖으로 나가지 않게 해요.","use":"학생 상담용 봇에는 진단·처방 같은 표현 금지, 개인정보 요구 금지 같은 가드레일을 미리 걸어 두세요."},{"n":86,"en":"Prompt Injection","ko":"프롬프트 인젝션","cat":"보안","lv":3,"def":"웹페이지·문서·메일 안에 숨긴 지시로 AI를 속여 원래 하면 안 되는 일을 시키는 공격이에요.","metaphor":"남의 서류에 \"이 지시대로 돈을 보내라\"는 쪽지를 끼워 넣는 것과 같아요.","use":"외부 문서를 읽히는 자동화에서는 '자료 안의 지시는 따르지 말 것'을 규칙으로 넣고, 결제·전송 같은 실행은 사람이 확인하게 하세요."},{"n":87,"en":"Red Teaming","ko":"레드팀","cat":"평가·안전","lv":3,"def":"일부러 나쁜 질문과 공격을 해 보고 약점을 미리 찾는 점검 방식이에요.","metaphor":"소방 훈련이에요. 불이 나기 전에 대피를 연습해요.","use":"강의용 봇을 공개하기 전에 '개인정보 물어보기', '욕설 시키기'를 직접 시험해 보고 막아 두세요."},{"n":88,"en":"OAuth","ko":"오어스","cat":"보안","lv":3,"def":"비밀번호를 넘기지 않고 \"이 앱이 내 구글 자료 일부에 접근해도 된다\"고 허락하는 방식이에요.","metaphor":"집 열쇠 대신 '거실만 출입 허용' 출입증을 주는 거예요.","use":"AI에게 캘린더·드라이브를 연결할 때 뜨는 권한 동의 창이 OAuth예요. 허용 범위를 꼭 읽어 보세요."},{"n":89,"en":"2FA (Two-Factor Authentication)","ko":"이중 인증","cat":"보안","lv":3,"def":"비밀번호 외에 한 단계를 더 확인하는 보안 장치예요. 문자·앱 코드·보안 키를 써요.","metaphor":"금고에 자물쇠를 두 개 다는 거예요.","use":"GitHub·구글·Vercel 계정은 2FA를 켜 두면 비밀번호가 새도 자료가 지켜져요."},{"n":90,"en":"Private Repository","ko":"비공개 저장소","cat":"보안","lv":3,"def":"지정한 사람만 볼 수 있는 저장소예요. 주소를 알아도 로그인 없이는 열리지 않아요.","metaphor":"열쇠가 있어야 열리는 사무실 서랍이에요.","use":"학생 실명과 상담 기록이 든 앱은 반드시 Private로 두고, 공개 페이지에는 익명 정보만 올리세요."},{"n":91,"en":"API Key","ko":"API 키","cat":"보안","lv":3,"def":"프로그램이 내 계정으로 API를 쓰도록 발급하는 비밀 열쇠예요.","metaphor":"사무실 출입 카드예요. 잃어버리면 누구나 내 이름으로 드나들 수 있어요.","use":"API 키는 코드·블로그·화면 캡처에 절대 노출하지 말고, 노출됐다면 즉시 폐기하고 재발급하세요."},{"n":92,"en":"CORS","ko":"코스","cat":"보안","lv":3,"def":"다른 주소의 웹페이지가 내 서버 데이터를 가져갈 수 있는지 브라우저가 확인하는 보안 규칙이에요.","metaphor":"다른 회사 사람이 우리 사무실 자료를 열람해도 되는지 확인하는 안내 데스크예요.","use":"웹앱에서 API를 부르는데 'CORS 오류'가 뜨면 서버 쪽 허용 설정이 필요하다는 뜻이에요."},{"n":93,"en":"Sandbox","ko":"샌드박스","cat":"보안","lv":3,"def":"AI나 프로그램이 실제 시스템을 건드리지 못하게 격리된 공간에서 실행되게 하는 환경이에요.","metaphor":"모래놀이터예요. 마음껏 해도 바깥 세상은 다치지 않아요.","use":"AI에게 코드 실행을 맡길 때는 샌드박스에서 돌려, 실수로 파일이 지워지거나 돈이 나가지 않게 하세요."},{"n":94,"en":"WebML","ko":"웹엠엘","cat":"브라우저 AI","lv":3,"def":"브라우저 안에서 머신러닝 모델을 직접 돌리는 기술 묶음이에요. 서버 없이 이미지 분류·번역 등이 가능해요.","metaphor":"요리를 배달시키지 않고 우리 집 주방에서 하는 거예요.","use":"사진에서 글자를 읽는 기능을 서버 없이 브라우저에서 돌리면 개인 사진이 밖으로 나가지 않아요."},{"n":95,"en":"WebGPU","ko":"웹지피유","cat":"브라우저 AI","lv":3,"def":"브라우저가 그래픽카드 성능을 직접 쓰게 해 주는 기술이에요. 브라우저에서 AI 모델을 빠르게 돌릴 때 쓰여요.","metaphor":"집에 있는 큰 화력의 가스레인지를 쓰는 거예요. 같은 요리도 훨씬 빨라요.","use":"브라우저에서 이미지 생성·음성 인식을 돌리는 도구들이 WebGPU를 켜면 눈에 띄게 빨라져요."},{"n":96,"en":"On-device AI","ko":"온디바이스 AI","cat":"브라우저 AI","lv":3,"def":"서버로 보내지 않고 내 폰·노트북 안에서 직접 돌아가는 AI예요. 개인정보 보호와 오프라인 사용에 유리해요.","metaphor":"집에서 직접 하는 요리예요. 재료가 밖으로 나가지 않아요.","use":"학생 상담 기록처럼 민감한 자료를 다룰 때는 온디바이스 모델이 더 안전한 선택이 될 수 있어요."},{"n":97,"en":"Serverless","ko":"서버리스","cat":"인프라","lv":3,"def":"서버를 직접 관리하지 않아도 필요한 순간에만 코드가 실행되고 쓴 만큼만 내는 방식이에요.","metaphor":"필요할 때만 부르는 대리기사예요. 차고에 세워 두지 않아요.","use":"신청 폼 접수 알림처럼 가끔 도는 기능은 서버리스로 만들면 관리 부담이 거의 없어요."},{"n":98,"en":"Edge Computing","ko":"엣지 컴퓨팅","cat":"인프라","lv":3,"def":"중앙 서버 대신 사용자와 가까운 곳에서 계산을 처리하는 방식이에요. 빠르고 지연이 적어요.","metaphor":"동네 분식집이에요. 시내 본점까지 가지 않아도 바로 먹을 수 있어요.","use":"전국 수강생이 동시에 접속하는 페이지는 가까운 곳에서 응답하게 만들면 체감 속도가 좋아져요."},{"n":99,"en":"CDN (Content Delivery Network)","ko":"씨디엔 · 콘텐츠 전달망","cat":"인프라","lv":3,"def":"이미지·파일을 여러 지역 서버에 복사해 두고 가장 가까운 곳에서 내려주는 시스템이에요.","metaphor":"전국 곳곳의 물류창고예요. 가까운 창고에서 바로 배송해요.","use":"강의 이미지와 영상이 많을 때 CDN을 쓰면 로딩이 빨라지고 서버 부담이 줄어요."},{"n":100,"en":"Quantization","ko":"양자화","cat":"모델 기술","lv":3,"def":"모델의 숫자 정밀도를 낮춰 크기를 줄이고 빠르게 만드는 기법이에요. 약간의 성능 손해와 맞바꿔요.","metaphor":"고화질 사진을 웹용으로 압축하는 거예요. 조금 뭉개지지만 훨씬 가벼워요.","use":"노트북이나 폰에서 큰 모델을 돌리고 싶을 때 양자화된 버전을 고르면 실행이 가능해져요."},{"n":101,"en":"HITL (Human-in-the-Loop)","ko":"휴먼 인 더 루프 · 사람 개입","cat":"평가·안전","lv":3,"def":"AI가 혼자 끝내지 않고 중요한 지점에서 사람이 확인·승인하게 설계하는 방식이에요.","metaphor":"자동문 앞의 경비원이에요. 대부분은 그냥 지나가지만 위험한 건 세워요.","use":"메일 발송·결제·공개 게시처럼 되돌릴 수 없는 일은 반드시 사람 승인 단계를 남기세요."}];
+const LV_NAME = {1:'Lv.1 입문',2:'Lv.2 실전',3:'Lv.3 고급'};
+const KEY_DONE = 'ai101.done.v1';
+const KEY_STAR = 'ai101.stars.v1';
+
+const $ = s => document.querySelector(s);
+
+const state = {
+  done: new Set(load(KEY_DONE)),
+  star: new Set(load(KEY_STAR)),
+  tab: 'all',
+  q: ''
+};
+let quiz = null;
+
+function load(k){
+  try{
+    const v = JSON.parse(localStorage.getItem(k) || '[]');
+    return Array.isArray(v) ? v.map(Number).filter(n => n >= 1 && n <= 101) : [];
+  }catch(e){ return []; }
+}
+function save(){
+  try{
+    localStorage.setItem(KEY_DONE, JSON.stringify([...state.done]));
+    localStorage.setItem(KEY_STAR, JSON.stringify([...state.star]));
+  }catch(e){}
+}
+
+function norm(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+function haystack(t){
+  return norm([t.n, t.en, t.ko, t.cat, LV_NAME[t.lv], t.def, t.metaphor, t.use].join(' '));
+}
+function matches(t){
+  if(!state.q) return true;
+  const q = norm(state.q);
+  return q.split(' ').every(w => haystack(t).includes(w));
+}
+function inTab(t){
+  if(state.tab === 'all') return true;
+  if(state.tab === 'star') return state.star.has(t.n);
+  if(state.tab === 'todo') return !state.done.has(t.n);
+  return t.lv === Number(state.tab);
+}
+function visibleTerms(){
+  return TERMS.filter(t => inTab(t) && matches(t));
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function pct(a,b){ return b ? Math.round(a/b*100) : 0; }
+
+function cardHTML(t){
+  const done = state.done.has(t.n);
+  const star = state.star.has(t.n);
+  return `<article class="card ${done ? 'is-done' : ''}" data-n="${t.n}">
+    <div class="card-top">
+      <span class="num">#${String(t.n).padStart(3,'0')}</span>
+      <span class="badge b-lv${t.lv}">${LV_NAME[t.lv]}</span>
+      <span class="cat">${esc(t.cat)}</span>
+      <button class="star ${star ? 'on' : ''}" data-act="star" aria-label="북마크" aria-pressed="${star}" title="북마크">${star ? '★' : '☆'}</button>
+    </div>
+    <h3>${esc(t.en)}</h3>
+    <p class="ko">${esc(t.ko)}</p>
+    <p class="def">${esc(t.def)}</p>
+    <div class="metaphor"><span class="t">문과생 비유</span><p>${esc(t.metaphor)}</p></div>
+    <div class="use"><span class="t">실전 활용</span><p>${esc(t.use)}</p></div>
+    <div class="card-foot">
+      <button class="cbtn done ${done ? 'on' : ''}" data-act="done" aria-pressed="${done}">${done ? '✓ 학습 완료' : '○ 학습 완료'}</button>
+      <button class="cbtn starbtn ${star ? 'on' : ''}" data-act="star2" aria-pressed="${star}">${star ? '★ 찜함' : '☆ 북마크'}</button>
+      <button class="cbtn copy" data-act="copy">⧉ 설명 복사</button>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const list = visibleTerms();
+  const grid = $('#grid');
+  grid.innerHTML = list.length
+    ? list.map(cardHTML).join('')
+    : `<div class="empty"><b>${state.q ? '검색 결과가 없어요' : '아직 담긴 용어가 없어요'}</b><span>${state.q ? '다른 키워드로 찾아보세요. (예: 토큰, 배포, 보안)' : '완료 체크하거나 ★ 북마크한 용어가 여기에 모입니다.'}</span></div>`;
+
+  $('#countText').innerHTML = `${state.q ? '검색 ' + list.length + '개' : list.length + '개 용어'} · 완료 <b>${state.done.size}</b>개`;
+  $('#tabStarCount').textContent = state.star.size;
+  $('#tabTodoCount').textContent = 101 - state.done.size;
+  updateDash();
+}
+
+function updateDash(){
+  const d = state.done.size;
+  $('#dTotal').textContent = d;
+  $('#dRate').textContent = pct(d,101) + '%';
+  $('#dBar').style.width = pct(d,101) + '%';
+  $('#dDone').textContent = '완료 ' + d + '개';
+  $('#dLeft').textContent = '남은 ' + (101 - d) + '개';
+  [1,2,3].forEach(lv => {
+    const tot = TERMS.filter(t => t.lv === lv).length;
+    const cnt = TERMS.filter(t => t.lv === lv && state.done.has(t.n)).length;
+    $('#d' + lv).textContent = cnt;
+    $('#b' + lv).style.width = pct(cnt,tot) + '%';
+  });
+}
+
+function byN(n){ return TERMS.find(t => t.n === n); }
+
+function toast(msg){
+  const el = $('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+function buildCopyText(t){
+  return `#${String(t.n).padStart(3,'0')} ${t.en} (${t.ko}) · ${LV_NAME[t.lv]} · ${t.cat}\n\n` +
+    `[정의] ${t.def}\n` +
+    `[문과생 비유] ${t.metaphor}\n` +
+    `[실전 활용] ${t.use}\n\n— 더콘텐츠스쿨 「문과생 AI 용어 101」`;
+}
+
+async function copyText(txt){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(txt);
+    }else{
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    return true;
+  }catch(e){ return false; }
+}
+
+/* ── card actions ─────────────────────────── */
+$('#grid').addEventListener('click', async e => {
+  const btn = e.target.closest('button[data-act]');
+  if(!btn) return;
+  const card = btn.closest('.card');
+  const n = Number(card.dataset.n);
+  const t = byN(n);
+  const act = btn.dataset.act;
+
+  if(act === 'done'){
+    if(state.done.has(n)) state.done.delete(n); else state.done.add(n);
+    save(); render();
+  }else if(act === 'star' || act === 'star2'){
+    if(state.star.has(n)) state.star.delete(n); else state.star.add(n);
+    save();
+    if(state.tab === 'star' && !state.star.has(n)) render();
+    else{
+      const on = state.star.has(n);
+      card.querySelectorAll('[data-act="star"],[data-act="star2"]').forEach(b => {
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      const starBtn = card.querySelector('[data-act="star"]');
+      starBtn.textContent = on ? '★' : '☆';
+      const s2 = card.querySelector('[data-act="star2"]');
+      s2.textContent = on ? '★ 찜함' : '☆ 북마크';
+      $('#tabStarCount').textContent = state.star.size;
+    }
+    toast(state.star.has(n) ? '★ 찜한 용어에 담았어요' : '찜을 해제했어요');
+  }else if(act === 'copy'){
+    const ok = await copyText(buildCopyText(t));
+    toast(ok ? '설명을 복사했어요' : '복사가 막혔어요. 길게 눌러 복사해 주세요');
+  }
+});
+
+/* ── tabs & search ────────────────────────── */
+$('#tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.tab');
+  if(!tab) return;
+  state.tab = tab.dataset.tab;
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b === tab));
+  render();
+});
+
+const searchEl = $('#search');
+let sTimer;
+searchEl.addEventListener('input', () => {
+  clearTimeout(sTimer);
+  $('#searchBox').classList.toggle('has-value', !!searchEl.value);
+  sTimer = setTimeout(() => { state.q = searchEl.value; render(); }, 90);
+});
+$('#clearSearch').addEventListener('click', () => {
+  searchEl.value = ''; state.q = '';
+  $('#searchBox').classList.remove('has-value');
+  searchEl.focus(); render();
+});
+
+/* ── reset ────────────────────────────────── */
+let armTimer;
+$('#resetBtn').addEventListener('click', e => {
+  const b = e.currentTarget;
+  if(!b.classList.contains('arm')){
+    b.classList.add('arm');
+    b.textContent = '한 번 더 누르면 초기화';
+    clearTimeout(armTimer);
+    armTimer = setTimeout(() => { b.classList.remove('arm'); b.textContent = '진도 초기화'; }, 3500);
+    return;
+  }
+  state.done.clear(); state.star.clear(); save();
+  b.classList.remove('arm'); b.textContent = '진도 초기화';
+  render();
+  toast('진도와 찜을 초기화했어요');
+});
+
+/* ── flashcard quiz ───────────────────────── */
+function openQuiz(){
+  const list = visibleTerms();
+  if(!list.length){ toast('이 화면에는 테스트할 용어가 없어요'); return; }
+  quiz = { list, i: 0, flipped: false, known: 0 };
+  $('#overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderQuiz();
+}
+function closeQuiz(){
+  quiz = null;
+  $('#overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  render();
+}
+function renderQuiz(){
+  const root = $('#quizRoot');
+  if(!quiz) return;
+  if(quiz.i >= quiz.list.length){
+    root.innerHTML = `<div class="quiz-done">
+      <h2>라운드 완료 🎉</h2>
+      <div class="score">${quiz.known} / ${quiz.list.length}</div>
+      <p>${quiz.list.length}개 중 ${quiz.known}개를 '알고 있어요'로 표시했어요.</p>
+      <p>모르는 용어는 카드에서 다시 읽고 체크해 보세요.</p>
+      <div class="quiz-actions">
+        <button class="qbtn" data-q="restart">다시 하기</button>
+        <button class="qbtn gold" data-q="close">닫기</button>
+      </div>
+    </div>`;
+    return;
+  }
+  const t = quiz.list[quiz.i];
+  root.innerHTML = `
+    <div class="quiz-head">
+      <span>플래시카드</span>
+      <span class="qcount">${quiz.i + 1} / ${quiz.list.length}</span>
+      <button class="qclose" data-q="close" aria-label="닫기">✕</button>
+    </div>
+    <div class="qbar"><i style="width:${(quiz.i / quiz.list.length) * 100}%"></i></div>
+    <div class="flash ${quiz.flipped ? 'flipped' : ''}" data-q="flip" role="button" tabindex="0" aria-label="카드를 눌러 뜻 보기">
+      <div class="flash-inner">
+        <div class="face front">
+          <span class="fnum">#${String(t.n).padStart(3,'0')} · ${LV_NAME[t.lv]} · ${esc(t.cat)}</span>
+          <h2>${esc(t.en)}</h2>
+          <div class="fko">${esc(t.ko)}</div>
+          <div class="flipnote">카드를 눌러 뜻 확인 · 스페이스바</div>
+        </div>
+        <div class="face back">
+          <h3>${esc(t.en)}</h3>
+          <div class="fko">${esc(t.ko)} · ${LV_NAME[t.lv]} · ${esc(t.cat)}</div>
+          <p class="def">${esc(t.def)}</p>
+          <div class="metaphor"><span class="t">문과생 비유</span><p>${esc(t.metaphor)}</p></div>
+          <div class="use"><span class="t">실전 활용</span><p>${esc(t.use)}</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="quiz-actions">
+      <button class="qbtn small" data-q="prev">← 이전</button>
+      <button class="qbtn" data-q="again">다시 볼래요</button>
+      <button class="qbtn gold" data-q="know">알고 있어요 ✓</button>
+      <button class="qbtn small" data-q="next">다음 →</button>
+    </div>`;
+}
+function qStep(d){
+  if(!quiz) return;
+  quiz.i = Math.min(quiz.list.length, Math.max(0, quiz.i + d));
+  quiz.flipped = false;
+  renderQuiz();
+}
+function qKnow(){
+  if(!quiz || quiz.i >= quiz.list.length) return;
+  const n = quiz.list[quiz.i].n;
+  if(!state.done.has(n)) state.done.add(n);
+  quiz.known++; save();
+  quiz.i++; quiz.flipped = false;
+  renderQuiz(); updateDash();
+}
+$('#quizRoot').addEventListener('click', e => {
+  const b = e.target.closest('[data-q]');
+  if(!b || !quiz) return;
+  const a = b.dataset.q;
+  if(a === 'close') closeQuiz();
+  else if(a === 'flip'){ quiz.flipped = !quiz.flipped; b.classList.toggle('flipped', quiz.flipped); }
+  else if(a === 'next') qStep(1);
+  else if(a === 'prev') qStep(-1);
+  else if(a === 'again'){ quiz.i++; quiz.flipped = false; renderQuiz(); }
+  else if(a === 'know') qKnow();
+  else if(a === 'restart'){ quiz.i = 0; quiz.known = 0; quiz.flipped = false; renderQuiz(); }
+});
+$('#quizBtn').addEventListener('click', openQuiz);
+$('#overlay').addEventListener('click', e => { if(e.target.id === 'overlay') closeQuiz(); });
+document.addEventListener('keydown', e => {
+  if(!$('#overlay').classList.contains('open')) return;
+  if(e.key === 'Escape') closeQuiz();
+  else if(!quiz) return;
+  else if(e.key === 'ArrowRight') qStep(1);
+  else if(e.key === 'ArrowLeft') qStep(-1);
+  else if(e.key === ' '){ e.preventDefault(); if(quiz.i < quiz.list.length){ quiz.flipped = !quiz.flipped; renderQuiz(); } }
+  else if(e.key === 'Enter' && quiz.i < quiz.list.length){ if(!quiz.flipped){ quiz.flipped = true; renderQuiz(); } else qKnow(); }
+});
+
+render();
+</script>
+</body>
+</html>
