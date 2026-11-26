@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>더콘텐츠스쿨 · 10가지 화풍 애니메이션 프롬프트</title>
+<meta name="description" content="화풍 하나 고르고 장면 한 줄 쓰면, ChatGPT가 9:16 움직이는 애니메이션 릴스를 만들어 줍니다. 프롬프트 복사만 하면 끝.">
+<meta name="theme-color" content="#0D2B22">
+<meta property="og:type" content="website">
+<meta property="og:title" content="더콘텐츠스쿨 · 10가지 화풍 애니메이션 프롬프트">
+<meta property="og:description" content="프롬프트 두 개로 9:16 움직이는 애니메이션 릴스 만들기">
+<style>
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-800.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Paperozi';src:url('fonts/Paperozi-900.woff2') format('woff2');font-weight:900;font-display:swap}
+
+:root{
+  --deep:#0D2B22;
+  --green:#1F3D2B;
+  --cream:#FAF8F2;
+  --gold:#FFC24B;
+  --ink:#20302A;
+  --muted:#6E786F;
+  --line:rgba(31,61,43,.14);
+  --card:#fffdf8;
+  --font:'Paperozi','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+  --mono:'D2Coding','SFMono-Regular',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--font);font-weight:400;line-height:1.72;
+  letter-spacing:-0.01em;word-break:keep-all;overflow-wrap:anywhere;
+  -webkit-font-smoothing:antialiased;
+}
+img,canvas{max-width:100%}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+
+/* ── HERO ───────────────────────────── */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(110% 80% at 88% -12%, rgba(255,194,75,.26) 0%, rgba(255,194,75,0) 58%),
+    linear-gradient(165deg, var(--green) 0%, var(--deep) 100%);
+  color:var(--cream);padding:40px 0 34px;
+  border-bottom:3px solid var(--gold);
+}
+.hero::after{
+  content:"";position:absolute;inset:auto 0 0 0;height:120px;
+  background:radial-gradient(60% 100% at 50% 100%, rgba(255,194,75,.10), transparent 70%);
+  pointer-events:none;
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:600;letter-spacing:.02em;
+  color:var(--gold);border:1px solid rgba(255,194,75,.45);
+  border-radius:999px;padding:5px 13px;margin-bottom:16px;
+  background:rgba(255,194,75,.06);
+}
+.hero h1{
+  margin:0 0 12px;font-size:clamp(24px,5.6vw,38px);font-weight:900;
+  line-height:1.3;letter-spacing:-0.035em;
+}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lead{
+  margin:0;max-width:640px;font-size:clamp(14.5px,3.6vw,16.5px);
+  color:rgba(250,248,242,.82);font-weight:300;
+}
+.hero .lead strong{font-weight:700;color:#fff}
+.flow{
+  display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none;
+}
+.flow li{
+  font-size:12.5px;font-weight:600;color:var(--cream);
+  border:1px solid rgba(250,248,242,.22);border-radius:10px;
+  padding:7px 12px;background:rgba(250,248,242,.07);
+  display:flex;align-items:center;gap:7px;
+}
+.flow li b{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:17px;height:17px;border-radius:50%;background:var(--gold);color:var(--deep);
+  font-size:11px;font-weight:900;
+}
+
+/* ── SECTION ─────────────────────────── */
+section{padding:34px 0 6px}
+.sec-head{margin-bottom:18px}
+.sec-no{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--green);
+  text-transform:uppercase;margin-bottom:7px;
+}
+.sec-no::before{content:"";width:18px;height:2px;background:var(--gold);border-radius:2px}
+.sec-head h2{
+  margin:0 0 8px;font-size:clamp(19px,4.4vw,25px);font-weight:900;
+  letter-spacing:-0.03em;line-height:1.34;color:var(--deep);
+}
+.sec-head p{margin:0;font-size:14.5px;color:var(--muted);font-weight:400;max-width:660px}
+.sec-head p b{color:var(--green);font-weight:700}
+
+/* ── STYLE PICKER ────────────────────── */
+.styles{
+  display:grid;gap:10px;
+  grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+}
+.style-card{
+  position:relative;display:block;width:100%;text-align:left;
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+  padding:0 0 10px;overflow:hidden;color:var(--ink);
+  transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.style-card:hover{transform:translateY(-2px);border-color:rgba(31,61,43,.32);box-shadow:0 8px 20px -12px rgba(13,43,34,.5)}
+.style-card .thumb{
+  display:block;width:100%;aspect-ratio:4/3;background:#eae6da;
+  border-bottom:1px solid var(--line);
+}
+.style-card .thumb canvas{display:block;width:100%;height:100%}
+.style-card .num{
+  position:absolute;top:7px;left:7px;z-index:2;
+  font-size:10.5px;font-weight:900;letter-spacing:.04em;
+  background:rgba(13,43,34,.82);color:var(--gold);
+  border-radius:6px;padding:2px 6px;backdrop-filter:blur(2px);
+}
+.style-card .name{
+  display:block;padding:9px 11px 0;font-size:14px;font-weight:800;letter-spacing:-0.02em;
+  color:var(--deep);line-height:1.35;
+}
+.style-card .en{
+  display:block;padding:1px 11px 0;font-size:10.5px;font-weight:500;
+  color:var(--muted);letter-spacing:.01em;
+}
+.style-card .feel{
+  display:block;padding:5px 11px 0;font-size:11.5px;font-weight:400;
+  color:var(--muted);line-height:1.5;
+}
+.style-card[aria-pressed="true"]{
+  border-color:var(--green);box-shadow:0 0 0 2.5px rgba(255,194,75,.55),0 10px 22px -14px rgba(13,43,34,.6);
+  background:#fff;
+}
+.style-card[aria-pressed="true"] .name{color:var(--green)}
+.style-card[aria-pressed="true"]::after{
+  content:"선택";position:absolute;top:7px;right:7px;z-index:2;
+  font-size:10.5px;font-weight:900;background:var(--gold);color:var(--deep);
+  border-radius:6px;padding:2px 7px;
+}
+
+/* ── SCENE INPUT ─────────────────────── */
+.scene-box{
+  background:var(--card);border:1.5px solid var(--line);border-radius:16px;
+  padding:16px 16px 14px;
+}
+.scene-box label{
+  display:block;font-size:13px;font-weight:800;color:var(--green);margin-bottom:7px;
+}
+.scene-box textarea{
+  width:100%;min-height:78px;resize:vertical;
+  border:1.5px solid rgba(31,61,43,.2);border-radius:11px;
+  background:#fff;padding:11px 12px;color:var(--ink);
+  font-family:inherit;font-size:15px;line-height:1.6;letter-spacing:-0.01em;
+}
+.scene-box textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(255,194,75,.35)}
+.scene-box .hint{
+  margin:8px 0 0;font-size:12.5px;color:var(--muted);line-height:1.6;
+}
+.scene-box .hint b{color:var(--green);font-weight:700}
+.sub-label{
+  font-size:11.5px;font-weight:700;color:var(--muted);margin:13px 0 6px;letter-spacing:.01em;
+}
+.examples{display:flex;flex-wrap:wrap;gap:6px}
+.ex{
+  font-size:12.5px;font-weight:500;color:var(--green);
+  background:rgba(31,61,43,.055);border:1px solid rgba(31,61,43,.16);
+  border-radius:999px;padding:6px 12px;line-height:1.4;
+  transition:background .14s ease,color .14s ease;
+}
+.ex:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.clear-scene{
+  margin-top:12px;font-size:12px;font-weight:700;color:var(--muted);
+  background:none;border:0;padding:2px 0;text-decoration:underline;text-underline-offset:3px;
+}
+.clear-scene:hover{color:var(--green)}
+
+/* ── PROMPT CARDS ────────────────────── */
+.prompt-card{
+  border:1.5px solid var(--line);border-radius:16px;overflow:hidden;
+  background:var(--card);box-shadow:0 10px 26px -22px rgba(13,43,34,.55);
+}
+.prompt-card + .prompt-card{margin-top:16px}
+.pc-head{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px 15px;background:rgba(31,61,43,.045);
+  border-bottom:1px solid var(--line);
+}
+.pc-step{
+  font-size:11px;font-weight:900;letter-spacing:.05em;color:var(--deep);
+  background:var(--gold);border-radius:6px;padding:3px 8px;
+}
+.pc-title{font-size:13.5px;font-weight:800;color:var(--deep);letter-spacing:-0.02em}
+.pc-meta{font-size:11.5px;font-weight:500;color:var(--muted)}
+.copy{
+  margin-left:auto;display:inline-flex;align-items:center;gap:6px;
+  background:var(--green);color:var(--cream);
+  border:0;border-radius:9px;padding:8px 14px;
+  font-size:12.5px;font-weight:800;letter-spacing:-0.01em;
+  transition:background .15s ease,transform .12s ease;
+  white-space:nowrap;
+}
+.copy:hover{background:var(--deep)}
+.copy:active{transform:scale(.97)}
+.copy.done{background:var(--gold);color:var(--deep)}
+.prompt-body{
+  margin:0;padding:16px 15px 18px;
+  background:var(--deep);color:#E8EDE7;
+  font-family:var(--mono);font-size:12.4px;line-height:1.78;
+  white-space:pre-wrap;letter-spacing:0;
+  max-height:360px;overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.prompt-body::-webkit-scrollbar{width:8px}
+.prompt-body::-webkit-scrollbar-thumb{background:rgba(255,194,75,.35);border-radius:4px}
+.slot{
+  background:rgba(255,194,75,.16);color:#FFD98F;
+  border-bottom:1px solid rgba(255,194,75,.55);
+  padding:1px 2px;border-radius:3px;
+  font-family:var(--font);font-size:12.6px;
+}
+.slot.empty{color:#C9A96A;font-style:italic}
+
+/* ── POLISH GRID ─────────────────────── */
+.polish{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(268px,1fr))}
+.pcard{
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+  padding:13px 13px 12px;display:flex;flex-direction:column;
+}
+.pcard h3{
+  margin:0 0 5px;font-size:13.5px;font-weight:800;color:var(--deep);
+  display:flex;align-items:center;gap:7px;letter-spacing:-0.02em;
+}
+.pcard h3 span{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:19px;height:19px;border-radius:50%;
+  background:rgba(31,61,43,.09);color:var(--green);
+  font-size:11px;font-weight:900;
+}
+.pcard p{margin:0 0 10px;font-size:12.4px;color:var(--muted);line-height:1.62;flex:1}
+.pcard .copy{
+  margin-left:0;align-self:flex-start;
+  background:rgba(31,61,43,.06);color:var(--green);
+  border:1px solid rgba(31,61,43,.18);padding:6px 12px;font-size:12px;
+}
+.pcard .copy:hover{background:var(--green);color:var(--cream);border-color:var(--green)}
+.pcard .copy.done{background:var(--gold);color:var(--deep);border-color:var(--gold)}
+
+/* ── GUIDE ───────────────────────────── */
+.guide{list-style:none;margin:0;padding:0;counter-reset:g}
+.guide > li{
+  position:relative;padding:0 0 20px 46px;
+}
+.guide > li::before{
+  counter-increment:g;content:counter(g);
+  position:absolute;left:0;top:0;
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--green);color:var(--gold);
+  font-size:14px;font-weight:900;
+}
+.guide > li::after{
+  content:"";position:absolute;left:14.5px;top:34px;bottom:2px;width:1.5px;
+  background:linear-gradient(to bottom,rgba(31,61,43,.22),rgba(31,61,43,.05));
+}
+.guide > li:last-child{padding-bottom:0}
+.guide > li:last-child::after{display:none}
+.guide h3{margin:2px 0 5px;font-size:15px;font-weight:800;color:var(--deep);letter-spacing:-0.025em}
+.guide p{margin:0;font-size:13.6px;color:#4E5B52;line-height:1.72}
+.guide p + p{margin-top:5px}
+.guide .tip{
+  display:block;margin-top:7px;font-size:12.6px;line-height:1.66;
+  color:var(--green);background:rgba(255,194,75,.14);
+  border-left:3px solid var(--gold);border-radius:0 8px 8px 0;
+  padding:7px 11px;
+}
+.guide .tip b{font-weight:800}
+kbd{
+  font-family:var(--mono);font-size:11.5px;background:#fff;
+  border:1px solid rgba(31,61,43,.25);border-bottom-width:2px;border-radius:5px;
+  padding:1px 5px;color:var(--deep);white-space:nowrap;
+}
+
+/* ── NOTE / FOOTER ───────────────────── */
+.note{
+  margin:26px 0 0;padding:15px 16px;border-radius:14px;
+  background:rgba(31,61,43,.05);border:1px dashed rgba(31,61,43,.26);
+  font-size:13px;color:#44524A;line-height:1.7;
+}
+.note b{color:var(--green)}
+.note strong{color:var(--deep)}
+footer{
+  margin-top:40px;background:var(--deep);color:rgba(250,248,242,.72);
+  padding:30px 0 34px;border-top:3px solid var(--gold);
+}
+footer .brand{font-size:16px;font-weight:900;color:var(--cream);letter-spacing:-0.02em}
+footer .brand span{color:var(--gold)}
+footer p{margin:6px 0 0;font-size:12.8px;line-height:1.75}
+footer .fine{margin-top:14px;font-size:11.5px;color:rgba(250,248,242,.45)}
+
+/* ── TOAST ───────────────────────────── */
+#toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);
+  background:var(--deep);color:var(--cream);
+  border:1px solid rgba(255,194,75,.5);
+  border-radius:12px;padding:11px 18px;
+  font-size:13.5px;font-weight:700;letter-spacing:-0.01em;
+  box-shadow:0 14px 34px -12px rgba(0,0,0,.55);
+  opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;
+  z-index:99;max-width:calc(100% - 32px);text-align:center;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast b{color:var(--gold)}
+
+@media (max-width:430px){
+  .styles{grid-template-columns:repeat(2,1fr);gap:8px}
+  .style-card .name{font-size:13px}
+  .style-card .feel{display:none}
+  .pc-head{padding:10px 12px}
+  .copy{margin-left:0;width:100%;justify-content:center;margin-top:4px}
+  .prompt-body{font-size:11.8px;max-height:320px}
+  .polish{grid-template-columns:1fr}
+  .hero{padding:32px 0 28px}
+}
+@media print{
+  .copy,#toast{display:none}
+  .prompt-body{max-height:none;background:#fff;color:#000;border:1px solid #999}
+  .slot{color:#000;background:none}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">🌿 더콘텐츠스쿨 · 무료 웹 도구</span>
+    <h1>10가지 화풍으로 만드는<br><em>9:16 움직이는 애니메이션 릴스</em></h1>
+    <p class="lead">
+      프롬프트 두 개만 복사해서 ChatGPT에 붙여 넣으면 끝입니다.
+      그림 한 장이 <strong>6초짜리 움직이는 영상</strong>으로 바뀌어요.
+      화풍은 열 가지 중에 고르고, 장면은 하고 싶은 걸 그냥 한국어로 쓰세요.
+    </p>
+    <ul class="flow">
+      <li><b>1</b> 화풍 고르기</li>
+      <li><b>2</b> 장면 쓰기</li>
+      <li><b>3</b> 그림 만들기</li>
+      <li><b>4</b> 움직이게 하기</li>
+      <li><b>5</b> 다듬어서 릴스로</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- 1. 화풍 -->
+  <section id="styles">
+    <div class="sec-head">
+      <div class="sec-no">Step 1</div>
+      <h2>화풍 열 가지 중에 하나를 고르세요</h2>
+      <p>고르는 순간 아래 프롬프트의 <b>Style</b>과 <b>움직임 규칙</b>이 그 화풍에 맞게 바뀝니다. 카드에 보이는 작은 그림은 느낌만 보여 주는 미리보기예요. 진짜 그림은 ChatGPT가 그립니다.</p>
+    </div>
+    <div class="styles" id="styleGrid" role="group" aria-label="애니메이션 화풍 선택"></div>
+  </section>
+
+  <!-- 2. 장면 -->
+  <section id="scene">
+    <div class="sec-head">
+      <div class="sec-no">Step 2</div>
+      <h2>장면은 직접 쓰세요 — 한 줄이면 충분합니다</h2>
+      <p>하고 싶은 장면을 한국어로 편하게 쓰세요. 쓰는 대로 1단계 프롬프트의 <b>Scene</b> 자리에 바로 들어갑니다. 비워 두면 화풍마다 준비해 둔 기본 장면이 들어가요.</p>
+    </div>
+    <div class="scene-box">
+      <label for="sceneInput">내 장면 (주제)</label>
+      <textarea id="sceneInput" placeholder="예) 밤하늘 별빛 아래 책 읽는 아이" rows="3" spellcheck="false"></textarea>
+      <p class="hint" id="sceneHint"></p>
+      <div class="sub-label">이런 장면은 어때요? 눌러서 넣어 보세요</div>
+      <div class="examples" id="examples"></div>
+      <button type="button" class="clear-scene" id="clearScene">장면 지우고 기본 예시로 돌아가기</button>
+    </div>
+  </section>
+
+  <!-- 3. 1단계 -->
+  <section id="prompt1">
+    <div class="sec-head">
+      <div class="sec-no">Step 3</div>
+      <h2>1단계 — 정지 그림 한 장 만들기</h2>
+      <p>ChatGPT에서 <b>새 채팅</b>을 열고 이 프롬프트를 붙여 넣으세요. HTML 파일 하나가 나옵니다. 그림이 마음에 안 들면 그 자리에서 "잉어를 더 크게", "종이 질감을 더 살려 줘"처럼 말하면 됩니다. <b>그림이 마음에 들 때</b> 다음으로 넘어가세요.</p>
+    </div>
+    <div class="prompt-card">
+      <div class="pc-head">
+        <span class="pc-step">1단계</span>
+        <span class="pc-title">정지 그림</span>
+        <span class="pc-meta" data-meta></span>
+        <button type="button" class="copy" data-copy="p1">복사하기</button>
+      </div>
+      <pre class="prompt-body" id="p1"></pre>
+    </div>
+  </section>
+
+  <!-- 4. 2단계 -->
+  <section id="prompt2">
+    <div class="sec-head">
+      <div class="sec-no">Step 4</div>
+      <h2>2단계 — 6초 움직이는 애니메이션 만들기</h2>
+      <p>1단계와 <b>같은 채팅</b>에 이어서 붙여 넣으세요. 30fps로 6초, 끝나면 다시 처음부터 이어지는 애니메이션이 나옵니다. 화면에 나온 그림은 그대로 두고 움직임만 입히는 지시라서, 1단계 그림의 색과 질감이 유지됩니다.</p>
+    </div>
+    <div class="prompt-card">
+      <div class="pc-head">
+        <span class="pc-step">2단계</span>
+        <span class="pc-title">6초 애니메이션</span>
+        <span class="pc-meta" data-meta></span>
+        <button type="button" class="copy" data-copy="p2">복사하기</button>
+      </div>
+      <pre class="prompt-body" id="p2"></pre>
+    </div>
+    <p class="note">
+      <b>왜 HTML인가요?</b> ChatGPT가 코드로 그림을 그리면, 움직임까지 코드로 정확하게 지시할 수 있습니다.
+      이미지 생성으로는 "이 부분만 이렇게 움직여"가 안 되거든요. 이 방식은 화면 녹화만 하면 바로 릴스가 됩니다.
+    </p>
+  </section>
+
+  <!-- 5. 다듬기 -->
+  <section id="polish">
+    <div class="sec-head">
+      <div class="sec-no">Step 5</div>
+      <h2>3단계 — 안 되면 이 여섯 개로 다듬으세요</h2>
+      <p>애니메이션을 보면서 걸리는 부분 하나를 골라 <b>같은 채팅에</b> 붙여 넣으세요. <b>한 번에 하나씩</b>만 보내는 게 요령입니다. 여러 개를 한꺼번에 보내면 ChatGPT가 엉킵니다. 잘 만든 영상도 보통 두세 번은 다듬어야 나옵니다.</p>
+    </div>
+    <div class="polish" id="polishGrid"></div>
+  </section>
+
+  <!-- 6. 가이드 -->
+  <section id="guide">
+    <div class="sec-head">
+      <div class="sec-no">How to</div>
+      <h2>처음이시면 이 순서대로만 하세요</h2>
+      <p>다섯 단계, 20분이면 첫 릴스 한 편이 나옵니다.</p>
+    </div>
+    <ol class="guide">
+      <li>
+        <h3>ChatGPT를 엽니다</h3>
+        <p><kbd>chatgpt.com</kbd>에 접속해서 <b>새 채팅</b>을 시작하세요. 무료 플랜도 됩니다. 다만 답이 길어서 무료 플랜은 중간에 잘릴 때가 있어요.</p>
+        <span class="tip">중간에 멈추면 그냥 <b>"계속"</b>이라고 보내면 이어서 만들어 줍니다.</span>
+      </li>
+      <li>
+        <h3>1단계 프롬프트를 붙여 넣고 보냅니다</h3>
+        <p>위의 <b>복사하기</b>를 누르고, 채팅창에 붙여 넣어 보내세요. 한참 생각하더니 그림 코드를 줍니다. 몇 분 걸릴 수 있으니 기다리세요.</p>
+        <span class="tip">ChatGPT 화면에 미리보기(캔버스)가 뜨면 그걸로 바로 보면 됩니다. 미리보기가 없으면 코드를 복사해 <kbd>painting.html</kbd>로 저장해서 열면 돼요.</span>
+      </li>
+      <li>
+        <h3>그림부터 마음에 들게 만듭니다</h3>
+        <p>그림이 어색하면 <b>움직이기 전에</b> 고치세요. "아이를 더 크게", "색을 더 차분하게", "종이 결을 더 살려 줘" — 이렇게 말로 하면 됩니다. 두세 번 고치면 확 좋아집니다.</p>
+        <span class="tip">여기서 대충 넘어가면 영상도 대충 나옵니다. 그림이 8할입니다.</span>
+      </li>
+      <li>
+        <h3>2단계 프롬프트를 이어서 보냅니다</h3>
+        <p><b>같은 채팅</b>에 2단계를 붙여 넣으세요. 새 채팅에 보내면 1단계 그림을 잊어버립니다. 이제 그림이 움직입니다.</p>
+        <span class="tip">검은 화면만 나오거나 멈추면, 3단계의 ⑥번을 보내세요. 그래도 안 되면 1단계부터 새 채팅으로 다시 시작하는 게 빠릅니다.</span>
+      </li>
+      <li>
+        <h3>다듬고, 녹화해서 9:16 릴스로 올립니다</h3>
+        <p>마음에 들 때까지 3단계 카드로 다듬은 다음, 화면을 크게 띄우고 녹화하세요. 아이폰·안드로이드는 기본 화면 녹화, PC는 <kbd>Win</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd>(윈도우) 또는 <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>5</kbd>(맥)입니다. 녹화한 영상을 인스타 편집기나 캡컷에서 9:16으로 잘라 올리면 끝.</p>
+        <span class="tip">녹화 직전에 페이지를 <b>새로 고침</b>하세요. 첫 프레임부터 깔끔하게 찍힙니다. 앱 화면이 같이 찍히면 캡컷에서 위아래를 잘라 내면 됩니다.</span>
+      </li>
+    </ol>
+    <p class="note">
+      <strong>한 가지 더.</strong> 같은 화풍으로 두 번 돌려서 더 잘 나온 걸 쓰세요. 매번 새로 그리기 때문에 결과가 다릅니다.
+      그리고 첫 결과물이 조금 투박한 게 정상이에요. 원래 이 작업은 한 편에 30~90분씩 다듬어 만드는 겁니다. 처음엔 5분짜리로 시작하시면 됩니다.
+    </p>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">더콘텐츠스쿨 <span>·</span> 오현주 대표강사</div>
+    <p>AI 시대에 강사가 되고 싶은 분들을 위해 만드는 무료 자료입니다.<br>가져다 쓰셔도 좋아요. 수업에 쓰실 땐 출처만 남겨 주세요.</p>
+    <p class="fine">© 2026 더콘텐츠스쿨 · 이 페이지의 프롬프트는 ChatGPT·Claude 모두에서 동작합니다.</p>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ─────────────── 데이터 ─────────────── */
+  var STYLES = [
+    {
+      key:"watercolour", num:"01", ko:"수채화", en:"Watercolour",
+      feel:"번지는 물감, 종이 결, 마른 자국",
+      scene:"A koi pond seen from straight above: three koi (red, orange, and white with red patches) glide between green lily pads and one pink lotus over blue-green water.",
+      sceneKo:"연못 위를 미끄러지듯 헤엄치는 잉어 세 마리",
+      style:"Watercolour on cold-press paper: soft washes with blooms and hard dried edges, pigment granulation, a few small splatters, the paper grain showing through. Only a few colours: warm koi against a cool blue-green pond.",
+      action:"The koi glide along slow curving paths, each at its own pace, their bodies flexing in an S wave from head to tail with the fins trailing behind. The lily pads drift and turn a little, soft ripple rings spread from the pads and from the lead fish, and one sun glint crosses the water.",
+      motion:"Ripples are soft, broken painted rings that fade as they grow. The paint moves, but the paper grain stays fixed to the frame."
+    },
+    {
+      key:"mosaic", num:"02", ko:"로마 모자이크", en:"Roman Mosaic",
+      feel:"작은 타일, 줄눈, 돌의 미세한 색차",
+      scene:"A sea turtle seen from above swims over sand and coral, laid as a Roman floor mosaic.",
+      sceneKo:"모자이크 바닥 위를 헤엄치는 바다거북",
+      style:"A Roman tile mosaic: small square and cut stone tiles (about 12 px wide on the 1080 px canvas) laid in rows that follow the outlines of every shape, grout lines between them, each tile with its own slight colour shift and a small bevel highlight. A stone palette of ochre, terracotta, sea green, slate and cream, plus one glass tile accent.",
+      action:"The turtle swims across the floor with slow, powerful flipper strokes and banks once, while sunlight plays across the tiles as if through water.",
+      motion:"The turtle is its own layer of tiles gliding over a fixed floor. Tiles never slide through each other or melt. Light moves as a shimmer of brighter tiles."
+    },
+    {
+      key:"sumie", num:"03", ko:"수묵화", en:"Sumi-e Ink",
+      feel:"먹의 농담, 번진 가장자리, 여백",
+      scene:"A red-crowned crane flies through misty mountains; its mate joins it near a red sun.",
+      sceneKo:"안개 낀 산을 나는 두루미와 붉은 해",
+      style:"Sumi-e ink wash on rice paper: black ink from deep black to pale grey washes, wet bleeding edges, dry brush strokes, a lot of empty paper and mist. The red sun is the only colour.",
+      action:"The crane flies with big, full wingbeats (the wings sweep up and down about 60 degrees), climbing and dipping, while the mountain ridges slide past in layers and the mist drifts. Halfway through, its mate curves in from the side and flies next to it near the red sun.",
+      motion:"Mist blooms and fades like a wet ink wash. The ridges are brush strokes that slide past in depth layers, the near ones fastest."
+    },
+    {
+      key:"impasto", num:"04", ko:"유화 임파스토", en:"Impasto Oil",
+      feel:"두꺼운 물감, 나이프 자국, 솟은 붓털",
+      scene:"A humpback whale breaches out of a stormy sea, most of its body in the air with its long fins spread, and a small boat for scale.",
+      sceneKo:"거친 바다 위로 솟구치는 혹등고래",
+      style:"An impasto oil painting: thick paint with visible palette knife and bristle strokes that follow the forms, swirling strokes in the sea and sky, raised paint ridges that catch the light, rich broken colour instead of flat fills, and the canvas weave showing where the paint is thin. An original painting, not a copy of a famous one.",
+      action:"The whale rises to its peak, hangs for a moment and crashes back into the sea in a big splash of paint strokes. Spray flies, the waves roll and the boat rocks.",
+      motion:"Waves are rolling paint strokes and spray is flicks of thick paint. The canvas weave stays fixed to the frame."
+    },
+    {
+      key:"nocturne", num:"05", ko:"밤하늘 과슈", en:"Nocturne Gouache",
+      feel:"불투명한 밤색, 달빛 테두리, 반딧불",
+      scene:"A deer steps out of the trees into a night meadow and fireflies rise around it under the moon.",
+      sceneKo:"달빛 아래 풀밭으로 나온 사슴과 반딧불",
+      style:"A night painting in gouache: dark, opaque layers of blue and green, matte paint with visible bristle texture, the moonlight as a pale edge along the deer, and the fireflies as small opaque warm dabs with a soft glow.",
+      action:"The deer walks out of the tree line and lifts its head. Fireflies rise from the grass and drift around it, blinking on and off, the grass sways and the moon glows behind thin clouds.",
+      motion:"The light is painted on, not a digital glow: each firefly is a warm dab that brightens and fades. The bristle texture moves with each object, and the paper grain stays fixed to the frame."
+    },
+    {
+      key:"botanical", num:"06", ko:"식물 세밀화", en:"Botanical Plate",
+      feel:"가는 잉크선, 크림 종이, 도감의 여백",
+      scene:"A blue butterfly flutters across a meadow drawn as a botanical plate and lands on a daisy.",
+      sceneKo:"들꽃 도감 위로 날아온 푸른 나비",
+      style:"A botanical illustration plate: fine ink outlines with soft watercolour fills on cream paper, the plants laid out airy and readable like a scientific drawing (daisies, buttercups, clover, grasses, buds), and the butterfly's blue wings with fine vein lines.",
+      action:"The butterfly flutters across the plate in a looping flight with fast wingbeats while a second one crosses behind it. The stems bend gently, then it lands on a daisy and slowly opens and closes its wings.",
+      motion:"Every line stays the same drawing: a wing at the same angle always looks the same, with no flickering lines. Plants bend from their base like real stems."
+    },
+    {
+      key:"papercut", num:"07", ko:"페이퍼컷", en:"Paper Cut",
+      feel:"여러 겹 자른 종이, 그림자, 칼자국",
+      scene:"A tissue paper jellyfish pulses up through layers of cut paper sea and kelp while a school of paper fish parts around it.",
+      sceneKo:"종이 바다를 떠오르는 해파리와 물고기 떼",
+      style:"A paper cut diorama: 6 to 9 layers of cut paper from pale surface blue to near black, each layer casting a soft shadow on the one behind it, visible paper fibre and slightly uneven knife-cut edges. The jellyfish's bell is stacked translucent tissue paper with light glowing through it, its tentacles thin paper strips and threads.",
+      action:"The jellyfish pulses upward toward the light while the paper layers slide past at different speeds, like a multiplane camera. A school of paper fish swims the other way and parts around it, and punched paper dots drift down like snow.",
+      motion:"Everything is a piece of cut paper: pieces slide, hinge, fold and curl, but never melt. The bell pulses like a folding paper lantern, and the paper strips twist to show their paler back."
+    },
+    {
+      key:"nouveau", num:"08", ko:"아르누보", en:"Art Nouveau",
+      feel:"두꺼운 윤곽선, 휩쓸리는 곡선, 금빛",
+      scene:"A hummingbird hovers and drinks from a red trumpet flower inside an ornamental poster frame.",
+      sceneKo:"장식 액자 안에서 꿀을 먹는 벌새",
+      style:"An Art Nouveau poster: flowing whiplash lines, a thick dark outline around every shape, flat muted fills (sage, olive, gold ochre, cream, deep red), a circular halo behind the bird with a fine decorative pattern, stylised leaves and vines growing into the frame, and aged lithograph paper. No text or lettering.",
+      action:"The hummingbird hovers with fast blurred wingbeats, darts in to drink from the flower and backs out again, while the vines and leaves sway and the halo pattern slowly turns.",
+      motion:"Shapes move as clean outlined pieces, like a printed poster come to life. The wings blur as fast overlapping strokes, and the paper texture stays fixed to the frame."
+    },
+    {
+      key:"goldenhour", num:"09", ko:"골든아워", en:"Golden Hour",
+      feel:"낮게 깔린 해, 긴 그림자, 노란 밀밭",
+      scene:"A swallow skims a ripe wheat field at sunset and snaps an insect out of the air.",
+      sceneKo:"노을 진 밀밭을 스치는 제비",
+      style:"Golden hour gouache: warm opaque paint, the low sun turning the wheat gold and orange, long shadows, a soft hazy sky and visible brush texture.",
+      action:"The swallow swoops low over the wheat in fast arcs with sharp wingbeats, banks and catches an insect in mid air, while the wheat waves in the wind and slides past below.",
+      motion:"The wheat bends in waves of painted strokes. The brush texture moves with each object, and the paper grain stays fixed to the frame."
+    },
+    {
+      key:"ghibli", num:"10", ko:"지브리 스타일", en:"Ghibli Style",
+      feel:"손으로 칠한 배경, 큰 여름 구름, 초록",
+      scene:"Two kids, a girl and a boy, run through a sunny green meadow under big summer clouds, laughing.",
+      sceneKo:"커다란 여름 구름 아래 풀밭을 달리는 두 아이",
+      style:"A hand-painted anime film background in gouache, the look of classic Japanese animated films: lush greens, big white cumulus clouds in a blue sky, tiny white and yellow flowers in the grass and visible brush texture. The kids are drawn with clean, simple lines and soft flat colour, with natural proportions. An original look and original characters, not a copy of any film.",
+      action:"The kids run through the grass with the camera moving alongside them. The girl looks back and laughs, the boy smiles, and their hair, clothes and the grass flutter in the wind while the clouds drift.",
+      motion:"Like hand-drawn animation: the kids are drawn on twos (a new pose every 2 frames), and the background layers slide past at different speeds."
+    }
+  ];
+
+  var OWN_ACTION = "The main subject does what it naturally does (swims, flies, runs, grows) and travels through the scene, and the rest of the scene reacts to it.";
+
+  var EXAMPLES = [
+    {ko:"밤하늘 별빛 아래 책 읽는 아이", en:"A child reading a book under a starry night sky"},
+    {ko:"봄바람에 흔들리는 벚꽃길", en:"A cherry blossom road swaying in the spring breeze"},
+    {ko:"비 오는 날 창가에 앉은 고양이", en:"A cat sitting by the window on a rainy day"},
+    {ko:"한강에서 노을 보는 가족", en:"A family watching the sunset over the Han River"},
+    {ko:"할머니 댁 마당의 감나무와 참새", en:"A persimmon tree and sparrows in grandmother's yard"},
+    {ko:"새벽 시장을 걷는 사람들", en:"People walking through a dawn market"}
+  ];
+
+  /* ─────────────── 프롬프트 ─────────────── */
+  function buildP1(scene, style){
+    return "Create one self-contained HTML file that shows a single still painting in a 9:16 frame: a 1080x1920 canvas scaled to fit the window, black outside it. Draw everything in code with the Canvas 2D API: no images, no external files, no libraries. Use a seeded random number generator so the picture looks the same on every load.\n\n"
+      + "Scene: " + scene + "\n\n"
+      + "Style: " + style + "\n\n"
+      + "It must look like a real piece made in that medium, not a digital filter: real texture, uneven edges, the marks a hand and a tool would leave. No flat vector shapes and no plain digital gradients.\n\n"
+      + "Draw the main subject, every other creature and each depth layer of the background in its own function, so the picture can be animated later. Keep the main subject in the middle half of the frame with room around it to move. No text on screen. Reply with only the HTML file.";
+  }
+
+  function buildP2(action, motion){
+    return "Now turn this painting into a 6 second animation (180 frames at 30 fps) that starts again when it ends. Keep the look exactly as it is: every colour, texture and shape stays the same, and frame 0 shows the full painting.\n\n"
+      + "What happens: " + action + "\n\n"
+      + "Rules:\n"
+      + "1. Everything lives. Every painted element moves all the time: the main subject with purpose, everything else with small idle motion.\n"
+      + "2. How it moves in this medium: " + motion + "\n"
+      + "3. Every movement has a reason inside the scene: wind, current, light, or the subject passing by.\n"
+      + "4. The subject's own action reads at a glance: big, clear poses (wingbeats, strokes, steps), never a tiny wobble. It travels through its world, and the camera keeps it in the middle half of the frame: a slow push in from the full painting to about 1.3x, a soft follow, and the world sliding past behind it, the near layers faster than the far ones.\n"
+      + "5. Smooth: every position and angle moves on an eased curve, with no jumps.\n\n"
+      + "Base every frame on the elapsed time (frame = seconds x 30), so it plays at the same speed on any computer. Paint the textured layers once into offscreen canvases when the page loads and only move and combine them each frame, so it plays smoothly. Reply with only the full HTML file.";
+  }
+
+  /* 다듬기 6종 — 한국어 지시 + 필요한 기술 용어만 영어로 */
+  var POLISH = [
+    {
+      t:"움직임이 너무 적을 때",
+      d:"그림은 나왔는데 거의 정지 화면처럼 보일 때 씁니다.",
+      p:"주인공이 거의 안 움직여. 주인공의 동작을 두 배로 크게 만들고, 장면 안을 더 멀리까지 이동하게 해줘. 카메라는 계속 화면 가운데 절반 안에 주인공을 잡아줘. 나머지 분위기는 그대로 두고, 전체 HTML 파일로 다시 보내줘."
+    },
+    {
+      t:"일부가 멈춰 있을 때",
+      d:"주인공은 움직이는데 배경·잎·물결이 붙박이처럼 굳어 있을 때 씁니다.",
+      p:"그림의 일부 요소가 전혀 움직이지 않아. 모든 요소에 그 장면에서 자연스러운 작은 대기 움직임(idle motion)을 넣어줘. 바람, 물결, 빛, 흔들림처럼 장면 안에서 이유가 설명되는 움직임이어야 해. 전체 HTML 파일로 다시 보내줘."
+    },
+    {
+      t:"너무 디지털 같을 때",
+      d:"질감이 없고 포토샵 필터를 씌운 것처럼 밋밋할 때 씁니다.",
+      p:"디지털 필터를 씌운 것 같고 진짜 재료로 만든 느낌이 안 나. 그 재료의 질감을 더 넣어줘 — 고르지 않은 가장자리, 손과 도구가 남긴 붓자국·나이프 자국, 종이 결이나 캔버스 천이 비쳐 보이는 것까지. 움직임은 지금 그대로 두고, 전체 HTML 파일로 다시 보내줘."
+    },
+    {
+      t:"버벅거리거나 느릴 때",
+      d:"움직임이 끊기고 프레임이 떨어져서 뚝뚝 끊겨 보일 때 씁니다.",
+      p:"애니메이션이 버벅거리고 느리게 재생돼. 질감이 들어간 레이어는 페이지가 열릴 때 offscreen canvas에 한 번만 그리고, 매 프레임은 그 캔버스들을 움직여서 합치기만 하게 바꿔줘. 모양이 실제로 바뀌는 부분만 다시 그려줘. 전체 HTML 파일로 다시 보내줘."
+    },
+    {
+      t:"동작이 뚝뚝 끊길 때",
+      d:"속도는 괜찮은데 위치나 각도가 갑자기 튀거나 순간이동할 때 씁니다.",
+      p:"일부 움직임이 갑자기 튀거나 끊겨. 모든 위치, 각도, 밝기를 부드러운 이징 곡선(eased curve) 위에서 움직이게 해줘. 프레임과 프레임 사이에 갑자기 값이 바뀌는 곳이 없어야 해. 전체 HTML 파일로 다시 보내줘."
+    },
+    {
+      t:"검은 화면이거나 오류일 때",
+      d:"아무것도 안 보이거나 에러가 뜰 때 마지막으로 보냅니다.",
+      p:"화면이 검게만 나오거나 오류가 떠. 코드에서 오류를 찾아서 고치고, 전체 HTML 파일을 다시 보내줘. 만약 고칠 수 없으면 처음부터 다시 만들어줘."
+    }
+  ];
+
+  /* ─────────────── 상태 ─────────────── */
+  var currentKey = "watercolour";
+  var sceneText = "";
+  var grid = document.getElementById("styleGrid");
+  var sceneInput = document.getElementById("sceneInput");
+  var sceneHint = document.getElementById("sceneHint");
+  var p1El = document.getElementById("p1");
+  var p2El = document.getElementById("p2");
+  var metas = document.querySelectorAll("[data-meta]");
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+
+  function byKey(k){
+    for (var i=0;i<STYLES.length;i++) if (STYLES[i].key===k) return STYLES[i];
+    return STYLES[0];
+  }
+  function esc(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  /* ─────────────── 화풍 카드 ─────────────── */
+  function buildCards(){
+    var frag = document.createDocumentFragment();
+    STYLES.forEach(function(s){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "style-card";
+      b.setAttribute("aria-pressed", s.key===currentKey ? "true" : "false");
+      b.setAttribute("data-key", s.key);
+      b.innerHTML = '<span class="num">' + s.num + '</span>'
+        + '<span class="thumb"><canvas width="320" height="240"></canvas></span>'
+        + '<span class="name">' + s.ko + '</span>'
+        + '<span class="en">' + s.en + '</span>'
+        + '<span class="feel">' + s.feel + '</span>';
+      b.addEventListener("click", function(){
+        select(s.key);
+      });
+      frag.appendChild(b);
+    });
+    grid.appendChild(frag);
+    // draw previews after layout
+    requestAnimationFrame(function(){
+      STYLES.forEach(function(s){
+        var c = grid.querySelector('[data-key="'+s.key+'"] canvas');
+        if (c) drawPreview(s.key, c);
+      });
+    });
+  }
+
+  function select(k){
+    currentKey = k;
+    Array.prototype.forEach.call(grid.children, function(el){
+      el.setAttribute("aria-pressed", el.getAttribute("data-key")===k ? "true" : "false");
+    });
+    render();
+  }
+
+  /* ─────────────── 렌더 ─────────────── */
+  function render(){
+    var s = byKey(currentKey);
+    var custom = sceneText.replace(/\s+/g," ").trim();
+    var scene = custom || s.scene;
+    var action = custom ? OWN_ACTION : s.action;
+
+    p1El.innerHTML = promptHTML(
+      "Create one self-contained HTML file that shows a single still painting in a 9:16 frame: a 1080x1920 canvas scaled to fit the window, black outside it. Draw everything in code with the Canvas 2D API: no images, no external files, no libraries. Use a seeded random number generator so the picture looks the same on every load.\n\nScene: ",
+      scene,
+      "\n\nStyle: ",
+      s.style,
+      "\n\nIt must look like a real piece made in that medium, not a digital filter: real texture, uneven edges, the marks a hand and a tool would leave. No flat vector shapes and no plain digital gradients.\n\nDraw the main subject, every other creature and each depth layer of the background in its own function, so the picture can be animated later. Keep the main subject in the middle half of the frame with room around it to move. No text on screen. Reply with only the HTML file."
+    );
+
+    p2El.innerHTML = promptHTML(
+      "Now turn this painting into a 6 second animation (180 frames at 30 fps) that starts again when it ends. Keep the look exactly as it is: every colour, texture and shape stays the same, and frame 0 shows the full painting.\n\nWhat happens: ",
+      action,
+      "\n\nRules:\n1. Everything lives. Every painted element moves all the time: the main subject with purpose, everything else with small idle motion.\n2. How it moves in this medium: ",
+      s.motion,
+      "\n3. Every movement has a reason inside the scene: wind, current, light, or the subject passing by.\n4. The subject's own action reads at a glance: big, clear poses (wingbeats, strokes, steps), never a tiny wobble. It travels through its world, and the camera keeps it in the middle half of the frame: a slow push in from the full painting to about 1.3x, a soft follow, and the world sliding past behind it, the near layers faster than the far ones.\n5. Smooth: every position and angle moves on an eased curve, with no jumps.\n\nBase every frame on the elapsed time (frame = seconds x 30), so it plays at the same speed on any computer. Paint the textured layers once into offscreen canvases when the page loads and only move and combine them each frame, so it plays smoothly. Reply with only the full HTML file."
+    );
+
+    var meta = "화풍: " + s.ko + (custom ? " · 장면: 내가 쓴 것" : " · 장면: 기본 예시");
+    Array.prototype.forEach.call(metas, function(m){ m.textContent = meta; });
+
+    sceneHint.innerHTML = custom
+      ? "지금 <b>내가 쓴 장면</b>으로 들어가 있어요. 움직임 설명은 그 장면에 맞게 ChatGPT가 알아서 잡고, 화풍의 질감·붓터치·움직임 규칙은 그대로 유지됩니다."
+      : "비워 두면 <b>" + s.ko + "</b> 기본 장면이 들어갑니다 — " + s.sceneKo + ".";
+  }
+
+  function promptHTML(a, scene, b, style, c){
+    return esc(a) + "<mark class='slot'>" + esc(scene) + "</mark>"
+         + esc(b) + "<mark class='slot'>" + esc(style) + "</mark>" + esc(c);
+  }
+
+  /* copy용 순수 텍스트 */
+  function plainP1(){
+    var s = byKey(currentKey);
+    var custom = sceneText.replace(/\s+/g," ").trim();
+    return buildP1(custom || s.scene, s.style);
+  }
+  function plainP2(){
+    var s = byKey(currentKey);
+    var custom = sceneText.replace(/\s+/g," ").trim();
+    return buildP2(custom ? OWN_ACTION : s.action, s.motion);
+  }
+
+  /* ─────────────── 장면 입력 ─────────────── */
+  sceneInput.addEventListener("input", function(){
+    sceneText = sceneInput.value;
+    render();
+  });
+  document.getElementById("clearScene").addEventListener("click", function(){
+    sceneInput.value = ""; sceneText = ""; render(); sceneInput.focus();
+  });
+
+  function buildExamples(){
+    var box = document.getElementById("examples");
+    EXAMPLES.forEach(function(ex){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "ex";
+      b.textContent = ex.ko;
+      b.title = "영어로는: " + ex.en;
+      b.addEventListener("click", function(){
+        if (sceneInput.value.trim() === ex.ko) return;
+        sceneInput.value = ex.ko;
+        sceneText = ex.ko;
+        render();
+        showToast("장면을 넣었어요. 프롬프트에 바로 반영됐습니다.");
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* ─────────────── 다듬기 카드 ─────────────── */
+  function buildPolish(){
+    var box = document.getElementById("polishGrid");
+    POLISH.forEach(function(item, i){
+      var card = document.createElement("div");
+      card.className = "pcard";
+      card.innerHTML = '<h3><span>' + (i+1) + '</span>' + item.t + '</h3>'
+        + '<p>' + item.d + '</p>'
+        + '<button type="button" class="copy" data-text="' + esc(item.p).replace(/"/g,"&quot;") + '">복사하기</button>';
+      box.appendChild(card);
+    });
+  }
+
+  /* ─────────────── 복사 ─────────────── */
+  function copyText(text){
+    return new Promise(function(resolve){
+      if (navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(text).then(function(){ resolve(true); }, function(){ resolve(fallback(text)); });
+      } else {
+        resolve(fallback(text));
+      }
+    });
+  }
+  function fallback(text){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly","");
+      ta.style.position = "fixed";
+      ta.style.top = "-2000px";
+      ta.style.left = "0";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return !!ok;
+    }catch(e){ return false; }
+  }
+
+  function flash(btn){
+    var orig = btn.getAttribute("data-orig") || btn.textContent;
+    btn.setAttribute("data-orig", orig);
+    btn.textContent = "복사했어요 ✓";
+    btn.classList.add("done");
+    setTimeout(function(){
+      btn.textContent = orig;
+      btn.classList.remove("done");
+    }, 1900);
+  }
+
+  function showToast(msg){
+    toastEl.innerHTML = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2400);
+  }
+
+  document.addEventListener("click", function(e){
+    var btn = e.target.closest ? e.target.closest(".copy") : null;
+    if (!btn) return;
+    var which = btn.getAttribute("data-copy");
+    var text = which === "p1" ? plainP1() : which === "p2" ? plainP2() : btn.getAttribute("data-text");
+    if (!text) return;
+    copyText(text).then(function(ok){
+      if (ok){
+        flash(btn);
+        showToast("복사했어요. ChatGPT에 붙여 넣으면 됩니다.");
+      } else {
+        showToast("자동 복사가 안 됐어요. 프롬프트를 길게 눌러 직접 복사해 주세요.");
+      }
+    });
+  });
+
+  /* ─────────────── 미니 프리뷰 (Canvas) ─────────────── */
+  function mulberry(seed){
+    var a = seed >>> 0;
+    return function(){
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  function drawPreview(key, canvas){
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    var W = canvas.width, H = canvas.height;
+    var R = mulberry(key.length * 977 + key.charCodeAt(0) * 31 + 7);
+    ctx.clearRect(0,0,W,H);
+    try{
+      (PAINTERS[key] || PAINTERS.watercolour)(ctx, W, H, R);
+    }catch(e){ /* preview only */ }
+  }
+
+  var PAINTERS = {
+    watercolour: function(c,W,H,R){
+      c.fillStyle = "#F4EEDF"; c.fillRect(0,0,W,H);
+      // 물맛 번짐
+      for (var i=0;i<7;i++){
+        var x=R()*W, y=R()*H*0.9, r=30+R()*70;
+        var g=c.createRadialGradient(x,y,2,x,y,r);
+        g.addColorStop(0,"rgba(46,110,116,.34)");
+        g.addColorStop(.65,"rgba(46,110,116,.13)");
+        g.addColorStop(1,"rgba(46,110,116,0)");
+        c.fillStyle=g; c.beginPath(); c.arc(x,y,r,0,7); c.fill();
+      }
+      // 마른 자국 테두리
+      c.strokeStyle="rgba(38,92,98,.35)"; c.lineWidth=1.4;
+      c.beginPath(); c.ellipse(W*0.5,H*0.55,W*0.30,H*0.22,-0.12,0,7); c.stroke();
+      // 잉어
+      function koi(x,y,s,col){
+        c.fillStyle=col; c.beginPath();
+        c.ellipse(x,y,20*s,9*s,-0.3,0,7); c.fill();
+        c.beginPath(); c.moveTo(x+17*s,y-2*s); c.lineTo(x+30*s,y-11*s); c.lineTo(x+29*s,y+7*s); c.closePath(); c.fill();
+      }
+      koi(W*0.46,H*0.55,1.15,"rgba(214,96,60,.85)");
+      koi(W*0.62,H*0.42,0.9,"rgba(240,168,86,.8)");
+      koi(W*0.36,H*0.68,0.8,"rgba(250,244,236,.92)");
+      // 연잎
+      c.fillStyle="rgba(72,124,86,.55)";
+      c.beginPath(); c.ellipse(W*0.24,H*0.34,20,13,0.3,0,7); c.fill();
+      c.beginPath(); c.ellipse(W*0.78,H*0.7,17,11,-0.2,0,7); c.fill();
+      // 스플래터
+      for (var j=0;j<40;j++){
+        c.fillStyle="rgba(52,104,110,"+(0.05+R()*0.2)+")";
+        c.beginPath(); c.arc(R()*W,R()*H,0.6+R()*1.9,0,7); c.fill();
+      }
+      // 종이 결
+      c.globalAlpha=0.07; c.strokeStyle="#7a6f56";
+      for (var k=0;k<120;k++){
+        c.beginPath(); c.moveTo(R()*W,R()*H); c.lineTo(R()*W,R()*H+2); c.stroke();
+      }
+      c.globalAlpha=1;
+    },
+    mosaic: function(c,W,H,R){
+      c.fillStyle="#2E4E4A"; c.fillRect(0,0,W,H);
+      var ts=11;
+      var pal=["#C9A25E","#B4703F","#7FA08C","#5A7078","#E8DDC4","#8E5A3C"];
+      for (var y=0;y<H;y+=ts){
+        for (var x=0;x<W;x+=ts){
+          var d=Math.hypot((x-W*0.5)/(W*0.42),(y-H*0.55)/(H*0.4));
+          var inside = d < 1 - 0.16*Math.sin(x*0.09) - 0.1*Math.cos(y*0.12);
+          var col = inside ? (d<0.35?"#9FBEA8":"#C9A25E") : pal[Math.floor(R()*pal.length)];
+          var jx=(R()-0.5)*1.6, jy=(R()-0.5)*1.6;
+          c.fillStyle=col; c.globalAlpha=0.86+R()*0.14;
+          c.fillRect(x+1.2+jx,y+1.2+jy,ts-2.6,ts-2.6);
+          c.globalAlpha=0.28; c.fillStyle="#fff";
+          c.fillRect(x+1.2+jx,y+1.2+jy,ts-2.6,1.6);
+          c.globalAlpha=1;
+        }
+      }
+      // 거북 윤곽
+      c.strokeStyle="rgba(30,52,48,.5)"; c.lineWidth=2;
+      c.beginPath(); c.ellipse(W*0.5,H*0.55,W*0.2,H*0.15,0,0,7); c.stroke();
+    },
+    sumie: function(c,W,H,R){
+      c.fillStyle="#F6F1E4"; c.fillRect(0,0,W,H);
+      // 붉은 해
+      c.fillStyle="rgba(178,54,40,.85)";
+      c.beginPath(); c.arc(W*0.74,H*0.26,26,0,7); c.fill();
+      // 산 능선
+      var layers=[{y:0.72,a:0.5,w:3},{y:0.62,a:0.34,w:2.2},{y:0.52,a:0.22,w:1.6}];
+      layers.forEach(function(L){
+        c.fillStyle="rgba(26,26,24,"+L.a+")";
+        c.beginPath(); c.moveTo(0,H);
+        for (var x=0;x<=W;x+=10){
+          var y=H*L.y - Math.sin(x*0.021+L.y*9)*26 - Math.sin(x*0.006)*18;
+          c.lineTo(x,y);
+        }
+        c.lineTo(W,H); c.closePath(); c.fill();
+      });
+      // 두루미 느낌 붓질
+      c.strokeStyle="rgba(20,20,18,.8)"; c.lineWidth=2.4; c.lineCap="round";
+      c.beginPath(); c.moveTo(W*0.32,H*0.4); c.lineTo(W*0.42,H*0.3); c.stroke();
+      c.beginPath(); c.moveTo(W*0.32,H*0.4); c.lineTo(W*0.24,H*0.34); c.stroke();
+      c.fillStyle="rgba(20,20,18,.85)"; c.beginPath(); c.arc(W*0.45,H*0.28,3.4,0,7); c.fill();
+      // 안개 / 마른 붓
+      for (var i=0;i<26;i++){
+        c.fillStyle="rgba(255,255,255,"+(0.2+R()*0.4)+")";
+        c.beginPath(); c.ellipse(R()*W,H*(0.4+R()*0.4),30+R()*50,8+R()*14,0,0,7); c.fill();
+      }
+    },
+    impasto: function(c,W,H,R){
+      c.fillStyle="#2B3A44"; c.fillRect(0,0,W,H);
+      // 하늘-바다
+      var g=c.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,"#5B6E78"); g.addColorStop(0.45,"#8899A1"); g.addColorStop(0.5,"#2F4A57"); g.addColorStop(1,"#1C2C36");
+      c.fillStyle=g; c.fillRect(0,0,W,H);
+      // 두꺼운 붓자국
+      for (var i=0;i<230;i++){
+        var x=R()*W, y=R()*(H*0.55)+H*0.45;
+        var ang=(R()-0.5)*0.9 + (y>H*0.5?0.25:-0.4);
+        var len=8+R()*22, lw=3+R()*6;
+        var light=R()>0.55;
+        c.strokeStyle = light ? "rgba(228,236,238,.55)" : "rgba(16,34,44,.5)";
+        c.lineWidth=lw; c.lineCap="round";
+        c.beginPath(); c.moveTo(x,y); c.lineTo(x+Math.cos(ang)*len,y+Math.sin(ang)*len); c.stroke();
+        c.strokeStyle="rgba(255,255,255,.16)"; c.lineWidth=1;
+        c.beginPath(); c.moveTo(x,y-lw*0.35); c.lineTo(x+Math.cos(ang)*len,y+Math.sin(ang)*len-lw*0.35); c.stroke();
+      }
+      // 고래 실루엣
+      c.fillStyle="rgba(240,244,246,.92)";
+      c.beginPath();
+      c.moveTo(W*0.30,H*0.42);
+      c.bezierCurveTo(W*0.42,H*0.22,W*0.66,H*0.24,W*0.70,H*0.44);
+      c.bezierCurveTo(W*0.62,H*0.5,W*0.42,H*0.5,W*0.30,H*0.42);
+      c.fill();
+      c.strokeStyle="rgba(255,255,255,.75)"; c.lineWidth=4; c.lineCap="round";
+      c.beginPath(); c.moveTo(W*0.32,H*0.44); c.quadraticCurveTo(W*0.20,H*0.58,W*0.16,H*0.40); c.stroke();
+      // 물보라
+      for (var j=0;j<50;j++){
+        c.fillStyle="rgba(250,252,252,"+(0.35+R()*0.5)+")";
+        c.beginPath(); c.arc(W*0.3+R()*W*0.45,H*0.34+R()*H*0.2,1.2+R()*2.6,0,7); c.fill();
+      }
+      // 캔버스 천
+      c.globalAlpha=0.07; c.strokeStyle="#000";
+      for (var k=0;k<W;k+=3){ c.beginPath(); c.moveTo(k,0); c.lineTo(k,H); c.stroke(); }
+      c.globalAlpha=1;
+    },
+    nocturne: function(c,W,H,R){
+      var g=c.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,"#10202A"); g.addColorStop(0.55,"#1B3630"); g.addColorStop(1,"#0C1A18");
+      c.fillStyle=g; c.fillRect(0,0,W,H);
+      // 달
+      var mg=c.createRadialGradient(W*0.72,H*0.22,4,W*0.72,H*0.22,44);
+      mg.addColorStop(0,"rgba(250,244,214,.95)"); mg.addColorStop(0.35,"rgba(240,232,190,.5)"); mg.addColorStop(1,"rgba(240,232,190,0)");
+      c.fillStyle=mg; c.beginPath(); c.arc(W*0.72,H*0.22,44,0,7); c.fill();
+      c.fillStyle="rgba(252,248,226,.95)"; c.beginPath(); c.arc(W*0.72,H*0.22,11,0,7); c.fill();
+      // 나무 실루엣
+      c.fillStyle="rgba(8,22,20,.95)";
+      for (var i=0;i<7;i++){
+        var x=W*0.02+i*W*0.13, h=40+R()*70;
+        c.beginPath(); c.moveTo(x,H*0.62); c.lineTo(x+9,H*0.62-h); c.lineTo(x+18,H*0.62); c.closePath(); c.fill();
+      }
+      // 풀밭
+      c.fillStyle="#12291F"; c.beginPath(); c.moveTo(0,H); 
+      for (var x2=0;x2<=W;x2+=8){ c.lineTo(x2,H*0.66+Math.sin(x2*0.05)*6); } 
+      c.lineTo(W,H); c.closePath(); c.fill();
+      c.strokeStyle="rgba(70,110,80,.75)"; c.lineWidth=1.6;
+      for (var k=0;k<60;k++){
+        var gx=R()*W, gy=H*0.66+R()*H*0.3;
+        c.beginPath(); c.moveTo(gx,gy); c.quadraticCurveTo(gx+4,gy-8,gx+9,gy-11); c.stroke();
+      }
+      // 사슴
+      c.fillStyle="rgba(16,36,32,.98)";
+      c.beginPath(); c.ellipse(W*0.42,H*0.6,20,10,0,0,7); c.fill();
+      c.fillRect(W*0.38,H*0.6,3,16); c.fillRect(W*0.46,H*0.6,3,16);
+      c.beginPath(); c.ellipse(W*0.56,H*0.53,7,6,-0.4,0,7); c.fill();
+      c.strokeStyle="rgba(16,36,32,.98)"; c.lineWidth=2;
+      c.beginPath(); c.moveTo(W*0.57,H*0.5); c.lineTo(W*0.60,H*0.44); c.moveTo(W*0.60,H*0.44); c.lineTo(W*0.63,H*0.42); c.stroke();
+      // 반딧불
+      for (var f=0;f<26;f++){
+        var fx=R()*W, fy=H*0.5+R()*H*0.42, r=1.4+R()*2.2;
+        var fg=c.createRadialGradient(fx,fy,0,fx,fy,r*5);
+        fg.addColorStop(0,"rgba(255,214,120,.95)"); fg.addColorStop(1,"rgba(255,214,120,0)");
+        c.fillStyle=fg; c.beginPath(); c.arc(fx,fy,r*5,0,7); c.fill();
+        c.fillStyle="rgba(255,232,168,.95)"; c.beginPath(); c.arc(fx,fy,r,0,7); c.fill();
+      }
+    },
+    botanical: function(c,W,H,R){
+      c.fillStyle="#F3EBD8"; c.fillRect(0,0,W,H);
+      // 테두리 (도감)
+      c.strokeStyle="rgba(58,72,50,.35)"; c.lineWidth=1; c.strokeRect(10,10,W-20,H-20);
+      // 줄기와 잎
+      c.strokeStyle="#4C6B3C"; c.lineWidth=1.6; c.lineCap="round";
+      for (var i=0;i<6;i++){
+        var x=W*0.1+i*W*0.16, base=H*0.94;
+        c.beginPath(); c.moveTo(x,base); c.quadraticCurveTo(x+(R()-0.5)*18,base-70,x+(R()-0.5)*26,base-120); c.stroke();
+      }
+      function leaf(x,y,ang,s){
+        c.save(); c.translate(x,y); c.rotate(ang);
+        c.fillStyle="rgba(104,140,86,.55)";
+        c.beginPath(); c.ellipse(s*7,0,s*9,s*4,0,0,7); c.fill();
+        c.strokeStyle="rgba(48,72,42,.75)"; c.lineWidth=1;
+        c.beginPath(); c.moveTo(0,0); c.lineTo(s*16,0); c.stroke();
+        c.restore();
+      }
+      for (var j=0;j<16;j++){
+        leaf(W*0.08+R()*W*0.84,H*0.45+R()*H*0.42,(R()-0.5)*1.6,0.7+R()*0.7);
+      }
+      // 꽃
+      for (var k=0;k<5;k++){
+        var fx=W*0.14+k*W*0.18+R()*10, fy=H*0.4-R()*30;
+        c.fillStyle="rgba(250,250,244,.95)"; c.strokeStyle="rgba(60,70,48,.6)"; c.lineWidth=1;
+        for (var p=0;p<7;p++){
+          var a=p/7*Math.PI*2;
+          c.beginPath(); c.ellipse(fx+Math.cos(a)*6,fy+Math.sin(a)*6,6,3.4,a,0,7); c.fill(); c.stroke();
+        }
+        c.fillStyle="rgba(226,178,64,.9)"; c.beginPath(); c.arc(fx,fy,3,0,7); c.fill();
+      }
+      // 나비
+      var bx=W*0.72, by=H*0.26;
+      c.fillStyle="rgba(58,108,166,.9)";
+      c.beginPath(); c.ellipse(bx-8,by-5,10,7,-0.5,0,7); c.fill();
+      c.beginPath(); c.ellipse(bx+8,by-5,10,7,0.5,0,7); c.fill();
+      c.beginPath(); c.ellipse(bx-6,by+5,7,5,0.4,0,7); c.fill();
+      c.beginPath(); c.ellipse(bx+6,by+5,7,5,-0.4,0,7); c.fill();
+      c.strokeStyle="rgba(20,30,50,.75)"; c.lineWidth=1.1;
+      c.beginPath(); c.moveTo(bx,by-7); c.lineTo(bx,by+9); c.stroke();
+      c.strokeStyle="rgba(240,246,255,.5)";
+      c.beginPath(); c.arc(bx-8,by-5,5,-0.5,2.2); c.stroke();
+      c.beginPath(); c.arc(bx+8,by-5,5,0.9,3.7); c.stroke();
+    },
+    papercut: function(c,W,H,R){
+      var cols=["#BFD6E0","#95B8C8","#6A94AA","#476F88","#2E4E68","#1B3244"];
+      c.fillStyle=cols[0]; c.fillRect(0,0,W,H);
+      // 겹친 종이 물결
+      for (var i=1;i<cols.length;i++){
+        c.save();
+        c.shadowColor="rgba(10,26,38,.45)"; c.shadowBlur=7; c.shadowOffsetY=3;
+        c.fillStyle=cols[i];
+        c.beginPath(); c.moveTo(-10,H);
+        var baseH = H*(0.14+ i*0.115);
+        for (var x=-10;x<=W+10;x+=8){
+          var y=baseH + Math.sin(x*0.028 + i*1.3)*(9+i*2) + Math.sin(x*0.01+i)*7;
+          c.lineTo(x,y);
+        }
+        c.lineTo(W+10,H); c.closePath(); c.fill();
+        c.restore();
+      }
+      // 해파리
+      var jx=W*0.5, jy=H*0.42;
+      c.save();
+      c.shadowColor="rgba(10,26,38,.35)"; c.shadowBlur=8; c.shadowOffsetY=3;
+      c.fillStyle="rgba(236,244,248,.86)";
+      c.beginPath(); c.ellipse(jx,jy,30,20,0,Math.PI,0); c.closePath(); c.fill();
+      c.fillStyle="rgba(255,250,230,.55)";
+      c.beginPath(); c.ellipse(jx,jy-4,20,12,0,Math.PI,0); c.closePath(); c.fill();
+      c.restore();
+      // 촉수
+      c.strokeStyle="rgba(240,248,250,.8)"; c.lineWidth=1.8;
+      for (var t=0;t<9;t++){
+        var tx=jx-24+t*6;
+        c.beginPath(); c.moveTo(tx,jy);
+        c.bezierCurveTo(tx-4,jy+20,tx+6,jy+34,tx-2,jy+50);
+        c.stroke();
+      }
+      // 물고기
+      c.fillStyle="rgba(16,40,56,.6)";
+      for (var f=0;f<12;f++){
+        var fx=R()*W, fy=H*0.7+R()*H*0.22;
+        c.beginPath(); c.ellipse(fx,fy,6,2.6,0,0,7); c.fill();
+        c.beginPath(); c.moveTo(fx+5,fy); c.lineTo(fx+10,fy-3); c.lineTo(fx+10,fy+3); c.fill();
+      }
+      // 종이 구멍
+      for (var k=0;k<20;k++){
+        c.fillStyle="rgba(250,252,250,"+(0.3+R()*0.4)+")";
+        c.beginPath(); c.arc(R()*W,R()*H,1+R()*1.8,0,7); c.fill();
+      }
+    },
+    nouveau: function(c,W,H,R){
+      c.fillStyle="#EFE7D3"; c.fillRect(0,0,W,H);
+      // 장식 테두리
+      c.strokeStyle="#2C3A2A"; c.lineWidth=4; c.strokeRect(12,12,W-24,H-24);
+      c.strokeStyle="rgba(160,130,64,.75)"; c.lineWidth=1.4; c.strokeRect(20,20,W-40,H-40);
+      // 골드 후광
+      var g=c.createRadialGradient(W*0.46,H*0.42,6,W*0.46,H*0.42,86);
+      g.addColorStop(0,"rgba(255,214,120,.8)"); g.addColorStop(0.7,"rgba(226,178,64,.35)"); g.addColorStop(1,"rgba(226,178,64,0)");
+      c.fillStyle=g; c.beginPath(); c.arc(W*0.46,H*0.42,86,0,7); c.fill();
+      c.strokeStyle="rgba(150,116,50,.4)"; c.lineWidth=1.2;
+      for (var r=0;r<3;r++){ c.beginPath(); c.arc(W*0.46,H*0.42,44+r*20,0,7); c.stroke(); }
+      // 휘프래시 곡선
+      c.strokeStyle="#2C3A2A"; c.lineWidth=2.6; c.lineCap="round";
+      for (var i=0;i<4;i++){
+        var x=W*0.08+i*W*0.28;
+        c.beginPath(); c.moveTo(x,H*0.9);
+        c.bezierCurveTo(x+30,H*0.6,x-24,H*0.45,x+14,H*0.22);
+        c.stroke();
+      }
+      // 잎
+      function nleaf(x,y,rot,s,col){
+        c.save(); c.translate(x,y); c.rotate(rot);
+        c.fillStyle=col; c.strokeStyle="#2C3A2A"; c.lineWidth=1.6;
+        c.beginPath(); c.moveTo(0,0);
+        c.bezierCurveTo(s*10,-s*9,s*26,-s*4,s*30,s*2);
+        c.bezierCurveTo(s*18,s*8,s*4,s*6,0,0);
+        c.fill(); c.stroke();
+        c.restore();
+      }
+      nleaf(W*0.1,H*0.72,-0.7,1.0,"rgba(122,138,96,.9)");
+      nleaf(W*0.78,H*0.62,2.2,0.9,"rgba(96,116,84,.9)");
+      nleaf(W*0.2,H*0.28,0.5,0.7,"rgba(150,160,110,.8)");
+      // 벌새
+      c.fillStyle="#3A4A34"; c.strokeStyle="#2C3A2A"; c.lineWidth=1.6;
+      c.beginPath(); c.ellipse(W*0.5,H*0.45,16,9,-0.25,0,7); c.fill(); c.stroke();
+      c.beginPath(); c.ellipse(W*0.56,H*0.38,7,6,0,0,7); c.fill(); c.stroke();
+      c.beginPath(); c.moveTo(W*0.6,H*0.4); c.lineTo(W*0.72,H*0.44); c.lineTo(W*0.6,H*0.44); c.closePath(); c.stroke();
+      c.fillStyle="rgba(200,214,200,.75)";
+      c.beginPath(); c.ellipse(W*0.46,H*0.37,10,5,-0.9,0,7); c.fill(); c.stroke();
+      // 붉은 꽃
+      c.fillStyle="#9C2B29"; c.strokeStyle="#2C3A2A"; c.lineWidth=1.6;
+      c.beginPath(); c.moveTo(W*0.72,H*0.44); c.bezierCurveTo(W*0.86,H*0.4,W*0.9,H*0.56,W*0.74,H*0.54); c.closePath(); c.fill(); c.stroke();
+      c.fillStyle="rgba(226,178,64,.9)"; c.beginPath(); c.arc(W*0.73,H*0.486,3,0,7); c.fill();
+    },
+    goldenhour: function(c,W,H,R){
+      var g=c.createLinearGradient(0,0,0,H*0.75);
+      g.addColorStop(0,"#3E4A63"); g.addColorStop(0.45,"#B9764A"); g.addColorStop(0.72,"#F2B25C"); g.addColorStop(1,"#F7D08A");
+      c.fillStyle=g; c.fillRect(0,0,W,H);
+      // 해
+      var sg=c.createRadialGradient(W*0.68,H*0.62,4,W*0.68,H*0.62,70);
+      sg.addColorStop(0,"rgba(255,246,206,.98)"); sg.addColorStop(0.4,"rgba(255,224,150,.6)"); sg.addColorStop(1,"rgba(255,214,120,0)");
+      c.fillStyle=sg; c.beginPath(); c.arc(W*0.68,H*0.62,70,0,7); c.fill();
+      c.fillStyle="rgba(255,250,224,.95)"; c.beginPath(); c.arc(W*0.68,H*0.62,22,0,7); c.fill();
+      // 구름 붓자국
+      for (var i=0;i<12;i++){
+        c.fillStyle="rgba("+(240+R()*15)+","+(190+R()*40)+","+(150+R()*60)+","+(0.16+R()*0.3)+")";
+        c.beginPath(); c.ellipse(R()*W,H*(0.1+R()*0.42),30+R()*60,5+R()*9,0,0,7); c.fill();
+      }
+      // 밀밭
+      c.fillStyle="#8C5A22"; c.beginPath(); c.moveTo(0,H);
+      for (var x=0;x<=W;x+=6){ c.lineTo(x,H*0.74+Math.sin(x*0.03)*5); }
+      c.lineTo(W,H); c.closePath(); c.fill();
+      for (var k=0;k<520;k++){
+        var wx=R()*W, wy=H*0.75+R()*H*0.25;
+        var warm = R()>0.35;
+        c.strokeStyle = warm ? "rgba("+(226+Math.floor(R()*28))+","+(168+Math.floor(R()*50))+",80,.75)" : "rgba(140,86,32,.7)";
+        c.lineWidth=1.4;
+        c.beginPath(); c.moveTo(wx,wy); c.quadraticCurveTo(wx+2,wy-6,wx+5+(R()-0.5)*3,wy-11-R()*6); c.stroke();
+      }
+      // 제비
+      c.strokeStyle="rgba(48,32,26,.9)"; c.lineWidth=2.4; c.lineCap="round";
+      var bx=W*0.34,by=H*0.36;
+      c.beginPath(); c.moveTo(bx-13,by+3); c.quadraticCurveTo(bx-5,by-6,bx,by); c.quadraticCurveTo(bx+5,by-6,bx+13,by+3); c.stroke();
+      c.beginPath(); c.moveTo(bx,by); c.lineTo(bx-4,by+6); c.moveTo(bx,by); c.lineTo(bx+4,by+6); c.stroke();
+    },
+    ghibli: function(c,W,H,R){
+      var g=c.createLinearGradient(0,0,0,H);
+      g.addColorStop(0,"#3D7CB5"); g.addColorStop(0.55,"#8FC0DD"); g.addColorStop(0.78,"#CDE4D2"); g.addColorStop(1,"#6FA05A");
+      c.fillStyle=g; c.fillRect(0,0,W,H);
+      // 큰 구름
+      function cloud(cx,cy,s){
+        c.fillStyle="rgba(252,252,250,.97)";
+        var blobs=[[0,0,34],[ -30,8,24],[32,7,26],[-12,-18,26],[18,-16,22],[50,14,18],[-52,14,16]];
+        blobs.forEach(function(b){
+          c.beginPath(); c.arc(cx+b[0]*s,cy+b[1]*s,b[2]*s,0,7); c.fill();
+        });
+        c.fillStyle="rgba(196,214,228,.55)";
+        blobs.forEach(function(b){
+          c.beginPath(); c.arc(cx+b[0]*s,cy+b[1]*s+b[2]*s*0.42,b[2]*s*0.78,0,Math.PI); c.fill();
+        });
+      }
+      cloud(W*0.28,H*0.22,0.85);
+      cloud(W*0.72,H*0.15,0.62);
+      cloud(W*0.55,H*0.33,0.42);
+      // 언덕
+      c.fillStyle="#6E9E52";
+      c.beginPath(); c.moveTo(0,H); c.lineTo(0,H*0.72);
+      c.bezierCurveTo(W*0.3,H*0.58,W*0.62,H*0.8,W,H*0.66);
+      c.lineTo(W,H); c.closePath(); c.fill();
+      c.fillStyle="#82B463";
+      c.beginPath(); c.moveTo(0,H); c.lineTo(0,H*0.84);
+      c.bezierCurveTo(W*0.4,H*0.76,W*0.7,H*0.92,W,H*0.82);
+      c.lineTo(W,H); c.closePath(); c.fill();
+      // 풀포기
+      c.strokeStyle="rgba(52,92,44,.55)"; c.lineWidth=1.3;
+      for (var i=0;i<90;i++){
+        var x=R()*W, y=H*0.84+R()*H*0.16;
+        c.beginPath(); c.moveTo(x,y); c.quadraticCurveTo(x+2,y-5,x+4,y-9); c.stroke();
+      }
+      // 들꽃
+      for (var k=0;k<30;k++){
+        var fx=R()*W, fy=H*0.85+R()*H*0.14;
+        c.fillStyle = R()>0.5 ? "rgba(255,253,240,.95)" : "rgba(248,214,96,.95)";
+        c.beginPath(); c.arc(fx,fy,1.7+R()*1.4,0,7); c.fill();
+      }
+      // 아이들 실루엣
+      c.fillStyle="rgba(50,62,54,.9)";
+      function kid(x,y,s){
+        c.beginPath(); c.arc(x,y-13*s,3.2*s,0,7); c.fill();
+        c.beginPath(); c.moveTo(x-3*s,y-10*s); c.lineTo(x+3*s,y-10*s); c.lineTo(x+4*s,y); c.lineTo(x-4*s,y); c.closePath(); c.fill();
+        c.lineWidth=1.8; c.strokeStyle="rgba(50,62,54,.9)";
+        c.beginPath(); c.moveTo(x-2*s,y-1); c.lineTo(x-5*s,y+7*s); c.moveTo(x+2*s,y-1); c.lineTo(x+6*s,y+7*s); c.stroke();
+        c.beginPath(); c.moveTo(x-3*s,y-8*s); c.lineTo(x-8*s,y-3*s); c.moveTo(x+3*s,y-8*s); c.lineTo(x+8*s,y-4*s); c.stroke();
+      }
+      kid(W*0.44,H*0.9,1.5);
+      kid(W*0.54,H*0.89,1.35);
+    }
+  };
+
+  /* ─────────────── 시작 ─────────────── */
+  buildCards();
+  buildExamples();
+  buildPolish();
+  render();
+})();
+</script>
+</body>
+</html>
