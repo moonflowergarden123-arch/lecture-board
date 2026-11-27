@@ -434,13 +434,18 @@ body[data-mode="present"]{overflow:hidden}
 /* ── print (QR 안내문) ─────────────────────────── */
 @media print{
   @page{margin:14mm}
-  body{background:#fff !important;overflow:visible !important}
+  body{background:#fff !important;overflow:visible !important;color:#132A20 !important}
   body > *:not(#qrModal){display:none !important}
   #qrModal{position:static;display:block !important;background:#fff;backdrop-filter:none;padding:0;overflow:visible}
-  #qrModal .modal-card{box-shadow:none;border:1px solid #C9C2AE;max-width:none;border-radius:0;padding:0}
+  #qrModal .modal-card{box-shadow:none;border:1px solid #C9C2AE;max-width:none;border-radius:0;padding:14mm 12mm}
   #qrModal .modal-x,#qrModal .modal-actions{display:none !important}
-  .notice-grid{gap:16mm}
-  .notice-grid .qrcode{width:62mm;height:62mm}
+  #qrModalTitle{font-size:23pt;line-height:1.28}
+  #qrModal .meta{font-size:11pt;margin-top:5mm}
+  #qrModal .kicker{font-size:9pt}
+  .notice-grid{gap:14mm;margin-top:12mm;align-items:center}
+  .notice-grid .qrcode{width:70mm;height:70mm;padding:4mm}
+  .notice-grid ol{font-size:11.5pt;gap:4mm;line-height:1.6}
+  .notice-foot{font-size:10pt;margin-top:14mm;padding-top:6mm}
 }
 </style>
 </head>
